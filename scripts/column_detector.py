@@ -34,8 +34,8 @@ def detect_columns(df):
             detected['FIPS'] = normalized_cols[pattern]
             break
     
-    # County variations
-    county_patterns = ['county', 'county name', 'countyname', 'county_name']
+    # County variations (handle xCounty, County, etc.)
+    county_patterns = ['county', 'county name', 'countyname', 'county_name', 'xcounty']
     for pattern in county_patterns:
         if pattern in normalized_cols:
             detected['County'] = normalized_cols[pattern]
