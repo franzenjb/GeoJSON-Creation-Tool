@@ -417,6 +417,58 @@
                     <p>This tool takes your CSV file with geographic identifiers (ZIP codes, FIPS codes, etc.) and automatically creates GeoJSON files at multiple aggregation levels. Perfect for creating choropleth maps in ArcGIS Online, web applications, or data visualization tools.</p>
                 </div>
 
+                <h2>Why Use Codes Instead of Names?</h2>
+                <div class="explanation" style="background: #fff5f5; border-left: 3px solid #DC143C;">
+                    <p style="font-weight: 600; margin-bottom: 12px; color: #DC143C;">Codes are standardized, unique identifiers that eliminate ambiguity and spelling errors.</p>
+                    
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">📍 ZIP Codes (5-digit)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> United States Postal Service ZIP Code Tabulation Areas (ZCTA5)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> 5 digits (e.g., <code>33019</code>, <code>02134</code>)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> Every ZIP code is unique. "Miami" could refer to the city, county, or multiple ZIP codes. <code>33101</code> is unambiguous.</p>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">🏛️ FIPS Codes (5-digit)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> Federal Information Processing Standards codes for counties</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> 5 digits = State FIPS (2) + County FIPS (3), e.g., <code>12011</code> = Florida (12) + Broward County (011)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> "Dallas" could be Dallas County, TX (<code>48113</code>) or Dallas County, AL (<code>01047</code>). FIPS codes are unique nationwide and never change.</p>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">📚 ECODE (Chapter Code)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> Unique identifier for Red Cross chapters</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> Numeric code (e.g., <code>1019</code>, <code>38300</code>)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> "Red Cross of Kentucky" vs "American Red Cross Kentucky Region" vs "ARC Kentucky" - all refer to the same chapter, but <code>1019</code> is always correct.</p>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">🌍 RCODE (Region Code)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> Unique identifier for Red Cross regions</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> Alphanumeric (e.g., <code>01R04</code>, <code>38R28</code>)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> Region names change over time, but codes remain stable. "Southeast Region" might become "Southeast and Caribbean Division" - the code stays the same.</p>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">🌎 DCODE (Division Code)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> Unique identifier for Red Cross divisions</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> Alphanumeric (e.g., <code>D25</code>, <code>D27</code>)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> Division names are long and can be abbreviated differently. <code>D25</code> is always "Southeast and Caribbean Division" regardless of how it's written.</p>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 12px; background: #f0f0f0; border-radius: 3px;">
+                        <p style="font-size: 0.9em; margin: 0;"><strong>💡 Key Benefits:</strong></p>
+                        <ul style="font-size: 0.85em; margin: 8px 0 0 20px; padding: 0;">
+                            <li>No spelling variations (Jefferson vs Jeffersons vs Jefferson County)</li>
+                            <li>No ambiguity (Dallas city vs Dallas County vs Dallas Parish)</li>
+                            <li>Standardized format (always 5 digits for FIPS, always consistent)</li>
+                            <li>Never change (names change, codes stay the same)</li>
+                            <li>Perfect for joins (codes match exactly, names require fuzzy matching)</li>
+                            <li>International standards (FIPS is federal standard, ZIP is USPS standard)</li>
+                        </ul>
+                    </div>
+                </div>
+
                 <h2>Geographic Hierarchy</h2>
                 <div class="hierarchy">
                     <div class="level">
@@ -467,7 +519,7 @@
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-icon">📤</div>
                     <div class="upload-text">Drop your CSV file here or click to browse</div>
-                    <div class="upload-hint">Your CSV should have ZIP codes, FIPS codes, and geographic hierarchy columns</div>
+                    <div class="upload-hint">Your CSV should have ZIP codes, FIPS codes, ECODE/RCODE/DCODE, and geographic hierarchy columns<br><small style="color: #DC143C; font-weight: 500;">💡 Tip: Codes (ZIP, FIPS, ECODE) work better than names - see explanation above</small></div>
                     <input type="file" id="fileInput" accept=".csv">
                 </div>
                 <div class="file-info" id="fileInfo">
