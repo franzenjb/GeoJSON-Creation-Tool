@@ -1086,16 +1086,15 @@
                     const countyMatch = !countyQuery || 
                         (item.County && normalize(item.County).includes(normalize(countyQuery)));
                     
-                    // State matching: check both abbreviation and full name
+                    // State matching: convert full name to abbreviation, then match
                     let stateMatch = true;
                     if (stateQuery) {
-                        const itemState = normalize(item.State || '');
-                        // Match by abbreviation
-                        stateMatch = itemState === stateQueryNormalized.toLowerCase() ||
-                            // Match by full name (if state query is full name)
-                            (stateQueryNormalized.length > 2 && itemState.includes(stateQueryNormalized)) ||
-                            // Match by abbreviation (if state query is abbreviation)
-                            (stateQueryNormalized.length === 2 && itemState === stateQueryNormalized);
+                        const itemState = (item.State || '').toUpperCase();
+                        // stateQueryNormalized is already converted to abbreviation if it was a full name
+                        // Match the normalized query (which is now an abbreviation) against the item's state
+                        stateMatch = itemState === stateQueryNormalized.toUpperCase() ||
+                            // Also allow partial matching on the original query
+                            normalize(item.State || '').includes(normalize(stateQuery));
                     }
                     
                     const fipsMatch = !fipsQuery || 
