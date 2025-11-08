@@ -971,21 +971,30 @@
                 document.getElementById('noResults').style.display = 'none';
             }
 
+            // Normalize queries for flexible matching
+            const normalize = (str) => str ? str.toLowerCase().trim().replace(/\s+/g, ' ') : '';
+            
             // Search Red Cross codes (forward and reverse lookup)
             let results = [];
             if (lookupData.length > 0) {
                 results = lookupData.filter(item => {
+                    // Chapter/ECODE search - very flexible
                     const chapterMatch = !chapterQuery || 
-                        (item.Chapter && item.Chapter.toLowerCase().includes(chapterQuery.toLowerCase())) ||
-                        (item.ECODE && item.ECODE.toString().includes(chapterQuery));
+                        (item.Chapter && normalize(item.Chapter).includes(normalize(chapterQuery))) ||
+                        (item.ECODE && item.ECODE.toString().toLowerCase().includes(normalize(chapterQuery))) ||
+                        (item.ECODE && item.ECODE.toString().includes(chapterQuery.trim()));
                     
+                    // Region/RCODE search - very flexible
                     const regionMatch = !regionQuery || 
-                        (item.Region && item.Region.toLowerCase().includes(regionQuery.toLowerCase())) ||
-                        (item.RCODE && item.RCODE.toString().includes(regionQuery));
+                        (item.Region && normalize(item.Region).includes(normalize(regionQuery))) ||
+                        (item.RCODE && item.RCODE.toString().toLowerCase().includes(normalize(regionQuery))) ||
+                        (item.RCODE && item.RCODE.toString().includes(regionQuery.trim()));
                     
+                    // Division/DCODE search - very flexible
                     const divisionMatch = !divisionQuery || 
-                        (item.Division && item.Division.toLowerCase().includes(divisionQuery.toLowerCase())) ||
-                        (item.DCODE && item.DCODE.toString().includes(divisionQuery));
+                        (item.Division && normalize(item.Division).includes(normalize(divisionQuery))) ||
+                        (item.DCODE && item.DCODE.toString().toLowerCase().includes(normalize(divisionQuery))) ||
+                        (item.DCODE && item.DCODE.toString().includes(divisionQuery.trim()));
                     
                     return chapterMatch && regionMatch && divisionMatch;
                 });
@@ -996,13 +1005,13 @@
             if (countyData.length > 0) {
                 countyResults = countyData.filter(item => {
                     const countyMatch = !countyQuery || 
-                        (item.County && item.County.toLowerCase().includes(countyQuery.toLowerCase()));
+                        (item.County && normalize(item.County).includes(normalize(countyQuery)));
                     
                     const stateMatch = !stateQuery || 
-                        (item.State && item.State.toLowerCase().includes(stateQuery.toLowerCase()));
+                        (item.State && normalize(item.State).includes(normalize(stateQuery)));
                     
                     const fipsMatch = !fipsQuery || 
-                        (item.FIPS && item.FIPS.includes(fipsQuery));
+                        (item.FIPS && item.FIPS.toString().includes(fipsQuery.trim()));
                     
                     return countyMatch && stateMatch && fipsMatch;
                 });
