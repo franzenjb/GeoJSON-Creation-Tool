@@ -1,5 +1,6 @@
 // Built-in Red Cross Code Database
-// Auto-generated from Biomed data
+// Auto-generated from Red Cross Counties with Demographics.csv
+// Updated: 2024-11-08
 
 const LOOKUP_DATABASE = {
   chapters: [
@@ -36,12 +37,28 @@ const LOOKUP_DATABASE = {
     "DCODE": "D24"
   },
   {
+    "Chapter": "ARC Serving Greater Long Beach and South Bay",
+    "ECODE": "5132",
+    "Region": "Los Angeles Region",
+    "RCODE": "05R12",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
+  },
+  {
     "Chapter": "ARC of Blue Ridge Virginia",
     "ECODE": "46036",
     "Region": "Virginia Region",
     "RCODE": "46R08",
     "Division": "Central Atlantic Division",
     "DCODE": "D24"
+  },
+  {
+    "Chapter": "ARC of Broward County",
+    "ECODE": "10024",
+    "Region": "South Florida Region",
+    "RCODE": "10R12",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
   },
   {
     "Chapter": "ARC of Capital Area Florida",
@@ -60,12 +77,28 @@ const LOOKUP_DATABASE = {
     "DCODE": "D24"
   },
   {
+    "Chapter": "ARC of Capital West Louisiana",
+    "ECODE": "18125",
+    "Region": "Louisiana Region",
+    "RCODE": "18R08",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
+  },
+  {
     "Chapter": "ARC of Central Arizona",
     "ECODE": "3008",
     "Region": "Arizona and New Mexico Region",
     "RCODE": "03R04",
     "Division": "Southwest and Rocky Mountain Division",
     "DCODE": "D22"
+  },
+  {
+    "Chapter": "ARC of Central Florida Coast",
+    "ECODE": "10029",
+    "Region": "North and Central Florida Region",
+    "RCODE": "10R08",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
   },
   {
     "Chapter": "ARC of Central Illinois",
@@ -122,6 +155,14 @@ const LOOKUP_DATABASE = {
     "RCODE": "40R08",
     "Division": "Southeast and Caribbean Division",
     "DCODE": "D25"
+  },
+  {
+    "Chapter": "ARC of Central Valley",
+    "ECODE": "5112",
+    "Region": "Central California Region",
+    "RCODE": "05R04",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
   },
   {
     "Chapter": "ARC of Central Virginia",
@@ -194,6 +235,14 @@ const LOOKUP_DATABASE = {
     "RCODE": "38R28",
     "Division": "Northeast Division",
     "DCODE": "D27"
+  },
+  {
+    "Chapter": "ARC of Coastal Bend-Texas",
+    "ECODE": "43142",
+    "Region": "Texas Gulf Coast Region",
+    "RCODE": "43R28",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
   },
   {
     "Chapter": "ARC of Coastal Virginia",
@@ -348,6 +397,14 @@ const LOOKUP_DATABASE = {
     "DCODE": "D22"
   },
   {
+    "Chapter": "ARC of Greater Miami and the Keys",
+    "ECODE": "10060",
+    "Region": "South Florida Region",
+    "RCODE": "10R12",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
+  },
+  {
     "Chapter": "ARC of Greater New York",
     "ECODE": "32500",
     "Region": "Greater New York Region",
@@ -378,6 +435,22 @@ const LOOKUP_DATABASE = {
     "RCODE": "25R16",
     "Division": "Southwest and Rocky Mountain Division",
     "DCODE": "D22"
+  },
+  {
+    "Chapter": "ARC of Guam",
+    "ECODE": "53004",
+    "Region": "Pacific Islands Region",
+    "RCODE": "54R04",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
+  },
+  {
+    "Chapter": "ARC of Hawaii",
+    "ECODE": "54004",
+    "Region": "Pacific Islands Region",
+    "RCODE": "54R04",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
   },
   {
     "Chapter": "ARC of Heartland, Stark and Muskingum Lakes",
@@ -420,6 +493,14 @@ const LOOKUP_DATABASE = {
     "DCODE": "D21"
   },
   {
+    "Chapter": "ARC of Long Island New York",
+    "ECODE": "32236",
+    "Region": "Greater New York Region",
+    "RCODE": "32R16",
+    "Division": "Northeast Division",
+    "DCODE": "D27"
+  },
+  {
     "Chapter": "ARC of Lowcountry South Carolina",
     "ECODE": "40048",
     "Region": "South Carolina Region",
@@ -442,6 +523,14 @@ const LOOKUP_DATABASE = {
     "RCODE": "35R12",
     "Division": "Central Atlantic Division",
     "DCODE": "D24"
+  },
+  {
+    "Chapter": "ARC of Mid Florida",
+    "ECODE": "10090",
+    "Region": "South Florida Region",
+    "RCODE": "10R12",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
   },
   {
     "Chapter": "ARC of Mid Michigan",
@@ -532,6 +621,14 @@ const LOOKUP_DATABASE = {
     "DCODE": "D23"
   },
   {
+    "Chapter": "ARC of North Louisiana",
+    "ECODE": "18142",
+    "Region": "Louisiana Region",
+    "RCODE": "18R08",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
+  },
+  {
     "Chapter": "ARC of North Mississippi",
     "ECODE": "24180",
     "Region": "Alabama and Mississippi Region",
@@ -620,6 +717,14 @@ const LOOKUP_DATABASE = {
     "DCODE": "D22"
   },
   {
+    "Chapter": "ARC of Northern California",
+    "ECODE": "5052",
+    "Region": "California Gold Country Region",
+    "RCODE": "05R20",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
+  },
+  {
     "Chapter": "ARC of Northern Colorado",
     "ECODE": "6144",
     "Region": "Colorado and Wyoming Region",
@@ -628,12 +733,28 @@ const LOOKUP_DATABASE = {
     "DCODE": "D22"
   },
   {
+    "Chapter": "ARC of Northern Mariana Islands",
+    "ECODE": "55004",
+    "Region": "Pacific Islands Region",
+    "RCODE": "54R04",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
+  },
+  {
     "Chapter": "ARC of Northern Michigan",
     "ECODE": "22216",
     "Region": "Michigan Region",
     "RCODE": "22R08",
     "Division": "North Central Division",
     "DCODE": "D23"
+  },
+  {
+    "Chapter": "ARC of Northern NV",
+    "ECODE": "28066",
+    "Region": "Utah and Nevada Region",
+    "RCODE": "44R04",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
   },
   {
     "Chapter": "ARC of Northern New Jersey",
@@ -748,6 +869,14 @@ const LOOKUP_DATABASE = {
     "DCODE": "D21"
   },
   {
+    "Chapter": "ARC of Palm Beach and Treasure Coast",
+    "ECODE": "10228",
+    "Region": "South Florida Region",
+    "RCODE": "10R12",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
+  },
+  {
     "Chapter": "ARC of Pennsylvania Rivers",
     "ECODE": "38024",
     "Region": "Greater Pennsylvania Region",
@@ -764,12 +893,28 @@ const LOOKUP_DATABASE = {
     "DCODE": "D27"
   },
   {
+    "Chapter": "ARC of Puerto Rico",
+    "ECODE": "56004",
+    "Region": "Puerto Rico Region",
+    "RCODE": "56R04",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
+  },
+  {
     "Chapter": "ARC of Rappahannock Virginia",
     "ECODE": "46168",
     "Region": "Virginia Region",
     "RCODE": "46R08",
     "Division": "Central Atlantic Division",
     "DCODE": "D24"
+  },
+  {
+    "Chapter": "ARC of Rhode Island",
+    "ECODE": "39004",
+    "Region": "Connecticut and Rhode Island Region",
+    "RCODE": "07R08",
+    "Division": "Northeast Division",
+    "DCODE": "D27"
   },
   {
     "Chapter": "ARC of Riverside County",
@@ -828,6 +973,14 @@ const LOOKUP_DATABASE = {
     "DCODE": "D22"
   },
   {
+    "Chapter": "ARC of South Texas",
+    "ECODE": "43092",
+    "Region": "Texas Gulf Coast Region",
+    "RCODE": "43R28",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
+  },
+  {
     "Chapter": "ARC of South and West Central Illinois",
     "ECODE": "13392",
     "Region": "Illinois Region",
@@ -858,6 +1011,14 @@ const LOOKUP_DATABASE = {
     "RCODE": "14R12",
     "Division": "North Central Division",
     "DCODE": "D23"
+  },
+  {
+    "Chapter": "ARC of Southeast Louisiana",
+    "ECODE": "18206",
+    "Region": "Louisiana Region",
+    "RCODE": "18R08",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
   },
   {
     "Chapter": "ARC of Southeast Michigan",
@@ -988,6 +1149,14 @@ const LOOKUP_DATABASE = {
     "DCODE": "D25"
   },
   {
+    "Chapter": "ARC of Southwest Gulf Coast to Glades",
+    "ECODE": "10164",
+    "Region": "South Florida Region",
+    "RCODE": "10R12",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
+  },
+  {
     "Chapter": "ARC of Southwest Indiana",
     "ECODE": "14386",
     "Region": "Indiana Region",
@@ -1052,6 +1221,14 @@ const LOOKUP_DATABASE = {
     "DCODE": "D27"
   },
   {
+    "Chapter": "ARC of Tampa Bay",
+    "ECODE": "10091",
+    "Region": "North and Central Florida Region",
+    "RCODE": "10R08",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
+  },
+  {
     "Chapter": "ARC of Tennessee River",
     "ECODE": "42204",
     "Region": "Tennessee Region",
@@ -1061,19 +1238,19 @@ const LOOKUP_DATABASE = {
   },
   {
     "Chapter": "ARC of The Heart of the Valley",
-    "ECODE": "5350",
-    "Region": "Northern California Coastal Region",
-    "RCODE": "05R28",
-    "Division": "Pacific Division",
-    "DCODE": "D21"
-  },
-  {
-    "Chapter": "ARC of The Heart of the Valley",
     "ECODE": "48248",
     "Region": "Central Appalachia Region",
     "RCODE": "48R04",
     "Division": "Central Atlantic Division",
     "DCODE": "D24"
+  },
+  {
+    "Chapter": "ARC of The Heart of the Valley",
+    "ECODE": "5350",
+    "Region": "Northern California Coastal Region",
+    "RCODE": "05R28",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
   },
   {
     "Chapter": "ARC of UpState South Carolina",
@@ -1236,6 +1413,22 @@ const LOOKUP_DATABASE = {
     "DCODE": "D24"
   },
   {
+    "Chapter": "ARC of the Virgin Islands",
+    "ECODE": "58010",
+    "Region": "North and Central Florida Region",
+    "RCODE": "10R08",
+    "Division": "Southeast and Caribbean Division",
+    "DCODE": "D25"
+  },
+  {
+    "Chapter": "ARC serving Alaska",
+    "ECODE": "2012",
+    "Region": "Alaska Region",
+    "RCODE": "02R04",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
+  },
+  {
     "Chapter": "ARC serving Central East Alabama",
     "ECODE": "1216",
     "Region": "Alabama and Mississippi Region",
@@ -1266,6 +1459,14 @@ const LOOKUP_DATABASE = {
     "RCODE": "36R04",
     "Division": "Southwest and Rocky Mountain Division",
     "DCODE": "D22"
+  },
+  {
+    "Chapter": "ARC serving Central and Western South Dakota",
+    "ECODE": "41016",
+    "Region": "Minnesota and Dakotas Region",
+    "RCODE": "23R12",
+    "Division": "North Central Division",
+    "DCODE": "D23"
   },
   {
     "Chapter": "ARC serving DFW East",
@@ -1308,12 +1509,28 @@ const LOOKUP_DATABASE = {
     "DCODE": "D23"
   },
   {
+    "Chapter": "ARC serving Greater AR",
+    "ECODE": "4244",
+    "Region": "Missouri and Arkansas Region",
+    "RCODE": "25R16",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
+  },
+  {
     "Chapter": "ARC serving Greater San Antonio TX",
     "ECODE": "43746",
     "Region": "Central and South Texas Region",
     "RCODE": "43R08",
     "Division": "Southwest and Rocky Mountain Division",
     "DCODE": "D22"
+  },
+  {
+    "Chapter": "ARC serving Metro and Southeast Los Angeles",
+    "ECODE": "5180",
+    "Region": "Los Angeles Region",
+    "RCODE": "05R12",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
   },
   {
     "Chapter": "ARC serving Mid Alabama",
@@ -1352,6 +1569,14 @@ const LOOKUP_DATABASE = {
     "ECODE": "4304",
     "Region": "Missouri and Arkansas Region",
     "RCODE": "25R16",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
+  },
+  {
+    "Chapter": "ARC serving Panhandle Plains",
+    "ECODE": "43552",
+    "Region": "North Texas Region",
+    "RCODE": "43R16",
     "Division": "Southwest and Rocky Mountain Division",
     "DCODE": "D22"
   },
@@ -1420,8 +1645,48 @@ const LOOKUP_DATABASE = {
     "DCODE": "D21"
   },
   {
+    "Chapter": "ARC serving Western North Dakota",
+    "ECODE": "34204",
+    "Region": "Minnesota and Dakotas Region",
+    "RCODE": "23R12",
+    "Division": "North Central Division",
+    "DCODE": "D23"
+  },
+  {
+    "Chapter": "ARC serving the Greater San Gabriel and Pomona Valleys",
+    "ECODE": "5280",
+    "Region": "Los Angeles Region",
+    "RCODE": "05R12",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
+  },
+  {
     "Chapter": "ARC serving the Heart of TX",
     "ECODE": "43390",
+    "Region": "Central and South Texas Region",
+    "RCODE": "43R08",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
+  },
+  {
+    "Chapter": "ARC serving the Hill Country of TX",
+    "ECODE": "43484",
+    "Region": "Central and South Texas Region",
+    "RCODE": "43R08",
+    "Division": "Southwest and Rocky Mountain Division",
+    "DCODE": "D22"
+  },
+  {
+    "Chapter": "ARC serving the Northern Valleys",
+    "ECODE": "5022",
+    "Region": "Los Angeles Region",
+    "RCODE": "05R12",
+    "Division": "Pacific Division",
+    "DCODE": "D21"
+  },
+  {
+    "Chapter": "ARC serving the Permian Basin of TX",
+    "ECODE": "43596",
     "Region": "Central and South Texas Region",
     "RCODE": "43R08",
     "Division": "Southwest and Rocky Mountain Division",
@@ -1550,6 +1815,286 @@ const LOOKUP_DATABASE = {
 ],
   counties: [
   {
+    "FIPS": "48011",
+    "County": "Armstrong",
+    "State": ""
+  },
+  {
+    "FIPS": "48045",
+    "County": "Briscoe",
+    "State": ""
+  },
+  {
+    "FIPS": "48065",
+    "County": "Carson",
+    "State": ""
+  },
+  {
+    "FIPS": "48069",
+    "County": "Castro",
+    "State": ""
+  },
+  {
+    "FIPS": "48075",
+    "County": "Childress",
+    "State": ""
+  },
+  {
+    "FIPS": "48087",
+    "County": "Collingsworth",
+    "State": ""
+  },
+  {
+    "FIPS": "48111",
+    "County": "Dallam",
+    "State": ""
+  },
+  {
+    "FIPS": "48117",
+    "County": "Deaf Smith",
+    "State": ""
+  },
+  {
+    "FIPS": "48129",
+    "County": "Donley",
+    "State": ""
+  },
+  {
+    "FIPS": "48179",
+    "County": "Gray",
+    "State": ""
+  },
+  {
+    "FIPS": "48181",
+    "County": "Grayson",
+    "State": ""
+  },
+  {
+    "FIPS": "48191",
+    "County": "Hall",
+    "State": ""
+  },
+  {
+    "FIPS": "48195",
+    "County": "Hansford",
+    "State": ""
+  },
+  {
+    "FIPS": "48205",
+    "County": "Hartley",
+    "State": ""
+  },
+  {
+    "FIPS": "48211",
+    "County": "Hemphill",
+    "State": ""
+  },
+  {
+    "FIPS": "48233",
+    "County": "Hutchinson",
+    "State": ""
+  },
+  {
+    "FIPS": "48295",
+    "County": "Lipscomb",
+    "State": ""
+  },
+  {
+    "FIPS": "48341",
+    "County": "Moore",
+    "State": ""
+  },
+  {
+    "FIPS": "48357",
+    "County": "Ochiltree",
+    "State": ""
+  },
+  {
+    "FIPS": "48359",
+    "County": "Oldham",
+    "State": ""
+  },
+  {
+    "FIPS": "48369",
+    "County": "Parmer",
+    "State": ""
+  },
+  {
+    "FIPS": "48375",
+    "County": "Potter",
+    "State": ""
+  },
+  {
+    "FIPS": "48381",
+    "County": "Randall",
+    "State": ""
+  },
+  {
+    "FIPS": "48393",
+    "County": "Roberts",
+    "State": ""
+  },
+  {
+    "FIPS": "48421",
+    "County": "Sherman",
+    "State": ""
+  },
+  {
+    "FIPS": "48437",
+    "County": "Swisher",
+    "State": ""
+  },
+  {
+    "FIPS": "48483",
+    "County": "Wheeler",
+    "State": ""
+  },
+  {
+    "FIPS": "02013",
+    "County": "Aleutians East",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02016",
+    "County": "Aleutians West",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02020",
+    "County": "Anchorage",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02050",
+    "County": "Bethel",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02060",
+    "County": "Bristol Bay",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02068",
+    "County": "Denali",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02070",
+    "County": "Dillingham",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02090",
+    "County": "Fairbanks North",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02100",
+    "County": "Haines",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02105",
+    "County": "Hoonah-Angoon",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02110",
+    "County": "Juneau City",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02122",
+    "County": "Kenai Peninsula",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02130",
+    "County": "Ketchikan Gateway",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02150",
+    "County": "Kodiak Island",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02158",
+    "County": "Kusilvak",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02164",
+    "County": "Lake and Peninsula",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02170",
+    "County": "Matanuska-Susitna",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02180",
+    "County": "Nome",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02185",
+    "County": "North Slope",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02188",
+    "County": "Northwest Arctic",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02195",
+    "County": "Petersburg",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02198",
+    "County": "Prince of Wales-Outer Ket",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02220",
+    "County": "Sitka City",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02230",
+    "County": "Skagway",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02240",
+    "County": "Southeast Fairbanks",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02261",
+    "County": "Valdez-Cordova",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02275",
+    "County": "Wrangell City",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02282",
+    "County": "Yakutat City",
+    "State": "AK"
+  },
+  {
+    "FIPS": "02290",
+    "County": "Yukon-Koyukuk",
+    "State": "AK"
+  },
+  {
     "FIPS": "01001",
     "County": "Autauga",
     "State": "AL"
@@ -1572,6 +2117,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "01009",
     "County": "Blount",
+    "State": "AL"
+  },
+  {
+    "FIPS": "01011",
+    "County": "Bullock",
     "State": "AL"
   },
   {
@@ -1645,6 +2195,11 @@ const LOOKUP_DATABASE = {
     "State": "AL"
   },
   {
+    "FIPS": "01041",
+    "County": "Crenshaw",
+    "State": "AL"
+  },
+  {
     "FIPS": "01043",
     "County": "Cullman",
     "State": "AL"
@@ -1690,6 +2245,11 @@ const LOOKUP_DATABASE = {
     "State": "AL"
   },
   {
+    "FIPS": "01061",
+    "County": "Geneva",
+    "State": "AL"
+  },
+  {
     "FIPS": "01063",
     "County": "Greene",
     "State": "AL"
@@ -1697,6 +2257,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "01065",
     "County": "Hale",
+    "State": "AL"
+  },
+  {
+    "FIPS": "01067",
+    "County": "Henry",
     "State": "AL"
   },
   {
@@ -1865,6 +2430,16 @@ const LOOKUP_DATABASE = {
     "State": "AL"
   },
   {
+    "FIPS": "05001",
+    "County": "Arkansas",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05003",
+    "County": "Ashley",
+    "State": "AR"
+  },
+  {
     "FIPS": "05005",
     "County": "Baxter",
     "State": "AR"
@@ -1880,8 +2455,143 @@ const LOOKUP_DATABASE = {
     "State": "AR"
   },
   {
+    "FIPS": "05011",
+    "County": "Bradley",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05013",
+    "County": "Calhoun",
+    "State": "AR"
+  },
+  {
     "FIPS": "05015",
     "County": "Carroll",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05017",
+    "County": "Chicot",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05019",
+    "County": "Clark",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05023",
+    "County": "Cleburne",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05025",
+    "County": "Cleveland",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05027",
+    "County": "Columbia",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05029",
+    "County": "Conway",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05033",
+    "County": "Crawford",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05039",
+    "County": "Dallas",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05041",
+    "County": "Desha",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05043",
+    "County": "Drew",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05045",
+    "County": "Faulkner",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05047",
+    "County": "Franklin",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05051",
+    "County": "Garland",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05053",
+    "County": "Grant",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05057",
+    "County": "Hempstead",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05059",
+    "County": "Hot Spring",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05061",
+    "County": "Howard",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05063",
+    "County": "Independence",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05069",
+    "County": "Jefferson",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05071",
+    "County": "Johnson",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05073",
+    "County": "Lafayette",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05079",
+    "County": "Lincoln",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05081",
+    "County": "Little River",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05083",
+    "County": "Logan",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05085",
+    "County": "Lonoke",
     "State": "AR"
   },
   {
@@ -1895,8 +2605,63 @@ const LOOKUP_DATABASE = {
     "State": "AR"
   },
   {
+    "FIPS": "05097",
+    "County": "Montgomery",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05099",
+    "County": "Nevada",
+    "State": "AR"
+  },
+  {
     "FIPS": "05101",
     "County": "Newton",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05103",
+    "County": "Ouachita",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05105",
+    "County": "Perry",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05109",
+    "County": "Pike",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05113",
+    "County": "Polk",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05115",
+    "County": "Pope",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05117",
+    "County": "Prairie",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05119",
+    "County": "Pulaski",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05125",
+    "County": "Saline",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05127",
+    "County": "Scott",
     "State": "AR"
   },
   {
@@ -1905,9 +2670,49 @@ const LOOKUP_DATABASE = {
     "State": "AR"
   },
   {
+    "FIPS": "05131",
+    "County": "Sebastian",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05133",
+    "County": "Sevier",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05137",
+    "County": "Stone",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05139",
+    "County": "Union",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05141",
+    "County": "Van Buren",
+    "State": "AR"
+  },
+  {
     "FIPS": "05143",
     "County": "Washington",
     "State": "AR"
+  },
+  {
+    "FIPS": "05145",
+    "County": "White",
+    "State": "AR"
+  },
+  {
+    "FIPS": "05149",
+    "County": "Yell",
+    "State": "AR"
+  },
+  {
+    "FIPS": "04001",
+    "County": "Apache",
+    "State": "AZ"
   },
   {
     "FIPS": "04003",
@@ -1985,8 +2790,28 @@ const LOOKUP_DATABASE = {
     "State": "CA"
   },
   {
+    "FIPS": "06003",
+    "County": "Alpine",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06005",
+    "County": "Amador",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06007",
+    "County": "Butte",
+    "State": "CA"
+  },
+  {
     "FIPS": "06009",
     "County": "Calaveras",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06011",
+    "County": "Colusa",
     "State": "CA"
   },
   {
@@ -1995,8 +2820,38 @@ const LOOKUP_DATABASE = {
     "State": "CA"
   },
   {
+    "FIPS": "06015",
+    "County": "Del Norte",
+    "State": "CA"
+  },
+  {
     "FIPS": "06017",
     "County": "El Dorado",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06019",
+    "County": "Fresno",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06021",
+    "County": "Glenn",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06023",
+    "County": "Humboldt",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06025",
+    "County": "Imperial",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06027",
+    "County": "Inyo",
     "State": "CA"
   },
   {
@@ -2005,8 +2860,28 @@ const LOOKUP_DATABASE = {
     "State": "CA"
   },
   {
+    "FIPS": "06031",
+    "County": "Kings",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06033",
+    "County": "Lake",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06035",
+    "County": "Lassen",
+    "State": "CA"
+  },
+  {
     "FIPS": "06037",
     "County": "Los Angeles",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06039",
+    "County": "Madera",
     "State": "CA"
   },
   {
@@ -2015,8 +2890,28 @@ const LOOKUP_DATABASE = {
     "State": "CA"
   },
   {
+    "FIPS": "06043",
+    "County": "Mariposa",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06045",
+    "County": "Mendocino",
+    "State": "CA"
+  },
+  {
     "FIPS": "06047",
     "County": "Merced",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06049",
+    "County": "Modoc",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06051",
+    "County": "Mono",
     "State": "CA"
   },
   {
@@ -2030,6 +2925,11 @@ const LOOKUP_DATABASE = {
     "State": "CA"
   },
   {
+    "FIPS": "06057",
+    "County": "Nevada",
+    "State": "CA"
+  },
+  {
     "FIPS": "06059",
     "County": "Orange",
     "State": "CA"
@@ -2037,6 +2937,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "06061",
     "County": "Placer",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06063",
+    "County": "Plumas",
     "State": "CA"
   },
   {
@@ -2075,6 +2980,11 @@ const LOOKUP_DATABASE = {
     "State": "CA"
   },
   {
+    "FIPS": "06079",
+    "County": "San Luis Obispo",
+    "State": "CA"
+  },
+  {
     "FIPS": "06081",
     "County": "San Mateo",
     "State": "CA"
@@ -2095,6 +3005,21 @@ const LOOKUP_DATABASE = {
     "State": "CA"
   },
   {
+    "FIPS": "06089",
+    "County": "Shasta",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06091",
+    "County": "Sierra",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06093",
+    "County": "Siskiyou",
+    "State": "CA"
+  },
+  {
     "FIPS": "06095",
     "County": "Solano",
     "State": "CA"
@@ -2112,6 +3037,21 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "06101",
     "County": "Sutter",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06103",
+    "County": "Tehama",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06105",
+    "County": "Trinity",
+    "State": "CA"
+  },
+  {
+    "FIPS": "06107",
+    "County": "Tulare",
     "State": "CA"
   },
   {
@@ -2140,8 +3080,28 @@ const LOOKUP_DATABASE = {
     "State": "CO"
   },
   {
+    "FIPS": "08003",
+    "County": "Alamosa",
+    "State": "CO"
+  },
+  {
     "FIPS": "08005",
     "County": "Arapahoe",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08007",
+    "County": "Archuleta",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08009",
+    "County": "Baca",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08011",
+    "County": "Bent",
     "State": "CO"
   },
   {
@@ -2160,8 +3120,48 @@ const LOOKUP_DATABASE = {
     "State": "CO"
   },
   {
+    "FIPS": "08017",
+    "County": "Cheyenne",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08019",
+    "County": "Clear Creek",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08021",
+    "County": "Conejos",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08023",
+    "County": "Costilla",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08025",
+    "County": "Crowley",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08027",
+    "County": "Custer",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08029",
+    "County": "Delta",
+    "State": "CO"
+  },
+  {
     "FIPS": "08031",
     "County": "Denver",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08033",
+    "County": "Dolores",
     "State": "CO"
   },
   {
@@ -2180,8 +3180,23 @@ const LOOKUP_DATABASE = {
     "State": "CO"
   },
   {
+    "FIPS": "08039",
+    "County": "Elbert",
+    "State": "CO"
+  },
+  {
     "FIPS": "08043",
     "County": "Fremont",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08045",
+    "County": "Garfield",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08047",
+    "County": "Gilpin",
     "State": "CO"
   },
   {
@@ -2190,8 +3205,33 @@ const LOOKUP_DATABASE = {
     "State": "CO"
   },
   {
+    "FIPS": "08051",
+    "County": "Gunnison",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08053",
+    "County": "Hinsdale",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08055",
+    "County": "Huerfano",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08057",
+    "County": "Jackson",
+    "State": "CO"
+  },
+  {
     "FIPS": "08059",
     "County": "Jefferson",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08061",
+    "County": "Kiowa",
     "State": "CO"
   },
   {
@@ -2200,8 +3240,28 @@ const LOOKUP_DATABASE = {
     "State": "CO"
   },
   {
+    "FIPS": "08067",
+    "County": "La Plata",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08065",
+    "County": "Lake",
+    "State": "CO"
+  },
+  {
     "FIPS": "08069",
     "County": "Larimer",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08071",
+    "County": "Las Animas",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08073",
+    "County": "Lincoln",
     "State": "CO"
   },
   {
@@ -2215,8 +3275,38 @@ const LOOKUP_DATABASE = {
     "State": "CO"
   },
   {
+    "FIPS": "08079",
+    "County": "Mineral",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08081",
+    "County": "Moffat",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08083",
+    "County": "Montezuma",
+    "State": "CO"
+  },
+  {
     "FIPS": "08085",
     "County": "Montrose",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08087",
+    "County": "Morgan",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08089",
+    "County": "Otero",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08091",
+    "County": "Ouray",
     "State": "CO"
   },
   {
@@ -2230,8 +3320,48 @@ const LOOKUP_DATABASE = {
     "State": "CO"
   },
   {
+    "FIPS": "08097",
+    "County": "Pitkin",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08099",
+    "County": "Prowers",
+    "State": "CO"
+  },
+  {
     "FIPS": "08101",
     "County": "Pueblo",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08103",
+    "County": "Rio Blanco",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08105",
+    "County": "Rio Grande",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08107",
+    "County": "Routt",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08109",
+    "County": "Saguache",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08111",
+    "County": "San Juan",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08113",
+    "County": "San Miguel",
     "State": "CO"
   },
   {
@@ -2242,6 +3372,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "08117",
     "County": "Summit",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08119",
+    "County": "Teller",
+    "State": "CO"
+  },
+  {
+    "FIPS": "08121",
+    "County": "Washington",
     "State": "CO"
   },
   {
@@ -2290,6 +3430,11 @@ const LOOKUP_DATABASE = {
     "State": "CT"
   },
   {
+    "FIPS": "36103",
+    "County": "Suffolk",
+    "State": "CT"
+  },
+  {
     "FIPS": "09013",
     "County": "Tolland",
     "State": "CT"
@@ -2303,6 +3448,11 @@ const LOOKUP_DATABASE = {
     "FIPS": "09015",
     "County": "Windham",
     "State": "CT"
+  },
+  {
+    "FIPS": "24011",
+    "County": "Caroline",
+    "State": "DE"
   },
   {
     "FIPS": "24015",
@@ -2335,6 +3485,11 @@ const LOOKUP_DATABASE = {
     "State": "DE"
   },
   {
+    "FIPS": "24039",
+    "County": "Somerset",
+    "State": "DE"
+  },
+  {
     "FIPS": "10005",
     "County": "Sussex",
     "State": "DE"
@@ -2345,8 +3500,23 @@ const LOOKUP_DATABASE = {
     "State": "DE"
   },
   {
+    "FIPS": "24045",
+    "County": "Wicomico",
+    "State": "DE"
+  },
+  {
+    "FIPS": "24047",
+    "County": "Worcester",
+    "State": "DE"
+  },
+  {
     "FIPS": "12001",
     "County": "Alachua",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12003",
+    "County": "Baker",
     "State": "FL"
   },
   {
@@ -2355,8 +3525,58 @@ const LOOKUP_DATABASE = {
     "State": "FL"
   },
   {
+    "FIPS": "12007",
+    "County": "Bradford",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12009",
+    "County": "Brevard",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12011",
+    "County": "Broward",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12013",
+    "County": "Calhoun",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12015",
+    "County": "Charlotte",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12017",
+    "County": "Citrus",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12019",
+    "County": "Clay",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12021",
+    "County": "Collier",
+    "State": "FL"
+  },
+  {
     "FIPS": "12023",
     "County": "Columbia",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12027",
+    "County": "DeSoto",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12029",
+    "County": "Dixie",
     "State": "FL"
   },
   {
@@ -2370,8 +3590,113 @@ const LOOKUP_DATABASE = {
     "State": "FL"
   },
   {
+    "FIPS": "12035",
+    "County": "Flagler",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12037",
+    "County": "Franklin",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12039",
+    "County": "Gadsden",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12041",
+    "County": "Gilchrist",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12043",
+    "County": "Glades",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12045",
+    "County": "Gulf",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12047",
+    "County": "Hamilton",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12049",
+    "County": "Hardee",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12051",
+    "County": "Hendry",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12053",
+    "County": "Hernando",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12055",
+    "County": "Highlands",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12057",
+    "County": "Hillsborough",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12059",
+    "County": "Holmes",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12061",
+    "County": "Indian River",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12063",
+    "County": "Jackson",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12065",
+    "County": "Jefferson",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12067",
+    "County": "Lafayette",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12069",
+    "County": "Lake",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12071",
+    "County": "Lee",
+    "State": "FL"
+  },
+  {
     "FIPS": "12073",
     "County": "Leon",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12075",
+    "County": "Levy",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12077",
+    "County": "Liberty",
     "State": "FL"
   },
   {
@@ -2380,8 +3705,78 @@ const LOOKUP_DATABASE = {
     "State": "FL"
   },
   {
+    "FIPS": "12081",
+    "County": "Manatee",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12083",
+    "County": "Marion",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12085",
+    "County": "Martin",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12086",
+    "County": "Miami-Dade",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12087",
+    "County": "Monroe",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12089",
+    "County": "Nassau",
+    "State": "FL"
+  },
+  {
     "FIPS": "12091",
     "County": "Okaloosa",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12093",
+    "County": "Okeechobee",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12095",
+    "County": "Orange",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12097",
+    "County": "Osceola",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12099",
+    "County": "Palm Beach",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12101",
+    "County": "Pasco",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12103",
+    "County": "Pinellas",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12105",
+    "County": "Polk",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12107",
+    "County": "Putnam",
     "State": "FL"
   },
   {
@@ -2390,13 +3785,63 @@ const LOOKUP_DATABASE = {
     "State": "FL"
   },
   {
+    "FIPS": "12115",
+    "County": "Sarasota",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12117",
+    "County": "Seminole",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12109",
+    "County": "St. Johns",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12111",
+    "County": "St. Lucie",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12119",
+    "County": "Sumter",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12121",
+    "County": "Suwannee",
+    "State": "FL"
+  },
+  {
     "FIPS": "12123",
     "County": "Taylor",
     "State": "FL"
   },
   {
+    "FIPS": "12125",
+    "County": "Union",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12127",
+    "County": "Volusia",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12129",
+    "County": "Wakulla",
+    "State": "FL"
+  },
+  {
     "FIPS": "12131",
     "County": "Walton",
+    "State": "FL"
+  },
+  {
+    "FIPS": "12133",
+    "County": "Washington",
     "State": "FL"
   },
   {
@@ -2412,6 +3857,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13005",
     "County": "Bacon",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13007",
+    "County": "Baker",
     "State": "GA"
   },
   {
@@ -2505,6 +3955,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13047",
+    "County": "Catoosa",
+    "State": "GA"
+  },
+  {
     "FIPS": "13049",
     "County": "Charlton",
     "State": "GA"
@@ -2590,6 +4045,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13083",
+    "County": "Dade",
+    "State": "GA"
+  },
+  {
     "FIPS": "13085",
     "County": "Dawson",
     "State": "GA"
@@ -2622,6 +4082,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13097",
     "County": "Douglas",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13099",
+    "County": "Early",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13101",
+    "County": "Echols",
     "State": "GA"
   },
   {
@@ -2680,6 +4150,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13125",
+    "County": "Glascock",
+    "State": "GA"
+  },
+  {
     "FIPS": "13127",
     "County": "Glynn",
     "State": "GA"
@@ -2687,6 +4162,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13129",
     "County": "Gordon",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13131",
+    "County": "Grady",
     "State": "GA"
   },
   {
@@ -2707,6 +4187,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13139",
     "County": "Hall",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13141",
+    "County": "Hancock",
     "State": "GA"
   },
   {
@@ -2740,6 +4225,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13155",
+    "County": "Irwin",
+    "State": "GA"
+  },
+  {
     "FIPS": "13157",
     "County": "Jackson",
     "State": "GA"
@@ -2752,6 +4242,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13161",
     "County": "Jeff Davis",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13163",
+    "County": "Jefferson",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13165",
+    "County": "Jenkins",
     "State": "GA"
   },
   {
@@ -2770,6 +4270,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13173",
+    "County": "Lanier",
+    "State": "GA"
+  },
+  {
     "FIPS": "13175",
     "County": "Laurens",
     "State": "GA"
@@ -2782,6 +4287,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13179",
     "County": "Liberty",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13181",
+    "County": "Lincoln",
     "State": "GA"
   },
   {
@@ -2827,6 +4337,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13199",
     "County": "Meriwether",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13201",
+    "County": "Miller",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13205",
+    "County": "Mitchell",
     "State": "GA"
   },
   {
@@ -2900,6 +4420,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13235",
+    "County": "Pulaski",
+    "State": "GA"
+  },
+  {
     "FIPS": "13237",
     "County": "Putnam",
     "State": "GA"
@@ -2940,6 +4465,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13253",
+    "County": "Seminole",
+    "State": "GA"
+  },
+  {
     "FIPS": "13255",
     "County": "Spalding",
     "State": "GA"
@@ -2950,6 +4480,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13259",
+    "County": "Stewart",
+    "State": "GA"
+  },
+  {
     "FIPS": "13261",
     "County": "Sumter",
     "State": "GA"
@@ -2957,6 +4492,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13263",
     "County": "Talbot",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13265",
+    "County": "Taliaferro",
     "State": "GA"
   },
   {
@@ -3030,6 +4570,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13295",
+    "County": "Walker",
+    "State": "GA"
+  },
+  {
     "FIPS": "13297",
     "County": "Walton",
     "State": "GA"
@@ -3037,6 +4582,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13299",
     "County": "Ware",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13301",
+    "County": "Warren",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13303",
+    "County": "Washington",
     "State": "GA"
   },
   {
@@ -3050,6 +4605,11 @@ const LOOKUP_DATABASE = {
     "State": "GA"
   },
   {
+    "FIPS": "13309",
+    "County": "Wheeler",
+    "State": "GA"
+  },
+  {
     "FIPS": "13311",
     "County": "White",
     "State": "GA"
@@ -3057,6 +4617,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "13313",
     "County": "Whitfield",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13315",
+    "County": "Wilcox",
+    "State": "GA"
+  },
+  {
+    "FIPS": "13317",
+    "County": "Wilkes",
     "State": "GA"
   },
   {
@@ -3068,6 +4638,41 @@ const LOOKUP_DATABASE = {
     "FIPS": "13321",
     "County": "Worth",
     "State": "GA"
+  },
+  {
+    "FIPS": "71010",
+    "County": "Guam",
+    "State": "GU"
+  },
+  {
+    "FIPS": "70050",
+    "County": "American Samoa",
+    "State": "HI"
+  },
+  {
+    "FIPS": "15001",
+    "County": "Hawaii",
+    "State": "HI"
+  },
+  {
+    "FIPS": "15003",
+    "County": "Honolulu",
+    "State": "HI"
+  },
+  {
+    "FIPS": "15005",
+    "County": "Kalawao",
+    "State": "HI"
+  },
+  {
+    "FIPS": "15007",
+    "County": "Kauai",
+    "State": "HI"
+  },
+  {
+    "FIPS": "15009",
+    "County": "Maui",
+    "State": "HI"
   },
   {
     "FIPS": "19001",
@@ -3082,6 +4687,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "19005",
     "County": "Allamakee",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19007",
+    "County": "Appanoose",
     "State": "IA"
   },
   {
@@ -3115,8 +4725,18 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19021",
+    "County": "Buena Vista",
+    "State": "IA"
+  },
+  {
     "FIPS": "19023",
     "County": "Butler",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19025",
+    "County": "Calhoun",
     "State": "IA"
   },
   {
@@ -3130,8 +4750,23 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19031",
+    "County": "Cedar",
+    "State": "IA"
+  },
+  {
+    "FIPS": "31027",
+    "County": "Cedar",
+    "State": "IA"
+  },
+  {
     "FIPS": "19033",
     "County": "Cerro Gordo",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19035",
+    "County": "Cherokee",
     "State": "IA"
   },
   {
@@ -3185,6 +4820,11 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19051",
+    "County": "Davis",
+    "State": "IA"
+  },
+  {
     "FIPS": "19053",
     "County": "Decatur",
     "State": "IA"
@@ -3195,8 +4835,18 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19057",
+    "County": "Des Moines",
+    "State": "IA"
+  },
+  {
     "FIPS": "19059",
     "County": "Dickinson",
+    "State": "IA"
+  },
+  {
+    "FIPS": "31051",
+    "County": "Dixon",
     "State": "IA"
   },
   {
@@ -3220,8 +4870,18 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19069",
+    "County": "Franklin",
+    "State": "IA"
+  },
+  {
     "FIPS": "55043",
     "County": "Grant",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19073",
+    "County": "Greene",
     "State": "IA"
   },
   {
@@ -3230,8 +4890,38 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19077",
+    "County": "Guthrie",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19079",
+    "County": "Hamilton",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19081",
+    "County": "Hancock",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19083",
+    "County": "Hardin",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19087",
+    "County": "Henry",
+    "State": "IA"
+  },
+  {
     "FIPS": "19089",
     "County": "Howard",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19091",
+    "County": "Humboldt",
     "State": "IA"
   },
   {
@@ -3255,6 +4945,11 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19101",
+    "County": "Jefferson",
+    "State": "IA"
+  },
+  {
     "FIPS": "17085",
     "County": "Jo Daviess",
     "State": "IA"
@@ -3270,6 +4965,16 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19107",
+    "County": "Keokuk",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19109",
+    "County": "Kossuth",
+    "State": "IA"
+  },
+  {
     "FIPS": "55065",
     "County": "Lafayette",
     "State": "IA"
@@ -3280,8 +4985,33 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19115",
+    "County": "Louisa",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19117",
+    "County": "Lucas",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19119",
+    "County": "Lyon",
+    "State": "IA"
+  },
+  {
     "FIPS": "31119",
     "County": "Madison",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19121",
+    "County": "Madison",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19123",
+    "County": "Mahaska",
     "State": "IA"
   },
   {
@@ -3300,6 +5030,16 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19133",
+    "County": "Monona",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19135",
+    "County": "Monroe",
+    "State": "IA"
+  },
+  {
     "FIPS": "19141",
     "County": "O'Brien",
     "State": "IA"
@@ -3310,6 +5050,11 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19147",
+    "County": "Palo Alto",
+    "State": "IA"
+  },
+  {
     "FIPS": "31139",
     "County": "Pierce",
     "State": "IA"
@@ -3317,6 +5062,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "19149",
     "County": "Plymouth",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19151",
+    "County": "Pocahontas",
     "State": "IA"
   },
   {
@@ -3370,8 +5120,8 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
-    "FIPS": "19175",
-    "County": "Union",
+    "FIPS": "31173",
+    "County": "Thurston",
     "State": "IA"
   },
   {
@@ -3380,8 +5130,28 @@ const LOOKUP_DATABASE = {
     "State": "IA"
   },
   {
+    "FIPS": "19175",
+    "County": "Union",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19179",
+    "County": "Wapello",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19181",
+    "County": "Warren",
+    "State": "IA"
+  },
+  {
     "FIPS": "19183",
     "County": "Washington",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19185",
+    "County": "Wayne",
     "State": "IA"
   },
   {
@@ -3412,6 +5182,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "19195",
     "County": "Worth",
+    "State": "IA"
+  },
+  {
+    "FIPS": "19197",
+    "County": "Wright",
     "State": "IA"
   },
   {
@@ -3640,6 +5415,11 @@ const LOOKUP_DATABASE = {
     "State": "IL"
   },
   {
+    "FIPS": "17007",
+    "County": "Boone",
+    "State": "IL"
+  },
+  {
     "FIPS": "17009",
     "County": "Brown",
     "State": "IL"
@@ -3670,12 +5450,12 @@ const LOOKUP_DATABASE = {
     "State": "IL"
   },
   {
-    "FIPS": "17023",
+    "FIPS": "29045",
     "County": "Clark",
     "State": "IL"
   },
   {
-    "FIPS": "29045",
+    "FIPS": "17023",
     "County": "Clark",
     "State": "IL"
   },
@@ -3870,12 +5650,12 @@ const LOOKUP_DATABASE = {
     "State": "IL"
   },
   {
-    "FIPS": "17121",
+    "FIPS": "29127",
     "County": "Marion",
     "State": "IL"
   },
   {
-    "FIPS": "29127",
+    "FIPS": "17121",
     "County": "Marion",
     "State": "IL"
   },
@@ -3927,6 +5707,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "17139",
     "County": "Moultrie",
+    "State": "IL"
+  },
+  {
+    "FIPS": "19139",
+    "County": "Muscatine",
     "State": "IL"
   },
   {
@@ -3982,6 +5767,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "17169",
     "County": "Schuyler",
+    "State": "IL"
+  },
+  {
+    "FIPS": "17171",
+    "County": "Scott",
     "State": "IL"
   },
   {
@@ -4167,6 +5957,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "18041",
     "County": "Fayette",
+    "State": "IN"
+  },
+  {
+    "FIPS": "18045",
+    "County": "Fountain",
+    "State": "IN"
+  },
+  {
+    "FIPS": "18047",
+    "County": "Franklin",
     "State": "IN"
   },
   {
@@ -4360,6 +6160,11 @@ const LOOKUP_DATABASE = {
     "State": "IN"
   },
   {
+    "FIPS": "18121",
+    "County": "Parke",
+    "State": "IN"
+  },
+  {
     "FIPS": "39125",
     "County": "Paulding",
     "State": "IN"
@@ -4402,6 +6207,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "18137",
     "County": "Ripley",
+    "State": "IN"
+  },
+  {
+    "FIPS": "18139",
+    "County": "Rush",
     "State": "IN"
   },
   {
@@ -4460,12 +6270,12 @@ const LOOKUP_DATABASE = {
     "State": "IN"
   },
   {
-    "FIPS": "18161",
+    "FIPS": "21225",
     "County": "Union",
     "State": "IN"
   },
   {
-    "FIPS": "21225",
+    "FIPS": "18161",
     "County": "Union",
     "State": "IN"
   },
@@ -4497,6 +6307,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "18169",
     "County": "Wabash",
+    "State": "IN"
+  },
+  {
+    "FIPS": "18171",
+    "County": "Warren",
     "State": "IN"
   },
   {
@@ -4572,6 +6387,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "20011",
     "County": "Bourbon",
+    "State": "KS"
+  },
+  {
+    "FIPS": "20013",
+    "County": "Brown",
     "State": "KS"
   },
   {
@@ -5065,8 +6885,33 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21011",
+    "County": "Bath",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21013",
+    "County": "Bell",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21017",
+    "County": "Bourbon",
+    "State": "KY"
+  },
+  {
     "FIPS": "21021",
     "County": "Boyle",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21023",
+    "County": "Bracken",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21025",
+    "County": "Breathitt",
     "State": "KY"
   },
   {
@@ -5105,6 +6950,11 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21045",
+    "County": "Casey",
+    "State": "KY"
+  },
+  {
     "FIPS": "21047",
     "County": "Christian",
     "State": "KY"
@@ -5120,6 +6970,11 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21051",
+    "County": "Clay",
+    "State": "KY"
+  },
+  {
     "FIPS": "21053",
     "County": "Clinton",
     "State": "KY"
@@ -5130,6 +6985,11 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21057",
+    "County": "Cumberland",
+    "State": "KY"
+  },
+  {
     "FIPS": "21059",
     "County": "Daviess",
     "State": "KY"
@@ -5137,6 +6997,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "21061",
     "County": "Edmonson",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21063",
+    "County": "Elliott",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21065",
+    "County": "Estill",
     "State": "KY"
   },
   {
@@ -5170,6 +7040,16 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21077",
+    "County": "Gallatin",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21079",
+    "County": "Garrard",
+    "State": "KY"
+  },
+  {
     "FIPS": "21083",
     "County": "Graves",
     "State": "KY"
@@ -5200,7 +7080,17 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21095",
+    "County": "Harlan",
+    "State": "KY"
+  },
+  {
     "FIPS": "18061",
+    "County": "Harrison",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21097",
     "County": "Harrison",
     "State": "KY"
   },
@@ -5225,8 +7115,18 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21109",
+    "County": "Jackson",
+    "State": "KY"
+  },
+  {
     "FIPS": "21111",
     "County": "Jefferson",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21113",
+    "County": "Jessamine",
     "State": "KY"
   },
   {
@@ -5235,8 +7135,18 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21115",
+    "County": "Johnson",
+    "State": "KY"
+  },
+  {
     "FIPS": "21119",
     "County": "Knott",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21121",
+    "County": "Knox",
     "State": "KY"
   },
   {
@@ -5247,6 +7157,26 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "21125",
     "County": "Laurel",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21129",
+    "County": "Lee",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21131",
+    "County": "Leslie",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21133",
+    "County": "Letcher",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21135",
+    "County": "Lewis",
     "State": "KY"
   },
   {
@@ -5275,6 +7205,11 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21153",
+    "County": "Magoffin",
+    "State": "KY"
+  },
+  {
     "FIPS": "21155",
     "County": "Marion",
     "State": "KY"
@@ -5282,6 +7217,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "21157",
     "County": "Marshall",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21159",
+    "County": "Martin",
     "State": "KY"
   },
   {
@@ -5300,8 +7240,23 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21147",
+    "County": "McCreary",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21149",
+    "County": "McLean",
+    "State": "KY"
+  },
+  {
     "FIPS": "21163",
     "County": "Meade",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21165",
+    "County": "Menifee",
     "State": "KY"
   },
   {
@@ -5325,6 +7280,11 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21175",
+    "County": "Morgan",
+    "State": "KY"
+  },
+  {
     "FIPS": "21177",
     "County": "Muhlenberg",
     "State": "KY"
@@ -5340,6 +7300,11 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21183",
+    "County": "Ohio",
+    "State": "KY"
+  },
+  {
     "FIPS": "21185",
     "County": "Oldham",
     "State": "KY"
@@ -5347,6 +7312,21 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "21187",
     "County": "Owen",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21189",
+    "County": "Owsley",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21191",
+    "County": "Pendleton",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21193",
+    "County": "Perry",
     "State": "KY"
   },
   {
@@ -5360,8 +7340,28 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21197",
+    "County": "Powell",
+    "State": "KY"
+  },
+  {
     "FIPS": "17153",
     "County": "Pulaski",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21199",
+    "County": "Pulaski",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21201",
+    "County": "Robertson",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21203",
+    "County": "Rockcastle",
     "State": "KY"
   },
   {
@@ -5425,13 +7425,353 @@ const LOOKUP_DATABASE = {
     "State": "KY"
   },
   {
+    "FIPS": "21231",
+    "County": "Wayne",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21235",
+    "County": "Whitley",
+    "State": "KY"
+  },
+  {
+    "FIPS": "21237",
+    "County": "Wolfe",
+    "State": "KY"
+  },
+  {
     "FIPS": "21239",
     "County": "Woodford",
     "State": "KY"
   },
   {
+    "FIPS": "22001",
+    "County": "Acadia",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22003",
+    "County": "Allen",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22005",
+    "County": "Ascension",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22007",
+    "County": "Assumption",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22009",
+    "County": "Avoyelles",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22011",
+    "County": "Beauregard",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22013",
+    "County": "Bienville",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22015",
+    "County": "Bossier",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22017",
+    "County": "Caddo",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22019",
+    "County": "Calcasieu",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22021",
+    "County": "Caldwell",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22023",
+    "County": "Cameron",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22025",
+    "County": "Catahoula",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22027",
+    "County": "Claiborne",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22029",
+    "County": "Concordia",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22031",
+    "County": "De Soto",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22033",
+    "County": "East Baton Rouge",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22035",
+    "County": "East Carroll",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22037",
+    "County": "East Feliciana",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22039",
+    "County": "Evangeline",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22041",
+    "County": "Franklin",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22043",
+    "County": "Grant",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22045",
+    "County": "Iberia",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22047",
+    "County": "Iberville",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22049",
+    "County": "Jackson",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22051",
+    "County": "Jefferson",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22053",
+    "County": "Jefferson Davis",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22059",
+    "County": "La Salle",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22055",
+    "County": "Lafayette",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22057",
+    "County": "Lafourche",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22061",
+    "County": "Lincoln",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22063",
+    "County": "Livingston",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22065",
+    "County": "Madison",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22067",
+    "County": "Morehouse",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22069",
+    "County": "Natchitoches",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22071",
+    "County": "Orleans",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22073",
+    "County": "Ouachita",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22075",
+    "County": "Plaquemines",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22077",
+    "County": "Pointe Coupee",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22079",
+    "County": "Rapides",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22081",
+    "County": "Red River",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22083",
+    "County": "Richland",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22085",
+    "County": "Sabine",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22087",
+    "County": "St. Bernard",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22089",
+    "County": "St. Charles",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22091",
+    "County": "St. Helena",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22093",
+    "County": "St. James",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22095",
+    "County": "St. John the Bapti",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22097",
+    "County": "St. Landry",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22099",
+    "County": "St. Martin",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22101",
+    "County": "St. Mary",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22103",
+    "County": "St. Tammany",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22105",
+    "County": "Tangipahoa",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22107",
+    "County": "Tensas",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22109",
+    "County": "Terrebonne",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22111",
+    "County": "Union",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22113",
+    "County": "Vermilion",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22115",
+    "County": "Vernon",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22117",
+    "County": "Washington",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22119",
+    "County": "Webster",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22121",
+    "County": "West Baton Rouge",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22123",
+    "County": "West Carroll",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22125",
+    "County": "West Feliciana",
+    "State": "LA"
+  },
+  {
+    "FIPS": "22127",
+    "County": "Winn",
+    "State": "LA"
+  },
+  {
     "FIPS": "25001",
     "County": "Barnstable",
+    "State": "MA"
+  },
+  {
+    "FIPS": "25003",
+    "County": "Berkshire",
     "State": "MA"
   },
   {
@@ -5447,6 +7787,21 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "25009",
     "County": "Essex",
+    "State": "MA"
+  },
+  {
+    "FIPS": "25011",
+    "County": "Franklin",
+    "State": "MA"
+  },
+  {
+    "FIPS": "25013",
+    "County": "Hampden",
+    "State": "MA"
+  },
+  {
+    "FIPS": "25015",
+    "County": "Hampshire",
     "State": "MA"
   },
   {
@@ -5520,12 +7875,12 @@ const LOOKUP_DATABASE = {
     "State": "MD"
   },
   {
-    "FIPS": "24021",
+    "FIPS": "51069",
     "County": "Frederick",
     "State": "MD"
   },
   {
-    "FIPS": "51069",
+    "FIPS": "24021",
     "County": "Frederick",
     "State": "MD"
   },
@@ -5680,13 +8035,38 @@ const LOOKUP_DATABASE = {
     "State": "ME"
   },
   {
+    "FIPS": "26001",
+    "County": "Alcona",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26003",
+    "County": "Alger",
+    "State": "MI"
+  },
+  {
     "FIPS": "26005",
     "County": "Allegan",
     "State": "MI"
   },
   {
+    "FIPS": "26007",
+    "County": "Alpena",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26009",
+    "County": "Antrim",
+    "State": "MI"
+  },
+  {
     "FIPS": "26011",
     "County": "Arenac",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26013",
+    "County": "Baraga",
     "State": "MI"
   },
   {
@@ -5697,6 +8077,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "26017",
     "County": "Bay",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26019",
+    "County": "Benzie",
     "State": "MI"
   },
   {
@@ -5720,6 +8105,21 @@ const LOOKUP_DATABASE = {
     "State": "MI"
   },
   {
+    "FIPS": "26029",
+    "County": "Charlevoix",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26031",
+    "County": "Cheboygan",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26033",
+    "County": "Chippewa",
+    "State": "MI"
+  },
+  {
     "FIPS": "26035",
     "County": "Clare",
     "State": "MI"
@@ -5730,8 +8130,18 @@ const LOOKUP_DATABASE = {
     "State": "MI"
   },
   {
+    "FIPS": "26039",
+    "County": "Crawford",
+    "State": "MI"
+  },
+  {
     "FIPS": "26045",
     "County": "Eaton",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26047",
+    "County": "Emmet",
     "State": "MI"
   },
   {
@@ -5742,6 +8152,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "26051",
     "County": "Gladwin",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26055",
+    "County": "Grand Traverse",
     "State": "MI"
   },
   {
@@ -5790,6 +8205,11 @@ const LOOKUP_DATABASE = {
     "State": "MI"
   },
   {
+    "FIPS": "26079",
+    "County": "Kalkaska",
+    "State": "MI"
+  },
+  {
     "FIPS": "26081",
     "County": "Kent",
     "State": "MI"
@@ -5805,6 +8225,11 @@ const LOOKUP_DATABASE = {
     "State": "MI"
   },
   {
+    "FIPS": "26089",
+    "County": "Leelanau",
+    "State": "MI"
+  },
+  {
     "FIPS": "26091",
     "County": "Lenawee",
     "State": "MI"
@@ -5812,6 +8237,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "26093",
     "County": "Livingston",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26095",
+    "County": "Luce",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26097",
+    "County": "Mackinac",
     "State": "MI"
   },
   {
@@ -5855,6 +8290,11 @@ const LOOKUP_DATABASE = {
     "State": "MI"
   },
   {
+    "FIPS": "26119",
+    "County": "Montmorency",
+    "State": "MI"
+  },
+  {
     "FIPS": "26121",
     "County": "Muskegon",
     "State": "MI"
@@ -5885,8 +8325,23 @@ const LOOKUP_DATABASE = {
     "State": "MI"
   },
   {
+    "FIPS": "26135",
+    "County": "Oscoda",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26137",
+    "County": "Otsego",
+    "State": "MI"
+  },
+  {
     "FIPS": "26139",
     "County": "Ottawa",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26141",
+    "County": "Presque Isle",
     "State": "MI"
   },
   {
@@ -5902,6 +8357,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "26151",
     "County": "Sanilac",
+    "State": "MI"
+  },
+  {
+    "FIPS": "26153",
+    "County": "Schoolcraft",
     "State": "MI"
   },
   {
@@ -6005,6 +8465,16 @@ const LOOKUP_DATABASE = {
     "State": "MN"
   },
   {
+    "FIPS": "27029",
+    "County": "Clearwater",
+    "State": "MN"
+  },
+  {
+    "FIPS": "27031",
+    "County": "Cook",
+    "State": "MN"
+  },
+  {
     "FIPS": "27033",
     "County": "Cottonwood",
     "State": "MN"
@@ -6070,6 +8540,11 @@ const LOOKUP_DATABASE = {
     "State": "MN"
   },
   {
+    "FIPS": "27057",
+    "County": "Hubbard",
+    "State": "MN"
+  },
+  {
     "FIPS": "27059",
     "County": "Isanti",
     "State": "MN"
@@ -6095,8 +8570,23 @@ const LOOKUP_DATABASE = {
     "State": "MN"
   },
   {
+    "FIPS": "27071",
+    "County": "Koochiching",
+    "State": "MN"
+  },
+  {
     "FIPS": "27073",
     "County": "Lac qui Parle",
+    "State": "MN"
+  },
+  {
+    "FIPS": "27075",
+    "County": "Lake",
+    "State": "MN"
+  },
+  {
+    "FIPS": "27077",
+    "County": "Lake of the Woods",
     "State": "MN"
   },
   {
@@ -6112,6 +8602,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "27083",
     "County": "Lyon",
+    "State": "MN"
+  },
+  {
+    "FIPS": "27087",
+    "County": "Mahnomen",
     "State": "MN"
   },
   {
@@ -6202,6 +8697,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "27133",
     "County": "Rock",
+    "State": "MN"
+  },
+  {
+    "FIPS": "27135",
+    "County": "Roseau",
     "State": "MN"
   },
   {
@@ -6405,6 +8905,11 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
+    "FIPS": "29039",
+    "County": "Cedar",
+    "State": "MO"
+  },
+  {
     "FIPS": "29041",
     "County": "Chariton",
     "State": "MO"
@@ -6415,12 +8920,12 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
-    "FIPS": "05021",
+    "FIPS": "29047",
     "County": "Clay",
     "State": "MO"
   },
   {
-    "FIPS": "29047",
+    "FIPS": "05021",
     "County": "Clay",
     "State": "MO"
   },
@@ -6460,13 +8965,28 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
+    "FIPS": "29059",
+    "County": "Dallas",
+    "State": "MO"
+  },
+  {
     "FIPS": "29061",
     "County": "Daviess",
     "State": "MO"
   },
   {
+    "FIPS": "29063",
+    "County": "DeKalb",
+    "State": "MO"
+  },
+  {
     "FIPS": "29065",
     "County": "Dent",
+    "State": "MO"
+  },
+  {
+    "FIPS": "20043",
+    "County": "Doniphan",
     "State": "MO"
   },
   {
@@ -6495,12 +9015,17 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
-    "FIPS": "05055",
-    "County": "Greene",
+    "FIPS": "29075",
+    "County": "Gentry",
     "State": "MO"
   },
   {
     "FIPS": "29077",
+    "County": "Greene",
+    "State": "MO"
+  },
+  {
+    "FIPS": "05055",
     "County": "Greene",
     "State": "MO"
   },
@@ -6522,6 +9047,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "29085",
     "County": "Hickory",
+    "State": "MO"
+  },
+  {
+    "FIPS": "29087",
+    "County": "Holt",
     "State": "MO"
   },
   {
@@ -6550,12 +9080,12 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
-    "FIPS": "17077",
+    "FIPS": "29095",
     "County": "Jackson",
     "State": "MO"
   },
   {
-    "FIPS": "29095",
+    "FIPS": "17077",
     "County": "Jackson",
     "State": "MO"
   },
@@ -6597,6 +9127,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "29107",
     "County": "Lafayette",
+    "State": "MO"
+  },
+  {
+    "FIPS": "29109",
+    "County": "Lawrence",
     "State": "MO"
   },
   {
@@ -6685,17 +9220,17 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
+    "FIPS": "29137",
+    "County": "Monroe",
+    "State": "MO"
+  },
+  {
     "FIPS": "05095",
     "County": "Monroe",
     "State": "MO"
   },
   {
     "FIPS": "17133",
-    "County": "Monroe",
-    "State": "MO"
-  },
-  {
-    "FIPS": "29137",
     "County": "Monroe",
     "State": "MO"
   },
@@ -6795,17 +9330,17 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
+    "FIPS": "29175",
+    "County": "Randolph",
+    "State": "MO"
+  },
+  {
     "FIPS": "05121",
     "County": "Randolph",
     "State": "MO"
   },
   {
     "FIPS": "17157",
-    "County": "Randolph",
-    "State": "MO"
-  },
-  {
-    "FIPS": "29175",
     "County": "Randolph",
     "State": "MO"
   },
@@ -6865,12 +9400,12 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
-    "FIPS": "17163",
+    "FIPS": "29185",
     "County": "St. Clair",
     "State": "MO"
   },
   {
-    "FIPS": "29185",
+    "FIPS": "17163",
     "County": "St. Clair",
     "State": "MO"
   },
@@ -6960,6 +9495,11 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
+    "FIPS": "29227",
+    "County": "Worth",
+    "State": "MO"
+  },
+  {
     "FIPS": "29229",
     "County": "Wright",
     "State": "MO"
@@ -6970,13 +9510,128 @@ const LOOKUP_DATABASE = {
     "State": "MO"
   },
   {
+    "FIPS": "69085",
+    "County": "Northern Islands",
+    "State": "MP"
+  },
+  {
+    "FIPS": "69100",
+    "County": "Rota",
+    "State": "MP"
+  },
+  {
+    "FIPS": "69110",
+    "County": "Saipan",
+    "State": "MP"
+  },
+  {
+    "FIPS": "69120",
+    "County": "Tinian",
+    "State": "MP"
+  },
+  {
+    "FIPS": "28001",
+    "County": "Adams",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28003",
+    "County": "Alcorn",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28005",
+    "County": "Amite",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28007",
+    "County": "Attala",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28009",
+    "County": "Benton",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28011",
+    "County": "Bolivar",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28013",
+    "County": "Calhoun",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28015",
+    "County": "Carroll",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28017",
+    "County": "Chickasaw",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28019",
+    "County": "Choctaw",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28021",
+    "County": "Claiborne",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28023",
+    "County": "Clarke",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28025",
+    "County": "Clay",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28027",
+    "County": "Coahoma",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28029",
+    "County": "Copiah",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28031",
+    "County": "Covington",
+    "State": "MS"
+  },
+  {
     "FIPS": "28035",
     "County": "Forrest",
     "State": "MS"
   },
   {
+    "FIPS": "28037",
+    "County": "Franklin",
+    "State": "MS"
+  },
+  {
     "FIPS": "28039",
     "County": "George",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28041",
+    "County": "Greene",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28043",
+    "County": "Grenada",
     "State": "MS"
   },
   {
@@ -6995,8 +9650,58 @@ const LOOKUP_DATABASE = {
     "State": "MS"
   },
   {
+    "FIPS": "28051",
+    "County": "Holmes",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28053",
+    "County": "Humphreys",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28055",
+    "County": "Issaquena",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28057",
+    "County": "Itawamba",
+    "State": "MS"
+  },
+  {
     "FIPS": "28059",
     "County": "Jackson",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28061",
+    "County": "Jasper",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28063",
+    "County": "Jefferson",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28065",
+    "County": "Jefferson Davis",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28067",
+    "County": "Jones",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28069",
+    "County": "Kemper",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28071",
+    "County": "Lafayette",
     "State": "MS"
   },
   {
@@ -7010,8 +9715,73 @@ const LOOKUP_DATABASE = {
     "State": "MS"
   },
   {
+    "FIPS": "28077",
+    "County": "Lawrence",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28079",
+    "County": "Leake",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28081",
+    "County": "Lee",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28083",
+    "County": "Leflore",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28085",
+    "County": "Lincoln",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28087",
+    "County": "Lowndes",
+    "State": "MS"
+  },
+  {
     "FIPS": "28089",
     "County": "Madison",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28091",
+    "County": "Marion",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28093",
+    "County": "Marshall",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28095",
+    "County": "Monroe",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28097",
+    "County": "Montgomery",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28099",
+    "County": "Neshoba",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28101",
+    "County": "Newton",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28103",
+    "County": "Noxubee",
     "State": "MS"
   },
   {
@@ -7020,8 +9790,63 @@ const LOOKUP_DATABASE = {
     "State": "MS"
   },
   {
+    "FIPS": "28107",
+    "County": "Panola",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28109",
+    "County": "Pearl River",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28111",
+    "County": "Perry",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28113",
+    "County": "Pike",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28115",
+    "County": "Pontotoc",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28117",
+    "County": "Prentiss",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28119",
+    "County": "Quitman",
+    "State": "MS"
+  },
+  {
     "FIPS": "28121",
     "County": "Rankin",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28123",
+    "County": "Scott",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28125",
+    "County": "Sharkey",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28127",
+    "County": "Simpson",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28129",
+    "County": "Smith",
     "State": "MS"
   },
   {
@@ -7030,8 +9855,88 @@ const LOOKUP_DATABASE = {
     "State": "MS"
   },
   {
+    "FIPS": "28133",
+    "County": "Sunflower",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28135",
+    "County": "Tallahatchie",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28137",
+    "County": "Tate",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28139",
+    "County": "Tippah",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28141",
+    "County": "Tishomingo",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28145",
+    "County": "Union",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28147",
+    "County": "Walthall",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28149",
+    "County": "Warren",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28151",
+    "County": "Washington",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28153",
+    "County": "Wayne",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28155",
+    "County": "Webster",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28157",
+    "County": "Wilkinson",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28159",
+    "County": "Winston",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28161",
+    "County": "Yalobusha",
+    "State": "MS"
+  },
+  {
+    "FIPS": "28163",
+    "County": "Yazoo",
+    "State": "MS"
+  },
+  {
     "FIPS": "30001",
     "County": "Beaverhead",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30003",
+    "County": "Big Horn",
     "State": "MT"
   },
   {
@@ -7042,6 +9947,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "30007",
     "County": "Broadwater",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30009",
+    "County": "Carbon",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30011",
+    "County": "Carter",
     "State": "MT"
   },
   {
@@ -7075,6 +9990,11 @@ const LOOKUP_DATABASE = {
     "State": "MT"
   },
   {
+    "FIPS": "30025",
+    "County": "Fallon",
+    "State": "MT"
+  },
+  {
     "FIPS": "30027",
     "County": "Fergus",
     "State": "MT"
@@ -7097,6 +10017,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "30035",
     "County": "Glacier",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30037",
+    "County": "Golden Valley",
     "State": "MT"
   },
   {
@@ -7140,8 +10065,18 @@ const LOOKUP_DATABASE = {
     "State": "MT"
   },
   {
+    "FIPS": "30057",
+    "County": "Madison",
+    "State": "MT"
+  },
+  {
     "FIPS": "30055",
     "County": "McCone",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30059",
+    "County": "Meagher",
     "State": "MT"
   },
   {
@@ -7155,8 +10090,18 @@ const LOOKUP_DATABASE = {
     "State": "MT"
   },
   {
+    "FIPS": "30065",
+    "County": "Musselshell",
+    "State": "MT"
+  },
+  {
     "FIPS": "30067",
     "County": "Park",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30069",
+    "County": "Petroleum",
     "State": "MT"
   },
   {
@@ -7167,6 +10112,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "30073",
     "County": "Pondera",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30075",
+    "County": "Powder River",
     "State": "MT"
   },
   {
@@ -7215,6 +10165,16 @@ const LOOKUP_DATABASE = {
     "State": "MT"
   },
   {
+    "FIPS": "30095",
+    "County": "Stillwater",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30097",
+    "County": "Sweet Grass",
+    "State": "MT"
+  },
+  {
     "FIPS": "30099",
     "County": "Teton",
     "State": "MT"
@@ -7225,8 +10185,18 @@ const LOOKUP_DATABASE = {
     "State": "MT"
   },
   {
+    "FIPS": "30103",
+    "County": "Treasure",
+    "State": "MT"
+  },
+  {
     "FIPS": "30105",
     "County": "Valley",
+    "State": "MT"
+  },
+  {
+    "FIPS": "30107",
+    "County": "Wheatland",
     "State": "MT"
   },
   {
@@ -7760,8 +10730,48 @@ const LOOKUP_DATABASE = {
     "State": "NC"
   },
   {
+    "FIPS": "38001",
+    "County": "Adams",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38003",
+    "County": "Barnes",
+    "State": "ND"
+  },
+  {
     "FIPS": "27005",
     "County": "Becker",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38005",
+    "County": "Benson",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38007",
+    "County": "Billings",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38009",
+    "County": "Bottineau",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38011",
+    "County": "Bowman",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38013",
+    "County": "Burke",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38015",
+    "County": "Burleigh",
     "State": "ND"
   },
   {
@@ -7770,13 +10780,268 @@ const LOOKUP_DATABASE = {
     "State": "ND"
   },
   {
+    "FIPS": "38019",
+    "County": "Cavalier",
+    "State": "ND"
+  },
+  {
     "FIPS": "27027",
     "County": "Clay",
     "State": "ND"
   },
   {
+    "FIPS": "38021",
+    "County": "Dickey",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38023",
+    "County": "Divide",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38025",
+    "County": "Dunn",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38027",
+    "County": "Eddy",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38029",
+    "County": "Emmons",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38031",
+    "County": "Foster",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38033",
+    "County": "Golden Valley",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38035",
+    "County": "Grand Forks",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38037",
+    "County": "Grant",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38039",
+    "County": "Griggs",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38041",
+    "County": "Hettinger",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38043",
+    "County": "Kidder",
+    "State": "ND"
+  },
+  {
+    "FIPS": "27069",
+    "County": "Kittson",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38045",
+    "County": "LaMoure",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38047",
+    "County": "Logan",
+    "State": "ND"
+  },
+  {
+    "FIPS": "27089",
+    "County": "Marshall",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38049",
+    "County": "McHenry",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38051",
+    "County": "McIntosh",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38053",
+    "County": "McKenzie",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38055",
+    "County": "McLean",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38057",
+    "County": "Mercer",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38059",
+    "County": "Morton",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38061",
+    "County": "Mountrail",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38063",
+    "County": "Nelson",
+    "State": "ND"
+  },
+  {
+    "FIPS": "27107",
+    "County": "Norman",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38065",
+    "County": "Oliver",
+    "State": "ND"
+  },
+  {
     "FIPS": "27111",
     "County": "Otter Tail",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38067",
+    "County": "Pembina",
+    "State": "ND"
+  },
+  {
+    "FIPS": "27113",
+    "County": "Pennington",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38069",
+    "County": "Pierce",
+    "State": "ND"
+  },
+  {
+    "FIPS": "27119",
+    "County": "Polk",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38071",
+    "County": "Ramsey",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38073",
+    "County": "Ransom",
+    "State": "ND"
+  },
+  {
+    "FIPS": "27125",
+    "County": "Red Lake",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38075",
+    "County": "Renville",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38077",
+    "County": "Richland",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38079",
+    "County": "Rolette",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38081",
+    "County": "Sargent",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38083",
+    "County": "Sheridan",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38085",
+    "County": "Sioux",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38087",
+    "County": "Slope",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38089",
+    "County": "Stark",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38091",
+    "County": "Steele",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38093",
+    "County": "Stutsman",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38095",
+    "County": "Towner",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38097",
+    "County": "Traill",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38099",
+    "County": "Walsh",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38101",
+    "County": "Ward",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38103",
+    "County": "Wells",
+    "State": "ND"
+  },
+  {
+    "FIPS": "27167",
+    "County": "Wilkin",
+    "State": "ND"
+  },
+  {
+    "FIPS": "38105",
+    "County": "Williams",
     "State": "ND"
   },
   {
@@ -7795,6 +11060,11 @@ const LOOKUP_DATABASE = {
     "State": "NE"
   },
   {
+    "FIPS": "31007",
+    "County": "Banner",
+    "State": "NE"
+  },
+  {
     "FIPS": "31009",
     "County": "Blaine",
     "State": "NE"
@@ -7807,6 +11077,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "31013",
     "County": "Box Butte",
+    "State": "NE"
+  },
+  {
+    "FIPS": "31015",
+    "County": "Boyd",
     "State": "NE"
   },
   {
@@ -8020,6 +11295,11 @@ const LOOKUP_DATABASE = {
     "State": "NE"
   },
   {
+    "FIPS": "31105",
+    "County": "Kimball",
+    "State": "NE"
+  },
+  {
     "FIPS": "31107",
     "County": "Knox",
     "State": "NE"
@@ -8165,8 +11445,18 @@ const LOOKUP_DATABASE = {
     "State": "NE"
   },
   {
+    "FIPS": "31161",
+    "County": "Sheridan",
+    "State": "NE"
+  },
+  {
     "FIPS": "31163",
     "County": "Sherman",
+    "State": "NE"
+  },
+  {
+    "FIPS": "31165",
+    "County": "Sioux",
     "State": "NE"
   },
   {
@@ -8360,8 +11650,83 @@ const LOOKUP_DATABASE = {
     "State": "NJ"
   },
   {
+    "FIPS": "35001",
+    "County": "Bernalillo",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35003",
+    "County": "Catron",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35005",
+    "County": "Chaves",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35006",
+    "County": "Cibola",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35007",
+    "County": "Colfax",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35009",
+    "County": "Curry",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35011",
+    "County": "De Baca",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35013",
+    "County": "Dona Ana",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35015",
+    "County": "Eddy",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35017",
+    "County": "Grant",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35019",
+    "County": "Guadalupe",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35021",
+    "County": "Harding",
+    "State": "NM"
+  },
+  {
     "FIPS": "35023",
     "County": "Hidalgo",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35025",
+    "County": "Lea",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35027",
+    "County": "Lincoln",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35028",
+    "County": "Los Alamos",
     "State": "NM"
   },
   {
@@ -8370,8 +11735,128 @@ const LOOKUP_DATABASE = {
     "State": "NM"
   },
   {
+    "FIPS": "35031",
+    "County": "McKinley",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35033",
+    "County": "Mora",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35035",
+    "County": "Otero",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35037",
+    "County": "Quay",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35039",
+    "County": "Rio Arriba",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35041",
+    "County": "Roosevelt",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35045",
+    "County": "San Juan",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35047",
+    "County": "San Miguel",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35043",
+    "County": "Sandoval",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35049",
+    "County": "Santa Fe",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35051",
+    "County": "Sierra",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35053",
+    "County": "Socorro",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35055",
+    "County": "Taos",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35057",
+    "County": "Torrance",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35059",
+    "County": "Union",
+    "State": "NM"
+  },
+  {
+    "FIPS": "35061",
+    "County": "Valencia",
+    "State": "NM"
+  },
+  {
+    "FIPS": "32510",
+    "County": "Cars",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32001",
+    "County": "Churchill",
+    "State": "NV"
+  },
+  {
     "FIPS": "32003",
     "County": "Clark",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32005",
+    "County": "Douglas",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32007",
+    "County": "Elko",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32009",
+    "County": "Esmeralda",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32011",
+    "County": "Eureka",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32013",
+    "County": "Humboldt",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32015",
+    "County": "Lander",
     "State": "NV"
   },
   {
@@ -8380,8 +11865,38 @@ const LOOKUP_DATABASE = {
     "State": "NV"
   },
   {
+    "FIPS": "32019",
+    "County": "Lyon",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32021",
+    "County": "Mineral",
+    "State": "NV"
+  },
+  {
     "FIPS": "32023",
     "County": "Nye",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32027",
+    "County": "Pershing",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32029",
+    "County": "Storey",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32031",
+    "County": "Washoe",
+    "State": "NV"
+  },
+  {
+    "FIPS": "32033",
+    "County": "White Pine",
     "State": "NV"
   },
   {
@@ -8500,6 +12015,11 @@ const LOOKUP_DATABASE = {
     "State": "NY"
   },
   {
+    "FIPS": "36047",
+    "County": "Kings",
+    "State": "NY"
+  },
+  {
     "FIPS": "36049",
     "County": "Lewis",
     "State": "NY"
@@ -8522,6 +12042,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "36057",
     "County": "Montgomery",
+    "State": "NY"
+  },
+  {
+    "FIPS": "36059",
+    "County": "Nassau",
     "State": "NY"
   },
   {
@@ -8575,8 +12100,18 @@ const LOOKUP_DATABASE = {
     "State": "NY"
   },
   {
+    "FIPS": "36081",
+    "County": "Queens",
+    "State": "NY"
+  },
+  {
     "FIPS": "36083",
     "County": "Rensselaer",
+    "State": "NY"
+  },
+  {
+    "FIPS": "36085",
+    "County": "Richmond",
     "State": "NY"
   },
   {
@@ -8612,6 +12147,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "36101",
     "County": "Steuben",
+    "State": "NY"
+  },
+  {
+    "FIPS": "36103",
+    "County": "Suffolk",
     "State": "NY"
   },
   {
@@ -8752,6 +12292,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "39037",
     "County": "Darke",
+    "State": "OH"
+  },
+  {
+    "FIPS": "18029",
+    "County": "Dearborn",
     "State": "OH"
   },
   {
@@ -8940,6 +12485,11 @@ const LOOKUP_DATABASE = {
     "State": "OH"
   },
   {
+    "FIPS": "18115",
+    "County": "Ohio",
+    "State": "OH"
+  },
+  {
     "FIPS": "39123",
     "County": "Ottawa",
     "State": "OH"
@@ -8957,6 +12507,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "39133",
     "County": "Portage",
+    "State": "OH"
+  },
+  {
+    "FIPS": "39135",
+    "County": "Preble",
     "State": "OH"
   },
   {
@@ -9040,13 +12595,63 @@ const LOOKUP_DATABASE = {
     "State": "OH"
   },
   {
+    "FIPS": "40001",
+    "County": "Adair",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40003",
+    "County": "Alfalfa",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40005",
+    "County": "Atoka",
+    "State": "OK"
+  },
+  {
     "FIPS": "40007",
     "County": "Beaver",
     "State": "OK"
   },
   {
+    "FIPS": "40009",
+    "County": "Beckham",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40011",
+    "County": "Blaine",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40013",
+    "County": "Bryan",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40015",
+    "County": "Caddo",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40017",
+    "County": "Canadian",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40019",
+    "County": "Carter",
+    "State": "OK"
+  },
+  {
     "FIPS": "40021",
     "County": "Cherokee",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40023",
+    "County": "Choctaw",
     "State": "OK"
   },
   {
@@ -9060,6 +12665,21 @@ const LOOKUP_DATABASE = {
     "State": "OK"
   },
   {
+    "FIPS": "40029",
+    "County": "Coal",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40031",
+    "County": "Comanche",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40033",
+    "County": "Cotton",
+    "State": "OK"
+  },
+  {
     "FIPS": "40035",
     "County": "Craig",
     "State": "OK"
@@ -9070,8 +12690,23 @@ const LOOKUP_DATABASE = {
     "State": "OK"
   },
   {
+    "FIPS": "40039",
+    "County": "Custer",
+    "State": "OK"
+  },
+  {
     "FIPS": "40041",
     "County": "Delaware",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40043",
+    "County": "Dewey",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40045",
+    "County": "Ellis",
     "State": "OK"
   },
   {
@@ -9080,8 +12715,58 @@ const LOOKUP_DATABASE = {
     "State": "OK"
   },
   {
+    "FIPS": "40049",
+    "County": "Garvin",
+    "State": "OK"
+  },
+  {
     "FIPS": "40051",
     "County": "Grady",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40053",
+    "County": "Grant",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40055",
+    "County": "Greer",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40057",
+    "County": "Harmon",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40059",
+    "County": "Harper",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40061",
+    "County": "Haskell",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40063",
+    "County": "Hughes",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40065",
+    "County": "Jackson",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40067",
+    "County": "Jefferson",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40069",
+    "County": "Johnston",
     "State": "OK"
   },
   {
@@ -9090,8 +12775,48 @@ const LOOKUP_DATABASE = {
     "State": "OK"
   },
   {
+    "FIPS": "40073",
+    "County": "Kingfisher",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40075",
+    "County": "Kiowa",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40077",
+    "County": "Latimer",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40079",
+    "County": "Le Flore",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40081",
+    "County": "Lincoln",
+    "State": "OK"
+  },
+  {
     "FIPS": "40083",
     "County": "Logan",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40085",
+    "County": "Love",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40093",
+    "County": "Major",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40095",
+    "County": "Marshall",
     "State": "OK"
   },
   {
@@ -9100,8 +12825,23 @@ const LOOKUP_DATABASE = {
     "State": "OK"
   },
   {
+    "FIPS": "40087",
+    "County": "McClain",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40089",
+    "County": "McCurtain",
+    "State": "OK"
+  },
+  {
     "FIPS": "40091",
     "County": "McIntosh",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40099",
+    "County": "Murray",
     "State": "OK"
   },
   {
@@ -9110,8 +12850,18 @@ const LOOKUP_DATABASE = {
     "State": "OK"
   },
   {
+    "FIPS": "40103",
+    "County": "Noble",
+    "State": "OK"
+  },
+  {
     "FIPS": "40105",
     "County": "Nowata",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40107",
+    "County": "Okfuskee",
     "State": "OK"
   },
   {
@@ -9150,13 +12900,53 @@ const LOOKUP_DATABASE = {
     "State": "OK"
   },
   {
+    "FIPS": "40123",
+    "County": "Pontotoc",
+    "State": "OK"
+  },
+  {
     "FIPS": "40125",
     "County": "Pottawatomie",
     "State": "OK"
   },
   {
+    "FIPS": "40127",
+    "County": "Pushmataha",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40129",
+    "County": "Roger Mills",
+    "State": "OK"
+  },
+  {
     "FIPS": "40131",
     "County": "Rogers",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40133",
+    "County": "Seminole",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40135",
+    "County": "Sequoyah",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40137",
+    "County": "Stephens",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40139",
+    "County": "Texas",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40141",
+    "County": "Tillman",
     "State": "OK"
   },
   {
@@ -9172,6 +12962,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "40147",
     "County": "Washington",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40149",
+    "County": "Washita",
+    "State": "OK"
+  },
+  {
+    "FIPS": "40151",
+    "County": "Woods",
     "State": "OK"
   },
   {
@@ -9302,6 +13102,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "41053",
     "County": "Polk",
+    "State": "OR"
+  },
+  {
+    "FIPS": "41055",
+    "County": "Sherman",
     "State": "OR"
   },
   {
@@ -9665,6 +13470,41 @@ const LOOKUP_DATABASE = {
     "State": "PA"
   },
   {
+    "FIPS": "72998",
+    "County": "Puerto Rico",
+    "State": "PR"
+  },
+  {
+    "FIPS": "44001",
+    "County": "Bristol",
+    "State": "RI"
+  },
+  {
+    "FIPS": "44003",
+    "County": "Kent",
+    "State": "RI"
+  },
+  {
+    "FIPS": "44005",
+    "County": "Newport",
+    "State": "RI"
+  },
+  {
+    "FIPS": "44007",
+    "County": "Providence",
+    "State": "RI"
+  },
+  {
+    "FIPS": "44009",
+    "County": "Washington",
+    "State": "RI"
+  },
+  {
+    "FIPS": "45001",
+    "County": "Abbeville",
+    "State": "SC"
+  },
+  {
     "FIPS": "45003",
     "County": "Aiken",
     "State": "SC"
@@ -9860,9 +13700,19 @@ const LOOKUP_DATABASE = {
     "State": "SC"
   },
   {
+    "FIPS": "45087",
+    "County": "Union",
+    "State": "SC"
+  },
+  {
     "FIPS": "45089",
     "County": "Williamsburg",
     "State": "SC"
+  },
+  {
+    "FIPS": "46003",
+    "County": "Aurora",
+    "State": "SD"
   },
   {
     "FIPS": "46005",
@@ -9870,8 +13720,53 @@ const LOOKUP_DATABASE = {
     "State": "SD"
   },
   {
+    "FIPS": "46007",
+    "County": "Bennett",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46009",
+    "County": "Bon Homme",
+    "State": "SD"
+  },
+  {
     "FIPS": "46011",
     "County": "Brookings",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46013",
+    "County": "Brown",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46015",
+    "County": "Brule",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46017",
+    "County": "Buffalo",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46019",
+    "County": "Butte",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46021",
+    "County": "Campbell",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46023",
+    "County": "Charles Mix",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46025",
+    "County": "Clark",
     "State": "SD"
   },
   {
@@ -9885,8 +13780,53 @@ const LOOKUP_DATABASE = {
     "State": "SD"
   },
   {
+    "FIPS": "46031",
+    "County": "Corson",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46033",
+    "County": "Custer",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46035",
+    "County": "Davison",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46037",
+    "County": "Day",
+    "State": "SD"
+  },
+  {
     "FIPS": "46039",
     "County": "Deuel",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46041",
+    "County": "Dewey",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46043",
+    "County": "Douglas",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46045",
+    "County": "Edmunds",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46047",
+    "County": "Fall River",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46049",
+    "County": "Faulk",
     "State": "SD"
   },
   {
@@ -9895,8 +13835,63 @@ const LOOKUP_DATABASE = {
     "State": "SD"
   },
   {
+    "FIPS": "46053",
+    "County": "Gregory",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46055",
+    "County": "Haakon",
+    "State": "SD"
+  },
+  {
     "FIPS": "46057",
     "County": "Hamlin",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46059",
+    "County": "Hand",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46061",
+    "County": "Hanson",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46063",
+    "County": "Harding",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46065",
+    "County": "Hughes",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46067",
+    "County": "Hutchinson",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46069",
+    "County": "Hyde",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46071",
+    "County": "Jackson",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46073",
+    "County": "Jerauld",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46075",
+    "County": "Jones",
     "State": "SD"
   },
   {
@@ -9910,8 +13905,48 @@ const LOOKUP_DATABASE = {
     "State": "SD"
   },
   {
+    "FIPS": "46081",
+    "County": "Lawrence",
+    "State": "SD"
+  },
+  {
     "FIPS": "46083",
     "County": "Lincoln",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46085",
+    "County": "Lyman",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46091",
+    "County": "Marshall",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46087",
+    "County": "McCook",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46089",
+    "County": "McPherson",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46093",
+    "County": "Meade",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46095",
+    "County": "Mellette",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46097",
+    "County": "Miner",
     "State": "SD"
   },
   {
@@ -9920,8 +13955,63 @@ const LOOKUP_DATABASE = {
     "State": "SD"
   },
   {
+    "FIPS": "46101",
+    "County": "Moody",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46102",
+    "County": "Oglala Lakota",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46103",
+    "County": "Pennington",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46105",
+    "County": "Perkins",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46107",
+    "County": "Potter",
+    "State": "SD"
+  },
+  {
     "FIPS": "46109",
     "County": "Roberts",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46111",
+    "County": "Sanborn",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46115",
+    "County": "Spink",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46117",
+    "County": "Stanley",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46119",
+    "County": "Sully",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46121",
+    "County": "Todd",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46123",
+    "County": "Tripp",
     "State": "SD"
   },
   {
@@ -9930,8 +14020,18 @@ const LOOKUP_DATABASE = {
     "State": "SD"
   },
   {
+    "FIPS": "46129",
+    "County": "Walworth",
+    "State": "SD"
+  },
+  {
     "FIPS": "46135",
     "County": "Yankton",
+    "State": "SD"
+  },
+  {
+    "FIPS": "46137",
+    "County": "Ziebach",
     "State": "SD"
   },
   {
@@ -9965,6 +14065,11 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47013",
+    "County": "Campbell",
+    "State": "TN"
+  },
+  {
     "FIPS": "47015",
     "County": "Cannon",
     "State": "TN"
@@ -9975,8 +14080,18 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47019",
+    "County": "Carter",
+    "State": "TN"
+  },
+  {
     "FIPS": "47021",
     "County": "Cheatham",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47023",
+    "County": "Chester",
     "State": "TN"
   },
   {
@@ -9990,6 +14105,11 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47029",
+    "County": "Cocke",
+    "State": "TN"
+  },
+  {
     "FIPS": "47031",
     "County": "Coffee",
     "State": "TN"
@@ -9997,6 +14117,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "05035",
     "County": "Crittenden",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47033",
+    "County": "Crockett",
     "State": "TN"
   },
   {
@@ -10030,6 +14155,16 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47045",
+    "County": "Dyer",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47047",
+    "County": "Fayette",
+    "State": "TN"
+  },
+  {
     "FIPS": "47049",
     "County": "Fentress",
     "State": "TN"
@@ -10040,8 +14175,18 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47053",
+    "County": "Gibson",
+    "State": "TN"
+  },
+  {
     "FIPS": "47055",
     "County": "Giles",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47057",
+    "County": "Grainger",
     "State": "TN"
   },
   {
@@ -10065,8 +14210,33 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47067",
+    "County": "Hancock",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47069",
+    "County": "Hardeman",
+    "State": "TN"
+  },
+  {
     "FIPS": "47071",
     "County": "Hardin",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47073",
+    "County": "Hawkins",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47075",
+    "County": "Haywood",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47077",
+    "County": "Henderson",
     "State": "TN"
   },
   {
@@ -10090,6 +14260,21 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47087",
+    "County": "Jackson",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47089",
+    "County": "Jefferson",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47091",
+    "County": "Johnson",
+    "State": "TN"
+  },
+  {
     "FIPS": "47093",
     "County": "Knox",
     "State": "TN"
@@ -10097,6 +14282,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "47095",
     "County": "Lake",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47097",
+    "County": "Lauderdale",
     "State": "TN"
   },
   {
@@ -10112,6 +14302,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "47103",
     "County": "Lincoln",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47105",
+    "County": "Loudon",
     "State": "TN"
   },
   {
@@ -10140,6 +14335,21 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47107",
+    "County": "McMinn",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47109",
+    "County": "McNairy",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47121",
+    "County": "Meigs",
+    "State": "TN"
+  },
+  {
     "FIPS": "47123",
     "County": "Monroe",
     "State": "TN"
@@ -10152,6 +14362,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "47127",
     "County": "Moore",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47129",
+    "County": "Morgan",
     "State": "TN"
   },
   {
@@ -10185,6 +14400,11 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47143",
+    "County": "Rhea",
+    "State": "TN"
+  },
+  {
     "FIPS": "47145",
     "County": "Roane",
     "State": "TN"
@@ -10200,8 +14420,18 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47151",
+    "County": "Scott",
+    "State": "TN"
+  },
+  {
     "FIPS": "47153",
     "County": "Sequatchie",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47155",
+    "County": "Sevier",
     "State": "TN"
   },
   {
@@ -10230,13 +14460,33 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "47167",
+    "County": "Tipton",
+    "State": "TN"
+  },
+  {
     "FIPS": "47169",
     "County": "Trousdale",
     "State": "TN"
   },
   {
+    "FIPS": "28143",
+    "County": "Tunica",
+    "State": "TN"
+  },
+  {
     "FIPS": "47171",
     "County": "Unicoi",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47173",
+    "County": "Union",
+    "State": "TN"
+  },
+  {
+    "FIPS": "47175",
+    "County": "Van Buren",
     "State": "TN"
   },
   {
@@ -10275,8 +14525,48 @@ const LOOKUP_DATABASE = {
     "State": "TN"
   },
   {
+    "FIPS": "48001",
+    "County": "Anderson",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48003",
+    "County": "Andrews",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48005",
+    "County": "Angelina",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48007",
+    "County": "Aransas",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48009",
+    "County": "Archer",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48013",
+    "County": "Atascosa",
+    "State": "TX"
+  },
+  {
     "FIPS": "48015",
     "County": "Austin",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48017",
+    "County": "Bailey",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48019",
+    "County": "Bandera",
     "State": "TX"
   },
   {
@@ -10285,13 +14575,43 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48023",
+    "County": "Baylor",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48025",
+    "County": "Bee",
+    "State": "TX"
+  },
+  {
     "FIPS": "48027",
     "County": "Bell",
     "State": "TX"
   },
   {
+    "FIPS": "48029",
+    "County": "Bexar",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48031",
+    "County": "Blanco",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48033",
+    "County": "Borden",
+    "State": "TX"
+  },
+  {
     "FIPS": "48035",
     "County": "Bosque",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48037",
+    "County": "Bowie",
     "State": "TX"
   },
   {
@@ -10302,6 +14622,21 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "48041",
     "County": "Brazos",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48043",
+    "County": "Brewster",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48047",
+    "County": "Brooks",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48049",
+    "County": "Brown",
     "State": "TX"
   },
   {
@@ -10320,13 +14655,83 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48057",
+    "County": "Calhoun",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48059",
+    "County": "Callahan",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48061",
+    "County": "Cameron",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48063",
+    "County": "Camp",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48067",
+    "County": "Cass",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48071",
+    "County": "Chambers",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48073",
+    "County": "Cherokee",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48077",
+    "County": "Clay",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48079",
+    "County": "Cochran",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48081",
+    "County": "Coke",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48083",
+    "County": "Coleman",
+    "State": "TX"
+  },
+  {
     "FIPS": "48085",
     "County": "Collin",
     "State": "TX"
   },
   {
+    "FIPS": "48089",
+    "County": "Colorado",
+    "State": "TX"
+  },
+  {
     "FIPS": "48091",
     "County": "Comal",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48093",
+    "County": "Comanche",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48095",
+    "County": "Concho",
     "State": "TX"
   },
   {
@@ -10340,13 +14745,83 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48101",
+    "County": "Cottle",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48103",
+    "County": "Crane",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48105",
+    "County": "Crockett",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48107",
+    "County": "Crosby",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48109",
+    "County": "Culberson",
+    "State": "TX"
+  },
+  {
     "FIPS": "48113",
     "County": "Dallas",
     "State": "TX"
   },
   {
+    "FIPS": "48115",
+    "County": "Dawson",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48123",
+    "County": "DeWitt",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48119",
+    "County": "Delta",
+    "State": "TX"
+  },
+  {
     "FIPS": "48121",
     "County": "Denton",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48125",
+    "County": "Dickens",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48127",
+    "County": "Dimmit",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48131",
+    "County": "Duval",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48133",
+    "County": "Eastland",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48135",
+    "County": "Ector",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48137",
+    "County": "Edwards",
     "State": "TX"
   },
   {
@@ -10365,8 +14840,43 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48145",
+    "County": "Falls",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48147",
+    "County": "Fannin",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48149",
+    "County": "Fayette",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48151",
+    "County": "Fisher",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48153",
+    "County": "Floyd",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48155",
+    "County": "Foard",
+    "State": "TX"
+  },
+  {
     "FIPS": "48157",
     "County": "Fort Bend",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48159",
+    "County": "Franklin",
     "State": "TX"
   },
   {
@@ -10375,8 +14885,43 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48163",
+    "County": "Frio",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48165",
+    "County": "Gaines",
+    "State": "TX"
+  },
+  {
     "FIPS": "48167",
     "County": "Galveston",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48169",
+    "County": "Garza",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48171",
+    "County": "Gillespie",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48173",
+    "County": "Glasscock",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48175",
+    "County": "Goliad",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48177",
+    "County": "Gonzales",
     "State": "TX"
   },
   {
@@ -10395,8 +14940,23 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48189",
+    "County": "Hale",
+    "State": "TX"
+  },
+  {
     "FIPS": "48193",
     "County": "Hamilton",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48197",
+    "County": "Hardeman",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48199",
+    "County": "Hardin",
     "State": "TX"
   },
   {
@@ -10410,6 +14970,11 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48207",
+    "County": "Haskell",
+    "State": "TX"
+  },
+  {
     "FIPS": "48209",
     "County": "Hays",
     "State": "TX"
@@ -10420,8 +14985,18 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48215",
+    "County": "Hidalgo",
+    "State": "TX"
+  },
+  {
     "FIPS": "48217",
     "County": "Hill",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48219",
+    "County": "Hockley",
     "State": "TX"
   },
   {
@@ -10430,8 +15005,68 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48223",
+    "County": "Hopkins",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48225",
+    "County": "Houston",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48227",
+    "County": "Howard",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48229",
+    "County": "Hudspeth",
+    "State": "TX"
+  },
+  {
     "FIPS": "48231",
     "County": "Hunt",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48235",
+    "County": "Irion",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48237",
+    "County": "Jack",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48239",
+    "County": "Jackson",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48241",
+    "County": "Jasper",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48243",
+    "County": "Jeff Davis",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48245",
+    "County": "Jefferson",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48247",
+    "County": "Jim Hogg",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48249",
+    "County": "Jim Wells",
     "State": "TX"
   },
   {
@@ -10440,8 +15075,68 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48253",
+    "County": "Jones",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48255",
+    "County": "Karnes",
+    "State": "TX"
+  },
+  {
     "FIPS": "48257",
     "County": "Kaufman",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48259",
+    "County": "Kendall",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48261",
+    "County": "Kenedy",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48263",
+    "County": "Kent",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48265",
+    "County": "Kerr",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48267",
+    "County": "Kimble",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48269",
+    "County": "King",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48271",
+    "County": "Kinney",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48273",
+    "County": "Kleberg",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48275",
+    "County": "Knox",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48283",
+    "County": "La Salle",
     "State": "TX"
   },
   {
@@ -10450,8 +15145,18 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48279",
+    "County": "Lamb",
+    "State": "TX"
+  },
+  {
     "FIPS": "48281",
     "County": "Lampasas",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48285",
+    "County": "Lavaca",
     "State": "TX"
   },
   {
@@ -10460,8 +15165,78 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48289",
+    "County": "Leon",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48291",
+    "County": "Liberty",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48293",
+    "County": "Limestone",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48297",
+    "County": "Live Oak",
+    "State": "TX"
+  },
+  {
     "FIPS": "48299",
     "County": "Llano",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48301",
+    "County": "Loving",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48303",
+    "County": "Lubbock",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48305",
+    "County": "Lynn",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48313",
+    "County": "Madison",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48315",
+    "County": "Marion",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48317",
+    "County": "Martin",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48319",
+    "County": "Mason",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48321",
+    "County": "Matagorda",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48323",
+    "County": "Maverick",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48307",
+    "County": "McCulloch",
     "State": "TX"
   },
   {
@@ -10470,8 +15245,48 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48311",
+    "County": "McMullen",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48325",
+    "County": "Medina",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48327",
+    "County": "Menard",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48329",
+    "County": "Midland",
+    "State": "TX"
+  },
+  {
     "FIPS": "48331",
     "County": "Milam",
+    "State": "TX"
+  },
+  {
+    "FIPS": "05091",
+    "County": "Miller",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48333",
+    "County": "Mills",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48335",
+    "County": "Mitchell",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48337",
+    "County": "Montague",
     "State": "TX"
   },
   {
@@ -10480,8 +15295,48 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48343",
+    "County": "Morris",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48345",
+    "County": "Motley",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48347",
+    "County": "Nacogdoches",
+    "State": "TX"
+  },
+  {
     "FIPS": "48349",
     "County": "Navarro",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48351",
+    "County": "Newton",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48353",
+    "County": "Nolan",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48355",
+    "County": "Nueces",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48361",
+    "County": "Orange",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48363",
+    "County": "Palo Pinto",
     "State": "TX"
   },
   {
@@ -10495,6 +15350,51 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48371",
+    "County": "Pecos",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48373",
+    "County": "Polk",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48377",
+    "County": "Presidio",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48379",
+    "County": "Rains",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48383",
+    "County": "Reagan",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48385",
+    "County": "Real",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48387",
+    "County": "Red River",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48389",
+    "County": "Reeves",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48391",
+    "County": "Refugio",
+    "State": "TX"
+  },
+  {
     "FIPS": "48395",
     "County": "Robertson",
     "State": "TX"
@@ -10502,6 +15402,61 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "48397",
     "County": "Rockwall",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48399",
+    "County": "Runnels",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48401",
+    "County": "Rusk",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48403",
+    "County": "Sabine",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48405",
+    "County": "San Augustine",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48407",
+    "County": "San Jacinto",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48409",
+    "County": "San Patricio",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48411",
+    "County": "San Saba",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48413",
+    "County": "Schleicher",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48415",
+    "County": "Scurry",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48417",
+    "County": "Shackelford",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48419",
+    "County": "Shelby",
     "State": "TX"
   },
   {
@@ -10515,6 +15470,31 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48427",
+    "County": "Starr",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48429",
+    "County": "Stephens",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48431",
+    "County": "Sterling",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48433",
+    "County": "Stonewall",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48435",
+    "County": "Sutton",
+    "State": "TX"
+  },
+  {
     "FIPS": "48439",
     "County": "Tarrant",
     "State": "TX"
@@ -10522,6 +15502,31 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "48441",
     "County": "Taylor",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48443",
+    "County": "Terrell",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48445",
+    "County": "Terry",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48447",
+    "County": "Throckmorton",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48449",
+    "County": "Titus",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48451",
+    "County": "Tom Green",
     "State": "TX"
   },
   {
@@ -10535,8 +15540,38 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48457",
+    "County": "Tyler",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48459",
+    "County": "Upshur",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48461",
+    "County": "Upton",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48463",
+    "County": "Uvalde",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48465",
+    "County": "Val Verde",
+    "State": "TX"
+  },
+  {
     "FIPS": "48467",
     "County": "Van Zandt",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48469",
+    "County": "Victoria",
     "State": "TX"
   },
   {
@@ -10550,13 +15585,53 @@ const LOOKUP_DATABASE = {
     "State": "TX"
   },
   {
+    "FIPS": "48475",
+    "County": "Ward",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48477",
+    "County": "Washington",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48479",
+    "County": "Webb",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48481",
+    "County": "Wharton",
+    "State": "TX"
+  },
+  {
     "FIPS": "48485",
     "County": "Wichita",
     "State": "TX"
   },
   {
+    "FIPS": "48487",
+    "County": "Wilbarger",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48489",
+    "County": "Willacy",
+    "State": "TX"
+  },
+  {
     "FIPS": "48491",
     "County": "Williamson",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48493",
+    "County": "Wilson",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48495",
+    "County": "Winkler",
     "State": "TX"
   },
   {
@@ -10567,6 +15642,26 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "48499",
     "County": "Wood",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48501",
+    "County": "Yoakum",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48503",
+    "County": "Young",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48505",
+    "County": "Zapata",
+    "State": "TX"
+  },
+  {
+    "FIPS": "48507",
+    "County": "Zavala",
     "State": "TX"
   },
   {
@@ -10587,6 +15682,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "49007",
     "County": "Carbon",
+    "State": "UT"
+  },
+  {
+    "FIPS": "49009",
+    "County": "Daggett",
     "State": "UT"
   },
   {
@@ -10657,6 +15757,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "49035",
     "County": "Salt Lake",
+    "State": "UT"
+  },
+  {
+    "FIPS": "49037",
+    "County": "San Juan",
     "State": "UT"
   },
   {
@@ -10850,6 +15955,11 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
+    "FIPS": "51580",
+    "County": "Covington",
+    "State": "VA"
+  },
+  {
     "FIPS": "51045",
     "County": "Craig",
     "State": "VA"
@@ -10870,6 +15980,11 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
+    "FIPS": "51051",
+    "County": "Dickenson",
+    "State": "VA"
+  },
+  {
     "FIPS": "51053",
     "County": "Dinwiddie",
     "State": "VA"
@@ -10880,12 +15995,22 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
+    "FIPS": "51595",
+    "County": "Emporia",
+    "State": "VA"
+  },
+  {
     "FIPS": "51057",
     "County": "Essex",
     "State": "VA"
   },
   {
     "FIPS": "51059",
+    "County": "Fairfax",
+    "State": "VA"
+  },
+  {
+    "FIPS": "51600",
     "County": "Fairfax",
     "State": "VA"
   },
@@ -10910,12 +16035,12 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
-    "FIPS": "51620",
+    "FIPS": "51067",
     "County": "Franklin",
     "State": "VA"
   },
   {
-    "FIPS": "51067",
+    "FIPS": "51620",
     "County": "Franklin",
     "State": "VA"
   },
@@ -10990,6 +16115,11 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
+    "FIPS": "51091",
+    "County": "Highland",
+    "State": "VA"
+  },
+  {
     "FIPS": "51670",
     "County": "Hopewell",
     "State": "VA"
@@ -11025,6 +16155,16 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
+    "FIPS": "51105",
+    "County": "Lee",
+    "State": "VA"
+  },
+  {
+    "FIPS": "51678",
+    "County": "Lexington",
+    "State": "VA"
+  },
+  {
     "FIPS": "51107",
     "County": "Loudoun",
     "State": "VA"
@@ -11052,6 +16192,16 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "51683",
     "County": "Manassas",
+    "State": "VA"
+  },
+  {
+    "FIPS": "51685",
+    "County": "Manassas Park",
+    "State": "VA"
+  },
+  {
+    "FIPS": "51690",
+    "County": "Martinsville",
     "State": "VA"
   },
   {
@@ -11102,6 +16252,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "51133",
     "County": "Northumberland",
+    "State": "VA"
+  },
+  {
+    "FIPS": "51720",
+    "County": "Norton",
     "State": "VA"
   },
   {
@@ -11185,12 +16340,12 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
-    "FIPS": "51770",
+    "FIPS": "51161",
     "County": "Roanoke",
     "State": "VA"
   },
   {
-    "FIPS": "51161",
+    "FIPS": "51770",
     "County": "Roanoke",
     "State": "VA"
   },
@@ -11205,8 +16360,18 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
+    "FIPS": "51167",
+    "County": "Russell",
+    "State": "VA"
+  },
+  {
     "FIPS": "51775",
     "County": "Salem",
+    "State": "VA"
+  },
+  {
+    "FIPS": "51169",
+    "County": "Scott",
     "State": "VA"
   },
   {
@@ -11260,6 +16425,11 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
+    "FIPS": "51191",
+    "County": "Washington",
+    "State": "VA"
+  },
+  {
     "FIPS": "51820",
     "County": "Waynesboro",
     "State": "VA"
@@ -11275,6 +16445,11 @@ const LOOKUP_DATABASE = {
     "State": "VA"
   },
   {
+    "FIPS": "51195",
+    "County": "Wise",
+    "State": "VA"
+  },
+  {
     "FIPS": "51197",
     "County": "Wythe",
     "State": "VA"
@@ -11283,6 +16458,21 @@ const LOOKUP_DATABASE = {
     "FIPS": "51199",
     "County": "York",
     "State": "VA"
+  },
+  {
+    "FIPS": "78010",
+    "County": "Saint Croix",
+    "State": "VI"
+  },
+  {
+    "FIPS": "78020",
+    "County": "Saint John",
+    "State": "VI"
+  },
+  {
+    "FIPS": "78030",
+    "County": "Saint Thomas",
+    "State": "VI"
   },
   {
     "FIPS": "50001",
@@ -11302,6 +16492,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "50007",
     "County": "Chittenden",
+    "State": "VT"
+  },
+  {
+    "FIPS": "50009",
+    "County": "Essex",
     "State": "VT"
   },
   {
@@ -11370,8 +16565,23 @@ const LOOKUP_DATABASE = {
     "State": "WA"
   },
   {
+    "FIPS": "16017",
+    "County": "Bonner",
+    "State": "WA"
+  },
+  {
+    "FIPS": "16021",
+    "County": "Boundary",
+    "State": "WA"
+  },
+  {
     "FIPS": "53007",
     "County": "Chelan",
+    "State": "WA"
+  },
+  {
+    "FIPS": "53009",
+    "County": "Clallam",
     "State": "WA"
   },
   {
@@ -11392,6 +16602,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "53017",
     "County": "Douglas",
+    "State": "WA"
+  },
+  {
+    "FIPS": "53019",
+    "County": "Ferry",
     "State": "WA"
   },
   {
@@ -11417,6 +16632,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "53029",
     "County": "Island",
+    "State": "WA"
+  },
+  {
+    "FIPS": "53031",
+    "County": "Jefferson",
     "State": "WA"
   },
   {
@@ -11450,6 +16670,11 @@ const LOOKUP_DATABASE = {
     "State": "WA"
   },
   {
+    "FIPS": "53043",
+    "County": "Lincoln",
+    "State": "WA"
+  },
+  {
     "FIPS": "53045",
     "County": "Mason",
     "State": "WA"
@@ -11465,8 +16690,23 @@ const LOOKUP_DATABASE = {
     "State": "WA"
   },
   {
+    "FIPS": "53051",
+    "County": "Pend Oreille",
+    "State": "WA"
+  },
+  {
     "FIPS": "53053",
     "County": "Pierce",
+    "State": "WA"
+  },
+  {
+    "FIPS": "53055",
+    "County": "San Juan",
+    "State": "WA"
+  },
+  {
+    "FIPS": "16079",
+    "County": "Shoshone",
     "State": "WA"
   },
   {
@@ -11490,6 +16730,11 @@ const LOOKUP_DATABASE = {
     "State": "WA"
   },
   {
+    "FIPS": "53065",
+    "County": "Stevens",
+    "State": "WA"
+  },
+  {
     "FIPS": "53067",
     "County": "Thurston",
     "State": "WA"
@@ -11502,6 +16747,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "53071",
     "County": "Walla Walla",
+    "State": "WA"
+  },
+  {
+    "FIPS": "53073",
+    "County": "Whatcom",
     "State": "WA"
   },
   {
@@ -11677,6 +16927,11 @@ const LOOKUP_DATABASE = {
   {
     "FIPS": "55061",
     "County": "Kewaunee",
+    "State": "WI"
+  },
+  {
+    "FIPS": "26083",
+    "County": "Keweenaw",
     "State": "WI"
   },
   {
@@ -12220,8 +17475,93 @@ const LOOKUP_DATABASE = {
     "State": "WV"
   },
   {
+    "FIPS": "56001",
+    "County": "Albany",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56003",
+    "County": "Big Horn",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56005",
+    "County": "Campbell",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56007",
+    "County": "Carbon",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56009",
+    "County": "Converse",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56011",
+    "County": "Crook",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56013",
+    "County": "Fremont",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56015",
+    "County": "Goshen",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56017",
+    "County": "Hot Springs",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56019",
+    "County": "Johnson",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56021",
+    "County": "Laramie",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56025",
+    "County": "Natrona",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56027",
+    "County": "Niobrara",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56029",
+    "County": "Park",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56031",
+    "County": "Platte",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56033",
+    "County": "Sheridan",
+    "State": "WY"
+  },
+  {
     "FIPS": "56035",
     "County": "Sublette",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56037",
+    "County": "Sweetwater",
     "State": "WY"
   },
   {
@@ -12230,9 +17570,14 @@ const LOOKUP_DATABASE = {
     "State": "WY"
   },
   {
-    "FIPS": "48181",
-    "County": "Grayson",
-    "State": NaN
+    "FIPS": "56043",
+    "County": "Washakie",
+    "State": "WY"
+  },
+  {
+    "FIPS": "56045",
+    "County": "Weston",
+    "State": "WY"
   }
 ]
 };
