@@ -1025,11 +1025,25 @@
             let zipResults = [];
             let zipFoundFIPS = null;
             if (zipQuery && zipData.length > 0) {
-                const zipNormalized = zipQuery.replace(/[^0-9]/g, '').substring(0, 5);
+                // Normalize ZIP to exactly 5 digits
+                const zipNormalized = zipQuery.replace(/[^0-9]/g, '').substring(0, 5).padStart(5, '0');
+                
+                // First try exact match
                 zipResults = zipData.filter(item => {
-                    const zipMatch = item.Zip && item.Zip.replace(/[^0-9]/g, '').includes(zipNormalized);
-                    return zipMatch;
+                    if (!item.Zip) return false;
+                    const itemZip = item.Zip.replace(/[^0-9]/g, '').padStart(5, '0');
+                    return itemZip === zipNormalized;
                 });
+                
+                // If no exact match, try partial match (first 3 digits)
+                if (zipResults.length === 0 && zipNormalized.length >= 3) {
+                    const zipPrefix = zipNormalized.substring(0, 3);
+                    zipResults = zipData.filter(item => {
+                        if (!item.Zip) return false;
+                        const itemZip = item.Zip.replace(/[^0-9]/g, '').padStart(5, '0');
+                        return itemZip.startsWith(zipPrefix);
+                    });
+                }
                 
                 if (zipResults.length > 0) {
                     // Use the FIPS from ZIP results to filter county results
