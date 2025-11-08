@@ -418,16 +418,16 @@
         <div class="content">
             <!-- Tab Navigation -->
             <div class="tabs" style="display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0;">
-                <button class="tab-btn active" onclick="showTab('create')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
-                    🗺️ Create GeoJSON
-                </button>
-                <button class="tab-btn" onclick="showTab('lookup')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                <button class="tab-btn active" onclick="showTab('lookup')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
                     🔍 Code Lookup Tool
+                </button>
+                <button class="tab-btn" onclick="showTab('create')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    🗺️ Create GeoJSON
                 </button>
             </div>
 
-            <!-- Create GeoJSON Tab -->
-            <div id="createTab" class="tab-content">
+            <!-- Code Lookup Tab -->
+            <div id="lookupTab" class="tab-content">
             <!-- Explanation Section -->
             <div class="section">
                 <h2>What This Does</h2>
@@ -602,8 +602,8 @@
             </div>
             </div>
 
-            <!-- Code Lookup Tab -->
-            <div id="lookupTab" class="tab-content" style="display: none;">
+            <!-- Create GeoJSON Tab -->
+            <div id="createTab" class="tab-content" style="display: none;">
                 <div class="section">
                     <h2>Red Cross Code Lookup</h2>
                     <div class="explanation">
@@ -940,12 +940,12 @@
             });
             
             // Show selected tab
-            if (tabName === 'create') {
-                document.getElementById('createTab').style.display = 'block';
+            if (tabName === 'lookup') {
+                document.getElementById('lookupTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[0].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[0].style.color = '#DC143C';
             } else {
-                document.getElementById('lookupTab').style.display = 'block';
+                document.getElementById('createTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[1].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[1].style.color = '#DC143C';
             }
