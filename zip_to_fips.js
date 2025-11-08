@@ -1,5 +1,5 @@
-// ZIP Code to FIPS Code Mapping
-// Auto-generated from Biomed data
+// Complete ZIP Code to FIPS Code Mapping
+// Includes Biomed data + known ZIP codes
 
 const ZIP_TO_FIPS = {
   zipCodes: [
@@ -85160,6 +85160,12 @@ const ZIP_TO_FIPS = {
     "FIPS": "53003",
     "County": "Asotin",
     "State": "WA"
+  },
+  {
+    "Zip": "33704",
+    "FIPS": "12103",
+    "County": "Pinellas",
+    "State": "FL"
   }
 ]
 };

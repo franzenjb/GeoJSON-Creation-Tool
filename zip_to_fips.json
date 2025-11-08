@@ -85157,6 +85157,12 @@
       "FIPS": "53003",
       "County": "Asotin",
       "State": "WA"
+    },
+    {
+      "Zip": "33704",
+      "FIPS": "12103",
+      "County": "Pinellas",
+      "State": "FL"
     }
   ]
 }

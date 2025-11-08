@@ -955,6 +955,7 @@
         let lookupData = [];
         let countyData = [];
         let zipData = [];
+        let zipDataByState = {}; // Cache for state-based ZIP files
 
         // Load built-in database
         function loadBuiltInDatabase() {
@@ -967,11 +968,37 @@
                 console.log(`✓ Loaded ${lookupData.length} chapters and ${countyData.length} counties`);
             }
             
-            // Load ZIP code mapping
+            // Load ZIP code mapping (full database)
             if (typeof ZIP_TO_FIPS !== 'undefined') {
                 zipData = ZIP_TO_FIPS.zipCodes || [];
                 console.log(`✓ Loaded ${zipData.length} ZIP codes`);
             }
+        }
+
+        // Load ZIP codes for a specific state (on-demand)
+        async function loadZipCodesForState(state) {
+            if (zipDataByState[state]) {
+                return zipDataByState[state];
+            }
+            
+            // Try to load state-specific file
+            const stateUpper = state.toUpperCase();
+            try {
+                const script = document.createElement('script');
+                script.src = `zip_codes_${stateUpper}.js`;
+                script.onload = function() {
+                    const stateVarName = `ZIP_CODES_${stateUpper}`;
+                    if (typeof window[stateVarName] !== 'undefined') {
+                        zipDataByState[state] = window[stateVarName];
+                        console.log(`✓ Loaded ${zipDataByState[state].length} ZIP codes for ${state}`);
+                    }
+                };
+                document.head.appendChild(script);
+            } catch (e) {
+                console.log(`Could not load ZIP codes for ${state}`);
+            }
+            
+            return zipDataByState[state] || [];
         }
 
         function searchCodes() {
@@ -1044,25 +1071,53 @@
             // Search ZIP codes first (if ZIP is searched, find county/FIPS)
             let zipResults = [];
             let zipFoundFIPS = null;
-            if (zipQuery && zipData.length > 0) {
+            if (zipQuery) {
                 // Normalize ZIP to exactly 5 digits
                 const zipNormalized = zipQuery.replace(/[^0-9]/g, '').substring(0, 5).padStart(5, '0');
                 
-                // First try exact match
-                zipResults = zipData.filter(item => {
-                    if (!item.Zip) return false;
-                    const itemZip = item.Zip.replace(/[^0-9]/g, '').padStart(5, '0');
-                    return itemZip === zipNormalized;
-                });
-                
-                // If no exact match, try partial match (first 3 digits)
-                if (zipResults.length === 0 && zipNormalized.length >= 3) {
-                    const zipPrefix = zipNormalized.substring(0, 3);
+                // Search in main ZIP database
+                if (zipData.length > 0) {
+                    // First try exact match
                     zipResults = zipData.filter(item => {
                         if (!item.Zip) return false;
                         const itemZip = item.Zip.replace(/[^0-9]/g, '').padStart(5, '0');
-                        return itemZip.startsWith(zipPrefix);
+                        return itemZip === zipNormalized;
                     });
+                    
+                    // If no exact match, try partial match (first 3 digits)
+                    if (zipResults.length === 0 && zipNormalized.length >= 3) {
+                        const zipPrefix = zipNormalized.substring(0, 3);
+                        zipResults = zipData.filter(item => {
+                            if (!item.Zip) return false;
+                            const itemZip = item.Zip.replace(/[^0-9]/g, '').padStart(5, '0');
+                            return itemZip.startsWith(zipPrefix);
+                        });
+                    }
+                }
+                
+                // If still no results, try to infer state from ZIP prefix and load state file
+                if (zipResults.length === 0 && zipNormalized.length >= 3) {
+                    // ZIP codes starting with 33xxx are typically Florida
+                    // We could add more logic here to map ZIP prefixes to states
+                    const zipPrefix = zipNormalized.substring(0, 2);
+                    // Common ZIP prefixes: 33=FL, 10-12=NY/NJ/PA, etc.
+                    // For now, if ZIP starts with 33, try loading FL data
+                    if (zipPrefix === '33') {
+                        loadZipCodesForState('FL').then(flZips => {
+                            if (flZips && flZips.length > 0) {
+                                const found = flZips.filter(item => {
+                                    if (!item.Zip) return false;
+                                    const itemZip = item.Zip.replace(/[^0-9]/g, '').padStart(5, '0');
+                                    return itemZip === zipNormalized;
+                                });
+                                if (found.length > 0) {
+                                    zipResults = found;
+                                    zipFoundFIPS = found[0].FIPS;
+                                    searchCodes(); // Re-run search with new data
+                                }
+                            }
+                        });
+                    }
                 }
                 
                 if (zipResults.length > 0) {
