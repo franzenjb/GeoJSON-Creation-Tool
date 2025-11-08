@@ -410,6 +410,18 @@
         </div>
 
         <div class="content">
+            <!-- Tab Navigation -->
+            <div class="tabs" style="display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0;">
+                <button class="tab-btn active" onclick="showTab('create')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    🗺️ Create GeoJSON
+                </button>
+                <button class="tab-btn" onclick="showTab('lookup')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    🔍 Code Lookup Tool
+                </button>
+            </div>
+
+            <!-- Create GeoJSON Tab -->
+            <div id="createTab" class="tab-content">
             <!-- Explanation Section -->
             <div class="section">
                 <h2>What This Does</h2>
@@ -581,6 +593,77 @@
             <div class="results" id="results">
                 <h2>Generated Files</h2>
                 <div class="result-grid" id="resultGrid"></div>
+            </div>
+            </div>
+
+            <!-- Code Lookup Tab -->
+            <div id="lookupTab" class="tab-content" style="display: none;">
+                <div class="section">
+                    <h2>Red Cross Code Lookup</h2>
+                    <div class="explanation">
+                        <p>Search for ECODE, RCODE, and DCODE by entering chapter, region, or division names. Perfect for finding the correct codes when you only know the name.</p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 20px 0;">
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Chapter Name</label>
+                            <input type="text" id="chapterSearch" placeholder="e.g., ARC serving Mid Alabama" 
+                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em;"
+                                   oninput="searchCodes()">
+                            <div id="chapterResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
+                        </div>
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Region Name</label>
+                            <input type="text" id="regionSearch" placeholder="e.g., Alabama and Mississippi Region" 
+                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em;"
+                                   oninput="searchCodes()">
+                            <div id="regionResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
+                        </div>
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Division Name</label>
+                            <input type="text" id="divisionSearch" placeholder="e.g., Southeast and Caribbean Division" 
+                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em;"
+                                   oninput="searchCodes()">
+                            <div id="divisionResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
+                        </div>
+                    </div>
+
+                    <div id="codeResults" style="margin-top: 25px; padding: 20px; background: #fafafa; border-radius: 3px; border-left: 3px solid #DC143C; display: none;">
+                        <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C;">Found Codes</h3>
+                        <div id="codeResultsContent" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;"></div>
+                    </div>
+
+                    <div style="margin-top: 25px; padding: 15px; background: #fff5f5; border-radius: 3px; border-left: 3px solid #DC143C;">
+                        <p style="font-weight: 600; margin-bottom: 10px; color: #DC143C;">📤 Upload CSV to Load Data</p>
+                        <p style="font-size: 0.9em; margin-bottom: 12px;">Upload a CSV file with Chapter, Region, Division, ECODE, RCODE, and DCODE columns to enable the lookup tool.</p>
+                        <input type="file" id="lookupFileInput" accept=".csv" style="display: none;" onchange="loadLookupData(event)">
+                        <button onclick="document.getElementById('lookupFileInput').click()" 
+                                style="padding: 8px 20px; background: #DC143C; color: white; border: none; border-radius: 3px; cursor: pointer; font-weight: 500;">
+                            Upload CSV for Lookup
+                        </button>
+                        <div id="lookupFileInfo" style="margin-top: 10px; font-size: 0.85em; color: #666;"></div>
+                    </div>
+
+                    <div id="lookupTable" style="margin-top: 25px; display: none;">
+                        <h3 style="font-size: 1.1em; margin-bottom: 15px;">All Codes</h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.85em;">
+                                <thead>
+                                    <tr style="background: #f0f0f0; border-bottom: 2px solid #DC143C;">
+                                        <th style="padding: 10px; text-align: left; font-weight: 600;">Chapter</th>
+                                        <th style="padding: 10px; text-align: left; font-weight: 600;">ECODE</th>
+                                        <th style="padding: 10px; text-align: left; font-weight: 600;">Region</th>
+                                        <th style="padding: 10px; text-align: left; font-weight: 600;">RCODE</th>
+                                        <th style="padding: 10px; text-align: left; font-weight: 600;">Division</th>
+                                        <th style="padding: 10px; text-align: left; font-weight: 600;">DCODE</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lookupTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
@@ -816,6 +899,231 @@
 
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('createTab').style.display = 'none';
+            document.getElementById('lookupTab').style.display = 'none';
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.style.borderBottomColor = 'transparent';
+                btn.style.color = '#666';
+            });
+            
+            // Show selected tab
+            if (tabName === 'create') {
+                document.getElementById('createTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[0].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[0].style.color = '#DC143C';
+            } else {
+                document.getElementById('lookupTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[1].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[1].style.color = '#DC143C';
+            }
+        }
+
+        // Code Lookup functionality
+        let lookupData = [];
+
+        function parseCSVLine(line) {
+            // Simple CSV parser that handles quoted fields
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result.map(v => v.replace(/^"|"$/g, ''));
+        }
+
+        function loadLookupData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const lines = text.split('\n').filter(l => l.trim());
+                const headers = parseCSVLine(lines[0]);
+                
+                // Find column indices (case-insensitive, handle variations)
+                const normalize = (s) => s.toLowerCase().replace(/[_\s-]/g, '');
+                const chapterIdx = headers.findIndex(h => normalize(h).includes('chapter') && !normalize(h).includes('code'));
+                const regionIdx = headers.findIndex(h => normalize(h) === 'region' || normalize(h).includes('region') && !normalize(h).includes('code'));
+                const divisionIdx = headers.findIndex(h => normalize(h) === 'division' || normalize(h).includes('division') && !normalize(h).includes('code'));
+                const ecodeIdx = headers.findIndex(h => normalize(h) === 'ecode' || normalize(h).includes('ecode'));
+                const rcodeIdx = headers.findIndex(h => normalize(h) === 'rcode' || normalize(h).includes('rcode'));
+                const dcodeIdx = headers.findIndex(h => normalize(h) === 'dcode' || normalize(h).includes('dcode'));
+
+                console.log('Detected columns:', {
+                    chapter: chapterIdx >= 0 ? headers[chapterIdx] : 'NOT FOUND',
+                    region: regionIdx >= 0 ? headers[regionIdx] : 'NOT FOUND',
+                    division: divisionIdx >= 0 ? headers[divisionIdx] : 'NOT FOUND',
+                    ecode: ecodeIdx >= 0 ? headers[ecodeIdx] : 'NOT FOUND',
+                    rcode: rcodeIdx >= 0 ? headers[rcodeIdx] : 'NOT FOUND',
+                    dcode: dcodeIdx >= 0 ? headers[dcodeIdx] : 'NOT FOUND'
+                });
+
+                lookupData = [];
+                for (let i = 1; i < lines.length; i++) {
+                    if (!lines[i].trim()) continue;
+                    const values = parseCSVLine(lines[i]);
+                    if (values.length < headers.length) continue;
+                    
+                    const item = {
+                        chapter: chapterIdx >= 0 && values[chapterIdx] ? values[chapterIdx].trim() : '',
+                        ecode: ecodeIdx >= 0 && values[ecodeIdx] ? String(values[ecodeIdx]).replace('.0', '').trim() : '',
+                        region: regionIdx >= 0 && values[regionIdx] ? values[regionIdx].trim() : '',
+                        rcode: rcodeIdx >= 0 && values[rcodeIdx] ? String(values[rcodeIdx]).trim() : '',
+                        division: divisionIdx >= 0 && values[divisionIdx] ? values[divisionIdx].trim() : '',
+                        dcode: dcodeIdx >= 0 && values[dcodeIdx] ? String(values[dcodeIdx]).trim() : ''
+                    };
+                    
+                    // Only add if it has at least one code
+                    if (item.ecode || item.rcode || item.dcode) {
+                        lookupData.push(item);
+                    }
+                }
+
+                // Remove duplicates
+                const seen = new Set();
+                lookupData = lookupData.filter(item => {
+                    const key = `${item.chapter}|${item.region}|${item.division}`;
+                    if (seen.has(key)) return false;
+                    seen.add(key);
+                    return true;
+                });
+
+                document.getElementById('lookupFileInfo').innerHTML = 
+                    `<span style="color: #DC143C; font-weight: 600;">✓ Loaded ${lookupData.length} unique entries</span>`;
+                
+                populateLookupTable();
+                searchCodes();
+            };
+            reader.readAsText(file);
+        }
+
+        function populateLookupTable() {
+            const tbody = document.getElementById('lookupTableBody');
+            tbody.innerHTML = '';
+            
+            lookupData.forEach(item => {
+                const row = document.createElement('tr');
+                row.style.borderBottom = '1px solid #e0e0e0';
+                row.innerHTML = `
+                    <td style="padding: 8px;">${item.chapter || ''}</td>
+                    <td style="padding: 8px; font-weight: 600; color: #DC143C;">${item.ecode || ''}</td>
+                    <td style="padding: 8px;">${item.region || ''}</td>
+                    <td style="padding: 8px; font-weight: 600; color: #DC143C;">${item.rcode || ''}</td>
+                    <td style="padding: 8px;">${item.division || ''}</td>
+                    <td style="padding: 8px; font-weight: 600; color: #DC143C;">${item.dcode || ''}</td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            document.getElementById('lookupTable').style.display = 'block';
+        }
+
+        function searchCodes() {
+            if (lookupData.length === 0) {
+                document.getElementById('chapterResults').innerHTML = '';
+                document.getElementById('regionResults').innerHTML = '';
+                document.getElementById('divisionResults').innerHTML = '';
+                document.getElementById('codeResults').style.display = 'none';
+                return;
+            }
+
+            const chapterQuery = document.getElementById('chapterSearch').value.toLowerCase().trim();
+            const regionQuery = document.getElementById('regionSearch').value.toLowerCase().trim();
+            const divisionQuery = document.getElementById('divisionSearch').value.toLowerCase().trim();
+
+            // Filter results
+            let results = lookupData.filter(item => {
+                const matchChapter = !chapterQuery || (item.chapter && item.chapter.toLowerCase().includes(chapterQuery));
+                const matchRegion = !regionQuery || (item.region && item.region.toLowerCase().includes(regionQuery));
+                const matchDivision = !divisionQuery || (item.division && item.division.toLowerCase().includes(divisionQuery));
+                return matchChapter && matchRegion && matchDivision;
+            });
+
+            // Show suggestions as user types
+            if (chapterQuery && results.length > 0) {
+                const suggestions = [...new Set(results.slice(0, 5).map(r => r.chapter))];
+                document.getElementById('chapterResults').innerHTML = 
+                    suggestions.length > 0 ? `<small>Found: ${suggestions.join(', ')}${results.length > 5 ? '...' : ''}</small>` : '';
+            } else {
+                document.getElementById('chapterResults').innerHTML = '';
+            }
+
+            if (regionQuery && results.length > 0) {
+                const suggestions = [...new Set(results.slice(0, 5).map(r => r.region))];
+                document.getElementById('regionResults').innerHTML = 
+                    suggestions.length > 0 ? `<small>Found: ${suggestions.join(', ')}${results.length > 5 ? '...' : ''}</small>` : '';
+            } else {
+                document.getElementById('regionResults').innerHTML = '';
+            }
+
+            if (divisionQuery && results.length > 0) {
+                const suggestions = [...new Set(results.slice(0, 5).map(r => r.division))];
+                document.getElementById('divisionResults').innerHTML = 
+                    suggestions.length > 0 ? `<small>Found: ${suggestions.join(', ')}${results.length > 5 ? '...' : ''}</small>` : '';
+            } else {
+                document.getElementById('divisionResults').innerHTML = '';
+            }
+
+            // Show results
+            if (results.length > 0 && (chapterQuery || regionQuery || divisionQuery)) {
+                const uniqueResults = [];
+                const seen = new Set();
+                results.forEach(item => {
+                    const key = `${item.chapter}|${item.region}|${item.division}`;
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        uniqueResults.push(item);
+                    }
+                });
+
+                const resultsHtml = uniqueResults.slice(0, 20).map(item => `
+                    <div style="padding: 12px; background: white; border: 2px solid #e0e0e0; border-radius: 3px;">
+                        <div style="font-weight: 600; margin-bottom: 8px; color: #333;">
+                            ${item.chapter || 'N/A'}
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 0.85em;">
+                            <div>
+                                <strong style="color: #666;">ECODE:</strong><br>
+                                <span style="color: #DC143C; font-weight: 600; font-size: 1.1em;">${item.ecode || 'N/A'}</span>
+                            </div>
+                            <div>
+                                <strong style="color: #666;">RCODE:</strong><br>
+                                <span style="color: #DC143C; font-weight: 600; font-size: 1.1em;">${item.rcode || 'N/A'}</span>
+                            </div>
+                            <div>
+                                <strong style="color: #666;">DCODE:</strong><br>
+                                <span style="color: #DC143C; font-weight: 600; font-size: 1.1em;">${item.dcode || 'N/A'}</span>
+                            </div>
+                        </div>
+                        ${item.region ? `<div style="margin-top: 6px; font-size: 0.8em; color: #666;">Region: ${item.region}</div>` : ''}
+                        ${item.division ? `<div style="margin-top: 2px; font-size: 0.8em; color: #666;">Division: ${item.division}</div>` : ''}
+                    </div>
+                `).join('');
+
+                document.getElementById('codeResultsContent').innerHTML = resultsHtml;
+                document.getElementById('codeResults').style.display = 'block';
+            } else {
+                document.getElementById('codeResults').style.display = 'none';
+            }
         }
 
         // Initialize
