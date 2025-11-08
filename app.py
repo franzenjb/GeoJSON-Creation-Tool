@@ -129,17 +129,27 @@ def modify_scripts_for_processing(temp_dir, csv_filename):
             with open(script_path, 'r') as f:
                 content = f.read()
             
-            # Replace CSV file path
-            content = content.replace(
+            # Replace CSV file path - handle both formats
+            old_patterns = [
+                'CSV_FILE = DATA_DIR / "Biomed by zip code_ENHANCED.csv"',
                 'CSV_FILE = DATA_DIR / "Biomed by zip code_ENHANCED.csv"',
                 f'CSV_FILE = DATA_DIR / "{csv_filename}"'
-            )
+            ]
             
-            # Update output directory
-            content = content.replace(
-                'OUTPUT_DIR = DATA_DIR / "geojson_output"',
-                'OUTPUT_DIR = DATA_DIR / "geojson_output"'
-            )
+            for pattern in old_patterns:
+                if pattern in content:
+                    content = content.replace(
+                        pattern,
+                        f'CSV_FILE = DATA_DIR / "{csv_filename}"'
+                    )
+                    break
+            
+            # If no pattern found, add it after DATA_DIR definition
+            if f'CSV_FILE = DATA_DIR / "{csv_filename}"' not in content:
+                content = content.replace(
+                    'DATA_DIR = Path(__file__).parent.parent',
+                    f'DATA_DIR = Path(__file__).parent.parent\nCSV_FILE = DATA_DIR / "{csv_filename}"'
+                )
             
             with open(script_path, 'w') as f:
                 f.write(content)

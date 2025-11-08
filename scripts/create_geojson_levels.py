@@ -15,9 +15,16 @@ from pathlib import Path
 import requests
 from io import BytesIO
 import zipfile
+import sys
+
+# Add scripts directory to path for imports
+SCRIPTS_DIR = Path(__file__).parent
+sys.path.insert(0, str(SCRIPTS_DIR))
+
+from column_detector import detect_columns, standardize_dataframe
 
 # Configuration
-DATA_DIR = Path(__file__).parent
+DATA_DIR = Path(__file__).parent.parent
 CSV_FILE = DATA_DIR / "Biomed by zip code_ENHANCED.csv"
 CHAPTERS_SHP = DATA_DIR / "Biomed by zip code_with_redcross_by_chapter" / "chapters.shp"
 
@@ -28,14 +35,25 @@ print("=" * 70)
 print("Creating GeoJSON files for Biomed data at multiple levels")
 print("=" * 70)
 
-# Step 1: Load CSV data
+# Step 1: Load CSV data and detect columns
 print("\n1. Loading CSV data...")
-df = pd.read_csv(CSV_FILE, dtype={'Zip': str, 'FIPS': str}, low_memory=False)
-df['Zip'] = df['Zip'].astype(str).str.replace('.0', '', regex=False).str.zfill(5)
-df['FIPS'] = df['FIPS'].astype(str).str.zfill(5)
+df = pd.read_csv(CSV_FILE, low_memory=False)
 
 print(f"   ✓ Loaded {len(df):,} rows")
 print(f"   ✓ Columns: {len(df.columns)}")
+print(f"   ✓ Column names: {list(df.columns)[:10]}...")
+
+# Auto-detect column names
+print("\n   Detecting column names...")
+detected_cols = detect_columns(df)
+print(f"   ✓ Detected columns:")
+for std_name, actual_name in detected_cols.items():
+    print(f"      {std_name} → {actual_name}")
+
+# Standardize dataframe
+df, detected_cols = standardize_dataframe(df, detected_cols)
+
+print(f"   ✓ Standardized dataframe with {len(df.columns)} columns")
 
 # Identify numeric columns (years and totals)
 year_cols = [col for col in df.columns if col.isdigit()]
