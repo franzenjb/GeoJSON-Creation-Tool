@@ -995,6 +995,22 @@
             // Normalize queries for flexible matching
             const normalize = (str) => str ? str.toLowerCase().trim().replace(/\s+/g, ' ') : '';
             
+            // Convert state name to abbreviation if needed
+            function normalizeState(stateQuery) {
+                if (!stateQuery) return '';
+                const normalized = normalize(stateQuery);
+                // Check if it's already an abbreviation (2 letters)
+                if (normalized.length === 2) {
+                    return normalized.toUpperCase();
+                }
+                // Check if it's a full state name
+                if (typeof STATE_NAMES !== 'undefined' && STATE_NAMES[normalized]) {
+                    return STATE_NAMES[normalized];
+                }
+                // Return as-is for partial matching
+                return normalized;
+            }
+            
             // Search Red Cross codes (forward and reverse lookup)
             let results = [];
             if (lookupData.length > 0) {
@@ -1054,6 +1070,9 @@
             // Search counties (forward and reverse lookup)
             let countyResults = [];
             if (countyData.length > 0) {
+                // Normalize state query (convert full name to abbreviation if needed)
+                const stateQueryNormalized = stateQuery ? normalizeState(stateQuery) : '';
+                
                 countyResults = countyData.filter(item => {
                     // If ZIP was searched and found a FIPS, prioritize that
                     if (zipFoundFIPS && zipQuery) {
@@ -1063,8 +1082,17 @@
                     const countyMatch = !countyQuery || 
                         (item.County && normalize(item.County).includes(normalize(countyQuery)));
                     
-                    const stateMatch = !stateQuery || 
-                        (item.State && normalize(item.State).includes(normalize(stateQuery)));
+                    // State matching: check both abbreviation and full name
+                    let stateMatch = true;
+                    if (stateQuery) {
+                        const itemState = normalize(item.State || '');
+                        // Match by abbreviation
+                        stateMatch = itemState === stateQueryNormalized.toLowerCase() ||
+                            // Match by full name (if state query is full name)
+                            (stateQueryNormalized.length > 2 && itemState.includes(stateQueryNormalized)) ||
+                            // Match by abbreviation (if state query is abbreviation)
+                            (stateQueryNormalized.length === 2 && itemState === stateQueryNormalized);
+                    }
                     
                     const fipsMatch = !fipsQuery || 
                         (item.FIPS && item.FIPS.toString().includes(fipsQuery.trim()));
