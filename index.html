@@ -610,44 +610,44 @@
                         <!-- Left: Search Boxes -->
                         <div style="display: flex; flex-direction: column; gap: 20px;">
                             <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Chapter Name</label>
-                                <input type="text" id="chapterSearch" placeholder="e.g., ARC serving Mid Alabama" 
-                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Chapter Name or ECODE</label>
+                                <input type="text" id="chapterSearch" placeholder="e.g., ARC serving Mid Alabama or 1019" 
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
                                        oninput="searchCodes()">
                             </div>
                             
                             <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Region Name</label>
-                                <input type="text" id="regionSearch" placeholder="e.g., Alabama and Mississippi Region" 
-                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Region Name or RCODE</label>
+                                <input type="text" id="regionSearch" placeholder="e.g., Alabama Region or 01R04" 
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
                                        oninput="searchCodes()">
                             </div>
                             
                             <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Division Name</label>
-                                <input type="text" id="divisionSearch" placeholder="e.g., Southeast and Caribbean Division" 
-                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Division Name or DCODE</label>
+                                <input type="text" id="divisionSearch" placeholder="e.g., Southeast Division or D25" 
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
                                        oninput="searchCodes()">
                             </div>
                             
-                            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">County Name</label>
+                            <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #e0e0e0;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">County Name</label>
                                 <input type="text" id="countySearch" placeholder="e.g., Broward" 
-                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
                                        oninput="searchCodes()">
                             </div>
                             
                             <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">State</label>
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">State (shows state code + counties)</label>
                                 <input type="text" id="stateSearch" placeholder="e.g., FL or Florida" 
-                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
                                        oninput="searchCodes()">
                             </div>
                             
                             <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">FIPS Code</label>
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">FIPS Code (5-digit)</label>
                                 <input type="text" id="fipsSearch" placeholder="e.g., 12011" 
-                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
                                        oninput="searchCodes()">
                             </div>
                         </div>
@@ -661,13 +661,13 @@
                             </div>
                             
                             <div id="codeResults" style="display: none;">
-                                <h3 style="font-size: 1.2em; margin-bottom: 20px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 8px;">Red Cross Codes</h3>
-                                <div id="codeResultsContent" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                                <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 6px;">Red Cross Codes</h3>
+                                <div id="codeResultsContent" style="display: flex; flex-direction: column; gap: 0;"></div>
                             </div>
                             
-                            <div id="countyResultsSection" style="display: none; margin-top: 30px;">
-                                <h3 style="font-size: 1.2em; margin-bottom: 20px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 8px;">County & FIPS Codes</h3>
-                                <div id="countyResultsContent" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                            <div id="countyResultsSection" style="display: none; margin-top: 25px;">
+                                <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 6px;">County & FIPS Codes</h3>
+                                <div id="countyResultsContent" style="display: flex; flex-direction: column; gap: 0;"></div>
                             </div>
                         </div>
                     </div>
@@ -951,40 +951,17 @@
         }
 
         function searchCodes() {
-            // Search Red Cross codes
-            const chapterQuery = document.getElementById('chapterSearch').value.toLowerCase().trim();
-            const regionQuery = document.getElementById('regionSearch').value.toLowerCase().trim();
-            const divisionQuery = document.getElementById('divisionSearch').value.toLowerCase().trim();
-
-            let results = [];
-            if (lookupData.length > 0) {
-                results = lookupData.filter(item => {
-                    const matchChapter = !chapterQuery || (item.Chapter && item.Chapter.toLowerCase().includes(chapterQuery));
-                    const matchRegion = !regionQuery || (item.Region && item.Region.toLowerCase().includes(regionQuery));
-                    const matchDivision = !divisionQuery || (item.Division && item.Division.toLowerCase().includes(divisionQuery));
-                    return matchChapter && matchRegion && matchDivision;
-                });
-            }
-
-            // Search counties
-            const countyQuery = document.getElementById('countySearch').value.toLowerCase().trim();
-            const stateQuery = document.getElementById('stateSearch').value.toLowerCase().trim();
+            // Get all search values
+            const chapterQuery = document.getElementById('chapterSearch').value.trim();
+            const regionQuery = document.getElementById('regionSearch').value.trim();
+            const divisionQuery = document.getElementById('divisionSearch').value.trim();
+            const countyQuery = document.getElementById('countySearch').value.trim();
+            const stateQuery = document.getElementById('stateSearch').value.trim();
             const fipsQuery = document.getElementById('fipsSearch').value.trim();
-
-            let countyResults = [];
-            if (countyData.length > 0) {
-                countyResults = countyData.filter(item => {
-                    const matchCounty = !countyQuery || (item.County && item.County.toLowerCase().includes(countyQuery));
-                    const matchState = !stateQuery || (item.State && item.State.toLowerCase().includes(stateQuery));
-                    const matchFIPS = !fipsQuery || (item.FIPS && item.FIPS.includes(fipsQuery));
-                    return matchCounty && matchState && matchFIPS;
-                });
-            }
 
             // Check if any search is active
             const hasSearch = chapterQuery || regionQuery || divisionQuery || countyQuery || stateQuery || fipsQuery;
             
-            // Show/hide no results message
             if (!hasSearch) {
                 document.getElementById('noResults').style.display = 'block';
                 document.getElementById('codeResults').style.display = 'none';
@@ -992,6 +969,55 @@
                 return;
             } else {
                 document.getElementById('noResults').style.display = 'none';
+            }
+
+            // Search Red Cross codes (forward and reverse lookup)
+            let results = [];
+            if (lookupData.length > 0) {
+                results = lookupData.filter(item => {
+                    const chapterMatch = !chapterQuery || 
+                        (item.Chapter && item.Chapter.toLowerCase().includes(chapterQuery.toLowerCase())) ||
+                        (item.ECODE && item.ECODE.toString().includes(chapterQuery));
+                    
+                    const regionMatch = !regionQuery || 
+                        (item.Region && item.Region.toLowerCase().includes(regionQuery.toLowerCase())) ||
+                        (item.RCODE && item.RCODE.toString().includes(regionQuery));
+                    
+                    const divisionMatch = !divisionQuery || 
+                        (item.Division && item.Division.toLowerCase().includes(divisionQuery.toLowerCase())) ||
+                        (item.DCODE && item.DCODE.toString().includes(divisionQuery));
+                    
+                    return chapterMatch && regionMatch && divisionMatch;
+                });
+            }
+
+            // Search counties (forward and reverse lookup)
+            let countyResults = [];
+            if (countyData.length > 0) {
+                countyResults = countyData.filter(item => {
+                    const countyMatch = !countyQuery || 
+                        (item.County && item.County.toLowerCase().includes(countyQuery.toLowerCase()));
+                    
+                    const stateMatch = !stateQuery || 
+                        (item.State && item.State.toLowerCase().includes(stateQuery.toLowerCase()));
+                    
+                    const fipsMatch = !fipsQuery || 
+                        (item.FIPS && item.FIPS.includes(fipsQuery));
+                    
+                    return countyMatch && stateMatch && fipsMatch;
+                });
+            }
+
+            // Get state code from FIPS (first 2 digits)
+            let stateCodeInfo = null;
+            if (stateQuery && countyResults.length > 0) {
+                const firstCounty = countyResults[0];
+                if (firstCounty.FIPS && firstCounty.FIPS.length >= 2) {
+                    stateCodeInfo = {
+                        state: firstCounty.State,
+                        stateCode: firstCounty.FIPS.substring(0, 2)
+                    };
+                }
             }
 
             // Show Red Cross code results
@@ -1007,27 +1033,31 @@
                 });
 
                 const resultsHtml = uniqueResults.slice(0, 50).map(item => `
-                    <div style="padding: 15px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 3px; border-left: 3px solid #DC143C;">
-                        <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: start;">
+                    <div style="padding: 12px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 3px; border-left: 3px solid #DC143C; margin-bottom: 8px;">
+                        <div style="display: grid; grid-template-columns: 2fr 1.5fr 1fr; gap: 15px; align-items: start;">
                             <div>
-                                <div style="font-weight: 600; margin-bottom: 10px; color: #333; font-size: 1em;">
+                                <div style="font-weight: 600; color: #333; font-size: 0.95em; margin-bottom: 4px;">
                                     ${item.Chapter || 'N/A'}
                                 </div>
-                                ${item.Region ? `<div style="font-size: 0.9em; color: #666; margin-bottom: 4px;">Region: ${item.Region}</div>` : ''}
-                                ${item.Division ? `<div style="font-size: 0.9em; color: #666;">Division: ${item.Division}</div>` : ''}
+                                ${item.Region ? `<div style="font-size: 0.85em; color: #666;">${item.Region}</div>` : ''}
+                                ${item.Division ? `<div style="font-size: 0.85em; color: #666;">${item.Division}</div>` : ''}
                             </div>
-                            <div style="text-align: right; min-width: 200px;">
-                                <div style="margin-bottom: 8px;">
-                                    <div style="font-size: 0.8em; color: #666; margin-bottom: 2px;">ECODE</div>
-                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.3em;">${item.ECODE || 'N/A'}</div>
+                            <div style="font-size: 0.85em; color: #666;">
+                                ${item.Region ? `<div>Region: ${item.Region}</div>` : ''}
+                                ${item.Division ? `<div>Division: ${item.Division}</div>` : ''}
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="margin-bottom: 6px;">
+                                    <div style="font-size: 0.75em; color: #999; margin-bottom: 1px;">ECODE</div>
+                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.1em;">${item.ECODE || 'N/A'}</div>
                                 </div>
-                                <div style="margin-bottom: 8px;">
-                                    <div style="font-size: 0.8em; color: #666; margin-bottom: 2px;">RCODE</div>
-                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.3em;">${item.RCODE || 'N/A'}</div>
+                                <div style="margin-bottom: 6px;">
+                                    <div style="font-size: 0.75em; color: #999; margin-bottom: 1px;">RCODE</div>
+                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.1em;">${item.RCODE || 'N/A'}</div>
                                 </div>
                                 <div>
-                                    <div style="font-size: 0.8em; color: #666; margin-bottom: 2px;">DCODE</div>
-                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.3em;">${item.DCODE || 'N/A'}</div>
+                                    <div style="font-size: 0.75em; color: #999; margin-bottom: 1px;">DCODE</div>
+                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.1em;">${item.DCODE || 'N/A'}</div>
                                 </div>
                             </div>
                         </div>
@@ -1040,26 +1070,64 @@
                 document.getElementById('codeResults').style.display = 'none';
             }
 
-            // Show county results
-            if (countyResults.length > 0 && (countyQuery || stateQuery || fipsQuery)) {
-                const countyResultsHtml = countyResults.slice(0, 50).map(item => `
-                    <div style="padding: 15px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 3px; border-left: 3px solid #DC143C;">
-                        <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: center;">
-                            <div>
-                                <div style="font-weight: 600; color: #333; font-size: 1em;">
-                                    ${item.County || 'N/A'} County${item.State ? ', ' + item.State : ''}
+            // Show county results with state code
+            if (countyQuery || stateQuery || fipsQuery) {
+                let countyResultsHtml = '';
+                
+                // Show state code if state was searched
+                if (stateCodeInfo) {
+                    countyResultsHtml += `
+                        <div style="padding: 12px; background: #fff5f5; border: 2px solid #DC143C; border-radius: 3px; margin-bottom: 12px;">
+                            <div style="display: grid; grid-template-columns: 2fr 1.5fr 1fr; gap: 15px; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600; color: #333; font-size: 1em;">
+                                        ${stateCodeInfo.state}
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.9em; color: #666;">
+                                    State Code (FIPS)
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.4em;">${stateCodeInfo.stateCode}</div>
                                 </div>
                             </div>
-                            <div style="text-align: right; min-width: 150px;">
-                                <div style="font-size: 0.8em; color: #666; margin-bottom: 2px;">FIPS Code</div>
-                                <div style="color: #DC143C; font-weight: 700; font-size: 1.5em;">${item.FIPS || 'N/A'}</div>
-                            </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }
 
-                document.getElementById('countyResultsContent').innerHTML = countyResultsHtml;
-                document.getElementById('countyResultsSection').style.display = 'block';
+                // Show counties
+                if (countyResults.length > 0) {
+                    countyResultsHtml += countyResults.slice(0, 50).map(item => {
+                        const stateCode = item.FIPS && item.FIPS.length >= 2 ? item.FIPS.substring(0, 2) : '';
+                        return `
+                            <div style="padding: 10px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 3px; border-left: 3px solid #DC143C; margin-bottom: 6px;">
+                                <div style="display: grid; grid-template-columns: 2fr 1.5fr 1fr; gap: 15px; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600; color: #333; font-size: 0.9em;">
+                                            ${item.County || 'N/A'} County
+                                        </div>
+                                    </div>
+                                    <div style="font-size: 0.85em; color: #666;">
+                                        ${item.State || ''}${stateCode ? ` (State Code: ${stateCode})` : ''}
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <div style="font-size: 0.75em; color: #999; margin-bottom: 1px;">FIPS</div>
+                                        <div style="color: #DC143C; font-weight: 700; font-size: 1.2em;">${item.FIPS || 'N/A'}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else if (stateQuery || fipsQuery) {
+                    countyResultsHtml += `<div style="padding: 20px; text-align: center; color: #999;">No counties found</div>`;
+                }
+
+                if (countyResultsHtml) {
+                    document.getElementById('countyResultsContent').innerHTML = countyResultsHtml;
+                    document.getElementById('countyResultsSection').style.display = 'block';
+                } else {
+                    document.getElementById('countyResultsSection').style.display = 'none';
+                }
             } else {
                 document.getElementById('countyResultsSection').style.display = 'none';
             }
