@@ -609,6 +609,12 @@
                     <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-top: 25px;">
                         <!-- Left: Search Boxes -->
                         <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <button onclick="resetSearch()" 
+                                    style="padding: 10px 20px; background: #DC143C; color: white; border: none; border-radius: 3px; font-weight: 600; font-size: 0.9em; cursor: pointer; margin-bottom: 10px; transition: background 0.2s;"
+                                    onmouseover="this.style.background='#b01030'" 
+                                    onmouseout="this.style.background='#DC143C'">
+                                🔄 Reset All Searches
+                            </button>
                             <div>
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Chapter Name or ECODE</label>
                                 <input type="text" id="chapterSearch" placeholder="e.g., ARC serving Mid Alabama or 1019" 
@@ -1223,6 +1229,24 @@
             } else {
                 document.getElementById('countyResultsSection').style.display = 'none';
             }
+        }
+
+        // Reset all search fields
+        function resetSearch() {
+            document.getElementById('chapterSearch').value = '';
+            document.getElementById('regionSearch').value = '';
+            document.getElementById('divisionSearch').value = '';
+            document.getElementById('zipSearch').value = '';
+            document.getElementById('countySearch').value = '';
+            document.getElementById('stateSearch').value = '';
+            document.getElementById('fipsSearch').value = '';
+            
+            // Clear results
+            document.getElementById('noResults').style.display = 'block';
+            document.getElementById('codeResults').style.display = 'none';
+            document.getElementById('countyResultsSection').style.display = 'none';
+            document.getElementById('codeResultsContent').innerHTML = '';
+            document.getElementById('countyResultsContent').innerHTML = '';
         }
 
         // Initialize
