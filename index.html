@@ -947,13 +947,8 @@
                 countyData = LOOKUP_DATABASE.counties || [];
                 
                 console.log(`✓ Loaded ${lookupData.length} chapters and ${countyData.length} counties`);
-                
-                populateLookupTable();
-                populateCountyTable();
             }
         }
-
-        // Removed table population functions - using search results instead
 
         function searchCodes() {
             // Search Red Cross codes
