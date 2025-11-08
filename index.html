@@ -631,6 +631,13 @@
                             </div>
                             
                             <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #e0e0e0;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">ZIP Code</label>
+                                <input type="text" id="zipSearch" placeholder="e.g., 33704" 
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+                            
+                            <div>
                                 <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">County Name</label>
                                 <input type="text" id="countySearch" placeholder="e.g., Broward" 
                                        style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
@@ -645,8 +652,8 @@
                             </div>
                             
                             <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">FIPS Code (5-digit)</label>
-                                <input type="text" id="fipsSearch" placeholder="e.g., 12011" 
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">FIPS Code (5-digit: State+County)</label>
+                                <input type="text" id="fipsSearch" placeholder="e.g., 12011 (FL=12, Broward=011)" 
                                        style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
                                        oninput="searchCodes()">
                             </div>
@@ -937,6 +944,7 @@
         // Code Lookup functionality - Built-in database
         let lookupData = [];
         let countyData = [];
+        let zipData = [];
 
         // Load built-in database
         function loadBuiltInDatabase() {
@@ -948,6 +956,12 @@
                 
                 console.log(`✓ Loaded ${lookupData.length} chapters and ${countyData.length} counties`);
             }
+            
+            // Load ZIP code mapping
+            if (typeof ZIP_TO_FIPS !== 'undefined') {
+                zipData = ZIP_TO_FIPS.zipCodes || [];
+                console.log(`✓ Loaded ${zipData.length} ZIP codes`);
+            }
         }
 
         function searchCodes() {
@@ -955,12 +969,13 @@
             const chapterQuery = document.getElementById('chapterSearch').value.trim();
             const regionQuery = document.getElementById('regionSearch').value.trim();
             const divisionQuery = document.getElementById('divisionSearch').value.trim();
+            const zipQuery = document.getElementById('zipSearch').value.trim();
             const countyQuery = document.getElementById('countySearch').value.trim();
             const stateQuery = document.getElementById('stateSearch').value.trim();
             const fipsQuery = document.getElementById('fipsSearch').value.trim();
 
             // Check if any search is active
-            const hasSearch = chapterQuery || regionQuery || divisionQuery || countyQuery || stateQuery || fipsQuery;
+            const hasSearch = chapterQuery || regionQuery || divisionQuery || zipQuery || countyQuery || stateQuery || fipsQuery;
             
             if (!hasSearch) {
                 document.getElementById('noResults').style.display = 'block';
@@ -1000,10 +1015,31 @@
                 });
             }
 
+            // Search ZIP codes first (if ZIP is searched, find county/FIPS)
+            let zipResults = [];
+            let zipFoundFIPS = null;
+            if (zipQuery && zipData.length > 0) {
+                const zipNormalized = zipQuery.replace(/[^0-9]/g, '').substring(0, 5);
+                zipResults = zipData.filter(item => {
+                    const zipMatch = item.Zip && item.Zip.replace(/[^0-9]/g, '').includes(zipNormalized);
+                    return zipMatch;
+                });
+                
+                if (zipResults.length > 0) {
+                    // Use the FIPS from ZIP results to filter county results
+                    zipFoundFIPS = zipResults[0].FIPS;
+                }
+            }
+
             // Search counties (forward and reverse lookup)
             let countyResults = [];
             if (countyData.length > 0) {
                 countyResults = countyData.filter(item => {
+                    // If ZIP was searched and found a FIPS, prioritize that
+                    if (zipFoundFIPS && zipQuery) {
+                        return item.FIPS === zipFoundFIPS;
+                    }
+                    
                     const countyMatch = !countyQuery || 
                         (item.County && normalize(item.County).includes(normalize(countyQuery)));
                     
@@ -1014,6 +1050,21 @@
                         (item.FIPS && item.FIPS.toString().includes(fipsQuery.trim()));
                     
                     return countyMatch && stateMatch && fipsMatch;
+                });
+            }
+            
+            // If ZIP search found results, add them to county results
+            if (zipResults.length > 0 && zipQuery) {
+                zipResults.forEach(zipItem => {
+                    // Check if this FIPS is already in countyResults
+                    const exists = countyResults.some(c => c.FIPS === zipItem.FIPS);
+                    if (!exists) {
+                        countyResults.push({
+                            FIPS: zipItem.FIPS,
+                            County: zipItem.County,
+                            State: zipItem.State
+                        });
+                    }
                 });
             }
 
@@ -1079,8 +1130,40 @@
                 document.getElementById('codeResults').style.display = 'none';
             }
 
+            // Show ZIP code results if ZIP was searched
+            if (zipQuery && zipResults.length > 0) {
+                const zipResultsHtml = zipResults.slice(0, 10).map(item => `
+                    <div style="padding: 12px; background: #fff5f5; border: 2px solid #DC143C; border-radius: 3px; margin-bottom: 8px;">
+                        <div style="display: grid; grid-template-columns: 2fr 1.5fr 1fr; gap: 15px; align-items: center;">
+                            <div>
+                                <div style="font-weight: 600; color: #333; font-size: 0.95em;">
+                                    ZIP Code: ${item.Zip}
+                                </div>
+                                <div style="font-size: 0.85em; color: #666; margin-top: 2px;">
+                                    ${item.County || 'N/A'} County, ${item.State || 'N/A'}
+                                </div>
+                            </div>
+                            <div style="font-size: 0.85em; color: #666;">
+                                County FIPS Code
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: #DC143C; font-weight: 700; font-size: 1.3em;">${item.FIPS || 'N/A'}</div>
+                                <div style="font-size: 0.7em; color: #999; margin-top: 2px;">
+                                    State: ${item.FIPS ? item.FIPS.substring(0, 2) : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Prepend ZIP results to county results
+                if (!document.getElementById('countyResultsContent').innerHTML.includes('ZIP Code:')) {
+                    document.getElementById('countyResultsContent').innerHTML = zipResultsHtml + document.getElementById('countyResultsContent').innerHTML;
+                }
+            }
+
             // Show county results with state code
-            if (countyQuery || stateQuery || fipsQuery) {
+            if (zipQuery || countyQuery || stateQuery || fipsQuery) {
                 let countyResultsHtml = '';
                 
                 // Show state code if state was searched
