@@ -1,0 +1,7 @@
+geopandas>=1.0.0
+pandas>=2.0.0
+requests>=2.28.0
+
+# Optional: For Esri service fallback
+# arcgis>=2.0.0
+
