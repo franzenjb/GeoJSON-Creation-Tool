@@ -606,98 +606,69 @@
                         <p>Built-in database of all Red Cross chapters, regions, divisions, and counties. Search by name to find ECODE, RCODE, DCODE, and FIPS codes instantly.</p>
                     </div>
 
-                    <h3 style="font-size: 1.1em; margin: 25px 0 15px 0; color: #DC143C;">Red Cross Organization Codes</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 20px 0;">
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Chapter Name</label>
-                            <input type="text" id="chapterSearch" placeholder="e.g., ARC serving Mid Alabama" 
-                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                   oninput="searchCodes()">
-                            <div id="chapterResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
+                    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-top: 25px;">
+                        <!-- Left: Search Boxes -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Chapter Name</label>
+                                <input type="text" id="chapterSearch" placeholder="e.g., ARC serving Mid Alabama" 
+                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+                            
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Region Name</label>
+                                <input type="text" id="regionSearch" placeholder="e.g., Alabama and Mississippi Region" 
+                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+                            
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Division Name</label>
+                                <input type="text" id="divisionSearch" placeholder="e.g., Southeast and Caribbean Division" 
+                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+                            
+                            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">County Name</label>
+                                <input type="text" id="countySearch" placeholder="e.g., Broward" 
+                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+                            
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">State</label>
+                                <input type="text" id="stateSearch" placeholder="e.g., FL or Florida" 
+                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+                            
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">FIPS Code</label>
+                                <input type="text" id="fipsSearch" placeholder="e.g., 12011" 
+                                       style="width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.95em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
                         </div>
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Region Name</label>
-                            <input type="text" id="regionSearch" placeholder="e.g., Alabama and Mississippi Region" 
-                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                   oninput="searchCodes()">
-                            <div id="regionResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
-                        </div>
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Division Name</label>
-                            <input type="text" id="divisionSearch" placeholder="e.g., Southeast and Caribbean Division" 
-                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                   oninput="searchCodes()">
-                            <div id="divisionResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
-                        </div>
-                    </div>
 
-                    <h3 style="font-size: 1.1em; margin: 25px 0 15px 0; color: #DC143C;">County & FIPS Codes</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 20px 0;">
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">County Name</label>
-                            <input type="text" id="countySearch" placeholder="e.g., Broward" 
-                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                   oninput="searchCodes()">
-                            <div id="countyResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
-                        </div>
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">State</label>
-                            <input type="text" id="stateSearch" placeholder="e.g., FL or Florida" 
-                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                   oninput="searchCodes()">
-                            <div id="stateResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
-                        </div>
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">FIPS Code</label>
-                            <input type="text" id="fipsSearch" placeholder="e.g., 12011" 
-                                   style="width: 100%; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                   oninput="searchCodes()">
-                            <div id="fipsResults" style="margin-top: 8px; font-size: 0.85em; color: #666;"></div>
-                        </div>
-                    </div>
-
-                    <div id="codeResults" style="margin-top: 25px; padding: 20px; background: white; border: 2px solid #e0e0e0; border-radius: 3px; border-left: 3px solid #DC143C; display: none;">
-                        <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C;">Found Codes</h3>
-                        <div id="codeResultsContent" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;"></div>
-                    </div>
-
-                    <div id="countyResultsSection" style="margin-top: 25px; padding: 20px; background: white; border: 2px solid #e0e0e0; border-radius: 3px; border-left: 3px solid #DC143C; display: none;">
-                        <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C;">Found Counties</h3>
-                        <div id="countyResultsContent" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;"></div>
-                    </div>
-
-                    <div id="lookupTable" style="margin-top: 25px; display: none;">
-                        <h3 style="font-size: 1.1em; margin-bottom: 15px;">All Red Cross Codes</h3>
-                        <div style="overflow-x: auto;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 0.85em; background: white;">
-                                <thead>
-                                    <tr style="background: #f0f0f0; border-bottom: 2px solid #DC143C;">
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">Chapter</th>
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">ECODE</th>
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">Region</th>
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">RCODE</th>
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">Division</th>
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">DCODE</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="lookupTableBody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div id="countyTable" style="margin-top: 25px; display: none;">
-                        <h3 style="font-size: 1.1em; margin-bottom: 15px;">All Counties</h3>
-                        <div style="overflow-x: auto;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 0.85em; background: white;">
-                                <thead>
-                                    <tr style="background: #f0f0f0; border-bottom: 2px solid #DC143C;">
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">FIPS</th>
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">County</th>
-                                        <th style="padding: 10px; text-align: left; font-weight: 600; color: #333;">State</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="countyTableBody"></tbody>
-                            </table>
+                        <!-- Right: Results -->
+                        <div id="resultsPanel" style="min-height: 400px; padding: 20px; background: white; border: 2px solid #e0e0e0; border-radius: 3px;">
+                            <div id="noResults" style="text-align: center; padding: 40px; color: #999;">
+                                <div style="font-size: 3em; margin-bottom: 15px;">🔍</div>
+                                <div style="font-size: 1.1em; font-weight: 500;">Enter a search term to find codes</div>
+                                <div style="font-size: 0.9em; margin-top: 8px; color: #bbb;">Search by Chapter, Region, Division, County, State, or FIPS</div>
+                            </div>
+                            
+                            <div id="codeResults" style="display: none;">
+                                <h3 style="font-size: 1.2em; margin-bottom: 20px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 8px;">Red Cross Codes</h3>
+                                <div id="codeResultsContent" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                            </div>
+                            
+                            <div id="countyResultsSection" style="display: none; margin-top: 30px;">
+                                <h3 style="font-size: 1.2em; margin-bottom: 20px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 8px;">County & FIPS Codes</h3>
+                                <div id="countyResultsContent" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -982,50 +953,7 @@
             }
         }
 
-        function populateLookupTable() {
-            const tbody = document.getElementById('lookupTableBody');
-            tbody.innerHTML = '';
-            
-            lookupData.forEach(item => {
-                const row = document.createElement('tr');
-                row.style.borderBottom = '1px solid #e0e0e0';
-                row.style.background = 'white';
-                row.innerHTML = `
-                    <td style="padding: 8px; color: #333;">${item.Chapter || ''}</td>
-                    <td style="padding: 8px; font-weight: 600; color: #DC143C;">${item.ECODE || ''}</td>
-                    <td style="padding: 8px; color: #333;">${item.Region || ''}</td>
-                    <td style="padding: 8px; font-weight: 600; color: #DC143C;">${item.RCODE || ''}</td>
-                    <td style="padding: 8px; color: #333;">${item.Division || ''}</td>
-                    <td style="padding: 8px; font-weight: 600; color: #DC143C;">${item.DCODE || ''}</td>
-                `;
-                tbody.appendChild(row);
-            });
-            
-            if (lookupData.length > 0) {
-                document.getElementById('lookupTable').style.display = 'block';
-            }
-        }
-
-        function populateCountyTable() {
-            const tbody = document.getElementById('countyTableBody');
-            tbody.innerHTML = '';
-            
-            countyData.forEach(item => {
-                const row = document.createElement('tr');
-                row.style.borderBottom = '1px solid #e0e0e0';
-                row.style.background = 'white';
-                row.innerHTML = `
-                    <td style="padding: 8px; font-weight: 600; color: #DC143C;">${item.FIPS || ''}</td>
-                    <td style="padding: 8px; color: #333;">${item.County || ''}</td>
-                    <td style="padding: 8px; color: #333;">${item.State || ''}</td>
-                `;
-                tbody.appendChild(row);
-            });
-            
-            if (countyData.length > 0) {
-                document.getElementById('countyTable').style.display = 'block';
-            }
-        }
+        // Removed table population functions - using search results instead
 
         function searchCodes() {
             // Search Red Cross codes
@@ -1058,53 +986,17 @@
                 });
             }
 
-            // Show suggestions as user types
-            if (chapterQuery && results.length > 0) {
-                const suggestions = [...new Set(results.slice(0, 5).map(r => r.Chapter))];
-                document.getElementById('chapterResults').innerHTML = 
-                    suggestions.length > 0 ? `<small style="color: #666;">Found: ${suggestions.join(', ')}${results.length > 5 ? '...' : ''}</small>` : '';
+            // Check if any search is active
+            const hasSearch = chapterQuery || regionQuery || divisionQuery || countyQuery || stateQuery || fipsQuery;
+            
+            // Show/hide no results message
+            if (!hasSearch) {
+                document.getElementById('noResults').style.display = 'block';
+                document.getElementById('codeResults').style.display = 'none';
+                document.getElementById('countyResultsSection').style.display = 'none';
+                return;
             } else {
-                document.getElementById('chapterResults').innerHTML = '';
-            }
-
-            if (regionQuery && results.length > 0) {
-                const suggestions = [...new Set(results.slice(0, 5).map(r => r.Region))];
-                document.getElementById('regionResults').innerHTML = 
-                    suggestions.length > 0 ? `<small style="color: #666;">Found: ${suggestions.join(', ')}${results.length > 5 ? '...' : ''}</small>` : '';
-            } else {
-                document.getElementById('regionResults').innerHTML = '';
-            }
-
-            if (divisionQuery && results.length > 0) {
-                const suggestions = [...new Set(results.slice(0, 5).map(r => r.Division))];
-                document.getElementById('divisionResults').innerHTML = 
-                    suggestions.length > 0 ? `<small style="color: #666;">Found: ${suggestions.join(', ')}${results.length > 5 ? '...' : ''}</small>` : '';
-            } else {
-                document.getElementById('divisionResults').innerHTML = '';
-            }
-
-            // County suggestions
-            if (countyQuery && countyResults.length > 0) {
-                const suggestions = [...new Set(countyResults.slice(0, 5).map(r => r.County))];
-                document.getElementById('countyResults').innerHTML = 
-                    suggestions.length > 0 ? `<small style="color: #666;">Found: ${suggestions.join(', ')}${countyResults.length > 5 ? '...' : ''}</small>` : '';
-            } else {
-                document.getElementById('countyResults').innerHTML = '';
-            }
-
-            if (stateQuery && countyResults.length > 0) {
-                const suggestions = [...new Set(countyResults.slice(0, 5).map(r => r.State))];
-                document.getElementById('stateResults').innerHTML = 
-                    suggestions.length > 0 ? `<small style="color: #666;">Found: ${suggestions.join(', ')}${countyResults.length > 5 ? '...' : ''}</small>` : '';
-            } else {
-                document.getElementById('stateResults').innerHTML = '';
-            }
-
-            if (fipsQuery && countyResults.length > 0) {
-                document.getElementById('fipsResults').innerHTML = 
-                    countyResults.length > 0 ? `<small style="color: #666;">Found ${countyResults.length} county(ies)</small>` : '';
-            } else {
-                document.getElementById('fipsResults').innerHTML = '';
+                document.getElementById('noResults').style.display = 'none';
             }
 
             // Show Red Cross code results
@@ -1119,27 +1011,31 @@
                     }
                 });
 
-                const resultsHtml = uniqueResults.slice(0, 20).map(item => `
-                    <div style="padding: 12px; background: white; border: 2px solid #e0e0e0; border-radius: 3px;">
-                        <div style="font-weight: 600; margin-bottom: 8px; color: #333;">
-                            ${item.Chapter || 'N/A'}
+                const resultsHtml = uniqueResults.slice(0, 50).map(item => `
+                    <div style="padding: 15px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 3px; border-left: 3px solid #DC143C;">
+                        <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: start;">
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 10px; color: #333; font-size: 1em;">
+                                    ${item.Chapter || 'N/A'}
+                                </div>
+                                ${item.Region ? `<div style="font-size: 0.9em; color: #666; margin-bottom: 4px;">Region: ${item.Region}</div>` : ''}
+                                ${item.Division ? `<div style="font-size: 0.9em; color: #666;">Division: ${item.Division}</div>` : ''}
+                            </div>
+                            <div style="text-align: right; min-width: 200px;">
+                                <div style="margin-bottom: 8px;">
+                                    <div style="font-size: 0.8em; color: #666; margin-bottom: 2px;">ECODE</div>
+                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.3em;">${item.ECODE || 'N/A'}</div>
+                                </div>
+                                <div style="margin-bottom: 8px;">
+                                    <div style="font-size: 0.8em; color: #666; margin-bottom: 2px;">RCODE</div>
+                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.3em;">${item.RCODE || 'N/A'}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.8em; color: #666; margin-bottom: 2px;">DCODE</div>
+                                    <div style="color: #DC143C; font-weight: 700; font-size: 1.3em;">${item.DCODE || 'N/A'}</div>
+                                </div>
+                            </div>
                         </div>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 0.85em;">
-                            <div>
-                                <strong style="color: #666;">ECODE:</strong><br>
-                                <span style="color: #DC143C; font-weight: 600; font-size: 1.1em;">${item.ECODE || 'N/A'}</span>
-                            </div>
-                            <div>
-                                <strong style="color: #666;">RCODE:</strong><br>
-                                <span style="color: #DC143C; font-weight: 600; font-size: 1.1em;">${item.RCODE || 'N/A'}</span>
-                            </div>
-                            <div>
-                                <strong style="color: #666;">DCODE:</strong><br>
-                                <span style="color: #DC143C; font-weight: 600; font-size: 1.1em;">${item.DCODE || 'N/A'}</span>
-                            </div>
-                        </div>
-                        ${item.Region ? `<div style="margin-top: 6px; font-size: 0.8em; color: #666;">Region: ${item.Region}</div>` : ''}
-                        ${item.Division ? `<div style="margin-top: 2px; font-size: 0.8em; color: #666;">Division: ${item.Division}</div>` : ''}
                     </div>
                 `).join('');
 
@@ -1151,14 +1047,18 @@
 
             // Show county results
             if (countyResults.length > 0 && (countyQuery || stateQuery || fipsQuery)) {
-                const countyResultsHtml = countyResults.slice(0, 30).map(item => `
-                    <div style="padding: 12px; background: white; border: 2px solid #e0e0e0; border-radius: 3px;">
-                        <div style="font-weight: 600; margin-bottom: 8px; color: #333;">
-                            ${item.County || 'N/A'} County, ${item.State || 'N/A'}
-                        </div>
-                        <div style="font-size: 0.9em;">
-                            <strong style="color: #666;">FIPS Code:</strong><br>
-                            <span style="color: #DC143C; font-weight: 600; font-size: 1.2em;">${item.FIPS || 'N/A'}</span>
+                const countyResultsHtml = countyResults.slice(0, 50).map(item => `
+                    <div style="padding: 15px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 3px; border-left: 3px solid #DC143C;">
+                        <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: center;">
+                            <div>
+                                <div style="font-weight: 600; color: #333; font-size: 1em;">
+                                    ${item.County || 'N/A'} County${item.State ? ', ' + item.State : ''}
+                                </div>
+                            </div>
+                            <div style="text-align: right; min-width: 150px;">
+                                <div style="font-size: 0.8em; color: #666; margin-bottom: 2px;">FIPS Code</div>
+                                <div style="color: #DC143C; font-weight: 700; font-size: 1.5em;">${item.FIPS || 'N/A'}</div>
+                            </div>
                         </div>
                     </div>
                 `).join('');
