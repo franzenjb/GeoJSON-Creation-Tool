@@ -1062,10 +1062,13 @@
             const countOption = createAggregationFieldOption('Row Count', 'count', 'COUNT');
             fieldsContainer.appendChild(countOption);
 
-            // Add numeric columns
+            // Add numeric columns (only Drives and RBC fields)
+            const allowedSumFields = ['Drives', 'RBC Product Projection', 'RBC Products Collected'];
             detectedColumns.numeric.forEach(col => {
-                const option = createAggregationFieldOption(col.name, col.name, 'SUM', true);
-                fieldsContainer.appendChild(option);
+                if (allowedSumFields.includes(col.name)) {
+                    const option = createAggregationFieldOption(col.name, col.name, 'SUM', true);
+                    fieldsContainer.appendChild(option);
+                }
             });
 
             // Display column mapping
@@ -1378,15 +1381,21 @@
                                window.location.hostname === '127.0.0.1' ||
                                window.location.hostname === '';
 
-            const baseURL = isLocalhost
-                ? 'geographic-data/'
-                : 'https://raw.githubusercontent.com/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/';
-
-            console.log(`Loading boundaries from: ${baseURL} (hostname: ${window.location.hostname}, isLocalhost: ${isLocalhost})`);
+            console.log(`Loading boundaries (hostname: ${window.location.hostname}, isLocalhost: ${isLocalhost})`);
 
             for (const level of levels) {
                 if (!geoBoundaries[level]) {
-                    const url = `${baseURL}${level}_boundaries.geojson`;
+                    // ZIP boundaries are in Git LFS, need media.githubusercontent.com
+                    // Other files are regular Git files, use raw.githubusercontent.com
+                    let url;
+                    if (isLocalhost) {
+                        url = `geographic-data/${level}_boundaries.geojson`;
+                    } else if (level === 'zip') {
+                        url = `https://media.githubusercontent.com/media/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/${level}_boundaries.geojson`;
+                    } else {
+                        url = `https://raw.githubusercontent.com/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/${level}_boundaries.geojson`;
+                    }
+
                     console.log(`Fetching ${level} from: ${url}`);
 
                     promises.push(
