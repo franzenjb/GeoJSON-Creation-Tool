@@ -683,11 +683,15 @@
                             <div class="explanation">
                                 <p><strong>What this tool does:</strong></p>
                                 <ul style="margin-left: 20px; margin-top: 8px;">
-                                    <li>Aggregates row-level CSV data by geographic level (ZIP or County)</li>
-                                    <li>Rolls up totals hierarchically: ZIP → County → Chapter → Region → Division</li>
-                                    <li>Outputs a CSV file with aggregated metrics at each level</li>
-                                    <li>Use the output CSV in the "Create GeoJSON" tab to make maps</li>
+                                    <li><strong>Aggregates</strong> row-level CSV data by ZIP code or County FIPS</li>
+                                    <li><strong>Rolls up</strong> totals through Red Cross hierarchy: ZIP → County → Chapter → Region → Division</li>
+                                    <li><strong>Outputs</strong> one comprehensive CSV with metrics at all 5 geographic levels</li>
+                                    <li><strong>Adds</strong> FIPS, ECODE, RCODE, DCODE codes automatically</li>
+                                    <li><strong>Ready for mapping:</strong> Use output in "Create GeoJSON" tab (Tab 3) to visualize at any level</li>
                                 </ul>
+                                <p style="margin-top: 12px; padding: 10px; background: #f0f9ff; border-left: 3px solid #0284c7; font-size: 0.9em;">
+                                    <strong>💡 Pro Tip:</strong> Upload ZIP-level data here, then create Division or Region maps in Tab 3 - no manual aggregation needed!
+                                </p>
                             </div>
                         </div>
                     </div>
