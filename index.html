@@ -524,88 +524,57 @@
             <div class="section">
                 <h2>Red Cross Code Lookup</h2>
                 <div class="explanation">
-                    <p style="font-size: 1.05em; color: #333; margin-bottom: 15px;">
-                        <strong>Instantly find the right codes for your data</strong> — Search by name, get the code. No more guessing.
-                    </p>
+                    <p>Built-in database of all Red Cross chapters, regions, divisions, and counties. Search by name to find ECODE, RCODE, DCODE, and FIPS codes instantly.</p>
+                </div>
 
-                    <h3 style="font-size: 1.1em; margin-top: 20px; margin-bottom: 12px; color: #DC143C;">Why Codes Matter: The Real Problem</h3>
+                <h2>Why Use Codes Instead of Names?</h2>
+                <div class="explanation" style="background: #fff5f5; border-left: 3px solid #DC143C;">
+                    <p style="font-weight: 600; margin-bottom: 12px; color: #DC143C;">Codes are standardized, unique identifiers that eliminate ambiguity and spelling errors.</p>
 
-                    <div style="background: #fff; border: 2px solid #DC143C; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                        <p style="margin-bottom: 10px; font-weight: 600; color: #DC143C;">❌ PROBLEM: Your boss sends you a messy spreadsheet</p>
-                        <div style="background: #fff5f5; padding: 12px; border-radius: 4px; font-family: monospace; font-size: 0.85em; margin-bottom: 10px;">
-                            Chapter Name<br>
-                            <span style="color: #dc2626;">Red Cross of Greater New York</span><br>
-                            <span style="color: #dc2626;">ARC Greater NY</span><br>
-                            <span style="color: #dc2626;">American Red Cross - New York Chapter</span><br>
-                            <span style="color: #dc2626;">NYC Red Cross</span>
-                        </div>
-                        <p style="font-size: 0.9em; color: #666; margin: 0;">
-                            👆 All 4 names refer to the <strong>same chapter</strong>, but your database won't match them!
-                        </p>
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">ZIP Codes (5-digit)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> United States Postal Service ZIP Code Tabulation Areas (ZCTA5)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> 5 digits (e.g., <code>33019</code>, <code>02134</code>)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> Every ZIP code is unique. "Miami" could refer to the city, county, or multiple ZIP codes. <code>33101</code> is unambiguous.</p>
                     </div>
 
-                    <div style="background: #fff; border: 2px solid #1e7e34; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                        <p style="margin-bottom: 10px; font-weight: 600; color: #1e7e34;">✅ SOLUTION: Use the chapter code instead</p>
-                        <div style="background: #f0fdf4; padding: 12px; border-radius: 4px; font-family: monospace; font-size: 0.85em; margin-bottom: 10px;">
-                            ECODE<br>
-                            <span style="color: #1e7e34; font-weight: 600;">32500</span><br>
-                            <span style="color: #1e7e34; font-weight: 600;">32500</span><br>
-                            <span style="color: #1e7e34; font-weight: 600;">32500</span><br>
-                            <span style="color: #1e7e34; font-weight: 600;">32500</span>
-                        </div>
-                        <p style="font-size: 0.9em; color: #666; margin: 0;">
-                            👆 <strong>One code, perfect match every time.</strong> No spelling errors, no ambiguity.
-                        </p>
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">FIPS Codes (5-digit)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> Federal Information Processing Standards codes for counties</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> 5 digits = State FIPS (2) + County FIPS (3), e.g., <code>12011</code> = Florida (12) + Broward County (011)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> "Dallas" could be Dallas County, TX (<code>48113</code>) or Dallas County, AL (<code>01047</code>). FIPS codes are unique nationwide and never change.</p>
                     </div>
 
-                    <h3 style="font-size: 1em; margin-top: 25px; margin-bottom: 12px; color: #333;">🗺️ The 5 Code Types You'll Use</h3>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
-                        <div style="background: #f9fafb; border-left: 3px solid #DC143C; padding: 10px;">
-                            <p style="margin: 0 0 6px 0; font-weight: 600; font-size: 0.95em;">📍 ZIP Code</p>
-                            <p style="margin: 0; font-size: 0.85em; color: #666;">
-                                <strong>Example:</strong> <code>10001</code><br>
-                                <strong>Why:</strong> "Manhattan" has 40+ ZIP codes
-                            </p>
-                        </div>
-                        <div style="background: #f9fafb; border-left: 3px solid #DC143C; padding: 10px;">
-                            <p style="margin: 0 0 6px 0; font-weight: 600; font-size: 0.95em;">🏛️ FIPS (County)</p>
-                            <p style="margin: 0; font-size: 0.85em; color: #666;">
-                                <strong>Example:</strong> <code>48113</code><br>
-                                <strong>Why:</strong> There are 13 "Dallas Counties" in the US
-                            </p>
-                        </div>
-                        <div style="background: #f9fafb; border-left: 3px solid #DC143C; padding: 10px;">
-                            <p style="margin: 0 0 6px 0; font-weight: 600; font-size: 0.95em;">📚 ECODE (Chapter)</p>
-                            <p style="margin: 0; font-size: 0.85em; color: #666;">
-                                <strong>Example:</strong> <code>32500</code><br>
-                                <strong>Why:</strong> Chapter names are long and vary in spelling
-                            </p>
-                        </div>
-                        <div style="background: #f9fafb; border-left: 3px solid #DC143C; padding: 10px;">
-                            <p style="margin: 0 0 6px 0; font-weight: 600; font-size: 0.95em;">🌍 RCODE (Region)</p>
-                            <p style="margin: 0; font-size: 0.85em; color: #666;">
-                                <strong>Example:</strong> <code>32R16</code><br>
-                                <strong>Why:</strong> Region names change, codes stay stable
-                            </p>
-                        </div>
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">ECODE (Chapter Code)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> Unique identifier for Red Cross chapters</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> Numeric code (e.g., <code>1019</code>, <code>38300</code>)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> "Red Cross of Kentucky" vs "American Red Cross Kentucky Region" vs "ARC Kentucky" - all refer to the same chapter, but <code>1019</code> is always correct.</p>
                     </div>
 
-                    <div style="background: #f9fafb; border-left: 3px solid #DC143C; padding: 10px; margin-bottom: 15px;">
-                        <p style="margin: 0 0 6px 0; font-weight: 600; font-size: 0.95em;">🌎 DCODE (Division)</p>
-                        <p style="margin: 0; font-size: 0.85em; color: #666;">
-                            <strong>Example:</strong> <code>D27</code> = Northeast Division<br>
-                            <strong>Why:</strong> "Northeast Div" vs "NE Division" vs "Northeast" — codes are unambiguous
-                        </p>
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">RCODE (Region Code)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> Unique identifier for Red Cross regions</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> Alphanumeric (e.g., <code>01R04</code>, <code>38R28</code>)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> Region names change over time, but codes remain stable. "Southeast Region" might become "Southeast and Caribbean Division" - the code stays the same.</p>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 4px solid #f59e0b; border-radius: 6px;">
-                        <p style="margin: 0 0 8px 0; font-weight: 600; color: #92400e;">⚡ What This Tool Does:</p>
-                        <ul style="margin: 0; padding-left: 20px; color: #92400e; font-size: 0.9em;">
-                            <li>Type any chapter, region, county, or ZIP → get the official code</li>
-                            <li>Search by code → see what it represents</li>
-                            <li><strong>Copy codes into your data for perfect joins</strong></li>
-                            <li>100% coverage: All 33,120 US ZIP codes + territories</li>
+                    <div style="margin: 15px 0;">
+                        <h3 style="font-size: 1em; margin-bottom: 8px; color: #333;">DCODE (Division Code)</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>What:</strong> Unique identifier for Red Cross divisions</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Format:</strong> Alphanumeric (e.g., <code>D25</code>, <code>D27</code>)</p>
+                        <p style="font-size: 0.9em; margin-bottom: 8px;"><strong>Why better:</strong> Division names are long and can be abbreviated differently. <code>D25</code> is always "Southeast and Caribbean Division" regardless of how it's written.</p>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 12px; background: #f0f0f0; border-radius: 3px;">
+                        <p style="font-size: 0.9em; margin: 0;"><strong>Key Benefits:</strong></p>
+                        <ul style="font-size: 0.85em; margin: 8px 0 0 20px; padding: 0;">
+                            <li>No spelling variations (Jefferson vs Jeffersons vs Jefferson County)</li>
+                            <li>No ambiguity (Dallas city vs Dallas County vs Dallas Parish)</li>
+                            <li>Standardized format (always 5 digits for FIPS, always consistent)</li>
+                            <li>Never change (names change, codes stay the same)</li>
+                            <li>Perfect for joins (codes match exactly, names require fuzzy matching)</li>
+                            <li>International standards (FIPS is federal standard, ZIP is USPS standard)</li>
                         </ul>
                     </div>
                 </div>
