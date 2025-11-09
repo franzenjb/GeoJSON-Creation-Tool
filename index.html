@@ -490,6 +490,9 @@
                 <button class="tab-btn active" onclick="showTab('lookup')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
                     🔍 Code Lookup Tool
                 </button>
+                <button class="tab-btn" onclick="showTab('rollup')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    📊 CSV Roll-Up
+                </button>
                 <button class="tab-btn" onclick="showTab('create')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
                     🗺️ Create GeoJSON
                 </button>
@@ -652,6 +655,97 @@
                         </div>
                     </div>
             </div>
+            </div>
+
+            <!-- CSV Roll-Up Tab -->
+            <div id="rollupTab" class="tab-content" style="display: none;">
+
+                <!-- Collapsible Explanation Section -->
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion('rollupAccordion')">
+                        <div class="accordion-title">
+                            <span>ℹ️</span>
+                            <span>About CSV Roll-Up Tool</span>
+                        </div>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div id="rollupAccordion" class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="explanation">
+                                <p><strong>What this tool does:</strong></p>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li>Aggregates row-level CSV data by geographic level (ZIP or County)</li>
+                                    <li>Rolls up totals hierarchically: ZIP → County → Chapter → Region → Division</li>
+                                    <li>Outputs a CSV file with aggregated metrics at each level</li>
+                                    <li>Use the output CSV in the "Create GeoJSON" tab to make maps</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Section -->
+                <div class="section">
+                    <h2>Upload CSV File</h2>
+                    <div class="upload-area" id="rollupUploadArea" style="border: 2px dashed #DC143C; border-radius: 3px; padding: 40px; text-align: center; cursor: pointer; background: #fafafa; transition: all 0.2s;">
+                        <div style="font-size: 2.5em; margin-bottom: 10px; color: #DC143C;">📁</div>
+                        <p style="font-size: 1.1em; margin-bottom: 5px; font-weight: 500;">Drop CSV file here or click to browse</p>
+                        <p style="font-size: 0.85em; color: #666;">Upload row-level data with ZIP or County codes</p>
+                    </div>
+                    <input type="file" id="rollupFileInput" accept=".csv" style="display: none;">
+
+                    <div id="rollupFileInfo" class="file-info" style="margin-top: 15px; padding: 12px; background: #f0f8ff; border-left: 3px solid #DC143C; border-radius: 3px; display: none;">
+                        <span style="font-weight: 500;">📄 File: </span>
+                        <span id="rollupFileName"></span>
+                        <span id="rollupFileSize" style="color: #666; margin-left: 10px;"></span>
+                    </div>
+                </div>
+
+                <!-- Column Detection Section -->
+                <div id="rollupColumnDetectionSection" class="section" style="display: none;">
+                    <h2>Configure Aggregation</h2>
+
+                    <div style="background: #f0f8ff; padding: 15px; border-radius: 3px; margin-bottom: 20px; border-left: 3px solid #DC143C;">
+                        <p style="font-weight: 500; margin-bottom: 8px;">Detected Input Level:</p>
+                        <p id="rollupDetectedLevelText" style="font-size: 1.1em; color: #DC143C;"></p>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <p style="font-weight: 500; margin-bottom: 10px;">Select metrics to aggregate:</p>
+                        <div id="rollupAggregationFields" style="display: flex; flex-direction: column; gap: 10px;">
+                            <!-- Aggregation field checkboxes will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <p style="font-weight: 500; margin-bottom: 10px;">Select geographic levels to output:</p>
+                        <div id="rollupOutputLevels" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <!-- Level checkboxes will be inserted here -->
+                        </div>
+                    </div>
+
+                    <button id="rollupProcessBtn" style="width: 100%; padding: 15px; background: #DC143C; color: white; border: none; border-radius: 3px; font-size: 1.1em; cursor: pointer; font-weight: 500; transition: all 0.2s;">
+                        🚀 Process and Generate CSV
+                    </button>
+                </div>
+
+                <!-- Progress Section -->
+                <div id="rollupProgressSection" class="section" style="display: none;">
+                    <h2>Processing...</h2>
+                    <div style="background: #f5f5f5; border-radius: 3px; overflow: hidden; height: 30px; margin-bottom: 10px;">
+                        <div id="rollupProgressFill" style="height: 100%; background: linear-gradient(90deg, #DC143C, #ff4060); width: 0%; transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500; font-size: 0.9em;"></div>
+                    </div>
+                    <p id="rollupStatus" style="color: #666; font-size: 0.9em; text-align: center;"></p>
+                </div>
+
+                <!-- Results Section -->
+                <div id="rollupResultSection" class="section" style="display: none;">
+                    <h2>Download Results</h2>
+                    <div id="rollupResultGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                        <!-- Download buttons will be inserted here -->
+                    </div>
+                </div>
+
             </div>
 
             <!-- Create GeoJSON Tab -->
@@ -1610,6 +1704,7 @@
             // Hide all tabs
             document.getElementById('createTab').style.display = 'none';
             document.getElementById('lookupTab').style.display = 'none';
+            document.getElementById('rollupTab').style.display = 'none';
 
             // Remove active class from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -1622,10 +1717,14 @@
                 document.getElementById('lookupTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[0].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[0].style.color = '#DC143C';
-            } else {
-                document.getElementById('createTab').style.display = 'block';
+            } else if (tabName === 'rollup') {
+                document.getElementById('rollupTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[1].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[1].style.color = '#DC143C';
+            } else if (tabName === 'create') {
+                document.getElementById('createTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[2].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[2].style.color = '#DC143C';
             }
         }
 
@@ -1646,6 +1745,547 @@
                 content.style.maxHeight = content.scrollHeight + 'px';
             }
         }
+
+        // ==================== CSV ROLL-UP TAB FUNCTIONALITY ====================
+
+        // CSV Roll-Up state
+        let rollupCsvData = null;
+        let rollupDetectedColumns = null;
+        let rollupAggregationConfig = {
+            granularity: null,  // 'zip' or 'county'
+            fields: [],
+            outputLevels: []
+        };
+        let rollupGeneratedCSVs = {};
+
+        // Get rollup tab elements
+        const rollupUploadArea = document.getElementById('rollupUploadArea');
+        const rollupFileInput = document.getElementById('rollupFileInput');
+        const rollupFileInfo = document.getElementById('rollupFileInfo');
+        const rollupFileName = document.getElementById('rollupFileName');
+        const rollupFileSize = document.getElementById('rollupFileSize');
+        const rollupColumnDetectionSection = document.getElementById('rollupColumnDetectionSection');
+        const rollupDetectedLevelText = document.getElementById('rollupDetectedLevelText');
+        const rollupAggregationFields = document.getElementById('rollupAggregationFields');
+        const rollupOutputLevels = document.getElementById('rollupOutputLevels');
+        const rollupProcessBtn = document.getElementById('rollupProcessBtn');
+        const rollupProgressSection = document.getElementById('rollupProgressSection');
+        const rollupProgressFill = document.getElementById('rollupProgressFill');
+        const rollupStatus = document.getElementById('rollupStatus');
+        const rollupResultSection = document.getElementById('rollupResultSection');
+        const rollupResultGrid = document.getElementById('rollupResultGrid');
+
+        // Upload handlers for rollup tab
+        rollupUploadArea.addEventListener('click', () => rollupFileInput.click());
+        rollupFileInput.addEventListener('change', (e) => handleRollupFile(e.target.files[0]));
+
+        rollupUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            rollupUploadArea.style.borderColor = '#ff4060';
+            rollupUploadArea.style.background = '#fff5f7';
+        });
+
+        rollupUploadArea.addEventListener('dragleave', () => {
+            rollupUploadArea.style.borderColor = '#DC143C';
+            rollupUploadArea.style.background = '#fafafa';
+        });
+
+        rollupUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            rollupUploadArea.style.borderColor = '#DC143C';
+            rollupUploadArea.style.background = '#fafafa';
+            handleRollupFile(e.dataTransfer.files[0]);
+        });
+
+        function handleRollupFile(file) {
+            if (!file || !file.name.endsWith('.csv')) {
+                alert('Please upload a CSV file');
+                return;
+            }
+
+            rollupFileName.textContent = file.name;
+            rollupFileSize.textContent = `(${(file.size / 1024).toFixed(2)} KB)`;
+            rollupFileInfo.style.display = 'block';
+
+            // Parse CSV and detect columns
+            parseRollupCSV(file);
+        }
+
+        function parseRollupCSV(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const rows = text.split('\n').filter(row => row.trim());
+
+                if (rows.length === 0) {
+                    alert('CSV file is empty');
+                    return;
+                }
+
+                // Parse header and all rows
+                const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, '').replace(/^\uFEFF/, ''));
+                const dataRows = rows.slice(1).map(row => {
+                    return row.split(',').map(cell => cell.trim().replace(/"/g, ''));
+                });
+
+                rollupCsvData = { headers, dataRows };
+
+                // Detect columns
+                detectRollupColumns(headers, dataRows);
+            };
+            reader.readAsText(file);
+        }
+
+        function detectRollupColumns(headers, dataRows) {
+            rollupDetectedColumns = {
+                zip: null,
+                fips: null,
+                ecode: null,
+                rcode: null,
+                dcode: null,
+                numeric: [],
+                all: headers
+            };
+
+            // Detect geographic columns
+            const zipPatterns = ['zip', 'zipcode', 'zip_code', 'postal', 'postalcode'];
+            const fipsPatterns = ['fips', 'county_fips', 'countyfips', 'geoid'];
+            const ecodePatterns = ['ecode', 'chapter', 'chaptercode'];
+            const rcodePatterns = ['rcode', 'region', 'regioncode'];
+            const dcodePatterns = ['dcode', 'division', 'divisioncode'];
+
+            headers.forEach((header, index) => {
+                const headerLower = header.toLowerCase();
+
+                if (zipPatterns.some(p => headerLower.includes(p))) {
+                    rollupDetectedColumns.zip = { name: header, index };
+                } else if (fipsPatterns.some(p => headerLower.includes(p))) {
+                    rollupDetectedColumns.fips = { name: header, index };
+                } else if (ecodePatterns.some(p => headerLower.includes(p))) {
+                    rollupDetectedColumns.ecode = { name: header, index };
+                } else if (rcodePatterns.some(p => headerLower.includes(p))) {
+                    rollupDetectedColumns.rcode = { name: header, index };
+                } else if (dcodePatterns.some(p => headerLower.includes(p))) {
+                    rollupDetectedColumns.dcode = { name: header, index };
+                }
+
+                // Check if column is numeric
+                const isGeoColumn =
+                    rollupDetectedColumns.zip?.index === index ||
+                    rollupDetectedColumns.fips?.index === index ||
+                    rollupDetectedColumns.ecode?.index === index ||
+                    rollupDetectedColumns.rcode?.index === index ||
+                    rollupDetectedColumns.dcode?.index === index;
+
+                if (!isGeoColumn) {
+                    const sample = dataRows.slice(0, 10).map(row => row[index]);
+                    const numericValues = sample.filter(val => val !== '');
+                    const isNumeric = numericValues.length > 0 &&
+                                     numericValues.every(val => !isNaN(parseFloat(val)));
+                    if (isNumeric) {
+                        rollupDetectedColumns.numeric.push({ name: header, index });
+                    }
+                }
+            });
+
+            // Determine granularity
+            const detectedGranularity = rollupDetectedColumns.zip ? 'zip' :
+                                       rollupDetectedColumns.fips ? 'county' : null;
+
+            if (!detectedGranularity) {
+                alert('Could not detect ZIP or County FIPS column. Please ensure your CSV has a column with ZIP codes or County FIPS codes.');
+                return;
+            }
+
+            rollupAggregationConfig.granularity = detectedGranularity;
+
+            // Display column detection results
+            displayRollupColumnDetection(detectedGranularity);
+        }
+
+        function displayRollupColumnDetection(detectedGranularity) {
+            // Show the section
+            rollupColumnDetectionSection.style.display = 'block';
+
+            // Set detected level
+            rollupDetectedLevelText.textContent =
+                detectedGranularity === 'zip' ? 'ZIP Code Level (found ZIP column)' : 'County Level (found FIPS/County column)';
+
+            // Display aggregation field options
+            rollupAggregationFields.innerHTML = '';
+
+            // Add COUNT option
+            const countOption = createRollupFieldOption('Row Count', 'count', 'COUNT');
+            rollupAggregationFields.appendChild(countOption);
+
+            // Add numeric columns (only Drives and RBC fields)
+            const allowedSumFields = ['Drives', 'RBC Product Projection', 'RBC Products Collected'];
+            rollupDetectedColumns.numeric.forEach(col => {
+                if (allowedSumFields.includes(col.name)) {
+                    const option = createRollupFieldOption(col.name, col.name, 'SUM', true);
+                    rollupAggregationFields.appendChild(option);
+                }
+            });
+
+            // Display output level options
+            rollupOutputLevels.innerHTML = '';
+            const levels = detectedGranularity === 'zip'
+                ? ['zip', 'county', 'chapter', 'region', 'division']
+                : ['county', 'chapter', 'region', 'division'];
+
+            levels.forEach(level => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `rollupLevel${level}`;
+                checkbox.checked = true;
+                checkbox.style.marginRight = '5px';
+
+                const label = document.createElement('label');
+                label.htmlFor = `rollupLevel${level}`;
+                label.textContent = level.charAt(0).toUpperCase() + level.slice(1);
+                label.style.cssText = 'display: flex; align-items: center; padding: 8px 12px; background: white; border: 2px solid #e0e0e0; border-radius: 3px; cursor: pointer;';
+
+                const container = document.createElement('div');
+                container.appendChild(checkbox);
+                container.appendChild(label);
+
+                rollupOutputLevels.appendChild(label);
+                label.insertBefore(checkbox, label.firstChild);
+            });
+        }
+
+        function createRollupFieldOption(label, fieldName, defaultType, checked = true) {
+            const div = document.createElement('div');
+            div.style.cssText = 'display: flex; align-items: center; gap: 12px; padding: 12px; background: white; border: 2px solid #e0e0e0; border-radius: 3px;';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = checked;
+            checkbox.id = `rollup_field_${fieldName}`;
+
+            const labelEl = document.createElement('label');
+            labelEl.htmlFor = `rollup_field_${fieldName}`;
+            labelEl.textContent = label;
+            labelEl.style.flex = '1';
+            labelEl.style.cursor = 'pointer';
+
+            const typeSpan = document.createElement('span');
+            typeSpan.textContent = defaultType;
+            typeSpan.style.cssText = 'padding: 4px 8px; background: #DC143C; color: white; border-radius: 3px; font-size: 0.85em; font-weight: 500;';
+
+            div.appendChild(checkbox);
+            div.appendChild(labelEl);
+            div.appendChild(typeSpan);
+
+            // Track in config
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    rollupAggregationConfig.fields.push({
+                        field: fieldName,
+                        label: label,
+                        type: defaultType
+                    });
+                } else {
+                    rollupAggregationConfig.fields = rollupAggregationConfig.fields.filter(f => f.field !== fieldName);
+                }
+            });
+
+            // Initialize as checked
+            if (checked) {
+                rollupAggregationConfig.fields.push({
+                    field: fieldName,
+                    label: label,
+                    type: defaultType
+                });
+            }
+
+            return div;
+        }
+
+        // Process button handler
+        rollupProcessBtn.addEventListener('click', async () => {
+            if (!rollupCsvData || rollupAggregationConfig.fields.length === 0) {
+                alert('Please select at least one metric to aggregate');
+                return;
+            }
+
+            // Get selected output levels
+            const selectedLevels = [];
+            const levelCheckboxes = rollupOutputLevels.querySelectorAll('input[type="checkbox"]');
+            levelCheckboxes.forEach(cb => {
+                if (cb.checked) {
+                    const level = cb.id.replace('rollupLevel', '');
+                    selectedLevels.push(level);
+                }
+            });
+
+            if (selectedLevels.length === 0) {
+                alert('Please select at least one output level');
+                return;
+            }
+
+            rollupAggregationConfig.outputLevels = selectedLevels;
+
+            // Show progress
+            rollupColumnDetectionSection.style.display = 'none';
+            rollupProgressSection.style.display = 'block';
+            rollupResultSection.style.display = 'none';
+
+            try {
+                await processRollupCSV();
+            } catch (error) {
+                console.error('Error processing CSV:', error);
+                alert('Error processing CSV: ' + error.message);
+                rollupProgressSection.style.display = 'none';
+                rollupColumnDetectionSection.style.display = 'block';
+            }
+        });
+
+        async function processRollupCSV() {
+            updateRollupProgress(10, 'Parsing CSV data...');
+            await sleep(100);
+
+            // Step 1: Aggregate by base level (ZIP or County)
+            updateRollupProgress(30, 'Aggregating by ' + rollupAggregationConfig.granularity + '...');
+            const baseAggregated = aggregateRollupData(rollupCsvData);
+            await sleep(100);
+
+            // Step 2: Load boundary files to get hierarchy mapping
+            updateRollupProgress(50, 'Loading geographic boundaries...');
+            const boundaryData = await loadBoundaryForHierarchy(rollupAggregationConfig.granularity);
+            await sleep(100);
+
+            // Step 3: Perform hierarchical roll-ups
+            updateRollupProgress(70, 'Performing hierarchical roll-ups...');
+            rollupGeneratedCSVs = performHierarchicalRollup(baseAggregated, boundaryData);
+            await sleep(100);
+
+            // Step 4: Display download links
+            updateRollupProgress(100, 'Complete! CSV files generated successfully.');
+            await sleep(500);
+
+            displayRollupDownloadLinks();
+        }
+
+        function aggregateRollupData(csvData) {
+            const { headers, dataRows } = csvData;
+            const groupKey = rollupAggregationConfig.granularity === 'zip' ? 'zip' : 'fips';
+            const keyColumn = rollupDetectedColumns[groupKey];
+
+            const grouped = {};
+
+            dataRows.forEach(row => {
+                const key = row[keyColumn.index];
+                if (!key) return;
+
+                if (!grouped[key]) {
+                    grouped[key] = { key: key, rows: [], aggregates: {} };
+                }
+                grouped[key].rows.push(row);
+            });
+
+            // Calculate aggregates
+            Object.values(grouped).forEach(group => {
+                rollupAggregationConfig.fields.forEach(field => {
+                    if (field.type === 'COUNT') {
+                        group.aggregates[field.field] = group.rows.length;
+                    } else if (field.type === 'SUM') {
+                        const colIndex = headers.indexOf(field.field);
+                        group.aggregates[field.field] = group.rows.reduce((sum, row) => {
+                            const val = parseFloat(row[colIndex]) || 0;
+                            return sum + val;
+                        }, 0);
+                    }
+                });
+            });
+
+            return grouped;
+        }
+
+        async function loadBoundaryForHierarchy(granularity) {
+            // Load the appropriate boundary file to get hierarchy mappings
+            const isLocalhost = window.location.hostname === 'localhost' ||
+                               window.location.hostname === '127.0.0.1' ||
+                               window.location.hostname === '';
+
+            let url;
+            if (isLocalhost) {
+                url = `geographic-data/${granularity}_boundaries.geojson`;
+            } else if (granularity === 'zip') {
+                url = `https://media.githubusercontent.com/media/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/${granularity}_boundaries.geojson`;
+            } else {
+                url = `https://raw.githubusercontent.com/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/${granularity}_boundaries.geojson`;
+            }
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Failed to load ${granularity} boundaries: ${response.status}`);
+            }
+
+            return await response.json();
+        }
+
+        function performHierarchicalRollup(baseAggregated, boundaryData) {
+            const result = {};
+
+            // Create mapping from base level to higher levels using boundary data
+            const hierarchyMap = {};
+
+            boundaryData.features.forEach(feature => {
+                const props = feature.properties;
+                const key = rollupAggregationConfig.granularity === 'zip'
+                    ? (props.ZIP || props.ZCTA5CE20)
+                    : props.GEOID;
+
+                if (key) {
+                    hierarchyMap[key] = {
+                        county: props.County_FIPS || props.GEOID,
+                        chapter: props.ECODE,
+                        region: props.RCODE,
+                        division: props.DCODE
+                    };
+                }
+            });
+
+            // For each selected output level, create CSV
+            rollupAggregationConfig.outputLevels.forEach(level => {
+                const levelData = {};
+
+                // Roll up data to this level
+                Object.keys(baseAggregated).forEach(baseKey => {
+                    const hierarchy = hierarchyMap[baseKey];
+                    if (!hierarchy) return;
+
+                    let targetKey;
+                    if (level === 'zip') {
+                        targetKey = baseKey;
+                    } else if (level === 'county') {
+                        targetKey = hierarchy.county;
+                    } else if (level === 'chapter') {
+                        targetKey = hierarchy.chapter;
+                    } else if (level === 'region') {
+                        targetKey = hierarchy.region;
+                    } else if (level === 'division') {
+                        targetKey = hierarchy.division;
+                    }
+
+                    if (!targetKey) return;
+
+                    if (!levelData[targetKey]) {
+                        levelData[targetKey] = {};
+                        rollupAggregationConfig.fields.forEach(field => {
+                            levelData[targetKey][field.field] = 0;
+                        });
+                    }
+
+                    // Add this base unit's aggregates to the target level
+                    rollupAggregationConfig.fields.forEach(field => {
+                        levelData[targetKey][field.field] += baseAggregated[baseKey].aggregates[field.field] || 0;
+                    });
+                });
+
+                // Convert to CSV format
+                const csv = convertToCSV(level, levelData);
+                result[level] = csv;
+            });
+
+            return result;
+        }
+
+        function convertToCSV(level, data) {
+            const levelKeyName = level === 'zip' ? 'ZIP' :
+                                level === 'county' ? 'County_FIPS' :
+                                level === 'chapter' ? 'ECODE' :
+                                level === 'region' ? 'RCODE' : 'DCODE';
+
+            // Create header
+            const headers = [levelKeyName, ...rollupAggregationConfig.fields.map(f => f.label)];
+            const rows = [headers.join(',')];
+
+            // Add data rows
+            Object.keys(data).forEach(key => {
+                const values = [key];
+                rollupAggregationConfig.fields.forEach(field => {
+                    values.push(data[key][field.field] || 0);
+                });
+                rows.push(values.join(','));
+            });
+
+            return rows.join('\n');
+        }
+
+        function displayRollupDownloadLinks() {
+            rollupResultSection.style.display = 'block';
+            rollupResultGrid.innerHTML = '';
+
+            rollupAggregationConfig.outputLevels.forEach(level => {
+                if (rollupGeneratedCSVs[level]) {
+                    const csv = rollupGeneratedCSVs[level];
+                    const blob = new Blob([csv], { type: 'text/csv' });
+                    const size = blob.size;
+
+                    const card = createRollupResultCard(level, `${level}_aggregated.csv`, size, csv);
+                    rollupResultGrid.appendChild(card);
+                }
+            });
+        }
+
+        function createRollupResultCard(level, filename, sizeBytes, csvContent) {
+            const levelInfo = {
+                zip: { icon: '📦', name: 'ZIP Codes' },
+                county: { icon: '🏛️', name: 'Counties' },
+                chapter: { icon: '📚', name: 'Chapters' },
+                region: { icon: '🗺️', name: 'Regions' },
+                division: { icon: '🌎', name: 'Divisions' }
+            };
+
+            const info = levelInfo[level] || { icon: '📄', name: level };
+
+            const card = document.createElement('div');
+            card.style.cssText = 'background: white; border: 2px solid #e0e0e0; border-radius: 3px; padding: 15px; transition: all 0.2s;';
+
+            card.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="font-size: 2em;">${info.icon}</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; font-size: 1.05em; margin-bottom: 2px;">${info.name}</div>
+                        <div style="font-size: 0.85em; color: #666;">${(sizeBytes / 1024).toFixed(2)} KB</div>
+                    </div>
+                </div>
+                <button class="download-btn" style="width: 100%; padding: 10px; background: #DC143C; color: white; border: none; border-radius: 3px; cursor: pointer; font-weight: 500; transition: all 0.2s;">
+                    💾 Download CSV
+                </button>
+            `;
+
+            const downloadBtn = card.querySelector('.download-btn');
+            downloadBtn.addEventListener('click', () => {
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+
+            downloadBtn.addEventListener('mouseenter', () => {
+                downloadBtn.style.background = '#b01030';
+            });
+
+            downloadBtn.addEventListener('mouseleave', () => {
+                downloadBtn.style.background = '#DC143C';
+            });
+
+            return card;
+        }
+
+        function updateRollupProgress(percent, message) {
+            rollupProgressFill.style.width = percent + '%';
+            rollupProgressFill.textContent = Math.round(percent) + '%';
+            rollupStatus.textContent = message;
+        }
+
+        // ==================== END CSV ROLL-UP TAB ====================
 
         // Code Lookup functionality - Built-in database
         let lookupData = [];
