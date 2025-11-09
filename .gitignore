@@ -37,6 +37,6 @@ Thumbs.db
 *.tmp
 *.temp
 
-# Geographic boundary files (too large for GitHub - 180MB+)
-geographic-data/
+# Geographic boundary files (only excluded on main branch)
+# geographic-data/
 
