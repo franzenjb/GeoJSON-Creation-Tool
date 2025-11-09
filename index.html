@@ -1369,9 +1369,19 @@
                 updateProgress(5, 'Parsing CSV file...');
                 const fullCSV = await parseFullCSV(selectedFile);
 
-                // Step 2: Aggregate data
-                updateProgress(15, `Aggregating data at ${aggregationConfig.granularity} level...`);
-                const aggregated = aggregateData(fullCSV);
+                // Step 2: Check if data is already aggregated or needs aggregation
+                const isPreAggregated = detectIfPreAggregated(fullCSV);
+                let aggregated;
+
+                if (isPreAggregated) {
+                    updateProgress(15, 'Detected pre-aggregated CSV, using data directly...');
+                    aggregated = convertPreAggregatedToFormat(fullCSV);
+                    console.log('✓ Using pre-aggregated data from CSV Roll-Up tab');
+                } else {
+                    updateProgress(15, `Aggregating row-level data at ${aggregationConfig.granularity} level...`);
+                    aggregated = aggregateData(fullCSV);
+                    console.log('✓ Aggregated row-level data');
+                }
 
                 // Step 3: Load boundary files for selected levels
                 updateProgress(30, 'Loading geographic boundaries...');
@@ -1394,6 +1404,56 @@
             } catch (error) {
                 throw error;
             }
+        }
+
+        // Detect if CSV is pre-aggregated (from Roll-Up tab) or row-level
+        function detectIfPreAggregated(csvData) {
+            const { headers } = csvData;
+
+            // Pre-aggregated CSVs have columns like "Row Count", "Drives", "RBC Product Projection"
+            const aggregatedFieldNames = ['Row Count', 'Drives', 'RBC Product Projection', 'RBC Products Collected'];
+            const hasAggregatedFields = aggregatedFieldNames.some(field => headers.includes(field));
+
+            // Pre-aggregated CSVs have a geographic key column but not many other columns
+            const hasMinimalColumns = headers.length <= 6; // Key + few metrics
+
+            return hasAggregatedFields && hasMinimalColumns;
+        }
+
+        // Convert pre-aggregated CSV to the format expected by createGeoJSONFiles
+        function convertPreAggregatedToFormat(csvData) {
+            const { headers, dataRows } = csvData;
+            const result = {};
+
+            // Find the key column (ZIP, County_FIPS, ECODE, RCODE, or DCODE)
+            const keyColumnIndex = headers.findIndex(h =>
+                ['ZIP', 'County_FIPS', 'ECODE', 'RCODE', 'DCODE'].includes(h)
+            );
+
+            if (keyColumnIndex === -1) {
+                throw new Error('Could not find geographic key column in pre-aggregated CSV');
+            }
+
+            dataRows.forEach(row => {
+                const key = row[keyColumnIndex];
+                if (!key) return;
+
+                result[key] = {
+                    key: key,
+                    aggregates: {}
+                };
+
+                // Add all metric columns as aggregates
+                headers.forEach((header, index) => {
+                    if (index !== keyColumnIndex) {
+                        const value = parseFloat(row[index]) || 0;
+                        result[key].aggregates[header] = value;
+                    }
+                });
+            });
+
+            console.log(`✓ Converted ${Object.keys(result).length} pre-aggregated records`);
+            return result;
         }
 
         // Parse entire CSV file
@@ -1524,15 +1584,34 @@
                 // Clone boundary and add aggregated data
                 const output = JSON.parse(JSON.stringify(boundary));
 
-                // Join logic here (simplified for now)
+                // Proper join logic for each level
+                let joinedCount = 0;
+
                 output.features.forEach(feature => {
-                    const zipCode = feature.properties.ZIP || feature.properties.ZCTA5CE20;
-                    if (zipCode && aggregated[zipCode]) {
-                        // Add aggregated values to properties
-                        Object.assign(feature.properties, aggregated[zipCode].aggregates);
+                    const props = feature.properties;
+                    let matchKey = null;
+
+                    // Determine the correct property key for this level
+                    if (level === 'zip') {
+                        matchKey = props.ZIP || props.ZCTA5CE20;
+                    } else if (level === 'county') {
+                        matchKey = props.County_FIPS || props.GEOID;
+                    } else if (level === 'chapter') {
+                        matchKey = props.ECODE;
+                    } else if (level === 'region') {
+                        matchKey = props.RCODE;
+                    } else if (level === 'division') {
+                        matchKey = props.DCODE;
+                    }
+
+                    // Match and add aggregated data
+                    if (matchKey && aggregated[matchKey]) {
+                        Object.assign(props, aggregated[matchKey].aggregates);
+                        joinedCount++;
                     }
                 });
 
+                console.log(`✓ Joined ${joinedCount} features at ${level} level (out of ${output.features.length})`);
                 generatedGeoJSON[level] = output;
             }
         }
