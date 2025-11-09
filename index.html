@@ -915,7 +915,8 @@
                 }
 
                 // Parse header and first few rows
-                const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                // Remove BOM if present and clean headers
+                const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, '').replace(/^\uFEFF/, ''));
                 const dataRows = rows.slice(1, Math.min(100, rows.length)).map(row => {
                     return row.split(',').map(cell => cell.trim().replace(/"/g, ''));
                 });
@@ -964,11 +965,23 @@
                 }
 
                 // Check if column is numeric (sample first 10 rows)
-                const sample = dataRows.slice(0, 10).map(row => row[index]);
-                const isNumeric = sample.every(val => !isNaN(parseFloat(val)) && val !== '');
+                // Skip if this column was already identified as a geographic column
+                const isGeoColumn = detectedColumns.zip?.index === index ||
+                                   detectedColumns.fips?.index === index ||
+                                   detectedColumns.ecode?.index === index ||
+                                   detectedColumns.rcode?.index === index ||
+                                   detectedColumns.dcode?.index === index;
 
-                if (isNumeric && !detectedColumns.zip && !detectedColumns.fips) {
-                    detectedColumns.numeric.push({ name: header, index });
+                if (!isGeoColumn) {
+                    const sample = dataRows.slice(0, 10).map(row => row[index]);
+                    // Check if values are numeric (allow empty strings)
+                    const numericValues = sample.filter(val => val !== '');
+                    const isNumeric = numericValues.length > 0 &&
+                                     numericValues.every(val => !isNaN(parseFloat(val)));
+
+                    if (isNumeric) {
+                        detectedColumns.numeric.push({ name: header, index });
+                    }
                 }
             });
 
