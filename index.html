@@ -503,7 +503,7 @@
                     📋 Pop-up Creator
                 </button>
                 <button class="tab-btn" onclick="showTab('geocoder')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
-                    🗺️ Mapbox Geocoder
+                    🌐 Geocoder
                 </button>
             </div>
 
@@ -1170,20 +1170,75 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                 </div>
             </div>
 
-            <!-- Mapbox Geocoder Tab -->
+            <!-- Geocoder Tab -->
             <div id="geocoderTab" class="tab-content" style="display: none;">
                 <div class="section">
-                    <h2>Mapbox Geocoder</h2>
+                    <h2>Address Geocoder</h2>
                     <div class="explanation">
-                        <p>Geocode addresses from a CSV file using Mapbox Geocoding API. Upload your CSV with address columns, and get back a GeoJSON file with coordinates for each address.</p>
+                        <p>Geocode addresses from a CSV file to latitude/longitude coordinates. Choose from three providers and get back GeoJSON or CSV files ready for mapping.</p>
                     </div>
 
+                    <!-- Provider Comparison Table -->
+                    <div style="background: #fff; border: 2px solid #DC143C; border-radius: 8px; padding: 15px; margin: 20px 0;">
+                        <h3 style="margin-top: 0; color: #DC143C; margin-bottom: 12px; font-size: 1em;">📊 Provider Comparison</h3>
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85em;">
+                            <thead>
+                                <tr style="background: #f5f5f5; border-bottom: 2px solid #DC143C;">
+                                    <th style="padding: 8px; text-align: left; font-weight: 600;">Provider</th>
+                                    <th style="padding: 8px; text-align: left; font-weight: 600;">Free Tier</th>
+                                    <th style="padding: 8px; text-align: center; font-weight: 600;">Credit Card?</th>
+                                    <th style="padding: 8px; text-align: center; font-weight: 600;">Can Cache?</th>
+                                    <th style="padding: 8px; text-align: left; font-weight: 600;">Best For</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #e0e0e0;">
+                                    <td style="padding: 8px; font-weight: 600; color: #1e7e34;">Geoapify ⭐</td>
+                                    <td style="padding: 8px;"><strong>3,000/day</strong> (~90k/month)</td>
+                                    <td style="padding: 8px; text-align: center; color: #1e7e34; font-weight: 600;">✓ No</td>
+                                    <td style="padding: 8px; text-align: center; color: #1e7e34; font-weight: 600;">✓ Yes</td>
+                                    <td style="padding: 8px; font-size: 0.8em;">Most users, no card required, open data</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e0e0e0;">
+                                    <td style="padding: 8px; font-weight: 600;">Mapbox</td>
+                                    <td style="padding: 8px;"><strong>100,000/month</strong></td>
+                                    <td style="padding: 8px; text-align: center; color: #dc2626; font-weight: 600;">✗ Yes</td>
+                                    <td style="padding: 8px; text-align: center; color: #dc2626; font-weight: 600;">✗ No</td>
+                                    <td style="padding: 8px; font-size: 0.8em;">High volume users, best documentation</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; font-weight: 600;">Bing Maps</td>
+                                    <td style="padding: 8px;"><strong>125,000/year</strong> (~10k/month)</td>
+                                    <td style="padding: 8px; text-align: center; color: #1e7e34; font-weight: 600;">✓ No</td>
+                                    <td style="padding: 8px; text-align: center; color: #f59e0b; font-weight: 600;">⚠ Limited</td>
+                                    <td style="padding: 8px; font-size: 0.8em;">Occasional use, backup option</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 10px; padding: 10px; background: #fef3c7; border-left: 3px solid #f59e0b; border-radius: 3px; font-size: 0.85em;">
+                            <strong style="color: #92400e;">💡 Recommendation:</strong> <span style="color: #92400e;">Start with <strong>Geoapify</strong> (no credit card, generous free tier, can store results). Upgrade to Mapbox if you need 100k+/month.</span>
+                        </div>
+                    </div>
+
+                    <!-- Provider Selector -->
                     <div style="margin-top: 20px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Mapbox Access Token:</label>
-                        <input type="password" id="geocoderMapboxToken" placeholder="pk.eyJ1IjoieW91cnVzZXJuYW1lIiwiYSI6ImNs..."
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Select Geocoding Provider:</label>
+                        <select id="geocoderProvider" onchange="updateGeocoderProviderUI()" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333; cursor: pointer;">
+                            <option value="geoapify" selected>Geoapify (Recommended - No card required, 3,000/day)</option>
+                            <option value="mapbox">Mapbox (100,000/month, requires credit card)</option>
+                            <option value="bing">Bing Maps (125,000/year, no card required)</option>
+                        </select>
+                    </div>
+
+                    <!-- API Key Input (Dynamic) -->
+                    <div style="margin-top: 20px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                            <span id="geocoderApiKeyLabel">API Key:</span>
+                        </label>
+                        <input type="password" id="geocoderApiKey" placeholder="Your API key..."
                                style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; font-family: monospace; background: white; color: #333;">
-                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">
-                            Get your free token at <a href="https://account.mapbox.com/access-tokens/" target="_blank" style="color: #DC143C;">https://account.mapbox.com/access-tokens/</a>
+                        <div id="geocoderSignupLink" style="font-size: 0.85em; color: #666; margin-top: 5px;">
+                            Get your free API key at <a id="geocoderSignupLinkURL" href="https://myprojects.geoapify.com/" target="_blank" style="color: #DC143C;">https://myprojects.geoapify.com/</a>
                         </div>
                     </div>
 
@@ -1277,8 +1332,9 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                     <div class="explanation" style="margin-top: 25px; background: #fff5f5; border-left: 3px solid #DC143C;">
                         <h3 style="font-size: 1em; margin-bottom: 10px; color: #DC143C;">How to Use:</h3>
                         <ol style="margin: 10px 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6;">
-                            <li>Get a free Mapbox access token from <a href="https://account.mapbox.com/access-tokens/" target="_blank" style="color: #DC143C;">mapbox.com</a></li>
-                            <li>Paste your Mapbox access token in the field above</li>
+                            <li>Choose a geocoding provider from the dropdown (Geoapify recommended)</li>
+                            <li>Get a free API key from the signup link (no credit card needed for Geoapify & Bing)</li>
+                            <li>Paste your API key in the field above</li>
                             <li>Upload a CSV file with address columns (street, city, state, zip, etc.)</li>
                             <li>Select which columns contain address information</li>
                             <li>Optionally specify a country code to improve accuracy</li>
@@ -1286,7 +1342,7 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                             <li>Download the resulting GeoJSON or CSV file with coordinates</li>
                         </ol>
                         <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
-                            <strong>Note:</strong> Mapbox offers free geocoding up to 100,000 requests per month. Addresses are geocoded one at a time to respect rate limits.
+                            <strong>Note:</strong> Addresses are geocoded one at a time to respect API rate limits. All three providers offer generous free tiers - see comparison table above.
                         </p>
                     </div>
                 </div>
@@ -4008,10 +4064,113 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
             document.getElementById('geocoderGeocodeBtn').style.display = 'block';
         }
 
+        // Update UI based on selected provider
+        function updateGeocoderProviderUI() {
+            const provider = document.getElementById('geocoderProvider').value;
+            const labelEl = document.getElementById('geocoderApiKeyLabel');
+            const linkEl = document.getElementById('geocoderSignupLinkURL');
+
+            if (provider === 'geoapify') {
+                labelEl.textContent = 'Geoapify API Key:';
+                linkEl.href = 'https://myprojects.geoapify.com/';
+                linkEl.textContent = 'https://myprojects.geoapify.com/';
+            } else if (provider === 'mapbox') {
+                labelEl.textContent = 'Mapbox Access Token:';
+                linkEl.href = 'https://account.mapbox.com/access-tokens/';
+                linkEl.textContent = 'https://account.mapbox.com/access-tokens/';
+            } else if (provider === 'bing') {
+                labelEl.textContent = 'Bing Maps Key:';
+                linkEl.href = 'https://www.bingmapsportal.com/';
+                linkEl.textContent = 'https://www.bingmapsportal.com/';
+            }
+        }
+
+        // Geocode using Geoapify
+        async function geocodeWithGeoapify(address, apiKey, countryCode) {
+            const encodedAddress = encodeURIComponent(address);
+            const url = `https://api.geoapify.com/v1/geocode/search?text=${encodedAddress}&apiKey=${apiKey}&limit=1${countryCode ? '&filter=countrycode:' + countryCode.toLowerCase() : ''}`;
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                if (response.status === 401 || response.status === 403) {
+                    throw new Error('Unauthorized - Check your Geoapify API key');
+                }
+                throw new Error(`Geoapify API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (data.features && data.features.length > 0) {
+                const feature = data.features[0];
+                return {
+                    lat: feature.properties.lat,
+                    lng: feature.properties.lon,
+                    address: feature.properties.formatted || '',
+                    confidence: feature.properties.rank?.confidence || 'N/A'
+                };
+            }
+            return null;
+        }
+
+        // Geocode using Mapbox
+        async function geocodeWithMapbox(address, token, countryCode) {
+            const encodedAddress = encodeURIComponent(address);
+            const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${token}&country=${countryCode}&limit=1`;
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error('Unauthorized - Check your Mapbox access token');
+                }
+                throw new Error(`Mapbox API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (data.features && data.features.length > 0) {
+                const feature = data.features[0];
+                const [lng, lat] = feature.center;
+                return {
+                    lat: lat,
+                    lng: lng,
+                    address: feature.place_name,
+                    confidence: feature.properties.confidence || 'N/A'
+                };
+            }
+            return null;
+        }
+
+        // Geocode using Bing Maps
+        async function geocodeWithBing(address, apiKey, countryCode) {
+            const encodedAddress = encodeURIComponent(address);
+            const url = `https://dev.virtualearth.net/REST/v1/Locations?q=${encodedAddress}&key=${apiKey}&maxResults=1${countryCode ? '&countryRegion=' + countryCode : ''}`;
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error('Unauthorized - Check your Bing Maps key');
+                }
+                throw new Error(`Bing Maps API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (data.resourceSets && data.resourceSets[0] && data.resourceSets[0].resources.length > 0) {
+                const resource = data.resourceSets[0].resources[0];
+                const coords = resource.point.coordinates;
+                return {
+                    lat: coords[0],
+                    lng: coords[1],
+                    address: resource.name || resource.address?.formattedAddress || '',
+                    confidence: resource.confidence || 'N/A'
+                };
+            }
+            return null;
+        }
+
         async function startGeocoderGeocoding() {
-            const token = document.getElementById('geocoderMapboxToken').value.trim();
-            if (!token) {
-                alert('Please enter your Mapbox access token');
+            const provider = document.getElementById('geocoderProvider').value;
+            const apiKey = document.getElementById('geocoderApiKey').value.trim();
+
+            if (!apiKey) {
+                alert('Please enter your API key');
                 return;
             }
 
@@ -4096,29 +4255,17 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                 document.getElementById('geocoderProgressText').textContent = `Geocoding ${i + 1} of ${total}: ${address.substring(0, 50)}...`;
 
                 try {
-                    const encodedAddress = encodeURIComponent(address);
-                    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${token}&country=${countryCode}&limit=1`;
-
-                    const response = await fetch(url);
-
-                    if (!response.ok) {
-                        if (response.status === 401) {
-                            throw new Error('Unauthorized - Check your Mapbox access token');
-                        }
-                        const errorText = await response.text();
-                        throw new Error(`Mapbox API error: ${response.status} ${response.statusText}`);
+                    // Call appropriate geocoding function based on provider
+                    let result = null;
+                    if (provider === 'geoapify') {
+                        result = await geocodeWithGeoapify(address, apiKey, countryCode);
+                    } else if (provider === 'mapbox') {
+                        result = await geocodeWithMapbox(address, apiKey, countryCode);
+                    } else if (provider === 'bing') {
+                        result = await geocodeWithBing(address, apiKey, countryCode);
                     }
 
-                    const data = await response.json();
-
-                    if (data.error) {
-                        throw new Error(`Mapbox API error: ${data.error}`);
-                    }
-
-                    if (data.features && data.features.length > 0) {
-                        const feature = data.features[0];
-                        const [lng, lat] = feature.center;
-
+                    if (result) {
                         const replaceCoordinates = document.querySelector('input[name="geocoderCoordinateHandling"]:checked')?.value === 'replace';
                         const cleanedRow = includeOriginal ? { ...row } : {};
 
@@ -4136,10 +4283,10 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                         const geocodedRow = {
                             ...cleanedRow,
                             address: address,
-                            Latitude: lat,
-                            Longitude: lng,
-                            geocoded_address: feature.place_name,
-                            confidence: feature.properties.confidence || 'N/A'
+                            Latitude: result.lat,
+                            Longitude: result.lng,
+                            geocoded_address: result.address,
+                            confidence: result.confidence
                         };
 
                         geocoderGeocodedData.push(geocodedRow);
