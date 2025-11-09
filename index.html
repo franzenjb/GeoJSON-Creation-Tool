@@ -2226,42 +2226,147 @@
                 }
             });
 
-            // For each selected output level, create CSV
-            rollupAggregationConfig.outputLevels.forEach(level => {
-                const levelData = {};
+            // Calculate aggregates at all hierarchical levels
+            const countyTotals = {};
+            const chapterTotals = {};
+            const regionTotals = {};
+            const divisionTotals = {};
 
-                // Roll up data to this level
-                Object.keys(baseAggregated).forEach(baseKey => {
-                    const hierarchy = hierarchyMap[baseKey];
-                    if (!hierarchy) return;
+            Object.keys(baseAggregated).forEach(baseKey => {
+                const hierarchy = hierarchyMap[baseKey];
+                if (!hierarchy) return;
 
-                    let targetKey;
-                    if (level === 'zip') {
-                        targetKey = baseKey;
-                    } else if (level === 'county') {
-                        targetKey = hierarchy.county;
-                    } else if (level === 'chapter') {
-                        targetKey = hierarchy.chapter;
-                    } else if (level === 'region') {
-                        targetKey = hierarchy.region;
-                    } else if (level === 'division') {
-                        targetKey = hierarchy.division;
-                    }
+                const aggregates = baseAggregated[baseKey].aggregates;
 
-                    if (!targetKey) return;
-
-                    if (!levelData[targetKey]) {
-                        levelData[targetKey] = {};
+                // Accumulate to county level
+                if (hierarchy.county) {
+                    if (!countyTotals[hierarchy.county]) {
+                        countyTotals[hierarchy.county] = {};
                         rollupAggregationConfig.fields.forEach(field => {
-                            levelData[targetKey][field.field] = 0;
+                            countyTotals[hierarchy.county][field.field] = 0;
                         });
                     }
-
-                    // Add this base unit's aggregates to the target level
                     rollupAggregationConfig.fields.forEach(field => {
-                        levelData[targetKey][field.field] += baseAggregated[baseKey].aggregates[field.field] || 0;
+                        countyTotals[hierarchy.county][field.field] += aggregates[field.field] || 0;
                     });
-                });
+                }
+
+                // Accumulate to chapter level
+                if (hierarchy.chapter) {
+                    if (!chapterTotals[hierarchy.chapter]) {
+                        chapterTotals[hierarchy.chapter] = {};
+                        rollupAggregationConfig.fields.forEach(field => {
+                            chapterTotals[hierarchy.chapter][field.field] = 0;
+                        });
+                    }
+                    rollupAggregationConfig.fields.forEach(field => {
+                        chapterTotals[hierarchy.chapter][field.field] += aggregates[field.field] || 0;
+                    });
+                }
+
+                // Accumulate to region level
+                if (hierarchy.region) {
+                    if (!regionTotals[hierarchy.region]) {
+                        regionTotals[hierarchy.region] = {};
+                        rollupAggregationConfig.fields.forEach(field => {
+                            regionTotals[hierarchy.region][field.field] = 0;
+                        });
+                    }
+                    rollupAggregationConfig.fields.forEach(field => {
+                        regionTotals[hierarchy.region][field.field] += aggregates[field.field] || 0;
+                    });
+                }
+
+                // Accumulate to division level
+                if (hierarchy.division) {
+                    if (!divisionTotals[hierarchy.division]) {
+                        divisionTotals[hierarchy.division] = {};
+                        rollupAggregationConfig.fields.forEach(field => {
+                            divisionTotals[hierarchy.division][field.field] = 0;
+                        });
+                    }
+                    rollupAggregationConfig.fields.forEach(field => {
+                        divisionTotals[hierarchy.division][field.field] += aggregates[field.field] || 0;
+                    });
+                }
+            });
+
+            // For each selected output level, create CSV with hierarchical columns
+            rollupAggregationConfig.outputLevels.forEach(level => {
+                const levelData = [];
+
+                if (level === 'zip') {
+                    // Each row is a ZIP with its own totals + parent totals
+                    Object.keys(baseAggregated).forEach(zipKey => {
+                        const hierarchy = hierarchyMap[zipKey];
+                        if (!hierarchy) return;
+
+                        const row = {
+                            key: zipKey,
+                            zip: baseAggregated[zipKey].aggregates,
+                            county: countyTotals[hierarchy.county] || {},
+                            chapter: chapterTotals[hierarchy.chapter] || {},
+                            region: regionTotals[hierarchy.region] || {},
+                            division: divisionTotals[hierarchy.division] || {}
+                        };
+                        levelData.push(row);
+                    });
+                } else if (level === 'county') {
+                    // Each row is a County with its own totals + parent totals
+                    Object.keys(countyTotals).forEach(countyKey => {
+                        // Find a ZIP in this county to get hierarchy
+                        const sampleZip = Object.keys(baseAggregated).find(zip => hierarchyMap[zip]?.county === countyKey);
+                        if (!sampleZip) return;
+                        const hierarchy = hierarchyMap[sampleZip];
+
+                        const row = {
+                            key: countyKey,
+                            county: countyTotals[countyKey],
+                            chapter: chapterTotals[hierarchy.chapter] || {},
+                            region: regionTotals[hierarchy.region] || {},
+                            division: divisionTotals[hierarchy.division] || {}
+                        };
+                        levelData.push(row);
+                    });
+                } else if (level === 'chapter') {
+                    // Each row is a Chapter with its own totals + parent totals
+                    Object.keys(chapterTotals).forEach(chapterKey => {
+                        const sampleZip = Object.keys(baseAggregated).find(zip => hierarchyMap[zip]?.chapter === chapterKey);
+                        if (!sampleZip) return;
+                        const hierarchy = hierarchyMap[sampleZip];
+
+                        const row = {
+                            key: chapterKey,
+                            chapter: chapterTotals[chapterKey],
+                            region: regionTotals[hierarchy.region] || {},
+                            division: divisionTotals[hierarchy.division] || {}
+                        };
+                        levelData.push(row);
+                    });
+                } else if (level === 'region') {
+                    // Each row is a Region with its own totals + parent totals
+                    Object.keys(regionTotals).forEach(regionKey => {
+                        const sampleZip = Object.keys(baseAggregated).find(zip => hierarchyMap[zip]?.region === regionKey);
+                        if (!sampleZip) return;
+                        const hierarchy = hierarchyMap[sampleZip];
+
+                        const row = {
+                            key: regionKey,
+                            region: regionTotals[regionKey],
+                            division: divisionTotals[hierarchy.division] || {}
+                        };
+                        levelData.push(row);
+                    });
+                } else if (level === 'division') {
+                    // Each row is a Division with its own totals only
+                    Object.keys(divisionTotals).forEach(divisionKey => {
+                        const row = {
+                            key: divisionKey,
+                            division: divisionTotals[divisionKey]
+                        };
+                        levelData.push(row);
+                    });
+                }
 
                 // Convert to CSV format
                 const csv = convertToCSV(level, levelData);
@@ -2277,16 +2382,47 @@
                                 level === 'chapter' ? 'ECODE' :
                                 level === 'region' ? 'RCODE' : 'DCODE';
 
-            // Create header
-            const headers = [levelKeyName, ...rollupAggregationConfig.fields.map(f => f.label)];
+            // Create hierarchical headers based on output level
+            const headers = [levelKeyName];
+            const levelOrder = {
+                'zip': ['zip', 'county', 'chapter', 'region', 'division'],
+                'county': ['county', 'chapter', 'region', 'division'],
+                'chapter': ['chapter', 'region', 'division'],
+                'region': ['region', 'division'],
+                'division': ['division']
+            };
+
+            const levelsToInclude = levelOrder[level] || [level];
+            const levelLabels = {
+                'zip': 'ZIP',
+                'county': 'County',
+                'chapter': 'Chapter',
+                'region': 'Region',
+                'division': 'Division'
+            };
+
+            // Add headers for each hierarchical level
+            levelsToInclude.forEach(lvl => {
+                rollupAggregationConfig.fields.forEach(field => {
+                    headers.push(`${field.label} (${levelLabels[lvl]})`);
+                });
+            });
+
             const rows = [headers.join(',')];
 
             // Add data rows
-            Object.keys(data).forEach(key => {
-                const values = [key];
-                rollupAggregationConfig.fields.forEach(field => {
-                    values.push(data[key][field.field] || 0);
+            data.forEach(rowData => {
+                const values = [rowData.key];
+
+                levelsToInclude.forEach(lvl => {
+                    rollupAggregationConfig.fields.forEach(field => {
+                        const value = rowData[lvl] && rowData[lvl][field.field] !== undefined
+                            ? rowData[lvl][field.field]
+                            : 0;
+                        values.push(value);
+                    });
                 });
+
                 rows.push(values.join(','));
             });
 
