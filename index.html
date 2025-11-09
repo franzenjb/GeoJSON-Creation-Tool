@@ -2182,48 +2182,61 @@
         }
 
         async function loadBoundaryForHierarchy(granularity) {
-            // Load the appropriate boundary file to get hierarchy mappings
-            const isLocalhost = window.location.hostname === 'localhost' ||
-                               window.location.hostname === '127.0.0.1' ||
-                               window.location.hostname === '';
-
-            let url;
-            if (isLocalhost) {
-                url = `geographic-data/${granularity}_boundaries.geojson`;
-            } else if (granularity === 'zip') {
-                url = `https://media.githubusercontent.com/media/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/${granularity}_boundaries.geojson`;
-            } else {
-                url = `https://raw.githubusercontent.com/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/${granularity}_boundaries.geojson`;
-            }
+            // Load ZIP code hierarchy lookup from simple CSV file
+            const url = 'https://cdn.jsdelivr.net/gh/franzenjb/alice_master_database/subcounty_zip_all_states.csv';
 
             const response = await fetch(url);
             if (!response.ok) {
-                throw new Error(`Failed to load ${granularity} boundaries: ${response.status}`);
+                throw new Error(`Failed to load ZIP hierarchy lookup: ${response.status}`);
             }
 
-            return await response.json();
+            const csvText = await response.text();
+            const lines = csvText.split('\n').filter(line => line.trim());
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+
+            // Find column indices
+            const geoIdIdx = headers.indexOf('GEO_ID');
+            const countyIdx = headers.indexOf('County');
+            const ecodeIdx = headers.indexOf('ECODE');
+            const rcodeIdx = headers.indexOf('RCODE');
+            const dcodeIdx = headers.indexOf('DCODE');
+
+            // Parse CSV rows into lookup object
+            const lookupData = {};
+            lines.slice(1).forEach(line => {
+                const values = line.split(',').map(v => v.trim().replace(/"/g, ''));
+                const geoId = values[geoIdIdx];
+                if (!geoId) return;
+
+                // Extract ZIP code (remove _ZCTA suffix if present)
+                const zip = geoId.replace('_ZCTA', '');
+
+                lookupData[zip] = {
+                    county: values[countyIdx],
+                    ecode: values[ecodeIdx],
+                    rcode: values[rcodeIdx],
+                    dcode: values[dcodeIdx]
+                };
+            });
+
+            console.log(`✓ Loaded ${Object.keys(lookupData).length} ZIP code hierarchy mappings`);
+            return lookupData;
         }
 
-        function performHierarchicalRollup(baseAggregated, boundaryData) {
+        function performHierarchicalRollup(baseAggregated, lookupData) {
             const result = {};
 
-            // Create mapping from base level to higher levels using boundary data
+            // lookupData is now a simple object: { "zipcode": { county, ecode, rcode, dcode }, ... }
+            // Convert to hierarchyMap with standardized keys
             const hierarchyMap = {};
-
-            boundaryData.features.forEach(feature => {
-                const props = feature.properties;
-                const key = rollupAggregationConfig.granularity === 'zip'
-                    ? (props.ZIP || props.ZCTA5CE20)
-                    : props.GEOID;
-
-                if (key) {
-                    hierarchyMap[key] = {
-                        county: props.County_FIPS || props.GEOID,
-                        chapter: props.ECODE,
-                        region: props.RCODE,
-                        division: props.DCODE
-                    };
-                }
+            Object.keys(lookupData).forEach(zip => {
+                const data = lookupData[zip];
+                hierarchyMap[zip] = {
+                    county: data.county,
+                    chapter: data.ecode,
+                    region: data.rcode,
+                    division: data.dcode
+                };
             });
 
             // Calculate aggregates at all hierarchical levels
