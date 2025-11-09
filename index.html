@@ -469,8 +469,8 @@
     </style>
     <!-- Built-in Code Database -->
     <script src="lookup_data.js"></script>
-    <!-- ZIP Code to FIPS Mapping -->
-    <script src="zip_to_fips.js"></script>
+    <!-- Comprehensive ZIP Code Database (33K ZIPs, 99%+ US coverage) -->
+    <script src="zip_to_fips_comprehensive.js"></script>
     <!-- State Name Mapping -->
     <script src="state_names.js"></script>
     <!-- Leaflet for map preview -->
@@ -495,6 +495,15 @@
                 </button>
                 <button class="tab-btn" onclick="showTab('create')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
                     🗺️ Create GeoJSON
+                </button>
+                <button class="tab-btn" onclick="showTab('orgler')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    🔗 Orgler URL
+                </button>
+                <button class="tab-btn" onclick="showTab('popup')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    📋 Pop-up Creator
+                </button>
+                <button class="tab-btn" onclick="showTab('geocoder')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    🗺️ Mapbox Geocoder
                 </button>
             </div>
 
@@ -951,6 +960,278 @@
                 <div class="result-grid" id="resultGrid"></div>
             </div>
             </div>
+
+            <!-- Orgler URL Creator Tab -->
+            <div id="orglerTab" class="tab-content" style="display: none;">
+                <div class="section">
+                    <div class="explanation">
+                        <p>Convert Power BI URLs to Orgler format for embedding in Story Maps and RCView dashboards.</p>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Power BI URL:</label>
+                        <textarea id="orglerPowerbiUrl" rows="3" placeholder="Paste your Power BI report URL here"
+                                  style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; font-family: monospace; background: white; color: #333;">https://app.powerbi.com/groups/me/reports/ddd5cb5a-9b44-407f-aa6d-1b291b5ba61a</textarea>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">A sample URL is pre-filled. Click "Convert to Orgler URL" to see how it works, or replace it with your own Power BI URL.</div>
+                    </div>
+
+                    <button onclick="convertToOrglerTool()" class="process-btn" style="margin-top: 20px;">
+                        Convert to Orgler URL
+                    </button>
+
+                    <div id="orglerResultDiv" style="display: none; margin-top: 25px;">
+                        <div style="background: #fff5f5; border: 2px solid #DC143C; border-radius: 3px; padding: 20px;">
+                            <h3 style="margin-top: 0; color: #DC143C; margin-bottom: 15px;">Converted Orgler URL:</h3>
+                            <textarea id="orglerOutputText" rows="4" readonly
+                                      style="width: 100%; font-family: monospace; font-size: 0.85em; background: white; color: #333; border: 2px solid #e0e0e0; padding: 10px; border-radius: 3px; margin-bottom: 15px;"></textarea>
+                            <button onclick="copyOrglerUrlTool()" class="process-btn" style="width: 100%; margin: 0; background: #4CAF50;">
+                                Copy URL
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="explanation" style="margin-top: 25px; background: #fff5f5; border-left: 3px solid #DC143C;">
+                        <h3 style="font-size: 1em; margin-bottom: 10px; color: #DC143C;">How to Use:</h3>
+                        <ol style="margin: 10px 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6;">
+                            <li>Click "Convert to Orgler URL" to see the sample conversion, or</li>
+                            <li>Replace the sample URL with your own Power BI report URL</li>
+                            <li>Click "Convert to Orgler URL"</li>
+                            <li>Copy the generated URL and use it in your Story Map or RCView embedding code</li>
+                        </ol>
+                        <p style="font-size: 0.85em; margin-top: 10px; font-style: italic; color: #666;">
+                            <strong>Note:</strong> Orgler URLs are optimized for embedding Power BI reports in ArcGIS Story Maps and RCView dashboards.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ArcGIS Pop-up Creator Tab -->
+            <div id="popupTab" class="tab-content" style="display: none;">
+                <div class="section">
+                    <div class="explanation">
+                        <p>Extract field names from an ArcGIS Online feature layer and generate inline CSS + HTML pop-up templates ready to paste into ArcGIS Experience Builder, Map Viewer, or Dashboards.</p>
+                    </div>
+
+                    <div style="background: #e8f5e9; border-left: 4px solid #4CAF50; padding: 15px; border-radius: 3px; margin: 20px 0;">
+                        <h3 style="margin: 0 0 10px 0; color: #2e7d32; font-size: 16px;">How to Use:</h3>
+                        <ol style="margin: 5px 0 0 0; padding-left: 20px; font-size: 13px; color: #2e7d32; line-height: 1.6;">
+                            <li>Open your ArcGIS FeatureServer REST page (e.g., <code style="background: #fff; padding: 2px 6px; border-radius: 3px; font-size: 12px;">.../FeatureServer/0</code>)</li>
+                            <li>Scroll down to the <strong>Fields:</strong> section</li>
+                            <li>Copy all the field definitions (the entire list showing field names, types, and aliases)</li>
+                            <li>Paste them into the box below</li>
+                        </ol>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Paste Field Definitions from ArcGIS REST Page:</label>
+                        <textarea id="popupToolFieldsInput" rows="12"
+                                  placeholder="Division (type: esriFieldTypeString, alias: Division, SQL Type: sqlTypeNVarchar, length: 4000, nullable: true, editable: true)&#10;DCODE (type: esriFieldTypeString, alias: DCODE, SQL Type: sqlTypeNVarchar, length: 4000, nullable: true, editable: true)&#10;F2022 (type: esriFieldTypeSingle, alias: 2022, SQL Type: sqlTypeReal, nullable: true, editable: true)&#10;..."
+                                  style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.85em; font-family: monospace; background: white; color: #333;"></textarea>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">
+                            <strong>Example format:</strong> <code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">FieldName (type: esriFieldTypeString, alias: Display Name, ...)</code>
+                        </div>
+                        <button onclick="parsePopupFieldDefinitions()" class="process-btn" style="margin-top: 15px;">
+                            Parse Fields
+                        </button>
+                    </div>
+
+                    <div id="popupToolFieldsContainer" style="display: none; margin-top: 25px;">
+                        <div style="background: #fafafa; padding: 15px; border-radius: 3px; border-left: 3px solid #DC143C;">
+                            <h3 style="margin-top: 0; color: #DC143C; margin-bottom: 15px;">Select Fields to Include</h3>
+
+                            <input type="text" id="popupToolFieldFilter" placeholder="Filter fields..."
+                                   style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 3px; margin-bottom: 15px; font-size: 0.9em;"
+                                   oninput="filterPopupToolFields()">
+
+                            <div id="popupToolFieldList" style="max-height: 300px; overflow-y: auto; border: 1px solid #e0e0e0; padding: 10px; background: white; border-radius: 3px;">
+                            </div>
+
+                            <div style="margin-top: 15px; font-size: 0.85em; color: #666;">
+                                <span id="popupToolFieldCount">0</span> fields selected
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Pop-up Title:</label>
+                            <input type="text" id="popupToolTitle" placeholder="e.g., ARC Biomed Zip Code Summary"
+                                   style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;">
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Field Grouping (optional):</label>
+                            <textarea id="popupToolGroups" rows="3" placeholder="Group 1: County, Region, Chapter&#10;Group 2: 2025 Total, Grand Total"
+                                      style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; font-family: monospace; background: white; color: #333;"></textarea>
+                            <div style="font-size: 0.85em; color: #666; margin-top: 5px;">Enter field names separated by commas, one group per line. Fields will be separated by horizontal rules.</div>
+                        </div>
+
+                        <button onclick="generatePopupToolHTML()" class="process-btn" style="margin-top: 20px;">
+                            Generate Pop-up HTML
+                        </button>
+                    </div>
+
+                    <div id="popupToolResult" style="display: none; margin-top: 25px;">
+                        <div style="background: #fff5f5; border: 2px solid #DC143C; border-radius: 3px; padding: 20px;">
+                            <h3 style="margin-top: 0; color: #DC143C; margin-bottom: 15px;">Generated Pop-up HTML:</h3>
+
+                            <div id="popupToolPreview" style="background: white; padding: 15px; border: 1px solid #e0e0e0; border-radius: 3px; margin-bottom: 15px; min-height: 100px;">
+                            </div>
+
+                            <textarea id="popupToolOutput" rows="10" readonly
+                                      style="width: 100%; font-family: monospace; font-size: 0.85em; background: white; color: #333; border: 2px solid #e0e0e0; padding: 10px; border-radius: 3px; margin-bottom: 15px;"></textarea>
+
+                            <div style="display: flex; gap: 10px;">
+                                <button onclick="copyPopupToolHTML()" class="process-btn" style="flex: 1; margin: 0; background: #4CAF50;">
+                                    Copy HTML
+                                </button>
+                                <button onclick="downloadPopupToolHTML()" class="process-btn" style="flex: 1; margin: 0; background: #2196F3;">
+                                    Download as .html
+                                </button>
+                                <button onclick="downloadPopupToolTXT()" class="process-btn" style="flex: 1; margin: 0; background: #2196F3;">
+                                    Download as .txt
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation" style="margin-top: 25px; background: #fff5f5; border-left: 3px solid #DC143C;">
+                        <h3 style="font-size: 1em; margin-bottom: 10px; color: #DC143C;">Quick Reference:</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 10px;"><strong>After parsing fields:</strong></p>
+                        <ol style="margin: 10px 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6;">
+                            <li>Select which fields to include in your pop-up</li>
+                            <li>Optionally add a pop-up title</li>
+                            <li>Optionally group related fields together (e.g., all 2022-2025 fields in one group)</li>
+                            <li>Click "Generate Pop-up HTML"</li>
+                            <li>Copy the generated HTML and paste it into ArcGIS Experience Builder or Map Viewer pop-up editor</li>
+                        </ol>
+                        <p style="font-size: 0.85em; margin-top: 10px; font-style: italic; color: #666;">
+                            <strong>Note:</strong> Generated HTML uses inline CSS matching American Red Cross color standards (#c8102e) and compact Economist-style typography.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mapbox Geocoder Tab -->
+            <div id="geocoderTab" class="tab-content" style="display: none;">
+                <div class="section">
+                    <h2>Mapbox Geocoder</h2>
+                    <div class="explanation">
+                        <p>Geocode addresses from a CSV file using Mapbox Geocoding API. Upload your CSV with address columns, and get back a GeoJSON file with coordinates for each address.</p>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Mapbox Access Token:</label>
+                        <input type="password" id="geocoderMapboxToken" placeholder="pk.eyJ1IjoieW91cnVzZXJuYW1lIiwiYSI6ImNs..."
+                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; font-family: monospace; background: white; color: #333;">
+                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">
+                            Get your free token at <a href="https://account.mapbox.com/access-tokens/" target="_blank" style="color: #DC143C;">https://account.mapbox.com/access-tokens/</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Upload CSV File:</label>
+                        <div style="border: 2px dashed #e0e0e0; border-radius: 3px; padding: 30px; text-align: center; background: #fafafa; cursor: pointer; transition: all 0.2s;"
+                             id="geocoderDropZone"
+                             onmouseover="this.style.borderColor='#DC143C'; this.style.background='#fff5f5'"
+                             onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='#fafafa'"
+                             onclick="document.getElementById('geocoderFileInput').click()">
+                            <div style="font-size: 2em; margin-bottom: 10px;">📤</div>
+                            <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Drop your CSV file here or click to browse</div>
+                            <div style="font-size: 0.85em; color: #666;">Your CSV should have address columns (street, city, state, zip, etc.)</div>
+                        </div>
+                        <input type="file" id="geocoderFileInput" accept=".csv" style="display: none;" onchange="handleGeocoderFileSelect(event)">
+                        <div id="geocoderFileName" style="margin-top: 10px; font-size: 0.9em; color: #333; font-weight: 500;"></div>
+                    </div>
+
+                    <div id="geocoderColumnSelector" style="display: none; margin-top: 25px;">
+                        <div style="background: #fafafa; padding: 15px; border-radius: 3px; border-left: 3px solid #DC143C;">
+                            <h3 style="margin-top: 0; color: #DC143C; margin-bottom: 15px;">Select Address Columns</h3>
+                            <div id="geocoderColumnOptions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="geocoderGeocodingOptions" style="display: none; margin-top: 20px;">
+                        <div style="background: #fafafa; padding: 15px; border-radius: 3px; border-left: 3px solid #DC143C;">
+                            <h3 style="margin-top: 0; color: #DC143C; margin-bottom: 15px;">Geocoding Options</h3>
+
+                            <div id="geocoderCoordinateWarning" style="display: none; background: #fff3cd; border: 2px solid #ffc107; border-radius: 3px; padding: 10px; margin-bottom: 15px;">
+                                <strong style="color: #856404;">Existing Coordinates Detected</strong>
+                                <p style="margin: 5px 0; font-size: 0.9em; color: #856404;">Your CSV already has coordinate columns. Choose how to handle them:</p>
+                                <div style="margin-top: 10px;">
+                                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 8px;">
+                                        <input type="radio" name="geocoderCoordinateHandling" value="replace" checked>
+                                        <span><strong>Replace</strong> - Remove old coordinates, use only geocoded coordinates (Recommended for ArcGIS)</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                        <input type="radio" name="geocoderCoordinateHandling" value="keep">
+                                        <span><strong>Keep Both</strong> - Keep original + add geocoded (may confuse ArcGIS)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" id="geocoderIncludeOriginal" checked>
+                                    <span>Include original CSV columns in output</span>
+                                </label>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333;">Country Code (optional):</label>
+                                <input type="text" id="geocoderCountryCode" placeholder="US" maxlength="2"
+                                       style="width: 100px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em;">
+                                <div style="font-size: 0.85em; color: #666; margin-top: 5px;">ISO 3166-1 alpha-2 code (e.g., US, CA, MX)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="geocoderGeocodeBtn" onclick="startGeocoderGeocoding()" class="process-btn" style="margin-top: 20px; display: none;">
+                        Start Geocoding
+                    </button>
+
+                    <div id="geocoderProgress" style="display: none; margin-top: 20px;">
+                        <div style="background: #fafafa; padding: 15px; border-radius: 3px; border-left: 3px solid #DC143C;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 10px;">Geocoding Progress</div>
+                            <div style="background: white; height: 25px; border-radius: 3px; overflow: hidden; border: 1px solid #e0e0e0;">
+                                <div id="geocoderProgressBar" style="background: #DC143C; height: 100%; width: 0%; transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.85em; font-weight: 600;">0%</div>
+                            </div>
+                            <div id="geocoderProgressText" style="margin-top: 10px; font-size: 0.9em; color: #666;">Ready to process...</div>
+                        </div>
+                    </div>
+
+                    <div id="geocoderResults" style="display: none; margin-top: 25px;">
+                        <div style="background: #fff5f5; border: 2px solid #DC143C; border-radius: 3px; padding: 20px;">
+                            <h3 style="margin-top: 0; color: #DC143C; margin-bottom: 15px;">Geocoding Complete</h3>
+                            <div id="geocoderResultsSummary" style="margin-bottom: 15px; font-size: 0.9em; color: #333;"></div>
+
+                            <div style="display: flex; gap: 10px;">
+                                <button onclick="downloadGeocoderGeoJSON()" class="process-btn" style="flex: 1; margin: 0; background: #4CAF50;">
+                                    Download GeoJSON
+                                </button>
+                                <button onclick="downloadGeocoderCSV()" class="process-btn" style="flex: 1; margin: 0; background: #2196F3;">
+                                    Download CSV with Coordinates
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation" style="margin-top: 25px; background: #fff5f5; border-left: 3px solid #DC143C;">
+                        <h3 style="font-size: 1em; margin-bottom: 10px; color: #DC143C;">How to Use:</h3>
+                        <ol style="margin: 10px 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6;">
+                            <li>Get a free Mapbox access token from <a href="https://account.mapbox.com/access-tokens/" target="_blank" style="color: #DC143C;">mapbox.com</a></li>
+                            <li>Paste your Mapbox access token in the field above</li>
+                            <li>Upload a CSV file with address columns (street, city, state, zip, etc.)</li>
+                            <li>Select which columns contain address information</li>
+                            <li>Optionally specify a country code to improve accuracy</li>
+                            <li>Click "Start Geocoding" to process your addresses</li>
+                            <li>Download the resulting GeoJSON or CSV file with coordinates</li>
+                        </ol>
+                        <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
+                            <strong>Note:</strong> Mapbox offers free geocoding up to 100,000 requests per month. Addresses are geocoded one at a time to respect rate limits.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -1073,8 +1354,42 @@
                 rcode: null,
                 dcode: null,
                 numeric: [],
-                all: headers
+                all: headers,
+                isHierarchical: false,  // NEW: track if this is a hierarchical CSV from Roll-Up tab
+                hierarchicalFields: {}  // NEW: map base field name to level-specific columns
             };
+
+            // Detect if this is a hierarchical CSV (from Roll-Up tab)
+            // These have columns like "Drives (ZIP)", "Drives (County)", etc.
+            const levelSuffixes = ['(ZIP)', '(County)', '(Chapter)', '(Region)', '(Division)'];
+            const hierarchicalColumns = headers.filter(h =>
+                levelSuffixes.some(suffix => h.includes(suffix))
+            );
+
+            if (hierarchicalColumns.length > 0) {
+                console.log('✓ Detected hierarchical CSV with level-specific columns');
+                detectedColumns.isHierarchical = true;
+
+                // Extract base field names and map to level-specific columns
+                hierarchicalColumns.forEach((header, index) => {
+                    // Extract base field name (before the level suffix)
+                    const match = header.match(/^(.+?)\s*\((ZIP|County|Chapter|Region|Division)\)$/);
+                    if (match) {
+                        const baseField = match[1];  // e.g., "Row Count", "Drives"
+                        const level = match[2].toLowerCase();  // e.g., "zip", "county"
+
+                        if (!detectedColumns.hierarchicalFields[baseField]) {
+                            detectedColumns.hierarchicalFields[baseField] = {};
+                        }
+                        detectedColumns.hierarchicalFields[baseField][level] = {
+                            name: header,
+                            index: headers.indexOf(header)
+                        };
+                    }
+                });
+
+                console.log('Hierarchical fields detected:', Object.keys(detectedColumns.hierarchicalFields));
+            }
 
             // Flexible column name matching
             const zipPatterns = ['zip', 'zipcode', 'zip_code', 'postal', 'postalcode'];
@@ -1086,17 +1401,22 @@
             headers.forEach((header, index) => {
                 const headerLower = header.toLowerCase();
 
-                // Check for geographic columns
-                if (zipPatterns.some(p => headerLower.includes(p))) {
-                    detectedColumns.zip = { name: header, index };
-                } else if (fipsPatterns.some(p => headerLower.includes(p))) {
-                    detectedColumns.fips = { name: header, index };
-                } else if (ecodePatterns.some(p => headerLower.includes(p))) {
-                    detectedColumns.ecode = { name: header, index };
-                } else if (rcodePatterns.some(p => headerLower.includes(p))) {
-                    detectedColumns.rcode = { name: header, index };
-                } else if (dcodePatterns.some(p => headerLower.includes(p))) {
-                    detectedColumns.dcode = { name: header, index };
+                // Skip hierarchical columns when looking for ID columns
+                const isHierarchicalColumn = levelSuffixes.some(suffix => header.includes(suffix));
+
+                // Check for geographic columns (only if not a hierarchical data column)
+                if (!isHierarchicalColumn) {
+                    if (zipPatterns.some(p => headerLower.includes(p))) {
+                        detectedColumns.zip = { name: header, index };
+                    } else if (fipsPatterns.some(p => headerLower.includes(p))) {
+                        detectedColumns.fips = { name: header, index };
+                    } else if (ecodePatterns.some(p => headerLower.includes(p))) {
+                        detectedColumns.ecode = { name: header, index };
+                    } else if (rcodePatterns.some(p => headerLower.includes(p))) {
+                        detectedColumns.rcode = { name: header, index };
+                    } else if (dcodePatterns.some(p => headerLower.includes(p))) {
+                        detectedColumns.dcode = { name: header, index };
+                    }
                 }
 
                 // Check if column is numeric (sample first 10 rows)
@@ -1107,7 +1427,8 @@
                                    detectedColumns.rcode?.index === index ||
                                    detectedColumns.dcode?.index === index;
 
-                if (!isGeoColumn) {
+                if (!isGeoColumn && !detectedColumns.isHierarchical) {
+                    // Only detect numeric columns for non-hierarchical CSVs
                     const sample = dataRows.slice(0, 10).map(row => row[index]);
                     // Check if values are numeric (allow empty strings)
                     const numericValues = sample.filter(val => val !== '');
@@ -1152,18 +1473,37 @@
             const fieldsContainer = document.getElementById('aggregationFields');
             fieldsContainer.innerHTML = '';
 
-            // Add COUNT option
-            const countOption = createAggregationFieldOption('Row Count', 'count', 'COUNT');
-            fieldsContainer.appendChild(countOption);
+            // For hierarchical CSVs, show base field names
+            if (detectedColumns.isHierarchical) {
+                // Add aggregation fields based on hierarchical base fields
+                const allowedSumFields = ['Drives', 'RBC Product Projection', 'RBC Products Collected'];
 
-            // Add numeric columns (only Drives and RBC fields)
-            const allowedSumFields = ['Drives', 'RBC Product Projection', 'RBC Products Collected'];
-            detectedColumns.numeric.forEach(col => {
-                if (allowedSumFields.includes(col.name)) {
-                    const option = createAggregationFieldOption(col.name, col.name, 'SUM', true);
-                    fieldsContainer.appendChild(option);
-                }
-            });
+                Object.keys(detectedColumns.hierarchicalFields).forEach(baseField => {
+                    if (baseField === 'Row Count') {
+                        // COUNT type
+                        const option = createAggregationFieldOption(baseField, baseField, 'COUNT', true);
+                        fieldsContainer.appendChild(option);
+                    } else if (allowedSumFields.includes(baseField)) {
+                        // SUM type
+                        const option = createAggregationFieldOption(baseField, baseField, 'SUM', true);
+                        fieldsContainer.appendChild(option);
+                    }
+                });
+            } else {
+                // Original logic for non-hierarchical CSVs
+                // Add COUNT option
+                const countOption = createAggregationFieldOption('Row Count', 'count', 'COUNT');
+                fieldsContainer.appendChild(countOption);
+
+                // Add numeric columns (only Drives and RBC fields)
+                const allowedSumFields = ['Drives', 'RBC Product Projection', 'RBC Products Collected'];
+                detectedColumns.numeric.forEach(col => {
+                    if (allowedSumFields.includes(col.name)) {
+                        const option = createAggregationFieldOption(col.name, col.name, 'SUM', true);
+                        fieldsContainer.appendChild(option);
+                    }
+                });
+            }
 
             // Display column mapping
             const mappingContainer = document.getElementById('columnMapping');
@@ -1369,27 +1709,43 @@
                 updateProgress(5, 'Parsing CSV file...');
                 const fullCSV = await parseFullCSV(selectedFile);
 
-                // Step 2: Check if data is already aggregated or needs aggregation
-                const isPreAggregated = detectIfPreAggregated(fullCSV);
-                let aggregated;
-
-                if (isPreAggregated) {
-                    updateProgress(15, 'Detected pre-aggregated CSV, using data directly...');
-                    aggregated = convertPreAggregatedToFormat(fullCSV);
-                    console.log('✓ Using pre-aggregated data from CSV Roll-Up tab');
-                } else {
-                    updateProgress(15, `Aggregating row-level data at ${aggregationConfig.granularity} level...`);
-                    aggregated = aggregateData(fullCSV);
-                    console.log('✓ Aggregated row-level data');
-                }
-
-                // Step 3: Load boundary files for selected levels
-                updateProgress(30, 'Loading geographic boundaries...');
+                // Step 2: Load boundary files for selected levels
+                updateProgress(15, 'Loading geographic boundaries...');
                 await loadBoundaries(levels);
 
-                // Step 4: Perform joins and create GeoJSON
-                updateProgress(50, 'Creating GeoJSON files...');
-                await createGeoJSONFiles(aggregated, levels);
+                // Step 3: Process differently for hierarchical vs non-hierarchical CSVs
+                if (detectedColumns.isHierarchical) {
+                    // NEW PATH: Hierarchical CSV - process each level separately
+                    console.log('✓ Processing hierarchical CSV - creating separate aggregations per level');
+                    updateProgress(30, 'Processing hierarchical data...');
+
+                    for (const level of levels) {
+                        updateProgress(30 + (levels.indexOf(level) / levels.length) * 40,
+                            `Creating ${level}-level GeoJSON...`);
+
+                        // Create level-specific aggregation
+                        const levelAggregated = aggregateHierarchicalData(fullCSV, level);
+                        await createGeoJSONFiles(levelAggregated, [level]);
+                    }
+                } else {
+                    // ORIGINAL PATH: Non-hierarchical CSV
+                    const isPreAggregated = detectIfPreAggregated(fullCSV);
+                    let aggregated;
+
+                    if (isPreAggregated) {
+                        updateProgress(30, 'Detected pre-aggregated CSV, using data directly...');
+                        aggregated = convertPreAggregatedToFormat(fullCSV);
+                        console.log('✓ Using pre-aggregated data from CSV Roll-Up tab');
+                    } else {
+                        updateProgress(30, `Aggregating row-level data at ${aggregationConfig.granularity} level...`);
+                        aggregated = aggregateData(fullCSV);
+                        console.log('✓ Aggregated row-level data');
+                    }
+
+                    // Step 4: Perform joins and create GeoJSON
+                    updateProgress(50, 'Creating GeoJSON files...');
+                    await createGeoJSONFiles(aggregated, levels);
+                }
 
                 // Step 5: Show preview map
                 updateProgress(90, 'Generating preview map...');
@@ -1457,6 +1813,28 @@
         }
 
         // Parse entire CSV file
+        // Proper CSV line parser that handles quoted fields with commas
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result;
+        }
+
         async function parseFullCSV(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -1469,16 +1847,78 @@
                         return;
                     }
 
-                    const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, '').replace(/^\uFEFF/, ''));
-                    const dataRows = rows.slice(1).map(row => {
-                        return row.split(',').map(cell => cell.trim().replace(/"/g, ''));
-                    });
+                    const headers = parseCSVLine(rows[0]).map(h => h.replace(/^\uFEFF/, ''));
+                    const dataRows = rows.slice(1).map(row => parseCSVLine(row));
 
                     resolve({ headers, dataRows });
                 };
                 reader.onerror = () => reject(new Error('Failed to read file'));
                 reader.readAsText(file);
             });
+        }
+
+        // Aggregate hierarchical CSV data for a specific level
+        function aggregateHierarchicalData(csvData, targetLevel) {
+            const { headers, dataRows } = csvData;
+
+            // Determine the ID column for this level
+            let levelIdColumn;
+            if (targetLevel === 'zip') {
+                levelIdColumn = detectedColumns.zip;
+            } else if (targetLevel === 'county') {
+                // For county level, we still group by ZIP but extract county-level data
+                levelIdColumn = detectedColumns.zip;
+            } else if (targetLevel === 'chapter') {
+                levelIdColumn = detectedColumns.ecode;
+            } else if (targetLevel === 'region') {
+                levelIdColumn = detectedColumns.rcode;
+            } else if (targetLevel === 'division') {
+                levelIdColumn = detectedColumns.dcode;
+            }
+
+            if (!levelIdColumn) {
+                throw new Error(`No ID column found for ${targetLevel} level`);
+            }
+
+            console.log(`Grouping by ${levelIdColumn.name} (column index ${levelIdColumn.index}) for ${targetLevel} level`);
+
+            const grouped = {};
+
+            // Group rows by the level's ID column
+            dataRows.forEach(row => {
+                const key = row[levelIdColumn.index];
+                if (!key) return;
+
+                // DEBUG: Log first key to verify
+                if (Object.keys(grouped).length === 0) {
+                    console.log(`First ${targetLevel} key found: "${key}" from column ${levelIdColumn.index}`);
+                }
+
+                if (!grouped[key]) {
+                    grouped[key] = {
+                        key: key,
+                        aggregates: {}
+                    };
+                }
+
+                // Extract values from the hierarchical columns for this level
+                // Since all rows with the same ID have the same values for that level,
+                // we can just take the value from this row
+                aggregationConfig.fields.forEach(field => {
+                    const hierarchicalFieldInfo = detectedColumns.hierarchicalFields[field.field];
+                    if (hierarchicalFieldInfo && hierarchicalFieldInfo[targetLevel]) {
+                        const colIndex = hierarchicalFieldInfo[targetLevel].index;
+                        const val = parseFloat(row[colIndex]) || 0;
+                        grouped[key].aggregates[field.field] = val;
+                    } else {
+                        console.warn(`No ${targetLevel} column found for field ${field.field}`);
+                        grouped[key].aggregates[field.field] = 0;
+                    }
+                });
+            });
+
+            console.log(`✓ Created ${Object.keys(grouped).length} ${targetLevel}-level aggregations`);
+            return grouped;
         }
 
         // Aggregate CSV data
@@ -1492,6 +1932,21 @@
             }
 
             const grouped = {};
+
+            // For hierarchical CSVs, determine which level to extract data from
+            // based on the selected output levels
+            let targetLevel = null;
+            if (detectedColumns.isHierarchical) {
+                // Determine target level based on output levels selected
+                const outputLevels = aggregationConfig.outputLevels || [];
+                if (outputLevels.includes('division')) targetLevel = 'division';
+                else if (outputLevels.includes('region')) targetLevel = 'region';
+                else if (outputLevels.includes('chapter')) targetLevel = 'chapter';
+                else if (outputLevels.includes('county')) targetLevel = 'county';
+                else if (outputLevels.includes('zip')) targetLevel = 'zip';
+
+                console.log(`Hierarchical CSV detected - extracting ${targetLevel} level data`);
+            }
 
             // Group rows by key
             dataRows.forEach(row => {
@@ -1511,14 +1966,29 @@
             // Calculate aggregates
             Object.values(grouped).forEach(group => {
                 aggregationConfig.fields.forEach(field => {
-                    if (field.type === 'COUNT') {
-                        group.aggregates[field.field] = group.rows.length;
-                    } else if (field.type === 'SUM') {
-                        const colIndex = headers.indexOf(field.field);
-                        group.aggregates[field.field] = group.rows.reduce((sum, row) => {
-                            const val = parseFloat(row[colIndex]) || 0;
-                            return sum + val;
-                        }, 0);
+                    if (detectedColumns.isHierarchical && targetLevel) {
+                        // For hierarchical CSVs, extract the value directly from the appropriate column
+                        const hierarchicalFieldInfo = detectedColumns.hierarchicalFields[field.field];
+                        if (hierarchicalFieldInfo && hierarchicalFieldInfo[targetLevel]) {
+                            const colIndex = hierarchicalFieldInfo[targetLevel].index;
+                            // For hierarchical CSVs, take the value from the first row (all rows have same value for that level)
+                            const val = parseFloat(group.rows[0][colIndex]) || 0;
+                            group.aggregates[field.field] = val;
+                        } else {
+                            console.warn(`No ${targetLevel} column found for field ${field.field}`);
+                            group.aggregates[field.field] = 0;
+                        }
+                    } else {
+                        // Original aggregation logic for non-hierarchical CSVs
+                        if (field.type === 'COUNT') {
+                            group.aggregates[field.field] = group.rows.length;
+                        } else if (field.type === 'SUM') {
+                            const colIndex = headers.indexOf(field.field);
+                            group.aggregates[field.field] = group.rows.reduce((sum, row) => {
+                                const val = parseFloat(row[colIndex]) || 0;
+                                return sum + val;
+                            }, 0);
+                        }
                     }
                 });
             });
@@ -1539,14 +2009,26 @@
 
             for (const level of levels) {
                 if (!geoBoundaries[level]) {
-                    // ZIP boundaries are in Git LFS, need media.githubusercontent.com
-                    // Other files are regular Git files, use raw.githubusercontent.com
+                    // Use official ArcGIS Red Cross geography service for most levels
+                    // ZIP boundaries come from GitHub (Census ZCTA data)
                     let url;
-                    if (isLocalhost) {
-                        url = `geographic-data/${level}_boundaries.geojson`;
+
+                    const arcgisLayers = {
+                        'division': 1,
+                        'region': 2,
+                        'chapter': 4,
+                        'county': 5
+                    };
+
+                    if (arcgisLayers[level]) {
+                        // Load from ArcGIS Feature Service (always up-to-date with official Red Cross geography)
+                        const layerId = arcgisLayers[level];
+                        url = `https://services.arcgis.com/pGfbNJoYypmNq86F/ArcGIS/rest/services/Master_ARC_Geography_2022/FeatureServer/${layerId}/query?where=1=1&outFields=*&f=geojson`;
                     } else if (level === 'zip') {
+                        // ZIP boundaries from GitHub (Census ZCTA data in Git LFS)
                         url = `https://media.githubusercontent.com/media/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/${level}_boundaries.geojson`;
                     } else {
+                        // Fallback to GitHub
                         url = `https://raw.githubusercontent.com/franzenjb/GeoJSON-Creation-Tool/geodata-files/geographic-data/${level}_boundaries.geojson`;
                     }
 
@@ -1587,6 +2069,10 @@
                 // Proper join logic for each level
                 let joinedCount = 0;
 
+                // DEBUG: Log what keys we have in aggregated data
+                const aggregatedKeys = Object.keys(aggregated);
+                console.log(`Aggregated data has ${aggregatedKeys.length} keys for ${level}. Sample:`, aggregatedKeys.slice(0, 5));
+
                 output.features.forEach(feature => {
                     const props = feature.properties;
                     let matchKey = null;
@@ -1608,6 +2094,8 @@
                     if (matchKey && aggregated[matchKey]) {
                         Object.assign(props, aggregated[matchKey].aggregates);
                         joinedCount++;
+                    } else if (matchKey) {
+                        console.log(`No match found for ${level} key: ${matchKey}`);
                     }
                 });
 
@@ -1784,6 +2272,9 @@
             document.getElementById('createTab').style.display = 'none';
             document.getElementById('lookupTab').style.display = 'none';
             document.getElementById('rollupTab').style.display = 'none';
+            document.getElementById('orglerTab').style.display = 'none';
+            document.getElementById('popupTab').style.display = 'none';
+            document.getElementById('geocoderTab').style.display = 'none';
 
             // Remove active class from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -1804,6 +2295,18 @@
                 document.getElementById('createTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[2].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[2].style.color = '#DC143C';
+            } else if (tabName === 'orgler') {
+                document.getElementById('orglerTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[3].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[3].style.color = '#DC143C';
+            } else if (tabName === 'popup') {
+                document.getElementById('popupTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[4].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[4].style.color = '#DC143C';
+            } else if (tabName === 'geocoder') {
+                document.getElementById('geocoderTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[5].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[5].style.color = '#DC143C';
             }
         }
 
@@ -2182,8 +2685,9 @@
         }
 
         async function loadBoundaryForHierarchy(granularity) {
-            // Load ZIP code hierarchy lookup from simple CSV file
-            const url = 'https://cdn.jsdelivr.net/gh/franzenjb/alice_master_database/subcounty_zip_all_states.csv';
+            // Load comprehensive ZIP code hierarchy lookup (33K ZIPs, 99%+ US coverage)
+            // This includes all Census ZIPs mapped to Red Cross Chapter/Region/Division hierarchy
+            const url = './zip_to_redcross_comprehensive.csv';
 
             const response = await fetch(url);
             if (!response.ok) {
@@ -2217,25 +2721,30 @@
 
             const headers = parseCSVLine(lines[0]);
 
-            // Find column indices
-            const geoIdIdx = headers.indexOf('GEO_ID');
+            // Find column indices - New comprehensive CSV format:
+            // ZIP_CODE, COUNTY_FIPS, County, Chapter, Region, Division, State, RCODE, DCODE, ECODE
+            const zipIdx = headers.indexOf('ZIP_CODE');
+            const fipsIdx = headers.indexOf('COUNTY_FIPS');
             const countyIdx = headers.indexOf('County');
             const ecodeIdx = headers.indexOf('ECODE');
             const rcodeIdx = headers.indexOf('RCODE');
             const dcodeIdx = headers.indexOf('DCODE');
 
+            console.log('Loading comprehensive ZIP database (33K ZIPs, 99%+ US coverage)...');
+
             // Parse CSV rows into lookup object
             const lookupData = {};
             lines.slice(1).forEach(line => {
                 const values = parseCSVLine(line);
-                const geoId = values[geoIdIdx];
-                if (!geoId) return;
+                const zip = values[zipIdx];
+                if (!zip) return;
 
-                // Extract ZIP code (remove _ZCTA suffix if present)
-                const zip = geoId.replace('_ZCTA', '');
+                const countyName = values[countyIdx];
+                const fips = values[fipsIdx];
 
                 lookupData[zip] = {
-                    county: values[countyIdx],
+                    county: countyName,
+                    fips: fips || null,
                     ecode: values[ecodeIdx],
                     rcode: values[rcodeIdx],
                     dcode: values[dcodeIdx]
@@ -2261,6 +2770,7 @@
                     division: data.dcode,
                     // Store codes for audit columns
                     county_name: data.county,
+                    fips: data.fips,
                     ecode: data.ecode,
                     rcode: data.rcode,
                     dcode: data.dcode
@@ -2346,6 +2856,7 @@
                             key: zipKey,
                             // Add ID columns for auditing
                             county_name: hierarchy.county_name,
+                            fips: hierarchy.fips,
                             ecode: hierarchy.ecode,
                             rcode: hierarchy.rcode,
                             dcode: hierarchy.dcode,
@@ -2434,7 +2945,7 @@
 
             // Add ID columns for auditing (for ZIP level output)
             if (level === 'zip') {
-                headers.push('County', 'ECODE', 'RCODE', 'DCODE');
+                headers.push('County', 'FIPS', 'ECODE', 'RCODE', 'DCODE');
             }
 
             const levelOrder = {
@@ -2471,6 +2982,7 @@
                 if (level === 'zip') {
                     values.push(
                         `"${rowData.county_name || ''}"`,
+                        rowData.fips || '',
                         rowData.ecode || '',
                         rowData.rcode || '',
                         rowData.dcode || ''
@@ -2975,13 +3487,773 @@
 
         // Initialize
         updateOptionCards();
-        
+
         // Load built-in database when page loads
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadBuiltInDatabase);
         } else {
             // DOM already loaded
             setTimeout(loadBuiltInDatabase, 100);
+        }
+
+        // ===== ORGLER URL CREATOR FUNCTIONS =====
+        function convertToOrglerTool() {
+            const powerbiUrl = document.getElementById('orglerPowerbiUrl').value.trim();
+
+            if (!powerbiUrl) {
+                alert('Please enter a Power BI URL');
+                return;
+            }
+
+            if (!powerbiUrl.includes('powerbi.com') && !powerbiUrl.includes('app.powerbi.com')) {
+                alert('Please enter a valid Power BI URL');
+                return;
+            }
+
+            try {
+                const url = new URL(powerbiUrl);
+                const pathParts = url.pathname.split('/').filter(p => p);
+
+                let reportId = null;
+                const reportsIndex = pathParts.indexOf('reports');
+                if (reportsIndex !== -1 && reportsIndex + 1 < pathParts.length) {
+                    reportId = pathParts[reportsIndex + 1];
+                } else {
+                    const guidPattern = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
+                    const match = powerbiUrl.match(guidPattern);
+                    if (match) reportId = match[0];
+                }
+
+                if (!reportId) {
+                    throw new Error('Could not extract report ID from URL');
+                }
+
+                let orglerUrl = `https://orglerws.redcross.org/PowerBI/Home/report/${reportId}`;
+
+                document.getElementById('orglerOutputText').value = orglerUrl;
+                document.getElementById('orglerResultDiv').style.display = 'block';
+            } catch (error) {
+                alert('Error converting URL: ' + error.message);
+            }
+        }
+
+        function copyOrglerUrlTool() {
+            const output = document.getElementById('orglerOutputText');
+            if (!output.value) {
+                alert('No URL to copy');
+                return;
+            }
+
+            output.select();
+            navigator.clipboard.writeText(output.value).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy. Please select and copy manually.');
+            });
+        }
+
+        // ===== POPUP CREATOR FUNCTIONS =====
+        let popupToolFieldsData = [];
+
+        function parsePopupFieldDefinitions() {
+            const inputText = document.getElementById('popupToolFieldsInput').value.trim();
+            if (!inputText) {
+                alert('Please paste the field definitions from the ArcGIS REST page');
+                return;
+            }
+
+            try {
+                document.getElementById('popupToolFieldsContainer').style.display = 'none';
+                document.getElementById('popupToolResult').style.display = 'none';
+
+                const lines = inputText.split('\n').filter(line => line.trim());
+                const fields = [];
+
+                for (const line of lines) {
+                    const nameMatch = line.match(/^([A-Za-z0-9_]+)\s*\(/);
+                    if (!nameMatch) continue;
+
+                    const name = nameMatch[1];
+                    const aliasMatch = line.match(/alias:\s*([^,]+)/);
+                    const alias = aliasMatch ? aliasMatch[1].trim() : name;
+                    const typeMatch = line.match(/type:\s*(esri[A-Za-z]+)/);
+                    const type = typeMatch ? typeMatch[1] : 'esriFieldTypeString';
+
+                    fields.push({ name, alias, type });
+                }
+
+                if (fields.length === 0) {
+                    throw new Error('No fields could be parsed');
+                }
+
+                popupToolFieldsData = fields.filter(field => {
+                    const name = field.name.toUpperCase();
+                    return name !== 'OBJECTID' && name !== 'SHAPE' && name !== 'GLOBALID' &&
+                           !name.startsWith('SHAPE_') && field.type !== 'esriFieldTypeOID' &&
+                           field.type !== 'esriFieldTypeGeometry';
+                });
+
+                if (popupToolFieldsData.length === 0) {
+                    throw new Error('No usable fields found');
+                }
+
+                displayPopupToolFields();
+                document.getElementById('popupToolFieldsContainer').style.display = 'block';
+
+            } catch (error) {
+                alert('Error parsing fields: ' + error.message);
+            }
+        }
+
+        function displayPopupToolFields(filterText = '') {
+            const container = document.getElementById('popupToolFieldList');
+            container.innerHTML = '';
+
+            const filtered = filterText ?
+                popupToolFieldsData.filter(f =>
+                    f.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                    (f.alias && f.alias.toLowerCase().includes(filterText.toLowerCase()))
+                ) : popupToolFieldsData;
+
+            filtered.forEach(field => {
+                const div = document.createElement('div');
+                div.style.cssText = 'display: flex; align-items: center; padding: 8px; border-bottom: 1px solid #f0f0f0;';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `popupToolField_${field.name}`;
+                checkbox.checked = true;
+                checkbox.style.marginRight = '10px';
+                checkbox.addEventListener('change', updatePopupToolFieldCount);
+
+                const label = document.createElement('label');
+                label.htmlFor = `popupToolField_${field.name}`;
+                label.style.cssText = 'flex: 1; cursor: pointer; font-size: 0.9em;';
+                label.innerHTML = `<strong>${escapeHtmlTool(field.alias || field.name)}</strong> <span style="color: #999; font-size: 0.85em;">(${field.name})</span>`;
+
+                div.appendChild(checkbox);
+                div.appendChild(label);
+                container.appendChild(div);
+            });
+
+            updatePopupToolFieldCount();
+        }
+
+        function filterPopupToolFields() {
+            const filterText = document.getElementById('popupToolFieldFilter').value;
+            displayPopupToolFields(filterText);
+        }
+
+        function updatePopupToolFieldCount() {
+            const checked = document.querySelectorAll('#popupToolFieldList input[type="checkbox"]:checked').length;
+            document.getElementById('popupToolFieldCount').textContent = checked;
+        }
+
+        function generatePopupToolHTML() {
+            const checkedBoxes = document.querySelectorAll('#popupToolFieldList input[type="checkbox"]:checked');
+            if (checkedBoxes.length === 0) {
+                alert('Please select at least one field');
+                return;
+            }
+
+            const selectedFields = Array.from(checkedBoxes).map(cb => {
+                const fieldName = cb.id.replace('popupToolField_', '');
+                return popupToolFieldsData.find(f => f.name === fieldName);
+            }).filter(f => f);
+
+            const title = document.getElementById('popupToolTitle').value.trim() || 'Feature Information';
+            const groupsText = document.getElementById('popupToolGroups').value.trim();
+
+            const groups = groupsText ?
+                groupsText.split('\n').map(line => line.split(',').map(f => f.trim()).filter(f => f)).filter(g => g.length > 0) : [];
+
+            let html = `<div style="background-color:#fff;border-radius:10px;border:1px solid #e0e0e0;box-shadow:0 1px 3px rgba(0,0,0,0.1);padding:10px;font-family:'Arial',sans-serif;color:#333;font-size:13px;line-height:1.4;">\n`;
+            html += `  <h3 style="color:#c8102e;margin-top:0;margin-bottom:12px;font-size:16px;font-weight:600;">${escapeHtmlTool(title)}</h3>\n`;
+
+            if (groups.length > 0) {
+                const usedFields = new Set();
+                groups.forEach((group, groupIndex) => {
+                    group.forEach(fieldName => {
+                        const field = selectedFields.find(f =>
+                            f.name.toLowerCase() === fieldName.toLowerCase() ||
+                            (f.alias && f.alias.toLowerCase() === fieldName.toLowerCase())
+                        );
+                        if (field) {
+                            usedFields.add(field.name);
+                            html += `  <p style="margin:6px 0;"><b>${escapeHtmlTool(field.alias || field.name)}:</b> {${field.name}}</p>\n`;
+                        }
+                    });
+                    if (groupIndex < groups.length - 1) {
+                        html += `  <hr style="border:none;border-top:1px solid #ddd;margin:8px 0;">\n`;
+                    }
+                });
+
+                const remainingFields = selectedFields.filter(f => !usedFields.has(f.name));
+                if (remainingFields.length > 0) {
+                    if (groups.length > 0) {
+                        html += `  <hr style="border:none;border-top:1px solid #ddd;margin:8px 0;">\n`;
+                    }
+                    remainingFields.forEach(field => {
+                        html += `  <p style="margin:6px 0;"><b>${escapeHtmlTool(field.alias || field.name)}:</b> {${field.name}}</p>\n`;
+                    });
+                }
+            } else {
+                selectedFields.forEach(field => {
+                    html += `  <p style="margin:6px 0;"><b>${escapeHtmlTool(field.alias || field.name)}:</b> {${field.name}}</p>\n`;
+                });
+            }
+
+            html += `</div>`;
+
+            document.getElementById('popupToolOutput').value = html;
+            document.getElementById('popupToolPreview').innerHTML = html.replace(/\{([^}]+)\}/g, '<span style="color:#666;font-style:italic;">{$1}</span>');
+            document.getElementById('popupToolResult').style.display = 'block';
+        }
+
+        function escapeHtmlTool(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function copyPopupToolHTML() {
+            const output = document.getElementById('popupToolOutput');
+            if (!output.value) {
+                alert('No HTML to copy');
+                return;
+            }
+
+            output.select();
+            navigator.clipboard.writeText(output.value).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = originalText, 2000);
+            }).catch(() => alert('Failed to copy'));
+        }
+
+        function downloadPopupToolHTML() {
+            const html = document.getElementById('popupToolOutput').value;
+            if (!html) {
+                alert('No HTML to download');
+                return;
+            }
+
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'arcgis_popup.html';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function downloadPopupToolTXT() {
+            const html = document.getElementById('popupToolOutput').value;
+            if (!html) {
+                alert('No HTML to download');
+                return;
+            }
+
+            const blob = new Blob([html], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'arcgis_popup.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        // ===== MAPBOX GEOCODER FUNCTIONS =====
+        let geocoderFile = null;
+        let geocoderCsvData = null;
+        let geocoderGeocodedData = null;
+        let geocoderHasExistingCoordinates = false;
+
+        // Add drag-and-drop support for geocoder file upload
+        (function() {
+            const dropZone = document.getElementById('geocoderDropZone');
+            const fileInput = document.getElementById('geocoderFileInput');
+
+            if (!dropZone || !fileInput) return;
+
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = '#DC143C';
+                dropZone.style.background = '#fff5f5';
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.style.borderColor = '#e0e0e0';
+                dropZone.style.background = '#fafafa';
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = '#e0e0e0';
+                dropZone.style.background = '#fafafa';
+
+                const file = e.dataTransfer.files[0];
+                if (file && file.name.endsWith('.csv')) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleGeocoderFileSelect({ target: fileInput });
+                } else {
+                    alert('Please drop a CSV file');
+                }
+            });
+        })();
+
+        function checkForExistingGeocoderCoordinates(sampleRow) {
+            const coordinateColumns = ['Latitude', 'Longitude', 'latitude', 'longitude', 'Lat', 'Lon', 'lat', 'lon', 'Y', 'X', 'y', 'x'];
+            geocoderHasExistingCoordinates = coordinateColumns.some(col => sampleRow.hasOwnProperty(col));
+
+            if (geocoderHasExistingCoordinates) {
+                document.getElementById('geocoderCoordinateWarning').style.display = 'block';
+            }
+        }
+
+        function handleGeocoderFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.name.endsWith('.csv')) {
+                alert('Please upload a CSV file');
+                return;
+            }
+
+            geocoderFile = file;
+
+            const fileNameDiv = document.getElementById('geocoderFileName');
+            fileNameDiv.innerHTML = `
+                <div style="background: #e8f5e9; border: 2px solid #4CAF50; border-radius: 3px; padding: 10px; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.2em;">File uploaded: ${file.name}</span>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #2e7d32;">Size: ${(file.size / 1024).toFixed(2)} KB</div>
+                    </div>
+                    <button onclick="clearGeocoderFile()" style="background: #f44336; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 0.85em;">Remove</button>
+                </div>
+            `;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const csvText = e.target.result;
+                geocoderCsvData = parseCSVForGeocoder(csvText);
+
+                if (geocoderCsvData && geocoderCsvData.length > 0) {
+                    showGeocoderColumnSelector(geocoderCsvData[0]);
+                    checkForExistingGeocoderCoordinates(geocoderCsvData[0]);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function clearGeocoderFile() {
+            geocoderFile = null;
+            geocoderCsvData = null;
+            document.getElementById('geocoderFileInput').value = '';
+            document.getElementById('geocoderFileName').innerHTML = '';
+            document.getElementById('geocoderColumnSelector').style.display = 'none';
+            document.getElementById('geocoderGeocodingOptions').style.display = 'none';
+            document.getElementById('geocoderGeocodeBtn').style.display = 'none';
+            document.getElementById('geocoderProgress').style.display = 'none';
+            document.getElementById('geocoderResults').style.display = 'none';
+        }
+
+        function parseCSVForGeocoder(text) {
+            const lines = text.split('\n').filter(line => line.trim());
+            if (lines.length < 2) return null;
+
+            function parseCSVLine(line) {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    const nextChar = line[i + 1];
+
+                    if (char === '"') {
+                        if (inQuotes && nextChar === '"') {
+                            current += '"';
+                            i++;
+                        } else {
+                            inQuotes = !inQuotes;
+                        }
+                    } else if (char === ',' && !inQuotes) {
+                        result.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                result.push(current.trim());
+                return result;
+            }
+
+            const headers = parseCSVLine(lines[0]).map(h => h.replace(/^"|"$/g, ''));
+            const data = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const values = parseCSVLine(lines[i]).map(v => v.replace(/^"|"$/g, ''));
+                if (values.length >= headers.length) {
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = (values[index] || '').trim();
+                    });
+                    data.push(row);
+                }
+            }
+
+            return data;
+        }
+
+        function showGeocoderColumnSelector(headers) {
+            const container = document.getElementById('geocoderColumnOptions');
+            container.innerHTML = '';
+
+            const components = [
+                { id: 'geocoderStreet', label: 'Street Address', suggestions: ['street', 'address', 'addr', 'location'] },
+                { id: 'geocoderCity', label: 'City', suggestions: ['city', 'town', 'municipality'] },
+                { id: 'geocoderState', label: 'State', suggestions: ['state', 'st', 'province'] },
+                { id: 'geocoderZip', label: 'ZIP Code', suggestions: ['zip', 'postal', 'postcode', 'zipcode'] }
+            ];
+
+            components.forEach(comp => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #333; font-size: 0.9em;">${comp.label}:</label>
+                    <select id="${comp.id}" style="width: 100%; padding: 8px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white;">
+                        <option value="">-- Select Column --</option>
+                        ${Object.keys(headers).map(h => {
+                            const lower = h.toLowerCase();
+                            const isMatch = comp.suggestions.some(s => lower.includes(s));
+                            return `<option value="${h}" ${isMatch ? 'selected' : ''}>${h}</option>`;
+                        }).join('')}
+                    </select>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('geocoderColumnSelector').style.display = 'block';
+            document.getElementById('geocoderGeocodingOptions').style.display = 'block';
+            document.getElementById('geocoderGeocodeBtn').style.display = 'block';
+        }
+
+        async function startGeocoderGeocoding() {
+            const token = document.getElementById('geocoderMapboxToken').value.trim();
+            if (!token) {
+                alert('Please enter your Mapbox access token');
+                return;
+            }
+
+            if (!geocoderFile || !geocoderCsvData || geocoderCsvData.length === 0) {
+                alert('Please upload a CSV file first');
+                return;
+            }
+
+            const streetCol = document.getElementById('geocoderStreet').value;
+            const cityCol = document.getElementById('geocoderCity').value;
+            const stateCol = document.getElementById('geocoderState').value;
+            const zipCol = document.getElementById('geocoderZip').value;
+
+            if (!streetCol && !cityCol) {
+                alert('Please select at least a Street Address or City column');
+                return;
+            }
+
+            document.getElementById('geocoderProgress').style.display = 'block';
+            document.getElementById('geocoderGeocodeBtn').disabled = true;
+            document.getElementById('geocoderResults').style.display = 'none';
+
+            const countryCode = document.getElementById('geocoderCountryCode').value.trim() || 'US';
+            const includeOriginal = document.getElementById('geocoderIncludeOriginal').checked;
+
+            geocoderGeocodedData = [];
+            const total = geocoderCsvData.length;
+            let successCount = 0;
+            let failCount = 0;
+
+            for (let i = 0; i < total; i++) {
+                const row = geocoderCsvData[i];
+
+                const addressParts = [];
+                if (streetCol && row[streetCol] && row[streetCol].trim()) {
+                    addressParts.push(row[streetCol].trim());
+                }
+                if (cityCol && row[cityCol] && row[cityCol].trim()) {
+                    addressParts.push(row[cityCol].trim());
+                }
+                if (stateCol && row[stateCol] && row[stateCol].trim()) {
+                    addressParts.push(row[stateCol].trim());
+                }
+                if (zipCol && row[zipCol] && row[zipCol].trim()) {
+                    addressParts.push(row[zipCol].trim());
+                }
+
+                const address = addressParts.join(', ');
+
+                if (!address || address.trim() === '') {
+                    const cleanedRow = includeOriginal ? { ...row } : {};
+                    delete cleanedRow.Latitude;
+                    delete cleanedRow.Longitude;
+                    delete cleanedRow.latitude;
+                    delete cleanedRow.longitude;
+                    delete cleanedRow.Lat;
+                    delete cleanedRow.Lon;
+                    delete cleanedRow.Y;
+                    delete cleanedRow.X;
+
+                    const failedRow = {
+                        ...cleanedRow,
+                        address: 'No address data',
+                        Latitude: '',
+                        Longitude: '',
+                        geocoded_address: 'Skipped - no address data',
+                        confidence: 'N/A'
+                    };
+                    geocoderGeocodedData.push(failedRow);
+                    failCount++;
+
+                    const progress = ((i + 1) / total) * 100;
+                    document.getElementById('geocoderProgressBar').style.width = progress + '%';
+                    document.getElementById('geocoderProgressBar').textContent = Math.round(progress) + '%';
+                    document.getElementById('geocoderProgressText').textContent = `Skipping ${i + 1} of ${total}: No address data`;
+                    continue;
+                }
+
+                const progress = ((i + 1) / total) * 100;
+                document.getElementById('geocoderProgressBar').style.width = progress + '%';
+                document.getElementById('geocoderProgressBar').textContent = Math.round(progress) + '%';
+                document.getElementById('geocoderProgressText').textContent = `Geocoding ${i + 1} of ${total}: ${address.substring(0, 50)}...`;
+
+                try {
+                    const encodedAddress = encodeURIComponent(address);
+                    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${token}&country=${countryCode}&limit=1`;
+
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            throw new Error('Unauthorized - Check your Mapbox access token');
+                        }
+                        const errorText = await response.text();
+                        throw new Error(`Mapbox API error: ${response.status} ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+
+                    if (data.error) {
+                        throw new Error(`Mapbox API error: ${data.error}`);
+                    }
+
+                    if (data.features && data.features.length > 0) {
+                        const feature = data.features[0];
+                        const [lng, lat] = feature.center;
+
+                        const replaceCoordinates = document.querySelector('input[name="geocoderCoordinateHandling"]:checked')?.value === 'replace';
+                        const cleanedRow = includeOriginal ? { ...row } : {};
+
+                        if (replaceCoordinates || !includeOriginal) {
+                            delete cleanedRow.Latitude;
+                            delete cleanedRow.Longitude;
+                            delete cleanedRow.latitude;
+                            delete cleanedRow.longitude;
+                            delete cleanedRow.Lat;
+                            delete cleanedRow.Lon;
+                            delete cleanedRow.Y;
+                            delete cleanedRow.X;
+                        }
+
+                        const geocodedRow = {
+                            ...cleanedRow,
+                            address: address,
+                            Latitude: lat,
+                            Longitude: lng,
+                            geocoded_address: feature.place_name,
+                            confidence: feature.properties.confidence || 'N/A'
+                        };
+
+                        geocoderGeocodedData.push(geocodedRow);
+                        successCount++;
+                    } else {
+                        const cleanedRow = includeOriginal ? { ...row } : {};
+                        delete cleanedRow.Latitude;
+                        delete cleanedRow.Longitude;
+                        delete cleanedRow.latitude;
+                        delete cleanedRow.longitude;
+                        delete cleanedRow.Lat;
+                        delete cleanedRow.Lon;
+                        delete cleanedRow.Y;
+                        delete cleanedRow.X;
+
+                        const failedRow = {
+                            ...cleanedRow,
+                            address: address,
+                            Latitude: '',
+                            Longitude: '',
+                            geocoded_address: 'Not found',
+                            confidence: 'N/A'
+                        };
+                        geocoderGeocodedData.push(failedRow);
+                        failCount++;
+                    }
+                } catch (error) {
+                    const cleanedRow = includeOriginal ? { ...row } : {};
+                    delete cleanedRow.Latitude;
+                    delete cleanedRow.Longitude;
+                    delete cleanedRow.latitude;
+                    delete cleanedRow.longitude;
+                    delete cleanedRow.Lat;
+                    delete cleanedRow.Lon;
+                    delete cleanedRow.Y;
+                    delete cleanedRow.X;
+
+                    const failedRow = {
+                        ...cleanedRow,
+                        address: address,
+                        Latitude: '',
+                        Longitude: '',
+                        geocoded_address: 'Error: ' + error.message,
+                        confidence: 'N/A'
+                    };
+                    geocoderGeocodedData.push(failedRow);
+                    failCount++;
+                }
+
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+
+            document.getElementById('geocoderProgressBar').style.width = '100%';
+            document.getElementById('geocoderProgressBar').textContent = '100%';
+            document.getElementById('geocoderProgressText').textContent = `Complete! ${successCount} geocoded, ${failCount} failed.`;
+
+            document.getElementById('geocoderResultsSummary').innerHTML = `
+                <strong>Geocoding Results:</strong><br>
+                Successfully geocoded: ${successCount} addresses<br>
+                Failed: ${failCount} addresses<br>
+                Total processed: ${total} addresses
+            `;
+
+            document.getElementById('geocoderResults').style.display = 'block';
+            document.getElementById('geocoderGeocodeBtn').disabled = false;
+        }
+
+        function downloadGeocoderGeoJSON() {
+            if (!geocoderGeocodedData || geocoderGeocodedData.length === 0) {
+                alert('No geocoded data to download');
+                return;
+            }
+
+            const features = geocoderGeocodedData
+                .filter(row => {
+                    const lat = row.Latitude || row.latitude;
+                    const lng = row.Longitude || row.longitude;
+                    return lat && lng && lat !== '' && lng !== '';
+                })
+                .map(row => {
+                    const lat = parseFloat(row.Latitude || row.latitude);
+                    const lng = parseFloat(row.Longitude || row.longitude);
+                    return {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [lng, lat]
+                        },
+                        properties: Object.fromEntries(
+                            Object.entries(row).filter(([key]) =>
+                                key !== 'latitude' && key !== 'longitude' &&
+                                key !== 'Latitude' && key !== 'Longitude'
+                            )
+                        )
+                    };
+                });
+
+            const geojson = {
+                type: 'FeatureCollection',
+                features: features
+            };
+
+            const blob = new Blob([JSON.stringify(geojson, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = geocoderFile.name.replace('.csv', '_geocoded.geojson');
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function downloadGeocoderCSV() {
+            if (!geocoderGeocodedData || geocoderGeocodedData.length === 0) {
+                alert('No geocoded data to download');
+                return;
+            }
+
+            const cleanedData = geocoderGeocodedData.map(row => {
+                const cleaned = { ...row };
+
+                const lat = cleaned.Latitude || cleaned.latitude || '';
+                const lng = cleaned.Longitude || cleaned.longitude || '';
+
+                delete cleaned.latitude;
+                delete cleaned.longitude;
+                delete cleaned.Latitude;
+                delete cleaned.Longitude;
+                delete cleaned.Lat;
+                delete cleaned.Lon;
+                delete cleaned.Y;
+                delete cleaned.X;
+
+                cleaned.Latitude = lat && lat !== '' && lat !== '0' ? parseFloat(lat).toFixed(6) : '';
+                cleaned.Longitude = lng && lng !== '' && lng !== '0' ? parseFloat(lng).toFixed(6) : '';
+
+                return cleaned;
+            });
+
+            const allHeaders = Object.keys(cleanedData[0]);
+            const coordinateHeaders = ['Latitude', 'Longitude'];
+            const otherHeaders = allHeaders.filter(h => !coordinateHeaders.includes(h));
+
+            const finalHeaders = [...coordinateHeaders, ...otherHeaders];
+
+            const csvRows = [
+                finalHeaders.join(','),
+                ...cleanedData.map(row =>
+                    finalHeaders.map(header => {
+                        let value = row[header] || '';
+                        if ((header === 'Latitude' || header === 'Longitude') && value !== '') {
+                            const num = parseFloat(value);
+                            if (!isNaN(num)) {
+                                value = num.toFixed(6);
+                            }
+                        } else {
+                            value = `"${String(value).replace(/"/g, '""')}"`;
+                        }
+                        return value;
+                    }).join(',')
+                )
+            ];
+
+            const csv = csvRows.join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = geocoderFile.name.replace('.csv', '_geocoded.csv');
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
         }
     </script>
 </body>
