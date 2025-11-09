@@ -2227,7 +2227,7 @@
             const result = {};
 
             // lookupData is now a simple object: { "zipcode": { county, ecode, rcode, dcode }, ... }
-            // Convert to hierarchyMap with standardized keys
+            // Convert to hierarchyMap with standardized keys AND store the codes for ID columns
             const hierarchyMap = {};
             Object.keys(lookupData).forEach(zip => {
                 const data = lookupData[zip];
@@ -2235,7 +2235,12 @@
                     county: data.county,
                     chapter: data.ecode,
                     region: data.rcode,
-                    division: data.dcode
+                    division: data.dcode,
+                    // Store codes for audit columns
+                    county_name: data.county,
+                    ecode: data.ecode,
+                    rcode: data.rcode,
+                    dcode: data.dcode
                 };
             });
 
@@ -2316,6 +2321,12 @@
 
                         const row = {
                             key: zipKey,
+                            // Add ID columns for auditing
+                            county_name: hierarchy.county_name,
+                            ecode: hierarchy.ecode,
+                            rcode: hierarchy.rcode,
+                            dcode: hierarchy.dcode,
+                            // Add aggregated data
                             zip: baseAggregated[zipKey].aggregates,
                             county: countyTotals[hierarchy.county] || {},
                             chapter: chapterTotals[hierarchy.chapter] || {},
@@ -2391,12 +2402,18 @@
 
         function convertToCSV(level, data) {
             const levelKeyName = level === 'zip' ? 'ZIP' :
-                                level === 'county' ? 'County_FIPS' :
+                                level === 'county' ? 'County' :
                                 level === 'chapter' ? 'ECODE' :
                                 level === 'region' ? 'RCODE' : 'DCODE';
 
             // Create hierarchical headers based on output level
             const headers = [levelKeyName];
+
+            // Add ID columns for auditing (for ZIP level output)
+            if (level === 'zip') {
+                headers.push('County', 'ECODE', 'RCODE', 'DCODE');
+            }
+
             const levelOrder = {
                 'zip': ['zip', 'county', 'chapter', 'region', 'division'],
                 'county': ['county', 'chapter', 'region', 'division'],
@@ -2426,6 +2443,16 @@
             // Add data rows
             data.forEach(rowData => {
                 const values = [rowData.key];
+
+                // Add ID values for auditing (for ZIP level output)
+                if (level === 'zip') {
+                    values.push(
+                        `"${rowData.county_name || ''}"`,
+                        rowData.ecode || '',
+                        rowData.rcode || '',
+                        rowData.dcode || ''
+                    );
+                }
 
                 levelsToInclude.forEach(lvl => {
                     rollupAggregationConfig.fields.forEach(field => {
