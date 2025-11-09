@@ -43,12 +43,15 @@ Generate custom ArcGIS pop-up HTML with inline CSS
 - Generates Red Cross branded HTML with inline CSS
 - Copy-paste directly into ArcGIS Pro or Online
 
-### 6. **Mapbox Geocoder** 🌐
-Geocode addresses to GeoJSON or CSV
-- Upload CSV with addresses
-- Uses Mapbox Geocoding API
+### 6. **Address Geocoder** 🌐
+Geocode addresses to GeoJSON or CSV with 3 provider options
+- **Choose from 3 providers:** Geoapify, Mapbox, or Bing Maps
+- **Geoapify** (recommended): 3,000/day, no credit card, can cache results
+- **Mapbox**: 100,000/month (requires credit card)
+- **Bing Maps**: 125,000/year, no credit card
+- Upload CSV with address columns
 - Export to GeoJSON or CSV with coordinates
-- Batch geocoding support
+- Batch geocoding support with progress tracking
 
 ## 🚀 Quick Start
 
@@ -163,7 +166,7 @@ Your CSV must have:
 - **Data Processing:** Client-side CSV parsing, GeoJSON manipulation
 - **APIs:**
   - ArcGIS REST API (Red Cross geography)
-  - Mapbox Geocoding API (geocoding tool)
+  - Geoapify, Mapbox, & Bing Maps Geocoding APIs (multi-provider geocoding)
 - **No Backend Required:** All processing happens in your browser
 
 ## 📈 Performance
@@ -227,7 +230,9 @@ This tool uses public domain data from the US Census Bureau and official America
 - **US Census Bureau** - ZCTA boundary data
 - **American Red Cross** - Official geography and organizational structure
 - **ArcGIS Platform** - Hosting Red Cross Master Geography service
+- **Geoapify** - Geocoding API (recommended provider)
 - **Mapbox** - Geocoding API
+- **Bing Maps** - Geocoding API
 
 ## 🔗 Related Repositories
 
