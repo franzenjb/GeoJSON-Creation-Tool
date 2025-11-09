@@ -681,17 +681,37 @@
                     <div id="rollupAccordion" class="accordion-content">
                         <div class="accordion-content-inner">
                             <div class="explanation">
-                                <p><strong>What this tool does:</strong></p>
-                                <ul style="margin-left: 20px; margin-top: 8px;">
-                                    <li><strong>Aggregates</strong> row-level CSV data by ZIP code or County FIPS</li>
-                                    <li><strong>Rolls up</strong> totals through Red Cross hierarchy: ZIP → County → Chapter → Region → Division</li>
-                                    <li><strong>Outputs</strong> one comprehensive CSV with metrics at all 5 geographic levels</li>
-                                    <li><strong>Adds</strong> FIPS, ECODE, RCODE, DCODE codes automatically</li>
-                                    <li><strong>Ready for mapping:</strong> Use output in "Create GeoJSON" tab (Tab 3) to visualize at any level</li>
-                                </ul>
-                                <p style="margin-top: 12px; padding: 10px; background: #f0f9ff; border-left: 3px solid #0284c7; font-size: 0.9em;">
-                                    <strong>💡 Pro Tip:</strong> Upload ZIP-level data here, then create Division or Region maps in Tab 3 - no manual aggregation needed!
-                                </p>
+                                <p style="font-size: 1.05em; color: #333; margin-bottom: 15px;"><strong>Turn raw ZIP-level data into multi-level insights in seconds</strong></p>
+
+                                <div style="background: #fff; border: 2px solid #DC143C; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                                    <p style="margin-bottom: 10px; font-weight: 600; color: #DC143C;">📤 INPUT: Your raw data</p>
+                                    <div style="background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.85em;">
+                                        ZIP, Incidents, Revenue<br>
+                                        10001, 5, 1250<br>
+                                        10002, 3, 890<br>
+                                        10003, 7, 2100
+                                    </div>
+                                </div>
+
+                                <div style="background: #fff; border: 2px solid #10b981; border-radius: 8px; padding: 15px;">
+                                    <p style="margin-bottom: 10px; font-weight: 600; color: #10b981;">📥 OUTPUT: Complete hierarchy at all 5 levels</p>
+                                    <div style="background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.85em;">
+                                        ZIP, County, DCODE, Incidents (ZIP), Incidents (Division)...<br>
+                                        10001, "New York, NY", D27, 5, 649<br>
+                                        <span style="color: #10b981;">↳ Auto-calculated Division totals</span><br>
+                                        <span style="color: #10b981;">↳ Auto-added FIPS, ECODE, RCODE, DCODE</span>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px; padding: 12px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 4px solid #f59e0b; border-radius: 6px;">
+                                    <p style="margin: 0; font-weight: 600; color: #92400e;">⚡ Why this is powerful:</p>
+                                    <ul style="margin: 8px 0 0 20px; color: #92400e;">
+                                        <li>One upload creates data for <strong>all 5 geographic levels</strong></li>
+                                        <li>Skip Excel pivot tables and manual aggregation</li>
+                                        <li>Instantly ready for Tab 3 → create Division/Region maps</li>
+                                        <li>100% Red Cross hierarchy compliance (3,162 counties, 226 chapters)</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
