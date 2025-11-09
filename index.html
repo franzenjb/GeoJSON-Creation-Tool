@@ -2192,7 +2192,30 @@
 
             const csvText = await response.text();
             const lines = csvText.split('\n').filter(line => line.trim());
-            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+
+            // Proper CSV parser that handles quoted fields with commas
+            function parseCSVLine(line) {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        result.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                result.push(current.trim());
+                return result;
+            }
+
+            const headers = parseCSVLine(lines[0]);
 
             // Find column indices
             const geoIdIdx = headers.indexOf('GEO_ID');
@@ -2204,7 +2227,7 @@
             // Parse CSV rows into lookup object
             const lookupData = {};
             lines.slice(1).forEach(line => {
-                const values = line.split(',').map(v => v.trim().replace(/"/g, ''));
+                const values = parseCSVLine(line);
                 const geoId = values[geoIdIdx];
                 if (!geoId) return;
 
