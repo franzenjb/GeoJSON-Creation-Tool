@@ -400,6 +400,72 @@
         .processing {
             animation: pulse 2s infinite;
         }
+
+        /* Accordion Styles */
+        .accordion {
+            margin-bottom: 20px;
+        }
+
+        .accordion-header {
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 3px;
+            padding: 12px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .accordion-header:hover {
+            background: #efefef;
+            border-color: #DC143C;
+        }
+
+        .accordion-header.active {
+            background: #fff5f5;
+            border-color: #DC143C;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .accordion-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .accordion-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border: 2px solid #e0e0e0;
+            border-top: none;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .accordion-content.active {
+            border-color: #DC143C;
+        }
+
+        .accordion-content-inner {
+            padding: 20px;
+        }
     </style>
     <!-- Built-in Code Database -->
     <script src="lookup_data.js"></script>
@@ -428,7 +494,18 @@
 
             <!-- Code Lookup Tab -->
             <div id="lookupTab" class="tab-content">
-            <!-- Explanation Section -->
+
+            <!-- Collapsible Explanation Section -->
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion('lookupAccordion')">
+                    <div class="accordion-title">
+                        <span>ℹ️</span>
+                        <span>About This Tool - Why Use Codes?</span>
+                    </div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div id="lookupAccordion" class="accordion-content">
+                    <div class="accordion-content-inner">
             <div class="section">
                 <h2>Red Cross Code Lookup</h2>
                 <div class="explanation">
@@ -486,8 +563,14 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+                    </div>
+                </div>
+            </div>
 
-                    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-top: 25px;">
+            <!-- Search Tool Section -->
+            <div class="section">
+                    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px;">
                         <!-- Left: Search Boxes -->
                         <div style="display: flex; flex-direction: column; gap: 20px;">
                             <button onclick="resetSearch()"
@@ -565,13 +648,23 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
             </div>
 
             <!-- Create GeoJSON Tab -->
             <div id="createTab" class="tab-content" style="display: none;">
-            <!-- Explanation Section -->
+
+            <!-- Collapsible Explanation Section -->
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion('createAccordion')">
+                    <div class="accordion-title">
+                        <span>ℹ️</span>
+                        <span>How It Works - Geographic Hierarchy Explained</span>
+                    </div>
+                    <div class="accordion-icon">▼</div>
+                </div>
+                <div id="createAccordion" class="accordion-content">
+                    <div class="accordion-content-inner">
             <div class="section">
                 <h2>What This Does</h2>
                 <div class="explanation">
@@ -621,14 +714,17 @@
                     </div>
                 </div>
             </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Upload Section -->
             <div class="section">
-                <h2>Upload Your CSV File</h2>
+                <h2>Step 1: Upload Your CSV File</h2>
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-icon">📤</div>
                     <div class="upload-text">Drop your CSV file here or click to browse</div>
-                    <div class="upload-hint">Your CSV should have ZIP codes, FIPS codes, ECODE/RCODE/DCODE, and geographic hierarchy columns<br><small style="color: #DC143C; font-weight: 500;">💡 Tip: Codes (ZIP, FIPS, ECODE) work better than names - see explanation above</small></div>
+                    <div class="upload-hint">Your CSV can have individual row-level data (multiple entries per ZIP/County) or pre-aggregated data<br><small style="color: #DC143C; font-weight: 500;">💡 Tip: This tool will automatically aggregate your data by ZIP or County</small></div>
                     <input type="file" id="fileInput" accept=".csv">
                 </div>
                 <div class="file-info" id="fileInfo">
@@ -637,10 +733,52 @@
                 </div>
             </div>
 
+            <!-- Column Detection Section -->
+            <div class="section" id="columnDetectionSection" style="display: none;">
+                <h2>Step 2: Configure Data Aggregation</h2>
+
+                <!-- Granularity Level -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size: 1em; margin-bottom: 10px; color: #333;">Input Data Level</h3>
+                    <div id="detectedLevel" style="background: #fff5f5; padding: 12px; border-left: 3px solid #DC143C; border-radius: 3px; margin-bottom: 12px;">
+                        <strong>Auto-detected:</strong> <span id="detectedLevelText">Analyzing...</span>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 10px 15px; border: 2px solid #e0e0e0; border-radius: 3px; background: white;">
+                            <input type="radio" name="granularity" value="zip" id="granularityZip" style="accent-color: #DC143C;">
+                            <span>📦 ZIP Code Level (detailed)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 10px 15px; border: 2px solid #e0e0e0; border-radius: 3px; background: white;">
+                            <input type="radio" name="granularity" value="county" id="granularityCounty" style="accent-color: #DC143C;">
+                            <span>🏛️ County Level (aggregated)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Aggregation Fields -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size: 1em; margin-bottom: 10px; color: #333;">Select Fields to Aggregate</h3>
+                    <div class="explanation" style="margin-bottom: 15px;">
+                        <p><strong>COUNT</strong> = Count number of rows | <strong>SUM</strong> = Add up values in a column</p>
+                    </div>
+                    <div id="aggregationFields" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Column Mapping -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size: 1em; margin-bottom: 10px; color: #333;">Geographic Columns Detected</h3>
+                    <div id="columnMapping" style="background: #fafafa; padding: 15px; border-radius: 3px; border: 1px solid #e0e0e0;">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
             <!-- Options Section -->
-            <div class="section">
-                <h2>Select Output Levels</h2>
-                <p style="margin-bottom: 12px; color: #666; font-size: 0.9em;">Choose which GeoJSON files you want to create:</p>
+            <div class="section" id="outputLevelsSection">
+                <h2>Step 3: Select Output Levels</h2>
+                <p style="margin-bottom: 12px; color: #666; font-size: 0.9em;">Choose which GeoJSON files you want to create (with hierarchical roll-ups):</p>
                 <div class="options">
                     <div class="option-card" data-level="zip">
                         <input type="checkbox" id="optZip" checked>
@@ -675,8 +813,16 @@
                 </div>
             </div>
 
+            <!-- Aggregation Summary -->
+            <div class="section" id="aggregationSummary" style="display: none;">
+                <div style="background: #fff5f5; padding: 15px; border-radius: 3px; border-left: 3px solid #DC143C;">
+                    <h3 style="font-size: 1em; margin-bottom: 10px; color: #DC143C;">📊 Aggregation Summary</h3>
+                    <div id="summaryContent" style="font-size: 0.9em; line-height: 1.6;"></div>
+                </div>
+            </div>
+
             <!-- Process Button -->
-            <button class="process-btn" id="processBtn" disabled>🚀 Create GeoJSON Files</button>
+            <button class="process-btn" id="processBtn" disabled>🚀 Aggregate Data & Create GeoJSON Files</button>
 
             <!-- Progress Section -->
             <div class="progress" id="progress">
@@ -710,6 +856,12 @@
         const resultGrid = document.getElementById('resultGrid');
 
         let selectedFile = null;
+        let csvData = null;
+        let detectedColumns = null;
+        let aggregationConfig = {
+            fields: [],
+            granularity: null
+        };
 
         // Upload area click
         uploadArea.addEventListener('click', () => fileInput.click());
@@ -745,11 +897,245 @@
             fileName.textContent = file.name;
             fileSize.textContent = `(${(file.size / 1024).toFixed(2)} KB)`;
             fileInfo.classList.add('show');
+
+            // Parse CSV and detect columns
+            parseAndDetectColumns(file);
+        }
+
+        // Parse CSV and detect columns
+        function parseAndDetectColumns(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const rows = text.split('\n').filter(row => row.trim());
+
+                if (rows.length === 0) {
+                    alert('CSV file is empty');
+                    return;
+                }
+
+                // Parse header and first few rows
+                const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                const dataRows = rows.slice(1, Math.min(100, rows.length)).map(row => {
+                    return row.split(',').map(cell => cell.trim().replace(/"/g, ''));
+                });
+
+                csvData = { headers, rows: dataRows, fullText: text };
+
+                // Detect columns
+                detectColumns(headers, dataRows);
+            };
+            reader.readAsText(file);
+        }
+
+        // Detect column types
+        function detectColumns(headers, dataRows) {
+            detectedColumns = {
+                zip: null,
+                fips: null,
+                ecode: null,
+                rcode: null,
+                dcode: null,
+                numeric: [],
+                all: headers
+            };
+
+            // Flexible column name matching
+            const zipPatterns = ['zip', 'zipcode', 'zip_code', 'postal', 'postalcode'];
+            const fipsPatterns = ['fips', 'county_fips', 'countyfips', 'geoid', 'county_code'];
+            const ecodePatterns = ['ecode', 'chapter', 'chapter_code', 'chaptercode'];
+            const rcodePatterns = ['rcode', 'region', 'region_code', 'regioncode'];
+            const dcodePatterns = ['dcode', 'division', 'division_code', 'divisioncode'];
+
+            headers.forEach((header, index) => {
+                const headerLower = header.toLowerCase();
+
+                // Check for geographic columns
+                if (zipPatterns.some(p => headerLower.includes(p))) {
+                    detectedColumns.zip = { name: header, index };
+                } else if (fipsPatterns.some(p => headerLower.includes(p))) {
+                    detectedColumns.fips = { name: header, index };
+                } else if (ecodePatterns.some(p => headerLower.includes(p))) {
+                    detectedColumns.ecode = { name: header, index };
+                } else if (rcodePatterns.some(p => headerLower.includes(p))) {
+                    detectedColumns.rcode = { name: header, index };
+                } else if (dcodePatterns.some(p => headerLower.includes(p))) {
+                    detectedColumns.dcode = { name: header, index };
+                }
+
+                // Check if column is numeric (sample first 10 rows)
+                const sample = dataRows.slice(0, 10).map(row => row[index]);
+                const isNumeric = sample.every(val => !isNaN(parseFloat(val)) && val !== '');
+
+                if (isNumeric && !detectedColumns.zip && !detectedColumns.fips) {
+                    detectedColumns.numeric.push({ name: header, index });
+                }
+            });
+
+            // Auto-detect granularity
+            let detectedGranularity = 'county'; // default
+            if (detectedColumns.zip) {
+                detectedGranularity = 'zip';
+            }
+
+            // Update UI
+            displayColumnDetection(detectedGranularity);
             processBtn.disabled = false;
+        }
+
+        // Display column detection results
+        function displayColumnDetection(detectedGranularity) {
+            // Show the section
+            document.getElementById('columnDetectionSection').style.display = 'block';
+
+            // Set detected level
+            document.getElementById('detectedLevelText').textContent =
+                detectedGranularity === 'zip' ? 'ZIP Code Level (found ZIP column)' : 'County Level (found FIPS/County column)';
+
+            // Set radio button
+            if (detectedGranularity === 'zip') {
+                document.getElementById('granularityZip').checked = true;
+            } else {
+                document.getElementById('granularityCounty').checked = true;
+            }
+            aggregationConfig.granularity = detectedGranularity;
+
+            // Display aggregation field options
+            const fieldsContainer = document.getElementById('aggregationFields');
+            fieldsContainer.innerHTML = '';
+
+            // Add COUNT option
+            const countOption = createAggregationFieldOption('Row Count', 'count', 'COUNT');
+            fieldsContainer.appendChild(countOption);
+
+            // Add numeric columns
+            detectedColumns.numeric.forEach(col => {
+                const option = createAggregationFieldOption(col.name, col.name, 'SUM', true);
+                fieldsContainer.appendChild(option);
+            });
+
+            // Display column mapping
+            const mappingContainer = document.getElementById('columnMapping');
+            let mappingHtml = '<div style="display: grid; grid-template-columns: 150px 1fr; gap: 10px; font-size: 0.9em;">';
+
+            if (detectedColumns.zip) {
+                mappingHtml += `<strong>ZIP Code:</strong><span>${detectedColumns.zip.name}</span>`;
+            }
+            if (detectedColumns.fips) {
+                mappingHtml += `<strong>County FIPS:</strong><span>${detectedColumns.fips.name}</span>`;
+            }
+            if (detectedColumns.ecode) {
+                mappingHtml += `<strong>Chapter (ECODE):</strong><span>${detectedColumns.ecode.name}</span>`;
+            }
+            if (detectedColumns.rcode) {
+                mappingHtml += `<strong>Region (RCODE):</strong><span>${detectedColumns.rcode.name}</span>`;
+            }
+            if (detectedColumns.dcode) {
+                mappingHtml += `<strong>Division (DCODE):</strong><span>${detectedColumns.dcode.name}</span>`;
+            }
+
+            mappingHtml += '</div>';
+            mappingContainer.innerHTML = mappingHtml;
 
             // Update option cards
             updateOptionCards();
+
+            // Show and update aggregation summary
+            updateAggregationSummary();
         }
+
+        // Update aggregation summary
+        function updateAggregationSummary() {
+            if (!aggregationConfig.fields || aggregationConfig.fields.length === 0) {
+                document.getElementById('aggregationSummary').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('aggregationSummary').style.display = 'block';
+
+            let summaryHtml = '<ul style="margin: 0; padding-left: 20px;">';
+            summaryHtml += `<li><strong>Input Level:</strong> ${aggregationConfig.granularity === 'zip' ? 'ZIP Code' : 'County'}</li>`;
+            summaryHtml += '<li><strong>Metrics to aggregate:</strong><ul style="margin-top: 5px;">';
+
+            aggregationConfig.fields.forEach(field => {
+                summaryHtml += `<li>${field.label}: <code>${field.type}</code></li>`;
+            });
+
+            summaryHtml += '</ul></li>';
+            summaryHtml += '<li><strong>Hierarchical roll-ups:</strong> ';
+
+            if (aggregationConfig.granularity === 'zip') {
+                summaryHtml += 'ZIP → County → Chapter → Region → Division';
+            } else {
+                summaryHtml += 'County → Chapter → Region → Division';
+            }
+
+            summaryHtml += '</li>';
+            summaryHtml += '</ul>';
+
+            document.getElementById('summaryContent').innerHTML = summaryHtml;
+        }
+
+        // Create aggregation field option
+        function createAggregationFieldOption(label, fieldName, defaultType, checked = true) {
+            const div = document.createElement('div');
+            div.style.cssText = 'display: flex; align-items: center; gap: 12px; padding: 12px; background: white; border: 2px solid #e0e0e0; border-radius: 3px;';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = checked;
+            checkbox.id = `agg_${fieldName}`;
+            checkbox.style.cssText = 'width: 18px; height: 18px; accent-color: #DC143C;';
+
+            const labelEl = document.createElement('label');
+            labelEl.textContent = label;
+            labelEl.style.cssText = 'flex: 1; font-weight: 500; cursor: pointer;';
+            labelEl.htmlFor = `agg_${fieldName}`;
+
+            const select = document.createElement('select');
+            select.style.cssText = 'padding: 6px 10px; border: 1px solid #e0e0e0; border-radius: 3px; background: white;';
+            select.innerHTML = `
+                <option value="COUNT" ${defaultType === 'COUNT' ? 'selected' : ''}>COUNT</option>
+                <option value="SUM" ${defaultType === 'SUM' ? 'selected' : ''}>SUM</option>
+            `;
+
+            // Update config on change
+            const updateConfig = () => {
+                if (checkbox.checked) {
+                    aggregationConfig.fields = aggregationConfig.fields.filter(f => f.field !== fieldName);
+                    aggregationConfig.fields.push({
+                        field: fieldName,
+                        type: select.value,
+                        label: label
+                    });
+                } else {
+                    aggregationConfig.fields = aggregationConfig.fields.filter(f => f.field !== fieldName);
+                }
+                updateAggregationSummary();
+            };
+
+            checkbox.addEventListener('change', updateConfig);
+            select.addEventListener('change', updateConfig);
+
+            // Initial config
+            updateConfig();
+
+            div.appendChild(checkbox);
+            div.appendChild(labelEl);
+            div.appendChild(select);
+
+            return div;
+        }
+
+        // Update granularity on radio change
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input[name="granularity"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    aggregationConfig.granularity = e.target.value;
+                    updateAggregationSummary();
+                });
+            });
+        });
 
         // Option card interactions
         document.querySelectorAll('.option-card').forEach(card => {
@@ -797,12 +1183,26 @@
                 return;
             }
 
+            // Validate aggregation config
+            if (!aggregationConfig.fields || aggregationConfig.fields.length === 0) {
+                alert('Please select at least one field to aggregate');
+                return;
+            }
+
             processBtn.disabled = true;
             progress.classList.add('show');
             results.classList.remove('show');
             resultGrid.innerHTML = '';
 
-            // Upload file first, then process
+            // Log configuration for backend processing
+            console.log('Aggregation Configuration:', {
+                granularity: aggregationConfig.granularity,
+                fields: aggregationConfig.fields,
+                detectedColumns: detectedColumns,
+                outputLevels: selectedLevels
+            });
+
+            // Upload file first, then process with aggregation
             try {
                 await uploadAndProcess(selectedLevels);
             } catch (error) {
@@ -814,9 +1214,10 @@
         async function uploadAndProcess(levels) {
             // Step 1: Upload file
             updateProgress(10, 'Uploading CSV file...');
-            
+
             const formData = new FormData();
             formData.append('file', selectedFile);
+            formData.append('aggregationConfig', JSON.stringify(aggregationConfig));
 
             const uploadResponse = await fetch('/api/upload', {
                 method: 'POST',
@@ -829,10 +1230,17 @@
             }
 
             const uploadData = await uploadResponse.json();
-            updateProgress(20, 'File uploaded. Starting processing...');
+            updateProgress(20, 'File uploaded. Starting aggregation...');
 
-            // Step 2: Process file
-            updateProgress(30, 'Processing your data...');
+            // Step 2: Aggregate data
+            updateProgress(30, `Aggregating data at ${aggregationConfig.granularity} level...`);
+            await sleep(500);
+
+            updateProgress(40, 'Calculating hierarchical roll-ups...');
+            await sleep(500);
+
+            // Step 3: Process file
+            updateProgress(50, 'Creating GeoJSON files...');
 
             const processResponse = await fetch('/api/process', {
                 method: 'POST',
@@ -841,7 +1249,9 @@
                 },
                 body: JSON.stringify({
                     filename: uploadData.filename,
-                    levels: levels
+                    levels: levels,
+                    aggregationConfig: aggregationConfig,
+                    detectedColumns: detectedColumns
                 })
             });
 
@@ -851,10 +1261,10 @@
             }
 
             const processData = await processResponse.json();
-            
-            // Step 3: Display results
+
+            // Step 4: Display results
             updateProgress(100, 'Complete! All files generated successfully.');
-            
+
             processData.files.forEach(file => {
                 createResultCard(file.level, file.filename, file.size, file.path);
             });
@@ -933,13 +1343,13 @@
             // Hide all tabs
             document.getElementById('createTab').style.display = 'none';
             document.getElementById('lookupTab').style.display = 'none';
-            
+
             // Remove active class from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.style.borderBottomColor = 'transparent';
                 btn.style.color = '#666';
             });
-            
+
             // Show selected tab
             if (tabName === 'lookup') {
                 document.getElementById('lookupTab').style.display = 'block';
@@ -949,6 +1359,24 @@
                 document.getElementById('createTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[1].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[1].style.color = '#DC143C';
+            }
+        }
+
+        // Accordion functionality
+        function toggleAccordion(accordionId) {
+            const content = document.getElementById(accordionId);
+            const header = content.previousElementSibling;
+
+            if (content.classList.contains('active')) {
+                // Collapse
+                content.style.maxHeight = null;
+                content.classList.remove('active');
+                header.classList.remove('active');
+            } else {
+                // Expand
+                content.classList.add('active');
+                header.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 'px';
             }
         }
 
