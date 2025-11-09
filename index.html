@@ -428,11 +428,12 @@
 
             <!-- Code Lookup Tab -->
             <div id="lookupTab" class="tab-content">
-                <div class="section">
-                    <h2>Red Cross Code Lookup</h2>
-                    <div class="explanation">
-                        <p>Built-in database of all Red Cross chapters, regions, divisions, and counties. Search by name to find ECODE, RCODE, DCODE, and FIPS codes instantly.</p>
-                    </div>
+            <!-- Explanation Section -->
+            <div class="section">
+                <h2>Red Cross Code Lookup</h2>
+                <div class="explanation">
+                    <p>Built-in database of all Red Cross chapters, regions, divisions, and counties. Search by name to find ECODE, RCODE, DCODE, and FIPS codes instantly.</p>
+                </div>
 
                 <h2>Why Use Codes Instead of Names?</h2>
                 <div class="explanation" style="background: #fff5f5; border-left: 3px solid #DC143C;">
@@ -484,6 +485,97 @@
                             <li>International standards (FIPS is federal standard, ZIP is USPS standard)</li>
                         </ul>
                     </div>
+                </div>
+
+                    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-top: 25px;">
+                        <!-- Left: Search Boxes -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <button onclick="resetSearch()"
+                                    style="padding: 10px 20px; background: #DC143C; color: white; border: none; border-radius: 3px; font-weight: 600; font-size: 0.9em; cursor: pointer; margin-bottom: 10px; transition: background 0.2s;"
+                                    onmouseover="this.style.background='#b01030'"
+                                    onmouseout="this.style.background='#DC143C'">
+                                🔄 Reset All Searches
+                            </button>
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Chapter Name or ECODE</label>
+                                <input type="text" id="chapterSearch" placeholder="e.g., ARC serving Mid Alabama or 1019"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Region Name or RCODE</label>
+                                <input type="text" id="regionSearch" placeholder="e.g., Alabama Region or 01R04"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Division Name or DCODE</label>
+                                <input type="text" id="divisionSearch" placeholder="e.g., Southeast Division or D25"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+
+                            <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #e0e0e0;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">ZIP Code</label>
+                                <input type="text" id="zipSearch" placeholder="e.g., 33704"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">County Name</label>
+                                <input type="text" id="countySearch" placeholder="e.g., Broward"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">State (shows state code + counties)</label>
+                                <input type="text" id="stateSearch" placeholder="e.g., FL or Florida"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">FIPS Code (5-digit: State+County)</label>
+                                <input type="text" id="fipsSearch" placeholder="e.g., 12011 (FL=12, Broward=011)"
+                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
+                                       oninput="searchCodes()">
+                            </div>
+                        </div>
+
+                        <!-- Right: Results -->
+                        <div id="resultsPanel" style="min-height: 400px; padding: 20px; background: white; border: 2px solid #e0e0e0; border-radius: 3px;">
+                            <div id="noResults" style="text-align: center; padding: 40px; color: #999;">
+                                <div style="font-size: 3em; margin-bottom: 15px;">🔍</div>
+                                <div style="font-size: 1.1em; font-weight: 500;">Enter a search term to find codes</div>
+                                <div style="font-size: 0.9em; margin-top: 8px; color: #bbb;">Search by Chapter, Region, Division, County, State, or FIPS</div>
+                            </div>
+
+                            <div id="codeResults" style="display: none;">
+                                <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 6px;">Red Cross Codes</h3>
+                                <div id="codeResultsContent" style="display: flex; flex-direction: column; gap: 0;"></div>
+                            </div>
+
+                            <div id="countyResultsSection" style="display: none; margin-top: 25px;">
+                                <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 6px;">County & FIPS Codes</h3>
+                                <div id="countyResultsContent" style="display: flex; flex-direction: column; gap: 0;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Create GeoJSON Tab -->
+            <div id="createTab" class="tab-content" style="display: none;">
+            <!-- Explanation Section -->
+            <div class="section">
+                <h2>What This Does</h2>
+                <div class="explanation">
+                    <p>This tool takes your CSV file with geographic identifiers (ZIP codes, FIPS codes, etc.) and automatically creates GeoJSON files at multiple aggregation levels. Perfect for creating choropleth maps in ArcGIS Online, web applications, or data visualization tools.</p>
                 </div>
 
                 <h2>Geographic Hierarchy</h2>
@@ -598,97 +690,6 @@
             <div class="results" id="results">
                 <h2>Generated Files</h2>
                 <div class="result-grid" id="resultGrid"></div>
-            </div>
-            </div>
-
-            <!-- Create GeoJSON Tab -->
-            <div id="createTab" class="tab-content" style="display: none;">
-            <!-- Explanation Section -->
-            <div class="section">
-                <h2>What This Does</h2>
-                <div class="explanation">
-                    <p>This tool takes your CSV file with geographic identifiers (ZIP codes, FIPS codes, etc.) and automatically creates GeoJSON files at multiple aggregation levels. Perfect for creating choropleth maps in ArcGIS Online, web applications, or data visualization tools.</p>
-                </div>
-
-                    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-top: 25px;">
-                        <!-- Left: Search Boxes -->
-                        <div style="display: flex; flex-direction: column; gap: 20px;">
-                            <button onclick="resetSearch()" 
-                                    style="padding: 10px 20px; background: #DC143C; color: white; border: none; border-radius: 3px; font-weight: 600; font-size: 0.9em; cursor: pointer; margin-bottom: 10px; transition: background 0.2s;"
-                                    onmouseover="this.style.background='#b01030'" 
-                                    onmouseout="this.style.background='#DC143C'">
-                                🔄 Reset All Searches
-                            </button>
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Chapter Name or ECODE</label>
-                                <input type="text" id="chapterSearch" placeholder="e.g., ARC serving Mid Alabama or 1019" 
-                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                       oninput="searchCodes()">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Region Name or RCODE</label>
-                                <input type="text" id="regionSearch" placeholder="e.g., Alabama Region or 01R04" 
-                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                       oninput="searchCodes()">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">Division Name or DCODE</label>
-                                <input type="text" id="divisionSearch" placeholder="e.g., Southeast Division or D25" 
-                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                       oninput="searchCodes()">
-                            </div>
-                            
-                            <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #e0e0e0;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">ZIP Code</label>
-                                <input type="text" id="zipSearch" placeholder="e.g., 33704" 
-                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                       oninput="searchCodes()">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">County Name</label>
-                                <input type="text" id="countySearch" placeholder="e.g., Broward" 
-                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                       oninput="searchCodes()">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">State (shows state code + counties)</label>
-                                <input type="text" id="stateSearch" placeholder="e.g., FL or Florida" 
-                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                       oninput="searchCodes()">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 0.9em;">FIPS Code (5-digit: State+County)</label>
-                                <input type="text" id="fipsSearch" placeholder="e.g., 12011 (FL=12, Broward=011)" 
-                                       style="width: 100%; padding: 8px 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;"
-                                       oninput="searchCodes()">
-                            </div>
-                        </div>
-
-                        <!-- Right: Results -->
-                        <div id="resultsPanel" style="min-height: 400px; padding: 20px; background: white; border: 2px solid #e0e0e0; border-radius: 3px;">
-                            <div id="noResults" style="text-align: center; padding: 40px; color: #999;">
-                                <div style="font-size: 3em; margin-bottom: 15px;">🔍</div>
-                                <div style="font-size: 1.1em; font-weight: 500;">Enter a search term to find codes</div>
-                                <div style="font-size: 0.9em; margin-top: 8px; color: #bbb;">Search by Chapter, Region, Division, County, State, or FIPS</div>
-                            </div>
-                            
-                            <div id="codeResults" style="display: none;">
-                                <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 6px;">Red Cross Codes</h3>
-                                <div id="codeResultsContent" style="display: flex; flex-direction: column; gap: 0;"></div>
-                            </div>
-                            
-                            <div id="countyResultsSection" style="display: none; margin-top: 25px;">
-                                <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #DC143C; border-bottom: 2px solid #DC143C; padding-bottom: 6px;">County & FIPS Codes</h3>
-                                <div id="countyResultsContent" style="display: flex; flex-direction: column; gap: 0;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             </div>
         </div>
