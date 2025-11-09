@@ -473,6 +473,9 @@
     <script src="zip_to_fips.js"></script>
     <!-- State Name Mapping -->
     <script src="state_names.js"></script>
+    <!-- Leaflet for map preview -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
     <div class="container">
@@ -832,6 +835,22 @@
                 <div class="status" id="status">Ready to process...</div>
             </div>
 
+            <!-- Preview Map Section -->
+            <div class="results" id="previewSection" style="display: none;">
+                <h2>Map Preview</h2>
+                <div style="margin-bottom: 15px;">
+                    <label for="previewLevel" style="font-weight: 600; margin-right: 10px;">View Level:</label>
+                    <select id="previewLevel" style="padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 3px;">
+                        <option value="zip">ZIP Codes</option>
+                        <option value="county">Counties</option>
+                        <option value="chapter">Chapters</option>
+                        <option value="region">Regions</option>
+                        <option value="division">Divisions</option>
+                    </select>
+                </div>
+                <div id="map" style="height: 500px; border: 2px solid #e0e0e0; border-radius: 3px;"></div>
+            </div>
+
             <!-- Results Section -->
             <div class="results" id="results">
                 <h2>Generated Files</h2>
@@ -862,6 +881,28 @@
             fields: [],
             granularity: null
         };
+
+        // Geographic boundary data (loaded on demand)
+        let geoBoundaries = {
+            zip: null,
+            county: null,
+            chapter: null,
+            region: null,
+            division: null
+        };
+
+        // Generated GeoJSON results
+        let generatedGeoJSON = {
+            zip: null,
+            county: null,
+            chapter: null,
+            region: null,
+            division: null
+        };
+
+        // Leaflet map
+        let previewMap = null;
+        let currentLayer = null;
 
         // Upload area click
         uploadArea.addEventListener('click', () => fileInput.click());
@@ -1224,66 +1265,234 @@
             }
         });
 
+        // CLIENT-SIDE PROCESSING
         async function uploadAndProcess(levels) {
-            // Step 1: Upload file
-            updateProgress(10, 'Uploading CSV file...');
+            try {
+                // Step 1: Parse full CSV
+                updateProgress(5, 'Parsing CSV file...');
+                const fullCSV = await parseFullCSV(selectedFile);
 
-            const formData = new FormData();
-            formData.append('file', selectedFile);
-            formData.append('aggregationConfig', JSON.stringify(aggregationConfig));
+                // Step 2: Aggregate data
+                updateProgress(15, `Aggregating data at ${aggregationConfig.granularity} level...`);
+                const aggregated = aggregateData(fullCSV);
 
-            const uploadResponse = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData
+                // Step 3: Load boundary files for selected levels
+                updateProgress(30, 'Loading geographic boundaries...');
+                await loadBoundaries(levels);
+
+                // Step 4: Perform joins and create GeoJSON
+                updateProgress(50, 'Creating GeoJSON files...');
+                await createGeoJSONFiles(aggregated, levels);
+
+                // Step 5: Show preview map
+                updateProgress(90, 'Generating preview map...');
+                showPreviewMap(levels[0]);
+
+                // Step 6: Display download links
+                updateProgress(100, 'Complete! All files generated successfully.');
+                displayDownloadLinks(levels);
+
+                processBtn.disabled = false;
+                processBtn.textContent = '✨ Process Complete - Upload Another File';
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        // Parse entire CSV file
+        async function parseFullCSV(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const text = e.target.result;
+                    const rows = text.split('\n').filter(row => row.trim());
+
+                    if (rows.length === 0) {
+                        reject(new Error('CSV file is empty'));
+                        return;
+                    }
+
+                    const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, '').replace(/^\uFEFF/, ''));
+                    const dataRows = rows.slice(1).map(row => {
+                        return row.split(',').map(cell => cell.trim().replace(/"/g, ''));
+                    });
+
+                    resolve({ headers, dataRows });
+                };
+                reader.onerror = () => reject(new Error('Failed to read file'));
+                reader.readAsText(file);
             });
+        }
 
-            if (!uploadResponse.ok) {
-                const error = await uploadResponse.json();
-                throw new Error(error.error || 'Upload failed');
+        // Aggregate CSV data
+        function aggregateData(csvData) {
+            const { headers, dataRows } = csvData;
+            const groupKey = aggregationConfig.granularity === 'zip' ? 'zip' : 'fips';
+            const keyColumn = detectedColumns[groupKey];
+
+            if (!keyColumn) {
+                throw new Error(`No ${groupKey.toUpperCase()} column found`);
             }
 
-            const uploadData = await uploadResponse.json();
-            updateProgress(20, 'File uploaded. Starting aggregation...');
+            const grouped = {};
 
-            // Step 2: Aggregate data
-            updateProgress(30, `Aggregating data at ${aggregationConfig.granularity} level...`);
-            await sleep(500);
+            // Group rows by key
+            dataRows.forEach(row => {
+                const key = row[keyColumn.index];
+                if (!key) return;
 
-            updateProgress(40, 'Calculating hierarchical roll-ups...');
-            await sleep(500);
-
-            // Step 3: Process file
-            updateProgress(50, 'Creating GeoJSON files...');
-
-            const processResponse = await fetch('/api/process', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    filename: uploadData.filename,
-                    levels: levels,
-                    aggregationConfig: aggregationConfig,
-                    detectedColumns: detectedColumns
-                })
+                if (!grouped[key]) {
+                    grouped[key] = {
+                        key: key,
+                        rows: [],
+                        aggregates: {}
+                    };
+                }
+                grouped[key].rows.push(row);
             });
 
-            if (!processResponse.ok) {
-                const error = await processResponse.json();
-                throw new Error(error.error || 'Processing failed');
+            // Calculate aggregates
+            Object.values(grouped).forEach(group => {
+                aggregationConfig.fields.forEach(field => {
+                    if (field.type === 'COUNT') {
+                        group.aggregates[field.field] = group.rows.length;
+                    } else if (field.type === 'SUM') {
+                        const colIndex = headers.indexOf(field.field);
+                        group.aggregates[field.field] = group.rows.reduce((sum, row) => {
+                            const val = parseFloat(row[colIndex]) || 0;
+                            return sum + val;
+                        }, 0);
+                    }
+                });
+            });
+
+            return grouped;
+        }
+
+        // Load geographic boundary files
+        async function loadBoundaries(levels) {
+            const promises = [];
+
+            for (const level of levels) {
+                if (!geoBoundaries[level]) {
+                    promises.push(
+                        fetch(`geographic-data/${level}_boundaries.geojson`)
+                            .then(r => r.json())
+                            .then(data => { geoBoundaries[level] = data; })
+                    );
+                }
             }
 
-            const processData = await processResponse.json();
+            await Promise.all(promises);
+        }
 
-            // Step 4: Display results
-            updateProgress(100, 'Complete! All files generated successfully.');
+        // Create GeoJSON files with joins
+        async function createGeoJSONFiles(aggregated, levels) {
+            for (const level of levels) {
+                const boundary = geoBoundaries[level];
+                if (!boundary) continue;
 
-            processData.files.forEach(file => {
-                createResultCard(file.level, file.filename, file.size, file.path);
+                // Clone boundary and add aggregated data
+                const output = JSON.parse(JSON.stringify(boundary));
+
+                // Join logic here (simplified for now)
+                output.features.forEach(feature => {
+                    const zipCode = feature.properties.ZIP || feature.properties.ZCTA5CE20;
+                    if (zipCode && aggregated[zipCode]) {
+                        // Add aggregated values to properties
+                        Object.assign(feature.properties, aggregated[zipCode].aggregates);
+                    }
+                });
+
+                generatedGeoJSON[level] = output;
+            }
+        }
+
+        // Show preview map
+        function showPreviewMap(initialLevel) {
+            document.getElementById('previewSection').style.display = 'block';
+            document.getElementById('previewSection').classList.add('show');
+
+            if (!previewMap) {
+                previewMap = L.map('map').setView([39.8283, -98.5795], 4);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(previewMap);
+
+                // Add level selector handler
+                document.getElementById('previewLevel').addEventListener('change', (e) => {
+                    updateMapLayer(e.target.value);
+                });
+            }
+
+            updateMapLayer(initialLevel);
+        }
+
+        // Update map layer
+        function updateMapLayer(level) {
+            if (currentLayer) {
+                previewMap.removeLayer(currentLayer);
+            }
+
+            const geoJSON = generatedGeoJSON[level];
+            if (!geoJSON) return;
+
+            currentLayer = L.geoJSON(geoJSON, {
+                style: feature => ({
+                    fillColor: getColor(feature.properties),
+                    weight: 1,
+                    opacity: 1,
+                    color: 'white',
+                    fillOpacity: 0.7
+                }),
+                onEachFeature: (feature, layer) => {
+                    layer.bindPopup(createPopup(feature.properties));
+                }
+            }).addTo(previewMap);
+
+            previewMap.fitBounds(currentLayer.getBounds());
+        }
+
+        // Get color for choropleth
+        function getColor(properties) {
+            const firstMetric = aggregationConfig.fields[0];
+            if (!firstMetric) return '#cccccc';
+
+            const value = properties[firstMetric.field] || 0;
+            return value > 100 ? '#800026' :
+                   value > 50  ? '#BD0026' :
+                   value > 20  ? '#E31A1C' :
+                   value > 10  ? '#FC4E2A' :
+                   value > 5   ? '#FD8D3C' :
+                   value > 2   ? '#FEB24C' :
+                   value > 0   ? '#FED976' :
+                                 '#FFEDA0';
+        }
+
+        // Create popup content
+        function createPopup(properties) {
+            let html = '<div style="font-size: 0.9em;">';
+            html += `<strong>${properties.NAME || properties.ZIP || 'Unknown'}</strong><br>`;
+            aggregationConfig.fields.forEach(field => {
+                html += `${field.label}: ${properties[field.field] || 0}<br>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        // Display download links
+        function displayDownloadLinks(levels) {
+            resultGrid.innerHTML = '';
+
+            levels.forEach(level => {
+                if (generatedGeoJSON[level]) {
+                    const jsonString = JSON.stringify(generatedGeoJSON[level]);
+                    const size = new Blob([jsonString]).size;
+                    createResultCard(level, `${level}_output.geojson`, size, null, jsonString);
+                }
             });
 
-            processBtn.disabled = false;
-            processBtn.textContent = '✨ Process Complete - Upload Another File';
+            results.classList.add('show');
         }
 
         function updateProgress(percent, message) {
@@ -1292,7 +1501,7 @@
             status.textContent = message;
         }
 
-        function createResultCard(level, filename, sizeBytes, filepath) {
+        function createResultCard(level, filename, sizeBytes, filepath, jsonString) {
             const levelInfo = {
                 zip: { icon: '📦', name: 'ZIP Codes' },
                 county: { icon: '🏛️', name: 'Counties' },
@@ -1303,9 +1512,6 @@
 
             const info = levelInfo[level] || { icon: '📄', name: level };
             const sizeMB = (sizeBytes / 1024 / 1024).toFixed(2);
-            
-            // filepath is already relative path from backend
-            const downloadPath = filepath;
 
             const card = document.createElement('div');
             card.className = 'result-card';
@@ -1313,17 +1519,30 @@
                 <div class="icon">${info.icon}</div>
                 <div class="filename">${filename}</div>
                 <div class="size">${sizeMB} MB</div>
-                <button class="download-btn" data-filepath="${downloadPath.replace(/"/g, '&quot;')}">Download</button>
+                <button class="download-btn">Download</button>
             `;
 
-            // Add click handler
+            // Add click handler for client-side download
             const downloadBtn = card.querySelector('.download-btn');
             downloadBtn.addEventListener('click', () => {
-                downloadFile(downloadPath);
+                downloadGeoJSON(jsonString, filename);
             });
 
             resultGrid.appendChild(card);
             results.classList.add('show');
+        }
+
+        // Client-side download
+        function downloadGeoJSON(jsonString, filename) {
+            const blob = new Blob([jsonString], { type: 'application/geo+json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         async function downloadFile(filepath) {
