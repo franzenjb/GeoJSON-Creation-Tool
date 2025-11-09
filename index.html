@@ -1080,10 +1080,15 @@
                     <div style="margin-top: 20px;">
                         <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">Paste Field Definitions from ArcGIS REST Page:</label>
                         <textarea id="popupToolFieldsInput" rows="12"
-                                  placeholder="Division (type: esriFieldTypeString, alias: Division, SQL Type: sqlTypeNVarchar, length: 4000, nullable: true, editable: true)&#10;DCODE (type: esriFieldTypeString, alias: DCODE, SQL Type: sqlTypeNVarchar, length: 4000, nullable: true, editable: true)&#10;F2022 (type: esriFieldTypeSingle, alias: 2022, SQL Type: sqlTypeReal, nullable: true, editable: true)&#10;..."
-                                  style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.85em; font-family: monospace; background: white; color: #333;"></textarea>
+                                  style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.85em; font-family: monospace; background: white; color: #333;">ObjectID (type: esriFieldTypeOID, alias: ObjectID, SQL Type: sqlTypeOther, length: 0, nullable: false, editable: false)
+globalid (type: esriFieldTypeGUID, alias: globalid, SQL Type: sqlTypeOther, length: 38, nullable: true, editable: true)
+dr_name (type: esriFieldTypeString, alias: dr_name, SQL Type: sqlTypeOther, length: 255, nullable: true, editable: true)
+classification (type: esriFieldTypeString, alias: classification, SQL Type: sqlTypeOther, length: 255, nullable: true, editable: true)
+CaseNumber (type: esriFieldTypeString, alias: CaseNumber, SQL Type: sqlTypeOther, length: 30, nullable: true, editable: true)
+Case_CreatedDate (type: esriFieldTypeDate, alias: Case_CreatedDate, SQL Type: sqlTypeOther, length: 8, nullable: true, editable: true)
+Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOther, length: 1300, nullable: true, editable: true)</textarea>
                         <div style="font-size: 0.85em; color: #666; margin-top: 5px;">
-                            <strong>Example format:</strong> <code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">FieldName (type: esriFieldTypeString, alias: Display Name, ...)</code>
+                            <strong>👆 Sample field definitions above.</strong> Click "Parse Fields" to see how it works, or replace with your own field definitions.
                         </div>
                         <button onclick="parsePopupFieldDefinitions()" class="process-btn" style="margin-top: 15px;">
                             Parse Fields
