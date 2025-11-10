@@ -4,6 +4,14 @@ A comprehensive suite of 6 web-based tools for American Red Cross data processin
 
 **🌐 Live Demo:** https://franzenjb.github.io/GeoJSON-Creation-Tool/
 
+## 🆕 Recent Updates
+
+- **Multi-Provider Geocoding**: All 3 providers (Mapbox, Geoapify, Bing Maps) are 100% FREE
+- **Enhanced CSV Roll-Up**: Larger, easier-to-read INPUT/OUTPUT examples with visual improvements
+- **Pop-up Creator Samples**: Pre-filled field definition examples for quick testing
+- **Professional Documentation**: Clear, technical explanations throughout all tools
+- **100% US Coverage**: All 33,120 ZIP codes including territories (PR, VI, Guam, American Samoa)
+
 ## 🎯 Six Powerful Tools in One
 
 ### 1. **Code Lookup** 🔍
@@ -44,11 +52,11 @@ Generate custom ArcGIS pop-up HTML with inline CSS
 - Copy-paste directly into ArcGIS Pro or Online
 
 ### 6. **Address Geocoder** 🌐
-Geocode addresses to GeoJSON or CSV with 3 provider options
-- **Choose from 3 providers:** Geoapify, Mapbox, or Bing Maps
-- **Geoapify** (recommended): 3,000/day, no credit card, can cache results
-- **Mapbox**: 100,000/month (requires credit card)
-- **Bing Maps**: 125,000/year, no credit card
+Geocode addresses to GeoJSON or CSV with 3 FREE provider options
+- **All 3 providers are 100% FREE** with generous limits
+- **Mapbox** (default): 100,000/month FREE (requires credit card)
+- **Geoapify**: 3,000/day FREE (~90k/month, no credit card, can cache results)
+- **Bing Maps**: 125,000/year FREE (~10k/month, no credit card)
 - Upload CSV with address columns
 - Export to GeoJSON or CSV with coordinates
 - Batch geocoding support with progress tracking
