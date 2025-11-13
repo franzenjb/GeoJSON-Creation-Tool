@@ -505,6 +505,9 @@
                 <button class="tab-btn" onclick="showTab('geocoder')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
                     🌐 Geocoder
                 </button>
+                <button class="tab-btn" onclick="showTab('metadata')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    📋 Metadata BETA
+                </button>
             </div>
 
             <!-- Code Lookup Tab -->
@@ -1316,6 +1319,196 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                         <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
                             <strong>Note:</strong> Addresses are geocoded one at a time to respect API rate limits. All three providers offer generous free tiers - see comparison table above.
                         </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metadata Updater Tab -->
+            <div id="metadataTab" class="tab-content" style="display: none;">
+                <div class="section">
+                    <h2>ArcGIS Metadata Updater</h2>
+                    <div class="explanation">
+                        <p>Generate a complete Python script to update ArcGIS item metadata. Fill out the form below, click "Generate Script", then copy and paste the Python code into an ArcGIS Online Notebook to run it.</p>
+                    </div>
+
+                    <!-- Item ID Input -->
+                    <div style="margin-top: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                            ArcGIS Item ID: <span style="color: #DC143C;">*</span>
+                        </label>
+                        <input type="text" id="metadataItemId" placeholder="e.g., 2461b88c8a914c57bdd7177382ae9c19"
+                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333; font-family: monospace;">
+                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">
+                            Find this in your item's URL: <code style="background: #f5f5f5; padding: 2px 5px; border-radius: 2px;">...?id=YOUR_ITEM_ID</code>
+                        </div>
+                    </div>
+
+                    <!-- Summary Input -->
+                    <div style="margin-top: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                            Summary (1-2 sentences): <span style="color: #DC143C;">*</span>
+                        </label>
+                        <textarea id="metadataSummary" placeholder="Paste your AI-generated summary here..."
+                                  style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333; min-height: 80px; resize: vertical; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;"></textarea>
+                    </div>
+
+                    <!-- Description Input -->
+                    <div style="margin-top: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                            Description (detailed): <span style="color: #DC143C;">*</span>
+                        </label>
+                        <textarea id="metadataDescription" placeholder="Paste your AI-generated detailed description here..."
+                                  style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333; min-height: 150px; resize: vertical; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;"></textarea>
+                    </div>
+
+                    <!-- Categories -->
+                    <div style="margin-top: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 12px; color: #333;">
+                            Categories (select all that apply):
+                        </label>
+                        <div style="background: #fafafa; padding: 15px; border-radius: 3px; border: 2px solid #e0e0e0;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="NHQ">
+                                    <span>NHQ</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Division">
+                                    <span>Division</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Region">
+                                    <span>Region</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Chapter">
+                                    <span>Chapter</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="DRO">
+                                    <span>DRO</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="DA">
+                                    <span>DA</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Weather">
+                                    <span>Weather</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Hazard">
+                                    <span>Hazard</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Tropical">
+                                    <span>Tropical</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Partners">
+                                    <span>Partners</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Training">
+                                    <span>Training</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Boundaries">
+                                    <span>Boundaries</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="DRA_Territory">
+                                    <span>DRA_Territory</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Home Fire Campaign">
+                                    <span>Home Fire Campaign</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Lives Saved">
+                                    <span>Lives Saved</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Mission Adaptation">
+                                    <span>Mission Adaptation</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="Partner HUB">
+                                    <span>Partner HUB</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="BioMed">
+                                    <span>BioMed</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="SAF">
+                                    <span>SAF</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="metadata-category" value="NOAA">
+                                    <span>NOAA</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags Input -->
+                    <div style="margin-top: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                            Tags (comma-separated):
+                        </label>
+                        <input type="text" id="metadataTags" placeholder="e.g., California, Analysis, Regional, Planning, Demographics"
+                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;">
+                    </div>
+
+                    <!-- Access Information -->
+                    <div style="margin-top: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                            Access Information:
+                        </label>
+                        <input type="text" id="metadataAccessInfo" value="© American Red Cross" placeholder="© American Red Cross"
+                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;">
+                    </div>
+
+                    <!-- License Info -->
+                    <div style="margin-top: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                            License Information:
+                        </label>
+                        <input type="text" id="metadataLicenseInfo" value="For internal use only" placeholder="For internal use only"
+                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;">
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div style="margin-top: 30px; text-align: center;">
+                        <button onclick="generateMetadataScript()" style="background: #DC143C; color: white; border: none; padding: 12px 30px; font-size: 1em; font-weight: 600; border-radius: 3px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.2s;"
+                                onmouseover="this.style.background='#b01030'" onmouseout="this.style.background='#DC143C'">
+                            🐍 Generate Python Script
+                        </button>
+                    </div>
+
+                    <!-- Output Area -->
+                    <div id="metadataOutput" style="display: none; margin-top: 30px;">
+                        <div style="background: #f5f5f5; padding: 20px; border-radius: 3px; border: 2px solid #DC143C;">
+                            <h3 style="margin-top: 0; color: #DC143C; display: flex; justify-content: space-between; align-items: center;">
+                                <span>✅ Python Script Generated</span>
+                                <button onclick="copyMetadataScript()" style="background: #DC143C; color: white; border: none; padding: 8px 16px; font-size: 0.9em; border-radius: 3px; cursor: pointer;">
+                                    📋 Copy to Clipboard
+                                </button>
+                            </h3>
+                            <div style="background: #fff; padding: 15px; border-radius: 3px; margin-top: 15px; max-height: 400px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.5; border: 1px solid #e0e0e0;">
+                                <pre id="metadataScriptCode" style="margin: 0; white-space: pre-wrap; word-wrap: break-word;"></pre>
+                            </div>
+                            <div style="margin-top: 15px; padding: 12px; background: #e3f2fd; border-left: 3px solid #2196F3; border-radius: 3px;">
+                                <strong style="color: #1565c0;">💡 Next Steps:</strong>
+                                <ol style="margin: 8px 0 0 20px; color: #1565c0;">
+                                    <li>Click "Copy to Clipboard" above</li>
+                                    <li>Open an ArcGIS Online Notebook</li>
+                                    <li>Paste and run the code</li>
+                                    <li>Your item metadata will be updated!</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2363,6 +2556,7 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
             document.getElementById('orglerTab').style.display = 'none';
             document.getElementById('popupTab').style.display = 'none';
             document.getElementById('geocoderTab').style.display = 'none';
+            document.getElementById('metadataTab').style.display = 'none';
 
             // Remove active class from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -2395,6 +2589,10 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                 document.getElementById('geocoderTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[5].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[5].style.color = '#DC143C';
+            } else if (tabName === 'metadata') {
+                document.getElementById('metadataTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[6].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[6].style.color = '#DC143C';
             }
         }
 
@@ -4433,6 +4631,146 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
             a.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
+        }
+
+        // Metadata Updater Functions
+        function generateMetadataScript() {
+            // Get values from form
+            const itemId = document.getElementById('metadataItemId').value.trim();
+            const summary = document.getElementById('metadataSummary').value.trim();
+            const description = document.getElementById('metadataDescription').value.trim();
+            const tags = document.getElementById('metadataTags').value.trim();
+            const accessInfo = document.getElementById('metadataAccessInfo').value.trim();
+            const licenseInfo = document.getElementById('metadataLicenseInfo').value.trim();
+
+            // Validate required fields
+            if (!itemId) {
+                alert('⚠️ Please enter an ArcGIS Item ID');
+                return;
+            }
+            if (!summary) {
+                alert('⚠️ Please enter a summary');
+                return;
+            }
+            if (!description) {
+                alert('⚠️ Please enter a description');
+                return;
+            }
+
+            // Get selected categories
+            const categoryCheckboxes = document.querySelectorAll('.metadata-category:checked');
+            const categories = Array.from(categoryCheckboxes).map(cb => '/' + cb.value);
+
+            // Parse tags
+            const tagsList = tags ? tags.split(',').map(t => t.trim()).filter(t => t) : [];
+
+            // Escape strings for Python
+            function escapePython(str) {
+                return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+            }
+
+            // Generate Python script
+            let script = `"""
+ArcGIS Metadata Updater Script
+Generated by Red Cross GIS Tools
+"""
+
+from arcgis.gis import GIS
+
+# Connect to ArcGIS (uses your active login)
+gis = GIS("home")
+
+# Item ID to update
+item_id = "${escapePython(itemId)}"
+
+try:
+    # Get the item
+    item = gis.content.get(item_id)
+
+    if not item:
+        print(f"❌ Error: Item with ID {item_id} not found")
+    else:
+        print(f"📂 Found item: {item.title}")
+        print(f"   Type: {item.type}")
+        print()
+
+        # Update metadata
+        update_props = {
+            "snippet": """${escapePython(summary)}""",
+            "description": """${escapePython(description)}"""`;
+
+            if (tagsList.length > 0) {
+                script += `,
+            "tags": [${tagsList.map(t => `"${escapePython(t)}"`).join(', ')}]`;
+            }
+
+            if (accessInfo) {
+                script += `,
+            "accessInformation": "${escapePython(accessInfo)}"`;
+            }
+
+            if (licenseInfo) {
+                script += `,
+            "licenseInfo": "${escapePython(licenseInfo)}"`;
+            }
+
+            script += `
+        }
+
+        item.update(update_props)
+        print("✅ Updated metadata successfully")
+        print(f"   ✓ Summary: {len(update_props['snippet'])} characters")
+        print(f"   ✓ Description: {len(update_props['description'])} characters")`;
+
+            if (tagsList.length > 0) {
+                script += `
+        print(f"   ✓ Tags: {len(update_props['tags'])} tags")`;
+            }
+
+            if (categories.length > 0) {
+                script += `
+
+        # Update categories
+        categories = [${categories.map(c => `"${escapePython(c)}"`).join(', ')}]
+        item.update(item_properties={"categories": categories})
+        print(f"   ✓ Categories: {len(categories)} assigned")`;
+            }
+
+            script += `
+
+        print()
+        print("🎉 All updates complete!")
+        print(f"View your item: {item.homepage}")
+
+except Exception as e:
+    print(f"❌ Error: {e}")
+`;
+
+            // Display the script
+            document.getElementById('metadataScriptCode').textContent = script;
+            document.getElementById('metadataOutput').style.display = 'block';
+
+            // Scroll to output
+            document.getElementById('metadataOutput').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function copyMetadataScript() {
+            const scriptCode = document.getElementById('metadataScriptCode').textContent;
+
+            navigator.clipboard.writeText(scriptCode).then(() => {
+                // Show feedback
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                button.style.background = '#1e7e34';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#DC143C';
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy to clipboard. Please select and copy the code manually.');
+            });
         }
     </script>
 </body>
