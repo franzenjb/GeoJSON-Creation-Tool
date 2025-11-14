@@ -4805,6 +4805,9 @@ Start by asking me question #1.`;
             const redirectUri = document.getElementById('oauth-redirect-uri').value;
             const expiration = document.getElementById('oauth-expiration').value;
 
+            // DEBUG: Show what we're actually reading
+            alert('🔍 DEBUG:\n\nClient ID from field: "' + clientId + '"\nLength: ' + clientId.length + ' characters\n\nIf this doesn\'t look like "jcdyEMGStWjN3pPX", your browser might be auto-filling the wrong value!');
+
             if (!clientId) {
                 alert('Please enter your OAuth Client ID');
                 return;
@@ -4812,7 +4815,7 @@ Start by asking me question #1.`;
 
             // Validate Client ID format (should be alphanumeric)
             if (!/^[a-zA-Z0-9]+$/.test(clientId)) {
-                alert('Client ID appears invalid. It should only contain letters and numbers.\n\nCurrent value: ' + clientId + '\n\nPlease check your Client ID and try again.');
+                alert('❌ Client ID appears invalid. It should only contain letters and numbers.\n\nCurrent value: "' + clientId + '"\n\nPlease check your Client ID and try again.');
                 return;
             }
 
@@ -5102,6 +5105,9 @@ Start by asking me question #1.`;
             const clientId = atob(encoded);
 
             document.getElementById('oauth-client-id').value = clientId;
+
+            // DEBUG: Confirm what we set
+            alert('✅ Default Client ID loaded:\n\n"' + clientId + '"\n\nThis should be: jcdyEMGStWjN3pPX');
 
             // Show confirmation
             const btn = event.target;
