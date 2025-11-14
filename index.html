@@ -1045,6 +1045,99 @@
                         <p>Extract field names from an ArcGIS Online feature layer and generate inline CSS + HTML pop-up templates ready to paste into ArcGIS Experience Builder, Map Viewer, or Dashboards.</p>
                     </div>
 
+                    <!-- AI Workflow Accordion -->
+                    <details style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 4px; padding: 15px; margin: 20px 0 25px 0;">
+                        <summary style="cursor: pointer; font-weight: 600; color: #1976d2; font-size: 1.05em;">
+                            🤖 Pro Workflow: Use AI to Create Beautiful Pop-ups! (Click to expand)
+                        </summary>
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #2196f3;">
+                            <h3 style="color: #1976d2; margin-top: 0;">🚀 The Smart Way to Create ArcGIS Pop-ups</h3>
+
+                            <div style="background: white; padding: 15px; border-radius: 4px; margin-bottom: 15px; border-left: 4px solid #ff9800;">
+                                <strong style="color: #e65100; display: block; margin-bottom: 8px;">⚡ Critical Requirement:</strong>
+                                <p style="margin: 0; color: #e65100; font-size: 0.95em; line-height: 1.6;">
+                                    ArcGIS pop-ups require <strong>INLINE CSS</strong>—all styles must be embedded directly in the HTML using
+                                    <code style="background: #fff3e0; padding: 2px 6px; border-radius: 3px;">style="..."</code> attributes.
+                                    External stylesheets and <code style="background: #fff3e0; padding: 2px 6px; border-radius: 3px;">&lt;style&gt;</code> tags don't work!
+                                </p>
+                            </div>
+
+                            <div style="background: #e8f5e9; padding: 15px; border-radius: 4px; margin-bottom: 15px; border-left: 4px solid #4caf50;">
+                                <strong style="color: #2e7d32;">✨ The AI Solution:</strong>
+                                <p style="margin: 8px 0 0 0; color: #2e7d32; font-size: 0.95em; line-height: 1.6;">
+                                    ChatGPT, Claude, and other AI assistants are <strong>AMAZING</strong> at creating inline CSS!
+                                    Give them your field names and describe what you want—they'll generate production-ready pop-up HTML.
+                                </p>
+                            </div>
+
+                            <div style="background: white; padding: 20px; border-radius: 4px; border: 2px solid #4caf50;">
+                                <h4 style="color: #2e7d32; margin-top: 0;">📋 Recommended Workflow:</h4>
+
+                                <div style="display: flex; gap: 15px; flex-direction: column;">
+                                    <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                        <div style="background: #4caf50; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 600;">1</div>
+                                        <div style="flex: 1;">
+                                            <strong style="color: #333;">Get Your Field Names (This Tool!)</strong>
+                                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">
+                                                Use this tab to parse field definitions from your FeatureServer → Get clean field list
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                        <div style="background: #2196f3; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 600;">2</div>
+                                        <div style="flex: 1;">
+                                            <strong style="color: #333;">Ask AI to Create Your Pop-up</strong>
+                                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">
+                                                Example prompt to ChatGPT/Claude:
+                                            </p>
+                                            <div style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-top: 8px; border-left: 3px solid #2196f3; font-family: monospace; font-size: 0.85em;">
+                                                "Create an ArcGIS pop-up template with INLINE CSS (all styles in style attributes) for these fields:
+                                                {County}, {Region}, {Pop_2023}, {Med_HH_Inc_2023}.
+                                                Make it look professional with a Red Cross color scheme (#DC143C), use a table layout, format numbers with commas,
+                                                and add icons. Remember: ArcGIS requires inline CSS only!"
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                        <div style="background: #ff9800; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 600;">3</div>
+                                        <div style="flex: 1;">
+                                            <strong style="color: #333;">Copy → Paste → Done!</strong>
+                                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">
+                                                Copy the AI-generated HTML → Paste into ArcGIS pop-up configuration → Instant professional pop-up!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="background: #fff3e0; padding: 15px; border-radius: 4px; margin-top: 15px; border-left: 4px solid #ff9800;">
+                                <strong style="color: #e65100;">💡 Pro Tips for AI Prompts:</strong>
+                                <ul style="margin: 10px 0 0 0; padding-left: 20px; color: #e65100; font-size: 0.9em; line-height: 1.7;">
+                                    <li><strong>Always specify "inline CSS"</strong> or "all styles in style attributes"</li>
+                                    <li>Mention your color scheme (Red Cross: #DC143C, #c62828)</li>
+                                    <li>Request specific layouts: table, card, header+sections, etc.</li>
+                                    <li>Ask for formatting: commas in numbers, date formatting, currency symbols</li>
+                                    <li>Include emojis or icons for visual appeal (📍 🏘️ 💰 📊 ✅)</li>
+                                    <li>Test in one pop-up, then apply to all features!</li>
+                                </ul>
+                            </div>
+
+                            <div style="background: #e8f5e9; padding: 15px; border-radius: 4px; margin-top: 15px; border-left: 4px solid #4caf50;">
+                                <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">✅ What AI Can Do:</strong>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
+                                    <div style="background: white; padding: 10px; border-radius: 4px; font-size: 0.9em; color: #2e7d32;">✅ Tables with borders</div>
+                                    <div style="background: white; padding: 10px; border-radius: 4px; font-size: 0.9em; color: #2e7d32;">✅ Color-coded sections</div>
+                                    <div style="background: white; padding: 10px; border-radius: 4px; font-size: 0.9em; color: #2e7d32;">✅ Conditional formatting</div>
+                                    <div style="background: white; padding: 10px; border-radius: 4px; font-size: 0.9em; color: #2e7d32;">✅ Icons and emojis</div>
+                                    <div style="background: white; padding: 10px; border-radius: 4px; font-size: 0.9em; color: #2e7d32;">✅ Number formatting</div>
+                                    <div style="background: white; padding: 10px; border-radius: 4px; font-size: 0.9em; color: #2e7d32;">✅ Responsive layouts</div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
                     <div style="background: #e8f5e9; border-left: 4px solid #4CAF50; padding: 15px; border-radius: 3px; margin: 20px 0;">
                         <h3 style="margin: 0 0 10px 0; color: #2e7d32; font-size: 16px;">How to Use:</h3>
                         <ol style="margin: 5px 0 0 0; padding-left: 20px; font-size: 13px; color: #2e7d32; line-height: 1.6;">
