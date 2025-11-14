@@ -508,6 +508,9 @@
                 <button class="tab-btn" onclick="showTab('metadata')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
                     📋 Metadata BETA
                 </button>
+                <button class="tab-btn" onclick="showTab('oauth')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    🔐 OAuth Tokens
+                </button>
             </div>
 
             <!-- Code Lookup Tab -->
@@ -1374,6 +1377,192 @@ Start by asking me question #1.</div>
                             <li>ChatGPT generates your complete Python script</li>
                             <li>Copy script → Paste into ArcGIS Notebook → Run!</li>
                         </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OAuth Token Generator Tab -->
+            <div id="oauthTab" class="tab-content" style="display: none;">
+                <div class="section">
+                    <h2>🔐 ArcGIS OAuth Token Generator</h2>
+
+                    <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; border-radius: 3px; margin-bottom: 25px;">
+                        <div style="font-weight: 600; color: #1565c0; margin-bottom: 8px;">🎉 NO MORE 2FA PAIN!</div>
+                        <div style="color: #1565c0; font-size: 0.95em; line-height: 1.5;">
+                            Generate a refresh token ONCE → Use for 14-90 days → Update metadata without 2FA every time!
+                        </div>
+                    </div>
+
+                    <!-- Progress Steps -->
+                    <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+                        <div id="oauth-step1" style="flex: 1; min-width: 200px; padding: 15px; background: #fff; border: 2px solid #DC143C; border-radius: 4px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 5px;">Step 1: Setup</div>
+                            <div style="font-size: 0.85em; color: #666;">Enter your OAuth Client ID</div>
+                        </div>
+                        <div id="oauth-step2" style="flex: 1; min-width: 200px; padding: 15px; background: #f5f5f5; border: 2px solid #e0e0e0; border-radius: 4px;">
+                            <div style="font-weight: 600; color: #999; margin-bottom: 5px;">Step 2: Authorize</div>
+                            <div style="font-size: 0.85em; color: #666;">Complete 2FA (one time)</div>
+                        </div>
+                        <div id="oauth-step3" style="flex: 1; min-width: 200px; padding: 15px; background: #f5f5f5; border: 2px solid #e0e0e0; border-radius: 4px;">
+                            <div style="font-weight: 600; color: #999; margin-bottom: 5px;">Step 3: Get Tokens</div>
+                            <div style="font-size: 0.85em; color: #666;">Save refresh token</div>
+                        </div>
+                    </div>
+
+                    <!-- Form Section -->
+                    <div id="oauth-form" style="background: #f5f5f5; padding: 25px; border-radius: 4px; margin-bottom: 25px;">
+
+                        <!-- Step 1: Client ID Input -->
+                        <div id="oauth-input-section">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                                OAuth Client ID (App ID):
+                            </label>
+                            <input type="text" id="oauth-client-id" value="jcdyEMGStWjN3pPX"
+                                   style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-size: 1em; margin-bottom: 12px;">
+
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                                Redirect URI:
+                            </label>
+                            <input type="text" id="oauth-redirect-uri" value="urn:ietf:wg:oauth:2.0:oob" readonly
+                                   style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-size: 1em; background: #f9f9f9; margin-bottom: 12px;">
+
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                                Refresh Token Expiration:
+                            </label>
+                            <select id="oauth-expiration" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-size: 1em; margin-bottom: 15px;">
+                                <option value="20160">14 days (20160 minutes)</option>
+                                <option value="-1" selected>90 days maximum (recommended)</option>
+                            </select>
+
+                            <button onclick="oauthAuthorize()"
+                                    style="width: 100%; background: #DC143C; color: white; border: none; padding: 12px; font-size: 1em; font-weight: 600; border-radius: 4px; cursor: pointer;">
+                                🚀 Authorize with ArcGIS (Step 2)
+                            </button>
+
+                            <div style="margin-top: 15px; padding: 12px; background: #fff3e0; border-left: 3px solid #ff9800; border-radius: 3px; font-size: 0.9em;">
+                                <strong>Don't have a Client ID?</strong>
+                                <ol style="margin: 8px 0 0 20px; line-height: 1.6;">
+                                    <li>Go to <a href="https://arcgis.com/home/content.html" target="_blank" style="color: #DC143C;">ArcGIS Online</a></li>
+                                    <li>Content → Add Item → Application</li>
+                                    <li>Choose "Application"</li>
+                                    <li>Registered App → OAuth 2.0</li>
+                                    <li>Set redirect URI: <code>urn:ietf:wg:oauth:2.0:oob</code></li>
+                                    <li>Copy your Client ID</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Authorization Code Input (hidden initially) -->
+                        <div id="oauth-code-section" style="display: none;">
+                            <div style="background: #e8f5e9; padding: 15px; border-left: 3px solid #4caf50; border-radius: 3px; margin-bottom: 15px;">
+                                <strong style="color: #2e7d32;">✓ Authorization window opened!</strong>
+                                <div style="margin-top: 8px; color: #2e7d32; font-size: 0.9em;">
+                                    Complete 2FA in the popup window, then copy the authorization code and paste below.
+                                </div>
+                            </div>
+
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                                OAuth2 Approval Code:
+                            </label>
+                            <textarea id="oauth-auth-code" placeholder="Paste the long authorization code here..."
+                                      style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-size: 0.9em; font-family: monospace; min-height: 100px; margin-bottom: 15px;"></textarea>
+
+                            <button onclick="oauthGetTokens()"
+                                    style="width: 100%; background: #4caf50; color: white; border: none; padding: 12px; font-size: 1em; font-weight: 600; border-radius: 4px; cursor: pointer;">
+                                🎯 Get Tokens (Step 3)
+                            </button>
+                        </div>
+
+                        <!-- Step 3: Token Display (hidden initially) -->
+                        <div id="oauth-token-section" style="display: none;">
+                            <div style="background: #e8f5e9; padding: 15px; border-left: 3px solid #4caf50; border-radius: 3px; margin-bottom: 20px;">
+                                <strong style="color: #2e7d32;">🎉 SUCCESS! Tokens generated!</strong>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <label id="oauth-access-token-label" style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                                    Access Token (expires in 2 hours):
+                                </label>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="text" id="oauth-access-token" readonly
+                                           style="flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-size: 0.85em; font-family: monospace; background: #f9f9f9;">
+                                    <button onclick="oauthCopyToken('access')"
+                                            style="background: #2196f3; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; white-space: nowrap;">
+                                        📋 Copy
+                                    </button>
+                                    <button onclick="oauthRenewToken()"
+                                            style="background: #ff9800; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; white-space: nowrap;">
+                                        🔄 Renew
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <label id="oauth-refresh-token-label" style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                                    Refresh Token (expires in 90 days):
+                                </label>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="text" id="oauth-refresh-token" readonly
+                                           style="flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-size: 0.85em; font-family: monospace; background: #f9f9f9;">
+                                    <button onclick="oauthCopyToken('refresh')"
+                                            style="background: #2196f3; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; white-space: nowrap;">
+                                        📋 Copy
+                                    </button>
+                                    <button onclick="oauthSaveToken()"
+                                            style="background: #4caf50; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; white-space: nowrap;">
+                                        💾 Save
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="background: #fff3e0; padding: 15px; border-left: 3px solid #ff9800; border-radius: 3px;">
+                                <strong style="color: #e65100;">🔐 Security Note:</strong>
+                                <div style="margin-top: 8px; color: #e65100; font-size: 0.9em; line-height: 1.6;">
+                                    Your refresh token is like a password! Click "Save" to download it as a JSON file.
+                                    Keep this file secure and use it with Python scripts to authenticate without 2FA.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instructions -->
+                    <div style="background: #fff; padding: 20px; border-radius: 4px; border: 2px solid #e0e0e0;">
+                        <h3 style="margin: 0 0 15px 0; color: #DC143C;">📘 How to Use This Tool</h3>
+
+                        <div style="margin-bottom: 15px;">
+                            <strong style="color: #DC143C;">Step 1: Enter Your OAuth Client ID</strong>
+                            <p style="margin: 8px 0 0 0; color: #666; font-size: 0.9em;">
+                                Your Client ID is pre-filled (<code>jcdyEMGStWjN3pPX</code>). If you have your own OAuth app, replace it.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <strong style="color: #DC143C;">Step 2: Click "Authorize with ArcGIS"</strong>
+                            <p style="margin: 8px 0 0 0; color: #666; font-size: 0.9em;">
+                                A popup opens → Log in to ArcGIS → Complete 2FA → Authorization code appears → Copy the entire code
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <strong style="color: #DC143C;">Step 3: Paste Code and Get Tokens</strong>
+                            <p style="margin: 8px 0 0 0; color: #666; font-size: 0.9em;">
+                                Paste authorization code → Click "Get Tokens" → Access and Refresh tokens appear
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <strong style="color: #DC143C;">Step 4: Save Your Refresh Token</strong>
+                            <p style="margin: 8px 0 0 0; color: #666; font-size: 0.9em;">
+                                Click "Save" to download <code>agol_refresh_token.json</code> → Keep this file secure!
+                            </p>
+                        </div>
+
+                        <div style="background: #e8f5e9; padding: 12px; border-radius: 3px; margin-top: 15px;">
+                            <strong style="color: #2e7d32;">✅ After Setup:</strong>
+                            <p style="margin: 8px 0 0 0; color: #2e7d32; font-size: 0.9em;">
+                                Use the saved JSON file with Python scripts to authenticate WITHOUT 2FA for up to 90 days!
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2422,6 +2611,7 @@ Start by asking me question #1.</div>
             document.getElementById('popupTab').style.display = 'none';
             document.getElementById('geocoderTab').style.display = 'none';
             document.getElementById('metadataTab').style.display = 'none';
+            document.getElementById('oauthTab').style.display = 'none';
 
             // Remove active class from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -2458,6 +2648,10 @@ Start by asking me question #1.</div>
                 document.getElementById('metadataTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[6].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[6].style.color = '#DC143C';
+            } else if (tabName === 'oauth') {
+                document.getElementById('oauthTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[7].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[7].style.color = '#DC143C';
             }
         }
 
@@ -4566,6 +4760,285 @@ Start by asking me question #1.`;
                 fallbackCopy(promptText);
             }
         }
+
+        // ==================== OAUTH TOKEN GENERATOR FUNCTIONALITY ====================
+
+        // OAuth state
+        let oauthTokenData = {
+            client_id: null,
+            access_token: null,
+            refresh_token: null,
+            expires_in: null,
+            token_expiry: null,
+            refresh_expiry: null
+        };
+
+        // Step 1: Authorize with ArcGIS
+        function oauthAuthorize() {
+            const clientId = document.getElementById('oauth-client-id').value;
+            const redirectUri = document.getElementById('oauth-redirect-uri').value;
+            const expiration = document.getElementById('oauth-expiration').value;
+
+            if (!clientId) {
+                alert('Please enter your OAuth Client ID');
+                return;
+            }
+
+            // Store client ID
+            oauthTokenData.client_id = clientId;
+
+            // Build authorization URL
+            const authUrl = `https://maps.arcgis.com/sharing/rest/oauth2/authorize?client_id=${encodeURIComponent(clientId)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&expiration=${expiration}`;
+
+            // Open authorization window
+            window.open(authUrl, '_blank');
+
+            // Show authorization code input section
+            document.getElementById('oauth-code-section').style.display = 'block';
+            document.getElementById('oauth-auth-code').focus();
+
+            // Update step indicators
+            updateOAuthStep(2);
+        }
+
+        // Step 2: Exchange authorization code for tokens
+        async function oauthGetTokens() {
+            const clientId = document.getElementById('oauth-client-id').value;
+            const authCode = document.getElementById('oauth-auth-code').value.trim();
+            const redirectUri = document.getElementById('oauth-redirect-uri').value;
+
+            if (!authCode) {
+                alert('Please paste the authorization code');
+                return;
+            }
+
+            // Show loading state
+            const button = document.querySelector('#oauth-code-section button');
+            const originalText = button.textContent;
+            button.textContent = '⏳ Getting tokens...';
+            button.disabled = true;
+
+            try {
+                // Make POST request to get tokens
+                const response = await fetch('https://maps.arcgis.com/sharing/rest/oauth2/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        client_id: clientId,
+                        grant_type: 'authorization_code',
+                        code: authCode,
+                        redirect_uri: redirectUri
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const tokenData = await response.json();
+
+                if (tokenData.error) {
+                    throw new Error(tokenData.error.message || tokenData.error);
+                }
+
+                // Store token data
+                oauthTokenData.access_token = tokenData.access_token;
+                oauthTokenData.refresh_token = tokenData.refresh_token;
+                oauthTokenData.expires_in = tokenData.expires_in;
+
+                // Calculate expiration times
+                const now = new Date();
+                const tokenExpiry = new Date(now.getTime() + tokenData.expires_in * 1000);
+                const expirationMinutes = document.getElementById('oauth-expiration').value;
+                let refreshExpiry;
+
+                if (expirationMinutes === '-1') {
+                    refreshExpiry = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000); // 90 days
+                } else {
+                    refreshExpiry = new Date(now.getTime() + parseInt(expirationMinutes) * 60 * 1000);
+                }
+
+                oauthTokenData.token_expiry = tokenExpiry;
+                oauthTokenData.refresh_expiry = refreshExpiry;
+
+                // Display tokens
+                document.getElementById('oauth-access-token').value = tokenData.access_token;
+                document.getElementById('oauth-refresh-token').value = tokenData.refresh_token;
+
+                // Update labels with expiration times
+                document.getElementById('oauth-access-token-label').textContent =
+                    `Access Token (expires at ${tokenExpiry.getHours()}:${tokenExpiry.getMinutes().toString().padStart(2, '0')}):`;
+                document.getElementById('oauth-refresh-token-label').textContent =
+                    `Refresh Token (expires on ${refreshExpiry.toLocaleDateString()}):`;
+
+                // Hide code section, show token section
+                document.getElementById('oauth-code-section').style.display = 'none';
+                document.getElementById('oauth-token-section').style.display = 'block';
+
+                // Update step indicators
+                updateOAuthStep(3);
+
+            } catch (error) {
+                console.error('Error getting tokens:', error);
+                alert(`Failed to get tokens: ${error.message}\n\nPlease make sure:\n1. The authorization code is correct\n2. Your Client ID matches your OAuth app\n3. The redirect URI is set correctly in your app`);
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+
+        // Renew access token using refresh token
+        async function oauthRenewToken() {
+            const clientId = document.getElementById('oauth-client-id').value;
+            const refreshToken = document.getElementById('oauth-refresh-token').value;
+
+            if (!refreshToken) {
+                alert('No refresh token available');
+                return;
+            }
+
+            try {
+                const url = new URL('https://maps.arcgis.com/sharing/rest/oauth2/token');
+                url.searchParams.set('client_id', clientId);
+                url.searchParams.set('grant_type', 'refresh_token');
+                url.searchParams.set('refresh_token', refreshToken);
+
+                const response = await fetch(url, { method: 'GET' });
+                const tokenData = await response.json();
+
+                if (tokenData.error) {
+                    throw new Error(tokenData.error.message || tokenData.error);
+                }
+
+                // Update access token
+                oauthTokenData.access_token = tokenData.access_token;
+                oauthTokenData.expires_in = tokenData.expires_in;
+
+                const now = new Date();
+                const tokenExpiry = new Date(now.getTime() + tokenData.expires_in * 1000);
+                oauthTokenData.token_expiry = tokenExpiry;
+
+                // Display new access token
+                document.getElementById('oauth-access-token').value = tokenData.access_token;
+                document.getElementById('oauth-access-token-label').textContent =
+                    `Access Token (expires at ${tokenExpiry.getHours()}:${tokenExpiry.getMinutes().toString().padStart(2, '0')}):`;
+
+                alert('✓ Access token renewed successfully!');
+
+            } catch (error) {
+                console.error('Error renewing token:', error);
+                alert(`Failed to renew token: ${error.message}`);
+            }
+        }
+
+        // Copy token to clipboard
+        function oauthCopyToken(tokenType) {
+            const tokenField = tokenType === 'access' ?
+                document.getElementById('oauth-access-token') :
+                document.getElementById('oauth-refresh-token');
+
+            const token = tokenField.value;
+
+            if (!token) {
+                alert('No token available');
+                return;
+            }
+
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(token)
+                    .then(() => alert(`✓ ${tokenType === 'access' ? 'Access' : 'Refresh'} token copied to clipboard!`))
+                    .catch(err => {
+                        console.error('Clipboard API failed:', err);
+                        fallbackCopyToken(token, tokenType);
+                    });
+            } else {
+                fallbackCopyToken(token, tokenType);
+            }
+        }
+
+        // Fallback copy method
+        function fallbackCopyToken(token, tokenType) {
+            const textarea = document.createElement('textarea');
+            textarea.value = token;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                document.execCommand('copy');
+                alert(`✓ ${tokenType === 'access' ? 'Access' : 'Refresh'} token copied to clipboard!`);
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                alert('Failed to copy. Please select and copy manually.');
+            }
+
+            document.body.removeChild(textarea);
+        }
+
+        // Save refresh token as JSON file
+        function oauthSaveToken() {
+            const clientId = document.getElementById('oauth-client-id').value;
+            const refreshToken = document.getElementById('oauth-refresh-token').value;
+
+            if (!refreshToken) {
+                alert('No refresh token available');
+                return;
+            }
+
+            // Create JSON content
+            const tokenData = {
+                client_id: clientId,
+                refresh_token: refreshToken
+            };
+
+            const jsonContent = JSON.stringify(tokenData, null, 2);
+
+            // Create download link
+            const blob = new Blob([jsonContent], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'agol_refresh_token.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('✓ Refresh token saved as agol_refresh_token.json\n\nKeep this file secure! Use it with Python scripts to authenticate without 2FA.');
+        }
+
+        // Update step indicators
+        function updateOAuthStep(currentStep) {
+            const steps = [
+                document.getElementById('oauth-step1'),
+                document.getElementById('oauth-step2'),
+                document.getElementById('oauth-step3')
+            ];
+
+            steps.forEach((step, index) => {
+                const stepNum = index + 1;
+                const isActive = stepNum === currentStep;
+                const isComplete = stepNum < currentStep;
+
+                if (isActive) {
+                    step.style.background = '#fff';
+                    step.style.borderColor = '#DC143C';
+                    step.querySelector('div:first-child').style.color = '#DC143C';
+                } else if (isComplete) {
+                    step.style.background = '#e8f5e9';
+                    step.style.borderColor = '#4caf50';
+                    step.querySelector('div:first-child').style.color = '#2e7d32';
+                } else {
+                    step.style.background = '#f5f5f5';
+                    step.style.borderColor = '#e0e0e0';
+                    step.querySelector('div:first-child').style.color = '#999';
+                }
+            });
+        }
+
     </script>
 </body>
 </html>
