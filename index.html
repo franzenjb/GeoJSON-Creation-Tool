@@ -511,6 +511,9 @@
                 <button class="tab-btn" onclick="showTab('oauth')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
                     🔐 OAuth Tokens
                 </button>
+                <button class="tab-btn" onclick="showTab('screenshots')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
+                    📸 Hi-Res Captures
+                </button>
             </div>
 
             <!-- Code Lookup Tab -->
@@ -1640,6 +1643,255 @@ Start by asking me question #1.</div>
                             <p style="margin: 8px 0 0 0; color: #2e7d32; font-size: 0.9em;">
                                 Use the saved JSON file with Python scripts to authenticate WITHOUT 2FA for up to 90 days!
                             </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- High-Resolution Screenshot Capture Tab -->
+            <div id="screenshotsTab" class="tab-content" style="display: none;">
+                <div class="section">
+                    <h2>📸 High-Resolution Screenshot Capture</h2>
+
+                    <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; border-radius: 3px; margin-bottom: 25px;">
+                        <strong style="color: #e65100;">🙏 Credit:</strong>
+                        <span style="color: #e65100; font-size: 0.95em; margin-left: 8px;">
+                            This technique shared by <strong>Kevin Ham</strong>, Red Cross GIS. Thank you for this brilliant solution!
+                        </span>
+                    </div>
+
+                    <!-- What & Why Section -->
+                    <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 4px; padding: 20px; margin-bottom: 25px;">
+                        <h3 style="color: #1976d2; margin-top: 0;">🎯 What Is This?</h3>
+                        <p style="margin: 10px 0; font-size: 1.05em; line-height: 1.6;">
+                            A technique to capture <strong>ultra-high-resolution screenshots</strong> of web content—especially useful for
+                            <strong>ArcGIS maps, dashboards, and web apps</strong> that need to be printed or used in presentations.
+                        </p>
+
+                        <h3 style="color: #1976d2; margin: 20px 0 10px 0;">💡 Why Use This?</h3>
+                        <div style="background: white; padding: 15px; border-radius: 4px; border-left: 4px solid #4caf50;">
+                            <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                                <li><strong>Print Quality:</strong> Capture maps at 5000×8000 pixels (or larger!) for high-quality printing</li>
+                                <li><strong>Presentations:</strong> Get crystal-clear screenshots for PowerPoint, reports, and posters</li>
+                                <li><strong>No Pixelation:</strong> Unlike normal screenshots that look blurry when zoomed, these stay sharp</li>
+                                <li><strong>Perfect for Maps:</strong> ArcGIS maps, Experience Builder apps, Dashboards—all captured at full resolution</li>
+                            </ul>
+                        </div>
+
+                        <h3 style="color: #1976d2; margin: 20px 0 10px 0;">📊 Resolution Comparison</h3>
+                        <div style="background: white; padding: 15px; border-radius: 4px;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr style="background: #f5f5f5; border-bottom: 2px solid #ddd;">
+                                    <th style="padding: 10px; text-align: left;">Method</th>
+                                    <th style="padding: 10px; text-align: left;">Resolution</th>
+                                    <th style="padding: 10px; text-align: left;">Quality</th>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e0e0e0;">
+                                    <td style="padding: 10px;">❌ Normal screenshot (laptop)</td>
+                                    <td style="padding: 10px;">~1920×1080</td>
+                                    <td style="padding: 10px;"><span style="color: #dc143c;">Pixelated when printed</span></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e0e0e0;">
+                                    <td style="padding: 10px;">✅ Custom Device (Kevin's method)</td>
+                                    <td style="padding: 10px;"><strong>5000×8000 (or more!)</strong></td>
+                                    <td style="padding: 10px;"><span style="color: #4caf50;">Crystal clear, print-ready</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Instructions -->
+                    <div style="background: #fff; padding: 25px; border-radius: 4px; border: 2px solid #DC143C; margin-bottom: 25px;">
+                        <h3 style="color: #DC143C; margin-top: 0;">📋 How to Do It (Chrome)</h3>
+
+                        <div style="margin-bottom: 25px;">
+                            <div style="background: #DC143C; color: white; padding: 12px; border-radius: 4px 4px 0 0; font-weight: 600;">
+                                Step 1: Open DevTools
+                            </div>
+                            <div style="background: #f5f5f5; padding: 15px; border: 1px solid #ddd; border-top: none; border-radius: 0 0 4px 4px;">
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                                    <li>Open your ArcGIS map/dashboard/web app</li>
+                                    <li>Press <code style="background: #DC143C; color: white; padding: 2px 6px; border-radius: 3px;">F12</code>
+                                        or <code style="background: #DC143C; color: white; padding: 2px 6px; border-radius: 3px;">Cmd+Option+I</code> (Mac)
+                                        or <code style="background: #DC143C; color: white; padding: 2px 6px; border-radius: 3px;">Ctrl+Shift+I</code> (Windows)</li>
+                                    <li>DevTools panel opens on the right or bottom</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <div style="background: #DC143C; color: white; padding: 12px; border-radius: 4px 4px 0 0; font-weight: 600;">
+                                Step 2: Toggle Device Toolbar
+                            </div>
+                            <div style="background: #f5f5f5; padding: 15px; border: 1px solid #ddd; border-top: none; border-radius: 0 0 4px 4px;">
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                                    <li>Click the <strong>📱 Device Toggle icon</strong> in top-left of DevTools</li>
+                                    <li>Or press <code style="background: #DC143C; color: white; padding: 2px 6px; border-radius: 3px;">Cmd+Shift+M</code> (Mac)
+                                        or <code style="background: #DC143C; color: white; padding: 2px 6px; border-radius: 3px;">Ctrl+Shift+M</code> (Windows)</li>
+                                    <li>Your page now shows in "mobile device" view</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <div style="background: #DC143C; color: white; padding: 12px; border-radius: 4px 4px 0 0; font-weight: 600;">
+                                Step 3: Open Settings (The Key Step!)
+                            </div>
+                            <div style="background: #f5f5f5; padding: 15px; border: 1px solid #ddd; border-top: none; border-radius: 0 0 4px 4px;">
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                                    <li>Click the <strong>⚙️ Settings</strong> icon (three dots) next to device selector dropdown</li>
+                                    <li>Settings panel opens on the right</li>
+                                    <li>Click <strong>"Devices"</strong> in the left menu</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <div style="background: #4caf50; color: white; padding: 12px; border-radius: 4px 4px 0 0; font-weight: 600;">
+                                Step 4: Add Custom Device (Kevin's Secret!)
+                            </div>
+                            <div style="background: #e8f5e9; padding: 15px; border: 1px solid #4caf50; border-top: none; border-radius: 0 0 4px 4px;">
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                                    <li>Click <strong>"Add custom device..."</strong> button</li>
+                                    <li><strong>Device name:</strong> <code style="background: #4caf50; color: white; padding: 2px 6px; border-radius: 3px;">Jumbo</code> (or whatever you want!)</li>
+                                    <li><strong>Width:</strong> <code style="background: #4caf50; color: white; padding: 2px 6px; border-radius: 3px;">5000</code> pixels</li>
+                                    <li><strong>Height:</strong> <code style="background: #4caf50; color: white; padding: 2px 6px; border-radius: 3px;">8000</code> pixels</li>
+                                    <li><strong>Device pixel ratio:</strong> Leave as <code style="background: #666; color: white; padding: 2px 6px; border-radius: 3px;">1</code></li>
+                                    <li><strong>User agent:</strong> Select <code style="background: #666; color: white; padding: 2px 6px; border-radius: 3px;">Mobile</code> (or Desktop)</li>
+                                    <li>Click <strong>"Add"</strong></li>
+                                </ul>
+                                <div style="background: white; padding: 15px; border-radius: 4px; margin-top: 15px; border-left: 4px solid #ff9800;">
+                                    <strong style="color: #e65100; display: block; margin-bottom: 10px;">💡 Poster Printing Guide</strong>
+                                    <p style="margin: 0 0 12px 0; color: #e65100; font-size: 0.95em;">
+                                        Choose dimensions based on your final print size. Rule of thumb: <strong>multiply inches by 150-300</strong> (DPI).
+                                    </p>
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                                        <tr style="background: #fff3e0;">
+                                            <th style="padding: 8px; text-align: left; border: 1px solid #ff9800;">Poster Size</th>
+                                            <th style="padding: 8px; text-align: left; border: 1px solid #ff9800;">Acceptable (150 DPI)</th>
+                                            <th style="padding: 8px; text-align: left; border: 1px solid #ff9800;">High Quality (300 DPI)</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><strong>2' × 3'</strong> (24" × 36")</td>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><code>3600 × 5400</code></td>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><code>7200 × 10800</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><strong>3' × 4'</strong> (36" × 48")</td>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><code>5400 × 7200</code></td>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><code>10800 × 14400</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><strong>Letter</strong> (8.5" × 11")</td>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><code>1275 × 1650</code></td>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><code>2550 × 3300</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><strong>Tabloid</strong> (11" × 17")</td>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><code>1650 × 2550</code></td>
+                                            <td style="padding: 8px; border: 1px solid #ff9800;"><code>3300 × 5100</code></td>
+                                        </tr>
+                                    </table>
+                                    <p style="margin: 12px 0 0 0; color: #e65100; font-size: 0.85em; font-style: italic;">
+                                        💡 For maps viewed from distance (wall posters), 150 DPI is usually perfect. For close inspection (reports), use 300 DPI.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <div style="background: #DC143C; color: white; padding: 12px; border-radius: 4px 4px 0 0; font-weight: 600;">
+                                Step 5: Select Your Custom Device
+                            </div>
+                            <div style="background: #f5f5f5; padding: 15px; border: 1px solid #ddd; border-top: none; border-radius: 0 0 4px 4px;">
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                                    <li>Close Settings panel</li>
+                                    <li>In the device dropdown (top of page), select <strong>"Jumbo"</strong></li>
+                                    <li>Your page now renders at 5000×8000 pixels!</li>
+                                    <li>You'll see scrollbars because it's HUGE - that's normal</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 0;">
+                            <div style="background: #4caf50; color: white; padding: 12px; border-radius: 4px 4px 0 0; font-weight: 600;">
+                                Step 6: Take the Screenshot
+                            </div>
+                            <div style="background: #e8f5e9; padding: 15px; border: 1px solid #4caf50; border-top: none; border-radius: 0 0 4px 4px;">
+                                <strong style="color: #2e7d32;">Method 1: Chrome's Built-in Capture</strong>
+                                <ul style="margin: 10px 0; padding-left: 20px; line-height: 1.8;">
+                                    <li>Press <code style="background: #4caf50; color: white; padding: 2px 6px; border-radius: 3px;">Cmd+Shift+P</code> (Mac)
+                                        or <code style="background: #4caf50; color: white; padding: 2px 6px; border-radius: 3px;">Ctrl+Shift+P</code> (Windows)</li>
+                                    <li>Type: <code style="background: #666; color: white; padding: 2px 6px; border-radius: 3px;">screenshot</code></li>
+                                    <li>Select <strong>"Capture full size screenshot"</strong></li>
+                                    <li>Image downloads automatically at FULL 5000×8000 resolution! 🎉</li>
+                                </ul>
+
+                                <strong style="color: #2e7d32; display: block; margin-top: 15px;">Method 2: Browser Extension</strong>
+                                <ul style="margin: 10px 0 0 0; padding-left: 20px; line-height: 1.8;">
+                                    <li>Use extensions like "GoFullPage" or "Awesome Screenshot"</li>
+                                    <li>They'll capture the entire page at full custom resolution</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other Browsers -->
+                    <div style="background: #fff; padding: 20px; border-radius: 4px; border: 2px solid #666; margin-bottom: 25px;">
+                        <h3 style="color: #666; margin-top: 0;">🌐 Other Browsers</h3>
+
+                        <div style="margin-bottom: 15px;">
+                            <strong style="color: #DC143C;">Firefox:</strong>
+                            <p style="margin: 8px 0 0 0; color: #666; font-size: 0.95em; line-height: 1.6;">
+                                Firefox has similar DevTools! Press <code>F12</code> → Click device icon → Use "Responsive Design Mode" →
+                                Set custom dimensions → Use built-in screenshot tool (camera icon)
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <strong style="color: #DC143C;">Edge:</strong>
+                            <p style="margin: 8px 0 0 0; color: #666; font-size: 0.95em; line-height: 1.6;">
+                                Edge uses Chromium, so the process is identical to Chrome above!
+                            </p>
+                        </div>
+
+                        <div>
+                            <strong style="color: #DC143C;">Safari:</strong>
+                            <p style="margin: 8px 0 0 0; color: #666; font-size: 0.95em; line-height: 1.6;">
+                                Enable Developer menu → Enter Responsive Design Mode → Set custom dimensions →
+                                Use screenshot extensions
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Use Cases -->
+                    <div style="background: #e8f5e9; padding: 20px; border-radius: 4px; border: 2px solid #4caf50;">
+                        <h3 style="color: #2e7d32; margin-top: 0;">🎯 Perfect For:</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                            <div style="background: white; padding: 15px; border-radius: 4px; border-left: 4px solid #DC143C;">
+                                <strong style="color: #DC143C;">ArcGIS Maps</strong>
+                                <p style="margin: 8px 0 0 0; color: #666; font-size: 0.9em;">
+                                    Capture web maps at print resolution for reports, posters, and presentations
+                                </p>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 4px; border-left: 4px solid #DC143C;">
+                                <strong style="color: #DC143C;">Dashboards</strong>
+                                <p style="margin: 8px 0 0 0; color: #666; font-size: 0.9em;">
+                                    Get high-res snapshots of Operations Dashboard or Experience Builder apps
+                                </p>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 4px; border-left: 4px solid #DC143C;">
+                                <strong style="color: #DC143C;">Story Maps</strong>
+                                <p style="margin: 8px 0 0 0; color: #666; font-size: 0.9em;">
+                                    Capture full Story Map sections without scrolling or pixelation
+                                </p>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 4px; border-left: 4px solid #DC143C;">
+                                <strong style="color: #DC143C;">Web Apps</strong>
+                                <p style="margin: 8px 0 0 0; color: #666; font-size: 0.9em;">
+                                    Any web application - charts, tables, complex layouts - all crystal clear
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
