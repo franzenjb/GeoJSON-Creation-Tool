@@ -485,6 +485,93 @@
         </div>
 
         <div class="content">
+            <!-- Overview Accordion -->
+            <details style="background: #f5f5f5; border: 2px solid #DC143C; border-radius: 4px; padding: 15px; margin-bottom: 25px;">
+                <summary style="cursor: pointer; font-weight: 600; color: #DC143C; font-size: 1.1em; user-select: none;">
+                    📖 What's Inside: Quick Guide to All 9 Tools (Click to expand)
+                </summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #DC143C;">
+
+                    <!-- Tab Descriptions Grid -->
+                    <div style="display: grid; gap: 12px; margin-bottom: 20px;">
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">🔍 Code Lookup Tool</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Search built-in database for Red Cross chapters, regions, divisions, and counties. Get ECODE, RCODE, DCODE, and FIPS codes instantly.</div>
+                        </div>
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">📊 CSV Roll-Up</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Aggregate ZIP-level data into multi-level hierarchies. Input raw ZIP data, output complete summaries at ZIP → County → Chapter → Region → Division levels.</div>
+                        </div>
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">🗺️ Create GeoJSON</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Convert CSV files with geographic identifiers (ZIP, FIPS, etc.) into GeoJSON files ready for choropleth mapping in ArcGIS Online.</div>
+                        </div>
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">🔗 Orgler URL</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Convert Power BI report URLs to Orgler format for embedding in Story Maps and RCView dashboards.</div>
+                        </div>
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">📋 Pop-up Creator</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Create professional ArcGIS pop-up HTML templates. Includes AI workflow guide for generating beautiful inline CSS pop-ups using ChatGPT/Claude.</div>
+                        </div>
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">🌐 Geocoder</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Convert addresses from CSV to lat/long coordinates. Choose from three free providers (Mapbox, Nominatim, or Google). Output as GeoJSON or CSV.</div>
+                        </div>
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">📋 Metadata BETA</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Use AI (ChatGPT/Claude) to generate professional metadata for your ArcGIS items. Creates summaries, descriptions, tags, and access information.</div>
+                        </div>
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">🔐 OAuth Tokens</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Generate 90-day OAuth refresh tokens for ArcGIS automation. Skip 2FA for 3 months! Perfect for Python scripts. Based on JR Matchett's tool.</div>
+                        </div>
+
+                        <div style="background: white; border-left: 4px solid #DC143C; padding: 12px; border-radius: 3px;">
+                            <div style="font-weight: 600; color: #DC143C; margin-bottom: 4px;">📸 Hi-Res Captures</div>
+                            <div style="font-size: 0.9em; color: #666; line-height: 1.5;">Kevin Ham's technique for capturing high-resolution map screenshots using browser DevTools. Includes practical dimensions for poster printing (2'×3', 3'×4', etc.).</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Common Workflows -->
+                    <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 4px; padding: 15px;">
+                        <h3 style="color: #1976d2; margin-top: 0; margin-bottom: 12px; font-size: 1em;">🔗 Common Workflows - Tabs That Work Together:</h3>
+
+                        <div style="display: grid; gap: 10px; font-size: 0.9em;">
+                            <div style="background: white; padding: 10px; border-radius: 3px; border-left: 3px solid #2196f3;">
+                                <strong style="color: #1976d2;">Tab 7 + Tab 8:</strong> <span style="color: #666;">Generate metadata with AI → Get OAuth token → Automate updates with Python (95% faster!)</span>
+                            </div>
+
+                            <div style="background: white; padding: 10px; border-radius: 3px; border-left: 3px solid #2196f3;">
+                                <strong style="color: #1976d2;">Tab 1 + Tab 3:</strong> <span style="color: #666;">Look up codes for your data → Create GeoJSON files for mapping</span>
+                            </div>
+
+                            <div style="background: white; padding: 10px; border-radius: 3px; border-left: 3px solid #2196f3;">
+                                <strong style="color: #1976d2;">Tab 6 + Tab 3:</strong> <span style="color: #666;">Geocode addresses to coordinates → Convert to GeoJSON for web maps</span>
+                            </div>
+
+                            <div style="background: white; padding: 10px; border-radius: 3px; border-left: 3px solid #2196f3;">
+                                <strong style="color: #1976d2;">Tab 2 + Tab 3:</strong> <span style="color: #666;">Roll up ZIP data to county/region levels → Create GeoJSON choropleth maps</span>
+                            </div>
+
+                            <div style="background: white; padding: 10px; border-radius: 3px; border-left: 3px solid #2196f3;">
+                                <strong style="color: #1976d2;">Tab 9 + Tab 7:</strong> <span style="color: #666;">Capture high-res map screenshots → Generate metadata → Publish to ArcGIS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
             <!-- Tab Navigation -->
             <div class="tabs" style="display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0;">
                 <button class="tab-btn active" onclick="showTab('lookup')" style="padding: 10px 20px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 500; color: #666; transition: all 0.2s;">
@@ -1065,8 +1152,8 @@
                             <div style="background: #e8f5e9; padding: 15px; border-radius: 4px; margin-bottom: 15px; border-left: 4px solid #4caf50;">
                                 <strong style="color: #2e7d32;">✨ The AI Solution:</strong>
                                 <p style="margin: 8px 0 0 0; color: #2e7d32; font-size: 0.95em; line-height: 1.6;">
-                                    ChatGPT, Claude, and other AI assistants are <strong>AMAZING</strong> at creating inline CSS!
-                                    Give them your field names and describe what you want—they'll generate production-ready pop-up HTML.
+                                    ChatGPT, Claude, and other AI assistants excel at creating inline CSS.
+                                    Provide your field names and design requirements, and they'll generate production-ready pop-up HTML.
                                 </p>
                             </div>
 
