@@ -1326,188 +1326,147 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
             <!-- Metadata Updater Tab -->
             <div id="metadataTab" class="tab-content" style="display: none;">
                 <div class="section">
-                    <h2>ArcGIS Metadata Updater</h2>
-                    <div class="explanation">
-                        <p>Generate a complete Python script to update ArcGIS item metadata. Fill out the form below, click "Generate Script", then copy and paste the Python code into an ArcGIS Online Notebook to run it.</p>
-                    </div>
-
-                    <!-- Item ID Input -->
-                    <div style="margin-top: 25px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                            ArcGIS Item ID: <span style="color: #DC143C;">*</span>
-                        </label>
-                        <input type="text" id="metadataItemId" placeholder="e.g., 2461b88c8a914c57bdd7177382ae9c19"
-                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333; font-family: monospace;">
-                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">
-                            Find this in your item's URL: <code style="background: #f5f5f5; padding: 2px 5px; border-radius: 2px;">...?id=YOUR_ITEM_ID</code>
+                    <h2>ArcGIS Metadata Updater - ChatGPT Prompt</h2>
+                    <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; border-radius: 3px; margin-bottom: 25px;">
+                        <div style="font-weight: 600; color: #e65100; margin-bottom: 8px;">⚡ Fastest Method</div>
+                        <div style="color: #e65100; font-size: 0.95em; line-height: 1.5;">
+                            Copy this prompt template → Fill in your details → Paste to ChatGPT/Claude → Get complete Python script → Run in ArcGIS Notebook
                         </div>
                     </div>
 
-                    <!-- Summary Input -->
-                    <div style="margin-top: 25px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                            Summary (1-2 sentences): <span style="color: #DC143C;">*</span>
-                        </label>
-                        <textarea id="metadataSummary" placeholder="Paste your AI-generated summary here..."
-                                  style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333; min-height: 80px; resize: vertical; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;"></textarea>
-                    </div>
-
-                    <!-- Description Input -->
-                    <div style="margin-top: 25px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                            Description (detailed): <span style="color: #DC143C;">*</span>
-                        </label>
-                        <textarea id="metadataDescription" placeholder="Paste your AI-generated detailed description here..."
-                                  style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333; min-height: 150px; resize: vertical; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;"></textarea>
-                    </div>
-
-                    <!-- Categories -->
-                    <div style="margin-top: 25px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 12px; color: #333;">
-                            Categories (select all that apply):
-                        </label>
-                        <div style="background: #fafafa; padding: 15px; border-radius: 3px; border: 2px solid #e0e0e0;">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;">
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="NHQ">
-                                    <span>NHQ</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Division">
-                                    <span>Division</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Region">
-                                    <span>Region</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Chapter">
-                                    <span>Chapter</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="DRO">
-                                    <span>DRO</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="DA">
-                                    <span>DA</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Weather">
-                                    <span>Weather</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Hazard">
-                                    <span>Hazard</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Tropical">
-                                    <span>Tropical</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Partners">
-                                    <span>Partners</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Training">
-                                    <span>Training</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Boundaries">
-                                    <span>Boundaries</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="DRA_Territory">
-                                    <span>DRA_Territory</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Home Fire Campaign">
-                                    <span>Home Fire Campaign</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Lives Saved">
-                                    <span>Lives Saved</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Mission Adaptation">
-                                    <span>Mission Adaptation</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="Partner HUB">
-                                    <span>Partner HUB</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="BioMed">
-                                    <span>BioMed</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="SAF">
-                                    <span>SAF</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" class="metadata-category" value="NOAA">
-                                    <span>NOAA</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tags Input -->
-                    <div style="margin-top: 25px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                            Tags (comma-separated):
-                        </label>
-                        <input type="text" id="metadataTags" placeholder="e.g., California, Analysis, Regional, Planning, Demographics"
-                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;">
-                    </div>
-
-                    <!-- Access Information -->
-                    <div style="margin-top: 25px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                            Access Information:
-                        </label>
-                        <input type="text" id="metadataAccessInfo" value="© American Red Cross" placeholder="© American Red Cross"
-                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;">
-                    </div>
-
-                    <!-- License Info -->
-                    <div style="margin-top: 25px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                            License Information:
-                        </label>
-                        <input type="text" id="metadataLicenseInfo" value="For internal use only" placeholder="For internal use only"
-                               style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 3px; font-size: 0.9em; background: white; color: #333;">
-                    </div>
-
-                    <!-- Generate Button -->
-                    <div style="margin-top: 30px; text-align: center;">
-                        <button onclick="generateMetadataScript()" style="background: #DC143C; color: white; border: none; padding: 12px 30px; font-size: 1em; font-weight: 600; border-radius: 3px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.2s;"
-                                onmouseover="this.style.background='#b01030'" onmouseout="this.style.background='#DC143C'">
-                            🐍 Generate Python Script
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                        <button onclick="showPromptVersion('quick')" id="quickPromptBtn" style="flex: 1; background: #DC143C; color: white; border: none; padding: 12px 20px; font-size: 1em; font-weight: 600; border-radius: 3px; cursor: pointer; transition: all 0.2s;">
+                            ⚡ Quick Prompt
+                        </button>
+                        <button onclick="showPromptVersion('detailed')" id="detailedPromptBtn" style="flex: 1; background: #e0e0e0; color: #666; border: none; padding: 12px 20px; font-size: 1em; font-weight: 600; border-radius: 3px; cursor: pointer; transition: all 0.2s;">
+                            📋 Detailed Prompt
                         </button>
                     </div>
 
-                    <!-- Output Area -->
-                    <div id="metadataOutput" style="display: none; margin-top: 30px;">
+                    <!-- Quick Prompt -->
+                    <div id="quickPrompt" style="display: block;">
                         <div style="background: #f5f5f5; padding: 20px; border-radius: 3px; border: 2px solid #DC143C;">
-                            <h3 style="margin-top: 0; color: #DC143C; display: flex; justify-content: space-between; align-items: center;">
-                                <span>✅ Python Script Generated</span>
-                                <button onclick="copyMetadataScript()" style="background: #DC143C; color: white; border: none; padding: 8px 16px; font-size: 0.9em; border-radius: 3px; cursor: pointer;">
-                                    📋 Copy to Clipboard
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3 style="margin: 0; color: #DC143C;">⚡ Quick ChatGPT Prompt</h3>
+                                <button onclick="copyPromptToClipboard('quick')" style="background: #DC143C; color: white; border: none; padding: 8px 16px; font-size: 0.9em; border-radius: 3px; cursor: pointer;">
+                                    📋 Copy Prompt
                                 </button>
-                            </h3>
-                            <div style="background: #fff; padding: 15px; border-radius: 3px; margin-top: 15px; max-height: 400px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.5; border: 1px solid #e0e0e0;">
-                                <pre id="metadataScriptCode" style="margin: 0; white-space: pre-wrap; word-wrap: break-word;"></pre>
                             </div>
-                            <div style="margin-top: 15px; padding: 12px; background: #e3f2fd; border-left: 3px solid #2196F3; border-radius: 3px;">
-                                <strong style="color: #1565c0;">💡 Next Steps:</strong>
-                                <ol style="margin: 8px 0 0 20px; color: #1565c0;">
-                                    <li>Click "Copy to Clipboard" above</li>
-                                    <li>Open an ArcGIS Online Notebook</li>
-                                    <li>Paste and run the code</li>
-                                    <li>Your item metadata will be updated!</li>
-                                </ol>
+                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap;">Write a complete Python script for ArcGIS Online Notebook to update this item:
+
+ITEM ID: [your-item-id-here]
+
+WHAT IT IS: [one sentence describing the map/app/layer]
+
+SUMMARY: Write 20-30 words describing what this item is and its purpose
+
+DESCRIPTION: Write 50+ words including:
+- What data it contains
+- Who should use it
+- How it supports operations/planning
+- Geographic coverage: [your area]
+- Data sources: [your sources]
+
+TAGS: Generate 3-5 relevant tags for: [your geographic area], [data types], [use case]
+
+CATEGORIES: Assign these categories: [pick from: NHQ, Division, Region, Chapter, DRO, DA, Weather, Hazard, Tropical, Partners, Training, Boundaries, DRA_Territory, Home Fire Campaign, Lives Saved, Mission Adaptation, Partner HUB, BioMed, SAF, NOAA]
+
+ACCESS INFO: © American Red Cross - [Your Division] Division
+
+LICENSE: For internal use only - [Project name or "Confidential"]
+
+Generate Python using GIS("home"), update all metadata fields, include categories with "/" prefix, add error handling and success messages.</div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 3px solid #4caf50; border-radius: 3px;">
+                            <strong style="color: #2e7d32;">✅ How to Use:</strong>
+                            <ol style="margin: 8px 0 0 20px; color: #2e7d32;">
+                                <li>Click "Copy Prompt" above</li>
+                                <li>Paste into ChatGPT or Claude</li>
+                                <li>Fill in the [brackets] with your details</li>
+                                <li>Get your Python script back</li>
+                                <li>Copy script → Paste into ArcGIS Notebook → Run!</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Prompt -->
+                    <div id="detailedPrompt" style="display: none;">
+                        <div style="background: #f5f5f5; padding: 20px; border-radius: 3px; border: 2px solid #DC143C;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3 style="margin: 0; color: #DC143C;">📋 Detailed ChatGPT Prompt</h3>
+                                <button onclick="copyPromptToClipboard('detailed')" style="background: #DC143C; color: white; border: none; padding: 8px 16px; font-size: 0.9em; border-radius: 3px; cursor: pointer;">
+                                    📋 Copy Prompt
+                                </button>
                             </div>
+                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap;">I need you to write a complete, ready-to-run Python script for an ArcGIS Online Notebook that updates an item's metadata. Generate the script following these exact specifications:
+
+### ITEM INFORMATION
+- ArcGIS Item ID: [paste your item ID here]
+- Item Type/Purpose: [e.g., "Web map showing California Red Cross counties and demographics for regional planning"]
+
+### METADATA REQUIREMENTS
+
+Summary (20-30 words):
+Generate a concise, professional summary that describes what this item is, what data it contains, and its primary purpose. Keep it between 20-30 words.
+
+Description (50+ words):
+Generate a detailed description (minimum 50 words) that includes:
+- What the item shows/contains
+- What data sources are included
+- Who should use it and why
+- How it supports decision-making or operations
+- Any important technical details or coverage areas
+
+Tags (minimum 3-5):
+Generate relevant, specific tags including:
+- Geographic coverage (state, region, counties, etc.)
+- Data categories (demographics, operations, facilities, etc.)
+- Use cases (planning, analysis, reporting, etc.)
+- Organization terms (Red Cross specific terms)
+
+### CATEGORIES TO ASSIGN
+
+Organizational Structure: NHQ, Division, Region, Chapter, DRO
+Disaster & Emergency: DA, Weather, Hazard, Tropical, DRA_Territory
+Programs & Operations: Home Fire Campaign, Lives Saved, BioMed, SAF
+Data & Analysis: Boundaries, Training, NOAA
+Partnerships & Strategy: Partners, Partner HUB, Mission Adaptation
+
+Selected Categories: [e.g., Division, Region, Chapter, Boundaries]
+
+### ADDITIONAL METADATA
+- Access Information: "© American Red Cross - [Division Name] Division"
+- License Information: "For internal use only - [Project Name or 'Confidential']"
+
+### CONTEXT ABOUT THE ITEM
+- Geographic area: [describe coverage]
+- Datasets included: [list datasets]
+- Part of project: [project name if applicable]
+- Organizational initiatives: [any initiatives this supports]
+- Primary audience: [who will use this]
+
+### OUTPUT FORMAT
+Generate a complete Python script that:
+1. Uses GIS("home") for authentication
+2. Gets the item by ID
+3. Updates snippet, description, tags, accessInformation, and licenseInfo
+4. Updates categories using the correct ArcGIS format (with "/" prefix)
+5. Includes error handling
+6. Prints clear success messages with details
+7. Shows the item's homepage URL at the end
+
+Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.</div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-left: 3px solid #2196f3; border-radius: 3px;">
+                            <strong style="color: #1565c0;">💡 Best Results:</strong>
+                            <ul style="margin: 8px 0 0 20px; color: #1565c0;">
+                                <li>The more detail you provide, the better the AI-generated metadata</li>
+                                <li>Only select categories that truly apply to your item</li>
+                                <li>Review the generated Python script before running it</li>
+                                <li>Save your filled-in prompt for similar items in the future</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -4633,132 +4592,115 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
             document.body.removeChild(a);
         }
 
-        // Metadata Updater Functions
-        function generateMetadataScript() {
-            // Get values from form
-            const itemId = document.getElementById('metadataItemId').value.trim();
-            const summary = document.getElementById('metadataSummary').value.trim();
-            const description = document.getElementById('metadataDescription').value.trim();
-            const tags = document.getElementById('metadataTags').value.trim();
-            const accessInfo = document.getElementById('metadataAccessInfo').value.trim();
-            const licenseInfo = document.getElementById('metadataLicenseInfo').value.trim();
-
-            // Validate required fields
-            if (!itemId) {
-                alert('⚠️ Please enter an ArcGIS Item ID');
-                return;
+        // Metadata Prompt Functions
+        function showPromptVersion(version) {
+            if (version === 'quick') {
+                document.getElementById('quickPrompt').style.display = 'block';
+                document.getElementById('detailedPrompt').style.display = 'none';
+                document.getElementById('quickPromptBtn').style.background = '#DC143C';
+                document.getElementById('quickPromptBtn').style.color = 'white';
+                document.getElementById('detailedPromptBtn').style.background = '#e0e0e0';
+                document.getElementById('detailedPromptBtn').style.color = '#666';
+            } else {
+                document.getElementById('quickPrompt').style.display = 'none';
+                document.getElementById('detailedPrompt').style.display = 'block';
+                document.getElementById('quickPromptBtn').style.background = '#e0e0e0';
+                document.getElementById('quickPromptBtn').style.color = '#666';
+                document.getElementById('detailedPromptBtn').style.background = '#DC143C';
+                document.getElementById('detailedPromptBtn').style.color = 'white';
             }
-            if (!summary) {
-                alert('⚠️ Please enter a summary');
-                return;
-            }
-            if (!description) {
-                alert('⚠️ Please enter a description');
-                return;
-            }
-
-            // Get selected categories
-            const categoryCheckboxes = document.querySelectorAll('.metadata-category:checked');
-            const categories = Array.from(categoryCheckboxes).map(cb => '/' + cb.value);
-
-            // Parse tags
-            const tagsList = tags ? tags.split(',').map(t => t.trim()).filter(t => t) : [];
-
-            // Escape strings for Python
-            function escapePython(str) {
-                return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
-            }
-
-            // Generate Python script
-            let script = `"""
-ArcGIS Metadata Updater Script
-Generated by Red Cross GIS Tools
-"""
-
-from arcgis.gis import GIS
-
-# Connect to ArcGIS (uses your active login)
-gis = GIS("home")
-
-# Item ID to update
-item_id = "${escapePython(itemId)}"
-
-try:
-    # Get the item
-    item = gis.content.get(item_id)
-
-    if not item:
-        print(f"❌ Error: Item with ID {item_id} not found")
-    else:
-        print(f"📂 Found item: {item.title}")
-        print(f"   Type: {item.type}")
-        print()
-
-        # Update metadata
-        update_props = {
-            "snippet": """${escapePython(summary)}""",
-            "description": """${escapePython(description)}"""`;
-
-            if (tagsList.length > 0) {
-                script += `,
-            "tags": [${tagsList.map(t => `"${escapePython(t)}"`).join(', ')}]`;
-            }
-
-            if (accessInfo) {
-                script += `,
-            "accessInformation": "${escapePython(accessInfo)}"`;
-            }
-
-            if (licenseInfo) {
-                script += `,
-            "licenseInfo": "${escapePython(licenseInfo)}"`;
-            }
-
-            script += `
         }
 
-        item.update(update_props)
-        print("✅ Updated metadata successfully")
-        print(f"   ✓ Summary: {len(update_props['snippet'])} characters")
-        print(f"   ✓ Description: {len(update_props['description'])} characters")`;
+        function copyPromptToClipboard(version) {
+            let promptText = '';
 
-            if (tagsList.length > 0) {
-                script += `
-        print(f"   ✓ Tags: {len(update_props['tags'])} tags")`;
+            if (version === 'quick') {
+                promptText = `Write a complete Python script for ArcGIS Online Notebook to update this item:
+
+ITEM ID: [your-item-id-here]
+
+WHAT IT IS: [one sentence describing the map/app/layer]
+
+SUMMARY: Write 20-30 words describing what this item is and its purpose
+
+DESCRIPTION: Write 50+ words including:
+- What data it contains
+- Who should use it
+- How it supports operations/planning
+- Geographic coverage: [your area]
+- Data sources: [your sources]
+
+TAGS: Generate 3-5 relevant tags for: [your geographic area], [data types], [use case]
+
+CATEGORIES: Assign these categories: [pick from: NHQ, Division, Region, Chapter, DRO, DA, Weather, Hazard, Tropical, Partners, Training, Boundaries, DRA_Territory, Home Fire Campaign, Lives Saved, Mission Adaptation, Partner HUB, BioMed, SAF, NOAA]
+
+ACCESS INFO: © American Red Cross - [Your Division] Division
+
+LICENSE: For internal use only - [Project name or "Confidential"]
+
+Generate Python using GIS("home"), update all metadata fields, include categories with "/" prefix, add error handling and success messages.`;
+            } else {
+                promptText = `I need you to write a complete, ready-to-run Python script for an ArcGIS Online Notebook that updates an item's metadata. Generate the script following these exact specifications:
+
+### ITEM INFORMATION
+- ArcGIS Item ID: [paste your item ID here]
+- Item Type/Purpose: [e.g., "Web map showing California Red Cross counties and demographics for regional planning"]
+
+### METADATA REQUIREMENTS
+
+Summary (20-30 words):
+Generate a concise, professional summary that describes what this item is, what data it contains, and its primary purpose. Keep it between 20-30 words.
+
+Description (50+ words):
+Generate a detailed description (minimum 50 words) that includes:
+- What the item shows/contains
+- What data sources are included
+- Who should use it and why
+- How it supports decision-making or operations
+- Any important technical details or coverage areas
+
+Tags (minimum 3-5):
+Generate relevant, specific tags including:
+- Geographic coverage (state, region, counties, etc.)
+- Data categories (demographics, operations, facilities, etc.)
+- Use cases (planning, analysis, reporting, etc.)
+- Organization terms (Red Cross specific terms)
+
+### CATEGORIES TO ASSIGN
+
+Organizational Structure: NHQ, Division, Region, Chapter, DRO
+Disaster & Emergency: DA, Weather, Hazard, Tropical, DRA_Territory
+Programs & Operations: Home Fire Campaign, Lives Saved, BioMed, SAF
+Data & Analysis: Boundaries, Training, NOAA
+Partnerships & Strategy: Partners, Partner HUB, Mission Adaptation
+
+Selected Categories: [e.g., Division, Region, Chapter, Boundaries]
+
+### ADDITIONAL METADATA
+- Access Information: "© American Red Cross - [Division Name] Division"
+- License Information: "For internal use only - [Project Name or 'Confidential']"
+
+### CONTEXT ABOUT THE ITEM
+- Geographic area: [describe coverage]
+- Datasets included: [list datasets]
+- Part of project: [project name if applicable]
+- Organizational initiatives: [any initiatives this supports]
+- Primary audience: [who will use this]
+
+### OUTPUT FORMAT
+Generate a complete Python script that:
+1. Uses GIS("home") for authentication
+2. Gets the item by ID
+3. Updates snippet, description, tags, accessInformation, and licenseInfo
+4. Updates categories using the correct ArcGIS format (with "/" prefix)
+5. Includes error handling
+6. Prints clear success messages with details
+7. Shows the item's homepage URL at the end
+
+Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.`;
             }
 
-            if (categories.length > 0) {
-                script += `
-
-        # Update categories
-        categories = [${categories.map(c => `"${escapePython(c)}"`).join(', ')}]
-        item.update(item_properties={"categories": categories})
-        print(f"   ✓ Categories: {len(categories)} assigned")`;
-            }
-
-            script += `
-
-        print()
-        print("🎉 All updates complete!")
-        print(f"View your item: {item.homepage}")
-
-except Exception as e:
-    print(f"❌ Error: {e}")
-`;
-
-            // Display the script
-            document.getElementById('metadataScriptCode').textContent = script;
-            document.getElementById('metadataOutput').style.display = 'block';
-
-            // Scroll to output
-            document.getElementById('metadataOutput').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        function copyMetadataScript() {
-            const scriptCode = document.getElementById('metadataScriptCode').textContent;
-
-            navigator.clipboard.writeText(scriptCode).then(() => {
-                // Show feedback
+            navigator.clipboard.writeText(promptText).then(() => {
                 const button = event.target;
                 const originalText = button.textContent;
                 button.textContent = '✅ Copied!';
@@ -4769,7 +4711,7 @@ except Exception as e:
                     button.style.background = '#DC143C';
                 }, 2000);
             }).catch(err => {
-                alert('Failed to copy to clipboard. Please select and copy the code manually.');
+                alert('Failed to copy. Please select and copy the prompt manually.');
             });
         }
     </script>
