@@ -1352,7 +1352,7 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                                     📋 Copy Prompt
                                 </button>
                             </div>
-                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap;">Write a complete Python script for ArcGIS Online Notebook to update this item:
+                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap; user-select: all; cursor: text;">Write a complete Python script for ArcGIS Online Notebook to update this item:
 
 ITEM ID: [your-item-id-here]
 
@@ -1399,7 +1399,7 @@ Generate Python using GIS("home"), update all metadata fields, include categorie
                                     📋 Copy Prompt
                                 </button>
                             </div>
-                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap;">I need you to write a complete, ready-to-run Python script for an ArcGIS Online Notebook that updates an item's metadata. Generate the script following these exact specifications:
+                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap; user-select: all; cursor: text;">I need you to write a complete, ready-to-run Python script for an ArcGIS Online Notebook that updates an item's metadata. Generate the script following these exact specifications:
 
 ### ITEM INFORMATION
 - ArcGIS Item ID: [paste your item ID here]
@@ -4700,19 +4700,48 @@ Generate a complete Python script that:
 Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.`;
             }
 
-            navigator.clipboard.writeText(promptText).then(() => {
-                const button = event.target;
-                const originalText = button.textContent;
+            // Try modern clipboard API first, fallback to older method
+            const button = event.target;
+            const originalText = button.textContent;
+
+            function showSuccess() {
                 button.textContent = '✅ Copied!';
                 button.style.background = '#1e7e34';
-
                 setTimeout(() => {
                     button.textContent = originalText;
                     button.style.background = '#DC143C';
                 }, 2000);
-            }).catch(err => {
-                alert('Failed to copy. Please select and copy the prompt manually.');
-            });
+            }
+
+            function fallbackCopy(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    if (successful) {
+                        showSuccess();
+                    } else {
+                        alert('Copy failed. Please select and copy the text manually.');
+                    }
+                } catch (err) {
+                    document.body.removeChild(textarea);
+                    alert('Copy failed. Please select and copy the text manually.');
+                }
+            }
+
+            // Try modern API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(promptText)
+                    .then(() => showSuccess())
+                    .catch(() => fallbackCopy(promptText));
+            } else {
+                fallbackCopy(promptText);
+            }
         }
     </script>
 </body>
