@@ -1352,30 +1352,28 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                                     📋 Copy Prompt
                                 </button>
                             </div>
-                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap; user-select: all; cursor: text;">Write a complete Python script for ArcGIS Online Notebook to update this item:
+                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap; user-select: all; cursor: text;">I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata.
 
-ITEM ID: [your-item-id-here]
+Before I generate the final code, I need you to ask me these questions ONE AT A TIME and wait for my answers:
 
-WHAT IT IS: [one sentence describing the map/app/layer]
+1. What is your ArcGIS Item ID?
+2. In one sentence, what does this item show or contain?
+3. What geographic area does it cover?
+4. What datasets or data sources are included?
+5. Who is the primary audience?
+6. Which categories apply? (Pick from: NHQ, Division, Region, Chapter, DRO, DA, Weather, Hazard, Tropical, Partners, Training, Boundaries, DRA_Territory, Home Fire Campaign, Lives Saved, Mission Adaptation, Partner HUB, BioMed, SAF, NOAA)
+7. What is your Division name?
+8. What project is this for? (or say "Confidential")
 
-SUMMARY: Write 20-30 words describing what this item is and its purpose
+Once I provide all answers, generate a complete Python script that:
+- Creates a 20-30 word professional summary
+- Creates a 50+ word detailed description
+- Generates 3-5 relevant tags
+- Updates all metadata fields using GIS("home")
+- Assigns categories with "/" prefix
+- Includes error handling and success messages
 
-DESCRIPTION: Write 50+ words including:
-- What data it contains
-- Who should use it
-- How it supports operations/planning
-- Geographic coverage: [your area]
-- Data sources: [your sources]
-
-TAGS: Generate 3-5 relevant tags for: [your geographic area], [data types], [use case]
-
-CATEGORIES: Assign these categories: [pick from: NHQ, Division, Region, Chapter, DRO, DA, Weather, Hazard, Tropical, Partners, Training, Boundaries, DRA_Territory, Home Fire Campaign, Lives Saved, Mission Adaptation, Partner HUB, BioMed, SAF, NOAA]
-
-ACCESS INFO: © American Red Cross - [Your Division] Division
-
-LICENSE: For internal use only - [Project name or "Confidential"]
-
-Generate Python using GIS("home"), update all metadata fields, include categories with "/" prefix, add error handling and success messages.</div>
+Start by asking me question #1.</div>
                         </div>
 
                         <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 3px solid #4caf50; border-radius: 3px;">
@@ -1383,8 +1381,8 @@ Generate Python using GIS("home"), update all metadata fields, include categorie
                             <ol style="margin: 8px 0 0 20px; color: #2e7d32;">
                                 <li>Click "Copy Prompt" above</li>
                                 <li>Paste into ChatGPT or Claude</li>
-                                <li>Fill in the [brackets] with your details</li>
-                                <li>Get your Python script back</li>
+                                <li>Answer the 8 questions it asks you (one at a time)</li>
+                                <li>ChatGPT generates your complete Python script</li>
                                 <li>Copy script → Paste into ArcGIS Notebook → Run!</li>
                             </ol>
                         </div>
@@ -1399,74 +1397,52 @@ Generate Python using GIS("home"), update all metadata fields, include categorie
                                     📋 Copy Prompt
                                 </button>
                             </div>
-                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap; user-select: all; cursor: text;">I need you to write a complete, ready-to-run Python script for an ArcGIS Online Notebook that updates an item's metadata. Generate the script following these exact specifications:
+                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap; user-select: all; cursor: text;">I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata with professional, detailed information.
 
-### ITEM INFORMATION
-- ArcGIS Item ID: [paste your item ID here]
-- Item Type/Purpose: [e.g., "Web map showing California Red Cross counties and demographics for regional planning"]
+Before I generate the final code, I need you to ask me these questions ONE AT A TIME and wait for my answers after each one:
 
-### METADATA REQUIREMENTS
+REQUIRED INFORMATION:
+1. What is your ArcGIS Item ID?
+2. In one sentence, what does this item show or contain?
+3. What geographic area does it cover? (be specific: state, region, counties, etc.)
+4. What datasets or data sources are included? (list them)
+5. Who is the primary audience? (e.g., Division leadership, Regional CEOs, Chapter executives)
+6. How does this support operations or decision-making?
+7. Which categories apply? Choose from these groups:
+   - Organizational Structure: NHQ, Division, Region, Chapter, DRO
+   - Disaster & Emergency: DA, Weather, Hazard, Tropical, DRA_Territory
+   - Programs & Operations: Home Fire Campaign, Lives Saved, BioMed, SAF
+   - Data & Analysis: Boundaries, Training, NOAA
+   - Partnerships & Strategy: Partners, Partner HUB, Mission Adaptation
+8. What is your Division name? (e.g., Pacific Division)
+9. What project or initiative is this for? (or say "Confidential")
+10. Are there any organizational initiatives this supports? (optional)
 
-Summary (20-30 words):
-Generate a concise, professional summary that describes what this item is, what data it contains, and its primary purpose. Keep it between 20-30 words.
+Once I provide all answers, generate a complete Python script that:
+- Creates a 20-30 word professional summary based on my answers
+- Creates a 50+ word detailed description that includes what it contains, data sources, audience, purpose, and coverage
+- Generates 3-5 highly relevant tags based on geography, data types, and use cases
+- Sets access info as "© American Red Cross - [Division] Division"
+- Sets license as "For internal use only - [Project]"
+- Updates all metadata fields using GIS("home")
+- Assigns categories with "/" prefix
+- Includes error handling and detailed success messages
+- Shows the item homepage URL at the end
 
-Description (50+ words):
-Generate a detailed description (minimum 50 words) that includes:
-- What the item shows/contains
-- What data sources are included
-- Who should use it and why
-- How it supports decision-making or operations
-- Any important technical details or coverage areas
+Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.
 
-Tags (minimum 3-5):
-Generate relevant, specific tags including:
-- Geographic coverage (state, region, counties, etc.)
-- Data categories (demographics, operations, facilities, etc.)
-- Use cases (planning, analysis, reporting, etc.)
-- Organization terms (Red Cross specific terms)
-
-### CATEGORIES TO ASSIGN
-
-Organizational Structure: NHQ, Division, Region, Chapter, DRO
-Disaster & Emergency: DA, Weather, Hazard, Tropical, DRA_Territory
-Programs & Operations: Home Fire Campaign, Lives Saved, BioMed, SAF
-Data & Analysis: Boundaries, Training, NOAA
-Partnerships & Strategy: Partners, Partner HUB, Mission Adaptation
-
-Selected Categories: [e.g., Division, Region, Chapter, Boundaries]
-
-### ADDITIONAL METADATA
-- Access Information: "© American Red Cross - [Division Name] Division"
-- License Information: "For internal use only - [Project Name or 'Confidential']"
-
-### CONTEXT ABOUT THE ITEM
-- Geographic area: [describe coverage]
-- Datasets included: [list datasets]
-- Part of project: [project name if applicable]
-- Organizational initiatives: [any initiatives this supports]
-- Primary audience: [who will use this]
-
-### OUTPUT FORMAT
-Generate a complete Python script that:
-1. Uses GIS("home") for authentication
-2. Gets the item by ID
-3. Updates snippet, description, tags, accessInformation, and licenseInfo
-4. Updates categories using the correct ArcGIS format (with "/" prefix)
-5. Includes error handling
-6. Prints clear success messages with details
-7. Shows the item's homepage URL at the end
-
-Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.</div>
+Start by asking me question #1.</div>
                         </div>
 
                         <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-left: 3px solid #2196f3; border-radius: 3px;">
-                            <strong style="color: #1565c0;">💡 Best Results:</strong>
-                            <ul style="margin: 8px 0 0 20px; color: #1565c0;">
-                                <li>The more detail you provide, the better the AI-generated metadata</li>
-                                <li>Only select categories that truly apply to your item</li>
-                                <li>Review the generated Python script before running it</li>
-                                <li>Save your filled-in prompt for similar items in the future</li>
-                            </ul>
+                            <strong style="color: #1565c0;">💡 How to Use:</strong>
+                            <ol style="margin: 8px 0 0 20px; color: #1565c0;">
+                                <li>Click "Copy Prompt" above</li>
+                                <li>Paste into ChatGPT or Claude</li>
+                                <li>Answer the 10 detailed questions it asks (one at a time)</li>
+                                <li>ChatGPT generates your complete Python script with professional metadata</li>
+                                <li>Copy script → Paste into ArcGIS Notebook → Run!</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -4615,89 +4591,64 @@ Make sure all strings are properly escaped for Python and use triple quotes for 
             let promptText = '';
 
             if (version === 'quick') {
-                promptText = `Write a complete Python script for ArcGIS Online Notebook to update this item:
+                promptText = `I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata.
 
-ITEM ID: [your-item-id-here]
+Before I generate the final code, I need you to ask me these questions ONE AT A TIME and wait for my answers:
 
-WHAT IT IS: [one sentence describing the map/app/layer]
+1. What is your ArcGIS Item ID?
+2. In one sentence, what does this item show or contain?
+3. What geographic area does it cover?
+4. What datasets or data sources are included?
+5. Who is the primary audience?
+6. Which categories apply? (Pick from: NHQ, Division, Region, Chapter, DRO, DA, Weather, Hazard, Tropical, Partners, Training, Boundaries, DRA_Territory, Home Fire Campaign, Lives Saved, Mission Adaptation, Partner HUB, BioMed, SAF, NOAA)
+7. What is your Division name?
+8. What project is this for? (or say "Confidential")
 
-SUMMARY: Write 20-30 words describing what this item is and its purpose
+Once I provide all answers, generate a complete Python script that:
+- Creates a 20-30 word professional summary
+- Creates a 50+ word detailed description
+- Generates 3-5 relevant tags
+- Updates all metadata fields using GIS("home")
+- Assigns categories with "/" prefix
+- Includes error handling and success messages
 
-DESCRIPTION: Write 50+ words including:
-- What data it contains
-- Who should use it
-- How it supports operations/planning
-- Geographic coverage: [your area]
-- Data sources: [your sources]
-
-TAGS: Generate 3-5 relevant tags for: [your geographic area], [data types], [use case]
-
-CATEGORIES: Assign these categories: [pick from: NHQ, Division, Region, Chapter, DRO, DA, Weather, Hazard, Tropical, Partners, Training, Boundaries, DRA_Territory, Home Fire Campaign, Lives Saved, Mission Adaptation, Partner HUB, BioMed, SAF, NOAA]
-
-ACCESS INFO: © American Red Cross - [Your Division] Division
-
-LICENSE: For internal use only - [Project name or "Confidential"]
-
-Generate Python using GIS("home"), update all metadata fields, include categories with "/" prefix, add error handling and success messages.`;
+Start by asking me question #1.`;
             } else {
-                promptText = `I need you to write a complete, ready-to-run Python script for an ArcGIS Online Notebook that updates an item's metadata. Generate the script following these exact specifications:
+                promptText = `I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata with professional, detailed information.
 
-### ITEM INFORMATION
-- ArcGIS Item ID: [paste your item ID here]
-- Item Type/Purpose: [e.g., "Web map showing California Red Cross counties and demographics for regional planning"]
+Before I generate the final code, I need you to ask me these questions ONE AT A TIME and wait for my answers after each one:
 
-### METADATA REQUIREMENTS
+REQUIRED INFORMATION:
+1. What is your ArcGIS Item ID?
+2. In one sentence, what does this item show or contain?
+3. What geographic area does it cover? (be specific: state, region, counties, etc.)
+4. What datasets or data sources are included? (list them)
+5. Who is the primary audience? (e.g., Division leadership, Regional CEOs, Chapter executives)
+6. How does this support operations or decision-making?
+7. Which categories apply? Choose from these groups:
+   - Organizational Structure: NHQ, Division, Region, Chapter, DRO
+   - Disaster & Emergency: DA, Weather, Hazard, Tropical, DRA_Territory
+   - Programs & Operations: Home Fire Campaign, Lives Saved, BioMed, SAF
+   - Data & Analysis: Boundaries, Training, NOAA
+   - Partnerships & Strategy: Partners, Partner HUB, Mission Adaptation
+8. What is your Division name? (e.g., Pacific Division)
+9. What project or initiative is this for? (or say "Confidential")
+10. Are there any organizational initiatives this supports? (optional)
 
-Summary (20-30 words):
-Generate a concise, professional summary that describes what this item is, what data it contains, and its primary purpose. Keep it between 20-30 words.
+Once I provide all answers, generate a complete Python script that:
+- Creates a 20-30 word professional summary based on my answers
+- Creates a 50+ word detailed description that includes what it contains, data sources, audience, purpose, and coverage
+- Generates 3-5 highly relevant tags based on geography, data types, and use cases
+- Sets access info as "© American Red Cross - [Division] Division"
+- Sets license as "For internal use only - [Project]"
+- Updates all metadata fields using GIS("home")
+- Assigns categories with "/" prefix
+- Includes error handling and detailed success messages
+- Shows the item homepage URL at the end
 
-Description (50+ words):
-Generate a detailed description (minimum 50 words) that includes:
-- What the item shows/contains
-- What data sources are included
-- Who should use it and why
-- How it supports decision-making or operations
-- Any important technical details or coverage areas
+Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.
 
-Tags (minimum 3-5):
-Generate relevant, specific tags including:
-- Geographic coverage (state, region, counties, etc.)
-- Data categories (demographics, operations, facilities, etc.)
-- Use cases (planning, analysis, reporting, etc.)
-- Organization terms (Red Cross specific terms)
-
-### CATEGORIES TO ASSIGN
-
-Organizational Structure: NHQ, Division, Region, Chapter, DRO
-Disaster & Emergency: DA, Weather, Hazard, Tropical, DRA_Territory
-Programs & Operations: Home Fire Campaign, Lives Saved, BioMed, SAF
-Data & Analysis: Boundaries, Training, NOAA
-Partnerships & Strategy: Partners, Partner HUB, Mission Adaptation
-
-Selected Categories: [e.g., Division, Region, Chapter, Boundaries]
-
-### ADDITIONAL METADATA
-- Access Information: "© American Red Cross - [Division Name] Division"
-- License Information: "For internal use only - [Project Name or 'Confidential']"
-
-### CONTEXT ABOUT THE ITEM
-- Geographic area: [describe coverage]
-- Datasets included: [list datasets]
-- Part of project: [project name if applicable]
-- Organizational initiatives: [any initiatives this supports]
-- Primary audience: [who will use this]
-
-### OUTPUT FORMAT
-Generate a complete Python script that:
-1. Uses GIS("home") for authentication
-2. Gets the item by ID
-3. Updates snippet, description, tags, accessInformation, and licenseInfo
-4. Updates categories using the correct ArcGIS format (with "/" prefix)
-5. Includes error handling
-6. Prints clear success messages with details
-7. Shows the item's homepage URL at the end
-
-Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.`;
+Start by asking me question #1.`;
             }
 
             // Try modern clipboard API first, fallback to older method
