@@ -2942,6 +2942,7 @@ Start by asking me question #1.</div>
             document.getElementById('geocoderTab').style.display = 'none';
             document.getElementById('metadataTab').style.display = 'none';
             document.getElementById('oauthTab').style.display = 'none';
+            document.getElementById('screenshotsTab').style.display = 'none';
 
             // Remove active class from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -2982,6 +2983,10 @@ Start by asking me question #1.</div>
                 document.getElementById('oauthTab').style.display = 'block';
                 document.querySelectorAll('.tab-btn')[7].style.borderBottomColor = '#DC143C';
                 document.querySelectorAll('.tab-btn')[7].style.color = '#DC143C';
+            } else if (tabName === 'screenshots') {
+                document.getElementById('screenshotsTab').style.display = 'block';
+                document.querySelectorAll('.tab-btn')[8].style.borderBottomColor = '#DC143C';
+                document.querySelectorAll('.tab-btn')[8].style.color = '#DC143C';
             }
         }
 
