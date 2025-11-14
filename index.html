@@ -4801,12 +4801,18 @@ Start by asking me question #1.`;
 
         // Step 1: Authorize with ArcGIS
         function oauthAuthorize() {
-            const clientId = document.getElementById('oauth-client-id').value;
+            const clientId = document.getElementById('oauth-client-id').value.trim();
             const redirectUri = document.getElementById('oauth-redirect-uri').value;
             const expiration = document.getElementById('oauth-expiration').value;
 
             if (!clientId) {
                 alert('Please enter your OAuth Client ID');
+                return;
+            }
+
+            // Validate Client ID format (should be alphanumeric)
+            if (!/^[a-zA-Z0-9]+$/.test(clientId)) {
+                alert('Client ID appears invalid. It should only contain letters and numbers.\n\nCurrent value: ' + clientId + '\n\nPlease check your Client ID and try again.');
                 return;
             }
 
@@ -4816,8 +4822,16 @@ Start by asking me question #1.`;
             // Build authorization URL
             const authUrl = `https://maps.arcgis.com/sharing/rest/oauth2/authorize?client_id=${encodeURIComponent(clientId)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&expiration=${expiration}`;
 
+            console.log('Opening OAuth authorization with Client ID:', clientId);
+            console.log('Authorization URL:', authUrl);
+
             // Open authorization window
-            window.open(authUrl, '_blank');
+            const authWindow = window.open(authUrl, '_blank', 'width=600,height=700');
+
+            if (!authWindow) {
+                alert('⚠️ Pop-up blocked!\n\nPlease allow pop-ups for this site and try again.');
+                return;
+            }
 
             // Show authorization code input section
             document.getElementById('oauth-code-section').style.display = 'block';
