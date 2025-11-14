@@ -1417,8 +1417,24 @@ Start by asking me question #1.</div>
                             <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
                                 OAuth Client ID (App ID):
                             </label>
-                            <input type="text" id="oauth-client-id" value="" placeholder="Enter your OAuth Client ID (e.g., jcdy...)"
-                                   style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-size: 1em; margin-bottom: 12px;">
+                            <div style="display: flex; gap: 10px; align-items: flex-start;">
+                                <div style="flex: 1; position: relative;">
+                                    <input type="password" id="oauth-client-id" value="" placeholder="Enter Client ID or click button →"
+                                           style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-size: 1em;">
+                                    <button type="button" id="toggle-client-id-btn" onclick="toggleClientIdVisibility()"
+                                            style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1em; padding: 4px;" title="Show/Hide">
+                                        👁️
+                                    </button>
+                                </div>
+                                <button type="button" onclick="useDefaultClientId()"
+                                        style="background: #4caf50; color: white; border: none; padding: 10px 16px; border-radius: 4px; cursor: pointer; white-space: nowrap; font-weight: 600;">
+                                    📝 Use Default
+                                </button>
+                            </div>
+                            <div style="font-size: 0.82em; color: #666; margin-top: 6px; font-style: italic;">
+                                Click "Use Default" for quick setup, or enter your own OAuth Client ID
+                            </div>
+                            <div style="height: 12px;"></div>
 
                             <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
                                 Redirect URI:
@@ -5037,6 +5053,42 @@ Start by asking me question #1.`;
                     step.querySelector('div:first-child').style.color = '#999';
                 }
             });
+        }
+
+        // Toggle Client ID visibility
+        function toggleClientIdVisibility() {
+            const input = document.getElementById('oauth-client-id');
+            const btn = document.getElementById('toggle-client-id-btn');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+                btn.title = 'Hide';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+                btn.title = 'Show';
+            }
+        }
+
+        // Use default (shared) Client ID
+        function useDefaultClientId() {
+            // Lightly obfuscated - still visible in source but not obvious
+            const encoded = 'amNkeUVNR1N0V2pOM3BQWA=='; // base64 encoded
+            const clientId = atob(encoded);
+
+            document.getElementById('oauth-client-id').value = clientId;
+
+            // Show confirmation
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Loaded!';
+            btn.style.background = '#2196f3';
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '#4caf50';
+            }, 2000);
         }
 
     </script>
