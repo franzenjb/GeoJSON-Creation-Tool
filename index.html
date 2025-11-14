@@ -1328,30 +1328,19 @@ Care_Damage (type: esriFieldTypeString, alias: Care_Damage, SQL Type: sqlTypeOth
                 <div class="section">
                     <h2>ArcGIS Metadata Updater - ChatGPT Prompt</h2>
                     <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; border-radius: 3px; margin-bottom: 25px;">
-                        <div style="font-weight: 600; color: #e65100; margin-bottom: 8px;">⚡ Fastest Method</div>
+                        <div style="font-weight: 600; color: #e65100; margin-bottom: 8px;">⚡ Simple & Fast</div>
                         <div style="color: #e65100; font-size: 0.95em; line-height: 1.5;">
-                            Copy this prompt template → Fill in your details → Paste to ChatGPT/Claude → Get complete Python script → Run in ArcGIS Notebook
+                            Copy prompt → Paste to ChatGPT → Answer 8 questions → Get complete Python script → Run in ArcGIS Notebook
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-                        <button onclick="showPromptVersion('quick')" id="quickPromptBtn" style="flex: 1; background: #DC143C; color: white; border: none; padding: 12px 20px; font-size: 1em; font-weight: 600; border-radius: 3px; cursor: pointer; transition: all 0.2s;">
-                            ⚡ Quick Prompt
-                        </button>
-                        <button onclick="showPromptVersion('detailed')" id="detailedPromptBtn" style="flex: 1; background: #e0e0e0; color: #666; border: none; padding: 12px 20px; font-size: 1em; font-weight: 600; border-radius: 3px; cursor: pointer; transition: all 0.2s;">
-                            📋 Detailed Prompt
-                        </button>
-                    </div>
-
-                    <!-- Quick Prompt -->
-                    <div id="quickPrompt" style="display: block;">
-                        <div style="background: #f5f5f5; padding: 20px; border-radius: 3px; border: 2px solid #DC143C;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <h3 style="margin: 0; color: #DC143C;">⚡ Quick ChatGPT Prompt</h3>
-                                <button onclick="copyPromptToClipboard('quick')" style="background: #DC143C; color: white; border: none; padding: 8px 16px; font-size: 0.9em; border-radius: 3px; cursor: pointer;">
-                                    📋 Copy Prompt
-                                </button>
-                            </div>
+                    <div style="background: #f5f5f5; padding: 20px; border-radius: 3px; border: 2px solid #DC143C;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 style="margin: 0; color: #DC143C;">ChatGPT Interactive Prompt</h3>
+                            <button onclick="copyPromptToClipboard()" style="background: #DC143C; color: white; border: none; padding: 8px 16px; font-size: 0.9em; border-radius: 3px; cursor: pointer;">
+                                📋 Copy Prompt
+                            </button>
+                        </div>
                             <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap; user-select: all; cursor: text;">I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata.
 
 Before I generate the final code, I need you to ask me these questions ONE AT A TIME and wait for my answers:
@@ -1374,76 +1363,17 @@ Once I provide all answers, generate a complete Python script that:
 - Includes error handling and success messages
 
 Start by asking me question #1.</div>
-                        </div>
-
-                        <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 3px solid #4caf50; border-radius: 3px;">
-                            <strong style="color: #2e7d32;">✅ How to Use:</strong>
-                            <ol style="margin: 8px 0 0 20px; color: #2e7d32;">
-                                <li>Click "Copy Prompt" above</li>
-                                <li>Paste into ChatGPT or Claude</li>
-                                <li>Answer the 8 questions it asks you (one at a time)</li>
-                                <li>ChatGPT generates your complete Python script</li>
-                                <li>Copy script → Paste into ArcGIS Notebook → Run!</li>
-                            </ol>
-                        </div>
                     </div>
 
-                    <!-- Detailed Prompt -->
-                    <div id="detailedPrompt" style="display: none;">
-                        <div style="background: #f5f5f5; padding: 20px; border-radius: 3px; border: 2px solid #DC143C;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <h3 style="margin: 0; color: #DC143C;">📋 Detailed ChatGPT Prompt</h3>
-                                <button onclick="copyPromptToClipboard('detailed')" style="background: #DC143C; color: white; border: none; padding: 8px 16px; font-size: 0.9em; border-radius: 3px; cursor: pointer;">
-                                    📋 Copy Prompt
-                                </button>
-                            </div>
-                            <div style="background: #fff; padding: 15px; border-radius: 3px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 0.85em; line-height: 1.6; border: 1px solid #e0e0e0; white-space: pre-wrap; user-select: all; cursor: text;">I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata with professional, detailed information.
-
-Before I generate the final code, I need you to ask me these questions ONE AT A TIME and wait for my answers after each one:
-
-REQUIRED INFORMATION:
-1. What is your ArcGIS Item ID?
-2. In one sentence, what does this item show or contain?
-3. What geographic area does it cover? (be specific: state, region, counties, etc.)
-4. What datasets or data sources are included? (list them)
-5. Who is the primary audience? (e.g., Division leadership, Regional CEOs, Chapter executives)
-6. How does this support operations or decision-making?
-7. Which categories apply? Choose from these groups:
-   - Organizational Structure: NHQ, Division, Region, Chapter, DRO
-   - Disaster & Emergency: DA, Weather, Hazard, Tropical, DRA_Territory
-   - Programs & Operations: Home Fire Campaign, Lives Saved, BioMed, SAF
-   - Data & Analysis: Boundaries, Training, NOAA
-   - Partnerships & Strategy: Partners, Partner HUB, Mission Adaptation
-8. What is your Division name? (e.g., Pacific Division)
-9. What project or initiative is this for? (or say "Confidential")
-10. Are there any organizational initiatives this supports? (optional)
-
-Once I provide all answers, generate a complete Python script that:
-- Creates a 20-30 word professional summary based on my answers
-- Creates a 50+ word detailed description that includes what it contains, data sources, audience, purpose, and coverage
-- Generates 3-5 highly relevant tags based on geography, data types, and use cases
-- Sets access info as "© American Red Cross - [Division] Division"
-- Sets license as "For internal use only - [Project]"
-- Updates all metadata fields using GIS("home")
-- Assigns categories with "/" prefix
-- Includes error handling and detailed success messages
-- Shows the item homepage URL at the end
-
-Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.
-
-Start by asking me question #1.</div>
-                        </div>
-
-                        <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-left: 3px solid #2196f3; border-radius: 3px;">
-                            <strong style="color: #1565c0;">💡 How to Use:</strong>
-                            <ol style="margin: 8px 0 0 20px; color: #1565c0;">
-                                <li>Click "Copy Prompt" above</li>
-                                <li>Paste into ChatGPT or Claude</li>
-                                <li>Answer the 10 detailed questions it asks (one at a time)</li>
-                                <li>ChatGPT generates your complete Python script with professional metadata</li>
-                                <li>Copy script → Paste into ArcGIS Notebook → Run!</li>
-                            </ol>
-                        </div>
+                    <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 3px solid #4caf50; border-radius: 3px;">
+                        <strong style="color: #2e7d32;">✅ How to Use:</strong>
+                        <ol style="margin: 8px 0 0 20px; color: #2e7d32;">
+                            <li>Click "Copy Prompt" above</li>
+                            <li>Paste into ChatGPT or Claude</li>
+                            <li>Answer the 8 questions it asks you (one at a time)</li>
+                            <li>ChatGPT generates your complete Python script</li>
+                            <li>Copy script → Paste into ArcGIS Notebook → Run!</li>
+                        </ol>
                     </div>
                 </div>
             </div>
@@ -4568,30 +4498,9 @@ Start by asking me question #1.</div>
             document.body.removeChild(a);
         }
 
-        // Metadata Prompt Functions
-        function showPromptVersion(version) {
-            if (version === 'quick') {
-                document.getElementById('quickPrompt').style.display = 'block';
-                document.getElementById('detailedPrompt').style.display = 'none';
-                document.getElementById('quickPromptBtn').style.background = '#DC143C';
-                document.getElementById('quickPromptBtn').style.color = 'white';
-                document.getElementById('detailedPromptBtn').style.background = '#e0e0e0';
-                document.getElementById('detailedPromptBtn').style.color = '#666';
-            } else {
-                document.getElementById('quickPrompt').style.display = 'none';
-                document.getElementById('detailedPrompt').style.display = 'block';
-                document.getElementById('quickPromptBtn').style.background = '#e0e0e0';
-                document.getElementById('quickPromptBtn').style.color = '#666';
-                document.getElementById('detailedPromptBtn').style.background = '#DC143C';
-                document.getElementById('detailedPromptBtn').style.color = 'white';
-            }
-        }
-
-        function copyPromptToClipboard(version) {
-            let promptText = '';
-
-            if (version === 'quick') {
-                promptText = `I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata.
+        // Metadata Prompt Function
+        function copyPromptToClipboard() {
+            const promptText = `I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata.
 
 Before I generate the final code, I need you to ask me these questions ONE AT A TIME and wait for my answers:
 
@@ -4613,43 +4522,6 @@ Once I provide all answers, generate a complete Python script that:
 - Includes error handling and success messages
 
 Start by asking me question #1.`;
-            } else {
-                promptText = `I need you to help me create a Python script for an ArcGIS Online Notebook that updates item metadata with professional, detailed information.
-
-Before I generate the final code, I need you to ask me these questions ONE AT A TIME and wait for my answers after each one:
-
-REQUIRED INFORMATION:
-1. What is your ArcGIS Item ID?
-2. In one sentence, what does this item show or contain?
-3. What geographic area does it cover? (be specific: state, region, counties, etc.)
-4. What datasets or data sources are included? (list them)
-5. Who is the primary audience? (e.g., Division leadership, Regional CEOs, Chapter executives)
-6. How does this support operations or decision-making?
-7. Which categories apply? Choose from these groups:
-   - Organizational Structure: NHQ, Division, Region, Chapter, DRO
-   - Disaster & Emergency: DA, Weather, Hazard, Tropical, DRA_Territory
-   - Programs & Operations: Home Fire Campaign, Lives Saved, BioMed, SAF
-   - Data & Analysis: Boundaries, Training, NOAA
-   - Partnerships & Strategy: Partners, Partner HUB, Mission Adaptation
-8. What is your Division name? (e.g., Pacific Division)
-9. What project or initiative is this for? (or say "Confidential")
-10. Are there any organizational initiatives this supports? (optional)
-
-Once I provide all answers, generate a complete Python script that:
-- Creates a 20-30 word professional summary based on my answers
-- Creates a 50+ word detailed description that includes what it contains, data sources, audience, purpose, and coverage
-- Generates 3-5 highly relevant tags based on geography, data types, and use cases
-- Sets access info as "© American Red Cross - [Division] Division"
-- Sets license as "For internal use only - [Project]"
-- Updates all metadata fields using GIS("home")
-- Assigns categories with "/" prefix
-- Includes error handling and detailed success messages
-- Shows the item homepage URL at the end
-
-Make sure all strings are properly escaped for Python and use triple quotes for multi-line strings.
-
-Start by asking me question #1.`;
-            }
 
             // Try modern clipboard API first, fallback to older method
             const button = event.target;
