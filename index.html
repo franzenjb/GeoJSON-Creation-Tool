@@ -3557,14 +3557,14 @@ Start by asking me question #1.</div>
                 const enrichedRow = [...row];
 
                 if (hierarchyData) {
-                    enrichedRow.push(hierarchyData.county || '');  // County name
-                    enrichedRow.push(hierarchyData.fips || '');    // FIPS code
-                    enrichedRow.push(hierarchyData.ecode || '');   // ECODE
-                    enrichedRow.push('');  // Chapter name (we only have ECODE from lookup)
-                    enrichedRow.push(hierarchyData.rcode || '');   // RCODE
-                    enrichedRow.push('');  // Region name (we only have RCODE from lookup)
-                    enrichedRow.push(hierarchyData.dcode || '');   // DCODE
-                    enrichedRow.push('');  // Division name (we only have DCODE from lookup)
+                    enrichedRow.push(hierarchyData.county || '');     // County name
+                    enrichedRow.push(hierarchyData.fips || '');       // FIPS code
+                    enrichedRow.push(hierarchyData.ecode || '');      // ECODE
+                    enrichedRow.push(hierarchyData.chapter || '');    // Chapter name
+                    enrichedRow.push(hierarchyData.rcode || '');      // RCODE
+                    enrichedRow.push(hierarchyData.region || '');     // Region name
+                    enrichedRow.push(hierarchyData.dcode || '');      // DCODE
+                    enrichedRow.push(hierarchyData.division || '');   // Division name
                 } else {
                     // No match found - add empty values
                     enrichedRow.push('', '', '', '', '', '', '', '');
@@ -3670,6 +3670,9 @@ Start by asking me question #1.</div>
             const zipIdx = headers.indexOf('ZIP_CODE');
             const fipsIdx = headers.indexOf('COUNTY_FIPS');
             const countyIdx = headers.indexOf('County');
+            const chapterIdx = headers.indexOf('Chapter');
+            const regionIdx = headers.indexOf('Region');
+            const divisionIdx = headers.indexOf('Division');
             const ecodeIdx = headers.indexOf('ECODE');
             const rcodeIdx = headers.indexOf('RCODE');
             const dcodeIdx = headers.indexOf('DCODE');
@@ -3690,8 +3693,11 @@ Start by asking me question #1.</div>
                     county: countyName,
                     fips: fips || null,
                     ecode: values[ecodeIdx],
+                    chapter: values[chapterIdx],
                     rcode: values[rcodeIdx],
-                    dcode: values[dcodeIdx]
+                    region: values[regionIdx],
+                    dcode: values[dcodeIdx],
+                    division: values[divisionIdx]
                 };
             });
 
