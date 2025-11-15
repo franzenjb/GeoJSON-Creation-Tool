@@ -3270,6 +3270,8 @@ Start by asking me question #1.</div>
             rollupDetectedColumns = {
                 zip: null,
                 fips: null,
+                county: null,
+                state: null,
                 ecode: null,
                 rcode: null,
                 dcode: null,
@@ -3280,6 +3282,8 @@ Start by asking me question #1.</div>
             // Detect geographic columns
             const zipPatterns = ['zip', 'zipcode', 'zip_code', 'postal', 'postalcode'];
             const fipsPatterns = ['fips', 'county_fips', 'countyfips', 'geoid'];
+            const countyPatterns = ['county', 'county_name', 'countyname'];
+            const statePatterns = ['state', 'st', 'state_province', 'stateprovince', 'state/province'];
             const ecodePatterns = ['ecode', 'chapter', 'chaptercode'];
             const rcodePatterns = ['rcode', 'region', 'regioncode'];
             const dcodePatterns = ['dcode', 'division', 'divisioncode'];
@@ -3291,6 +3295,10 @@ Start by asking me question #1.</div>
                     rollupDetectedColumns.zip = { name: header, index };
                 } else if (fipsPatterns.some(p => headerLower.includes(p))) {
                     rollupDetectedColumns.fips = { name: header, index };
+                } else if (countyPatterns.some(p => headerLower === p || headerLower.includes(p))) {
+                    rollupDetectedColumns.county = { name: header, index };
+                } else if (statePatterns.some(p => headerLower.includes(p))) {
+                    rollupDetectedColumns.state = { name: header, index };
                 } else if (ecodePatterns.some(p => headerLower.includes(p))) {
                     rollupDetectedColumns.ecode = { name: header, index };
                 } else if (rcodePatterns.some(p => headerLower.includes(p))) {
@@ -3303,6 +3311,8 @@ Start by asking me question #1.</div>
                 const isGeoColumn =
                     rollupDetectedColumns.zip?.index === index ||
                     rollupDetectedColumns.fips?.index === index ||
+                    rollupDetectedColumns.county?.index === index ||
+                    rollupDetectedColumns.state?.index === index ||
                     rollupDetectedColumns.ecode?.index === index ||
                     rollupDetectedColumns.rcode?.index === index ||
                     rollupDetectedColumns.dcode?.index === index;
@@ -3318,12 +3328,18 @@ Start by asking me question #1.</div>
                 }
             });
 
-            // Determine granularity
-            const detectedGranularity = rollupDetectedColumns.zip ? 'zip' :
-                                       rollupDetectedColumns.fips ? 'county' : null;
+            // Determine granularity (priority: ZIP > FIPS > County+State)
+            let detectedGranularity = null;
+            if (rollupDetectedColumns.zip) {
+                detectedGranularity = 'zip';
+            } else if (rollupDetectedColumns.fips) {
+                detectedGranularity = 'county';
+            } else if (rollupDetectedColumns.county && rollupDetectedColumns.state) {
+                detectedGranularity = 'county_state';
+            }
 
             if (!detectedGranularity) {
-                alert('Could not detect ZIP or County FIPS column. Please ensure your CSV has a column with ZIP codes or County FIPS codes.');
+                alert('Could not detect geographic columns. Please ensure your CSV has one of:\n- ZIP code column\n- County FIPS column\n- County + State columns');
                 return;
             }
 
@@ -3338,8 +3354,15 @@ Start by asking me question #1.</div>
             rollupColumnDetectionSection.style.display = 'block';
 
             // Set detected level
-            rollupDetectedLevelText.textContent =
-                detectedGranularity === 'zip' ? 'ZIP Code Level (found ZIP column)' : 'County Level (found FIPS/County column)';
+            let levelText = '';
+            if (detectedGranularity === 'zip') {
+                levelText = 'ZIP Code Level (found ZIP column)';
+            } else if (detectedGranularity === 'county') {
+                levelText = 'County Level (found FIPS column)';
+            } else if (detectedGranularity === 'county_state') {
+                levelText = 'County Level (found County + State columns)';
+            }
+            rollupDetectedLevelText.textContent = levelText;
         }
 
         function createRollupFieldOption(label, fieldName, defaultType, checked = true) {
@@ -3450,10 +3473,45 @@ Start by asking me question #1.</div>
             displayRollupDownloadLinks();
         }
 
+        // Helper function to normalize county names (strip "County", "Parish", etc.)
+        function normalizeCountyName(countyName) {
+            if (!countyName) return '';
+            let normalized = countyName.trim().toLowerCase();
+            // Remove common suffixes
+            normalized = normalized.replace(/\s+(county|parish|borough|municipality|city|census area)$/i, '');
+            return normalized;
+        }
+
+        // Helper function to normalize state names (convert full names to abbreviations)
+        function normalizeStateName(stateName) {
+            if (!stateName) return '';
+            const stateAbbrevMap = {
+                'alabama': 'al', 'alaska': 'ak', 'arizona': 'az', 'arkansas': 'ar', 'california': 'ca',
+                'colorado': 'co', 'connecticut': 'ct', 'delaware': 'de', 'florida': 'fl', 'georgia': 'ga',
+                'hawaii': 'hi', 'idaho': 'id', 'illinois': 'il', 'indiana': 'in', 'iowa': 'ia',
+                'kansas': 'ks', 'kentucky': 'ky', 'louisiana': 'la', 'maine': 'me', 'maryland': 'md',
+                'massachusetts': 'ma', 'michigan': 'mi', 'minnesota': 'mn', 'mississippi': 'ms', 'missouri': 'mo',
+                'montana': 'mt', 'nebraska': 'ne', 'nevada': 'nv', 'new hampshire': 'nh', 'new jersey': 'nj',
+                'new mexico': 'nm', 'new york': 'ny', 'north carolina': 'nc', 'north dakota': 'nd', 'ohio': 'oh',
+                'oklahoma': 'ok', 'oregon': 'or', 'pennsylvania': 'pa', 'rhode island': 'ri', 'south carolina': 'sc',
+                'south dakota': 'sd', 'tennessee': 'tn', 'texas': 'tx', 'utah': 'ut', 'vermont': 'vt',
+                'virginia': 'va', 'washington': 'wa', 'west virginia': 'wv', 'wisconsin': 'wi', 'wyoming': 'wy',
+                'district of columbia': 'dc', 'puerto rico': 'pr', 'guam': 'gu', 'virgin islands': 'vi',
+                'american samoa': 'as', 'northern mariana islands': 'mp'
+            };
+
+            const normalized = stateName.trim().toLowerCase();
+            // If it's already an abbreviation (2 letters), return it
+            if (normalized.length === 2) {
+                return normalized;
+            }
+            // Otherwise, look it up in the map
+            return stateAbbrevMap[normalized] || normalized;
+        }
+
         function enrichOnlyCSV(csvData, lookupData) {
             const { headers, dataRows } = csvData;
             const granularity = rollupAggregationConfig.granularity;
-            const keyColumn = granularity === 'zip' ? rollupDetectedColumns.zip : rollupDetectedColumns.fips;
 
             // Define new columns to add
             const newColumns = ['County', 'FIPS', 'ECODE', 'Chapter', 'RCODE', 'Region', 'DCODE', 'Division'];
@@ -3463,18 +3521,48 @@ Start by asking me question #1.</div>
 
             // Enrich each row
             const enrichedRows = dataRows.map(row => {
-                const key = row[keyColumn.index];
                 let hierarchyData = null;
 
                 if (granularity === 'zip') {
                     // Look up by ZIP
+                    const key = row[rollupDetectedColumns.zip.index];
                     hierarchyData = lookupData[key];
-                } else {
+                } else if (granularity === 'county') {
                     // Look up by FIPS - need to find a matching FIPS in lookup
+                    const key = row[rollupDetectedColumns.fips.index];
                     for (const zipCode in lookupData) {
                         if (lookupData[zipCode].fips === key) {
                             hierarchyData = lookupData[zipCode];
                             break;
+                        }
+                    }
+                } else if (granularity === 'county_state') {
+                    // Look up by County + State - need to find a matching county and state in lookup
+                    const countyName = row[rollupDetectedColumns.county.index];
+                    const stateName = row[rollupDetectedColumns.state.index];
+
+                    // Normalize the input county name (strip "County", "Parish", etc.)
+                    const normalizedInputCounty = normalizeCountyName(countyName);
+                    // Normalize the input state (convert full name to abbreviation if needed)
+                    const normalizedInputState = normalizeStateName(stateName);
+
+                    // Lookup data has county in format "Dallas County, Alabama"
+                    // Need to match county base name + state abbreviation
+                    for (const zipCode in lookupData) {
+                        const data = lookupData[zipCode];
+                        if (data.county) {
+                            // Extract county and state from "Dallas County, Alabama" format
+                            const parts = data.county.split(',');
+                            if (parts.length === 2) {
+                                const lookupCounty = normalizeCountyName(parts[0].trim());
+                                const lookupState = normalizeStateName(parts[1].trim());
+
+                                if (lookupCounty === normalizedInputCounty &&
+                                    lookupState === normalizedInputState) {
+                                    hierarchyData = data;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
