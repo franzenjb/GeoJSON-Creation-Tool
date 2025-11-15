@@ -3977,12 +3977,12 @@ Start by asking me question #1.</div>
 
         function createRollupResultCard(level, filename, sizeBytes, csvContent) {
             const levelInfo = {
-                enriched: { icon: '✨', name: 'Enriched Data (All Original Columns + Hierarchy)' },
-                zip: { icon: '📦', name: 'ZIP Codes Aggregated' },
-                county: { icon: '🏛️', name: 'Counties Aggregated' },
-                chapter: { icon: '📚', name: 'Chapters Aggregated' },
-                region: { icon: '🗺️', name: 'Regions Aggregated' },
-                division: { icon: '🌎', name: 'Divisions Aggregated' }
+                enriched: { icon: '', name: 'Enriched Data (All Original Columns + Hierarchy)' },
+                zip: { icon: '', name: 'ZIP Codes Aggregated' },
+                county: { icon: '', name: 'Counties Aggregated' },
+                chapter: { icon: '', name: 'Chapters Aggregated' },
+                region: { icon: '', name: 'Regions Aggregated' },
+                division: { icon: '', name: 'Divisions Aggregated' }
             };
 
             const info = levelInfo[level] || { icon: '📄', name: level };
