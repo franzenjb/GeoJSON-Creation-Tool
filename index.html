@@ -2302,6 +2302,29 @@ Start by asking me question #1.</div>
             }
             aggregationConfig.granularity = detectedGranularity;
 
+            // Set smart defaults for output levels based on detected granularity
+            const optZip = document.getElementById('optZip');
+            const optCounty = document.getElementById('optCounty');
+            const optChapter = document.getElementById('optChapter');
+            const optRegion = document.getElementById('optRegion');
+            const optDivision = document.getElementById('optDivision');
+
+            if (detectedGranularity === 'zip') {
+                // ZIP-level data: Check ZIP and Counties only
+                optZip.checked = true;
+                optCounty.checked = true;
+                optChapter.checked = false;
+                optRegion.checked = false;
+                optDivision.checked = false;
+            } else {
+                // County-level data (FIPS or County+State): Check County, Chapter, Region, Division
+                optZip.checked = false;
+                optCounty.checked = true;
+                optChapter.checked = true;
+                optRegion.checked = true;
+                optDivision.checked = true;
+            }
+
             // Display aggregation field options
             const fieldsContainer = document.getElementById('aggregationFields');
             fieldsContainer.innerHTML = '';
