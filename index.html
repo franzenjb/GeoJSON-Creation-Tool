@@ -2914,7 +2914,7 @@ Start by asking me question #1.</div>
                     if (level === 'zip') {
                         matchKey = props.ZIP || props.ZCTA5CE20;
                     } else if (level === 'county') {
-                        matchKey = props.County_FIPS || props.GEOID;
+                        matchKey = props.FIPS || props.County_FIPS || props.GEOID;
                     } else if (level === 'chapter') {
                         matchKey = props.ECODE;
                     } else if (level === 'region') {
