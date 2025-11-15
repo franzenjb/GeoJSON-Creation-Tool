@@ -2913,6 +2913,27 @@ Start by asking me question #1.</div>
             await Promise.all(promises);
         }
 
+        // Sanitize field names for ArcGIS compatibility
+        function sanitizeFieldName(fieldName) {
+            // ArcGIS field name rules:
+            // - No spaces (replace with underscores)
+            // - No special characters except underscores
+            // - Can't start with a number (prefix with 'F_')
+            // - Max 64 characters (truncate)
+
+            let sanitized = fieldName
+                .replace(/\s+/g, '_')           // Replace spaces with underscores
+                .replace(/[^a-zA-Z0-9_]/g, '')  // Remove special characters
+                .substring(0, 64);               // Truncate to 64 chars
+
+            // Ensure doesn't start with a number
+            if (/^[0-9]/.test(sanitized)) {
+                sanitized = 'F_' + sanitized;
+            }
+
+            return sanitized;
+        }
+
         // Create GeoJSON files with joins
         async function createGeoJSONFiles(aggregated, levels) {
             for (const level of levels) {
@@ -2946,9 +2967,14 @@ Start by asking me question #1.</div>
                         matchKey = props.DCODE;
                     }
 
-                    // Match and add aggregated data
+                    // Match and add aggregated data with sanitized field names
                     if (matchKey && aggregated[matchKey]) {
-                        Object.assign(props, aggregated[matchKey].aggregates);
+                        const aggregates = aggregated[matchKey].aggregates;
+                        // Sanitize field names for ArcGIS compatibility
+                        Object.keys(aggregates).forEach(key => {
+                            const sanitizedKey = sanitizeFieldName(key);
+                            props[sanitizedKey] = aggregates[key];
+                        });
                         joinedCount++;
                     } else if (matchKey) {
                         console.log(`No match found for ${level} key: ${matchKey}`);
@@ -3010,7 +3036,8 @@ Start by asking me question #1.</div>
             const firstMetric = aggregationConfig.fields[0];
             if (!firstMetric) return '#cccccc';
 
-            const value = properties[firstMetric.field] || 0;
+            const sanitizedField = sanitizeFieldName(firstMetric.field);
+            const value = properties[sanitizedField] || 0;
             return value > 100 ? '#800026' :
                    value > 50  ? '#BD0026' :
                    value > 20  ? '#E31A1C' :
@@ -3026,7 +3053,8 @@ Start by asking me question #1.</div>
             let html = '<div style="font-size: 0.9em;">';
             html += `<strong>${properties.NAME || properties.ZIP || 'Unknown'}</strong><br>`;
             aggregationConfig.fields.forEach(field => {
-                html += `${field.label}: ${properties[field.field] || 0}<br>`;
+                const sanitizedField = sanitizeFieldName(field.field);
+                html += `${field.label}: ${properties[sanitizedField] || 0}<br>`;
             });
             html += '</div>';
             return html;
