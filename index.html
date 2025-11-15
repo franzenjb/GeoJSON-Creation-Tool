@@ -2849,6 +2849,17 @@ Start by asking me question #1.</div>
                 });
             });
 
+            // DEBUG: Log sample aggregated data
+            const sampleKeys = Object.keys(grouped).slice(0, 5);
+            console.log(`✓ Aggregated ${Object.keys(grouped).length} records. Sample keys:`, sampleKeys);
+            if (sampleKeys.length > 0) {
+                console.log('Sample aggregated data:', {
+                    key: sampleKeys[0],
+                    aggregates: grouped[sampleKeys[0]].aggregates,
+                    rowCount: grouped[sampleKeys[0]].rows.length
+                });
+            }
+
             return grouped;
         }
 
