@@ -777,35 +777,34 @@
                     <div id="rollupAccordion" class="accordion-content">
                         <div class="accordion-content-inner">
                             <div class="explanation">
-                                <p style="font-size: 1.15em; color: #333; margin-bottom: 20px; font-weight: 600;">Turn raw ZIP-level data into multi-level insights in seconds</p>
+                                <p style="font-size: 1.15em; color: #333; margin-bottom: 20px; font-weight: 600;">Enrich your data with complete Red Cross geographic hierarchy</p>
 
                                 <div style="background: #fff; border: 4px solid #DC143C; border-radius: 10px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <p style="margin-bottom: 15px; font-weight: 700; color: #DC143C; font-size: 1.1em;">📤 INPUT: Your raw data</p>
-                                    <div style="background: #f5f5f5; padding: 20px; border-radius: 6px; font-family: monospace; font-size: 1em; line-height: 1.8;">
-                                        <strong>ZIP, Incidents, Revenue</strong><br>
-                                        10001, 5, 1250<br>
-                                        10002, 3, 890<br>
-                                        10003, 7, 2100
+                                    <p style="margin-bottom: 15px; font-weight: 700; color: #DC143C; font-size: 1.1em;">📤 INPUT: Your CSV with ANY columns</p>
+                                    <div style="background: #f5f5f5; padding: 20px; border-radius: 6px; font-family: monospace; font-size: 0.95em; line-height: 1.8;">
+                                        <strong>Building ID, Address, City, ZIP, Status, Owner...</strong><br>
+                                        B14625, 113 S LAS POSAS RD, SAN MARCOS, 92078, Active, Leased<br>
+                                        B14627, 400 MAIN ST, BROCKWAY, 15824, Active, Licensed
                                     </div>
                                 </div>
 
                                 <div style="background: #fff; border: 4px solid #1e7e34; border-radius: 10px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <p style="margin-bottom: 15px; font-weight: 700; color: #1e7e34; font-size: 1.1em;">📥 OUTPUT: Complete hierarchy at all 5 levels</p>
-                                    <div style="background: #f5f5f5; padding: 20px; border-radius: 6px; font-family: monospace; font-size: 1em; line-height: 1.8;">
-                                        <strong>ZIP, County, DCODE, Incidents (ZIP), Incidents (Division)...</strong><br>
-                                        10001, "New York, NY", D27, 5, 649<br>
-                                        <span style="color: #1e7e34; font-weight: 600;">↳ Auto-calculated Division totals</span><br>
-                                        <span style="color: #1e7e34; font-weight: 600;">↳ Auto-added FIPS, ECODE, RCODE, DCODE</span>
+                                    <p style="margin-bottom: 15px; font-weight: 700; color: #1e7e34; font-size: 1.1em;">📥 OUTPUT: ALL original columns + 8 new hierarchy fields</p>
+                                    <div style="background: #f5f5f5; padding: 20px; border-radius: 6px; font-family: monospace; font-size: 0.95em; line-height: 1.8;">
+                                        <strong>...all original columns + County, FIPS, ECODE, Chapter, RCODE, Region, DCODE, Division</strong><br>
+                                        <span style="color: #1e7e34; font-weight: 600;">✓ Every row keeps ALL original data</span><br>
+                                        <span style="color: #1e7e34; font-weight: 600;">✓ Plus complete geographic hierarchy added</span><br>
+                                        <span style="color: #1e7e34; font-weight: 600;">✓ Optional: Also generate aggregated rollup files for choropleth maps</span>
                                     </div>
                                 </div>
 
                                 <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 6px solid #f59e0b; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <p style="margin: 0 0 12px 0; font-weight: 700; color: #92400e; font-size: 1.05em;">⚡ Why this is powerful:</p>
+                                    <p style="margin: 0 0 12px 0; font-weight: 700; color: #92400e; font-size: 1.05em;">⚡ What you get:</p>
                                     <ul style="margin: 0; padding-left: 20px; color: #92400e; font-size: 0.95em; line-height: 1.7;">
-                                        <li>One upload creates data for <strong>all 5 geographic levels</strong></li>
-                                        <li>Skip Excel pivot tables and manual aggregation</li>
-                                        <li>Instantly ready for Tab 3 → create Division/Region maps</li>
-                                        <li>100% Red Cross hierarchy compliance (3,162 counties, 226 chapters)</li>
+                                        <li><strong>Enriched file</strong> with all original rows + 8 new geographic columns</li>
+                                        <li><strong>Optional rollup files</strong> aggregated at ZIP, County, Chapter, Region, or Division levels</li>
+                                        <li>Perfect for analysis, reporting, and creating choropleth maps</li>
+                                        <li>100% Red Cross hierarchy compliance (33,120 ZIPs, 3,162 counties, 226 chapters)</li>
                                     </ul>
                                 </div>
                             </div>
@@ -832,41 +831,28 @@
 
                 <!-- Column Detection Section -->
                 <div id="rollupColumnDetectionSection" class="section" style="display: none;">
-                    <h2>Configure Processing Mode</h2>
+                    <h2>Configure Output Options</h2>
 
                     <div style="background: #f0f8ff; padding: 15px; border-radius: 3px; margin-bottom: 20px; border-left: 3px solid #DC143C;">
                         <p style="font-weight: 500; margin-bottom: 8px;">Detected Input Level:</p>
                         <p id="rollupDetectedLevelText" style="font-size: 1.1em; color: #DC143C;"></p>
                     </div>
 
-                    <div style="margin-bottom: 20px;">
-                        <p style="font-weight: 500; margin-bottom: 10px;">Processing Mode:</p>
-                        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 15px; border: 2px solid #DC143C; border-radius: 3px; background: #fff5f5; flex: 1;">
-                                <input type="radio" name="rollupMode" value="enrich" id="rollupModeEnrich" checked style="accent-color: #DC143C;">
-                                <div>
-                                    <div style="font-weight: 600; color: #DC143C;">✨ Enrich Only (Recommended)</div>
-                                    <div style="font-size: 0.85em; color: #666; margin-top: 4px;">Keep ALL original columns + add geographic hierarchy fields</div>
-                                </div>
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 15px; border: 2px solid #e0e0e0; border-radius: 3px; background: white; flex: 1;">
-                                <input type="radio" name="rollupMode" value="aggregate" id="rollupModeAggregate" style="accent-color: #DC143C;">
-                                <div>
-                                    <div style="font-weight: 600; color: #333;">📊 Aggregate & Roll-Up</div>
-                                    <div style="font-size: 0.85em; color: #666; margin-top: 4px;">Sum/count data at multiple geographic levels</div>
-                                </div>
-                            </label>
-                        </div>
+                    <div style="background: linear-gradient(135deg, #dcfce7 0%, #a7f3d0 100%); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #10b981;">
+                        <p style="font-weight: 700; color: #065f46; margin-bottom: 8px;">✨ Automatic Enrichment</p>
+                        <p style="color: #065f46; font-size: 0.95em; line-height: 1.6;">Your data will be enriched with: <strong>County, FIPS, ECODE, Chapter Name, RCODE, Region Name, DCODE, Division Name</strong></p>
+                        <p style="color: #065f46; font-size: 0.85em; margin-top: 8px;">All original columns will be preserved + 8 new geographic hierarchy columns added to each row.</p>
                     </div>
 
-                    <div id="rollupAggregateOptions" style="margin-bottom: 20px; display: none;">
-                        <p style="font-weight: 500; margin-bottom: 10px;">Select metrics to aggregate:</p>
-                        <div id="rollupAggregationFields" style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="margin-bottom: 20px;">
+                        <p style="font-weight: 500; margin-bottom: 10px;">Optional: Also create aggregated rollup files for choropleth maps</p>
+                        <p style="font-size: 0.85em; color: #666; margin-bottom: 12px;">Select which metrics to aggregate:</p>
+                        <div id="rollupAggregationFields" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
                             <!-- Aggregation field checkboxes will be inserted here -->
                         </div>
 
-                        <div style="margin-top: 20px;">
-                            <p style="font-weight: 500; margin-bottom: 10px;">Select geographic levels to output:</p>
+                        <div id="rollupAggregateOptions">
+                            <p style="font-weight: 500; margin-bottom: 10px;">Create aggregated rollup files at these geographic levels:</p>
                             <div id="rollupOutputLevels" style="display: flex; flex-wrap: wrap; gap: 10px;">
                                 <!-- Level checkboxes will be inserted here -->
                             </div>
@@ -3464,57 +3450,30 @@ Start by asking me question #1.</div>
             return div;
         }
 
-        // Mode toggle handler
-        document.addEventListener('DOMContentLoaded', () => {
-            const rollupModeRadios = document.querySelectorAll('input[name="rollupMode"]');
-            const rollupAggregateOptions = document.getElementById('rollupAggregateOptions');
-
-            rollupModeRadios.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    if (e.target.value === 'aggregate') {
-                        rollupAggregateOptions.style.display = 'block';
-                    } else {
-                        rollupAggregateOptions.style.display = 'none';
-                    }
-                });
-            });
-        });
-
         // Process button handler
         rollupProcessBtn.addEventListener('click', async () => {
-            const mode = document.querySelector('input[name="rollupMode"]:checked').value;
-
             if (!rollupCsvData) {
                 alert('Please upload a CSV file first');
                 return;
             }
 
-            if (mode === 'aggregate' && rollupAggregationConfig.fields.length === 0) {
-                alert('Please select at least one metric to aggregate');
+            // Check if user wants optional rollup files
+            const selectedLevels = [];
+            const levelCheckboxes = rollupOutputLevels.querySelectorAll('input[type="checkbox"]');
+            levelCheckboxes.forEach(cb => {
+                if (cb.checked) {
+                    const level = cb.id.replace('rollupLevel', '');
+                    selectedLevels.push(level);
+                }
+            });
+
+            // If rollup levels are selected, validate that aggregation fields are also selected
+            if (selectedLevels.length > 0 && rollupAggregationConfig.fields.length === 0) {
+                alert('Please select at least one metric to aggregate for rollup files');
                 return;
             }
 
-            // Get selected output levels (only for aggregate mode)
-            if (mode === 'aggregate') {
-                const selectedLevels = [];
-                const levelCheckboxes = rollupOutputLevels.querySelectorAll('input[type="checkbox"]');
-                levelCheckboxes.forEach(cb => {
-                    if (cb.checked) {
-                        const level = cb.id.replace('rollupLevel', '');
-                        selectedLevels.push(level);
-                    }
-                });
-
-                if (selectedLevels.length === 0) {
-                    alert('Please select at least one output level');
-                    return;
-                }
-
-                rollupAggregationConfig.outputLevels = selectedLevels;
-            } else {
-                // For enrich mode, we only output one enriched file
-                rollupAggregationConfig.outputLevels = ['enriched'];
-            }
+            rollupAggregationConfig.outputLevels = selectedLevels;
 
             // Show progress
             rollupColumnDetectionSection.style.display = 'none';
@@ -3532,52 +3491,37 @@ Start by asking me question #1.</div>
         });
 
         async function processRollupCSV() {
-            // Check which mode is selected
-            const mode = document.querySelector('input[name="rollupMode"]:checked').value;
+            updateRollupProgress(10, 'Parsing CSV data...');
+            await sleep(100);
 
-            if (mode === 'enrich') {
-                // ENRICH ONLY MODE: Keep all original columns, add geographic hierarchy
-                updateRollupProgress(10, 'Parsing CSV data...');
-                await sleep(100);
+            updateRollupProgress(20, 'Loading geographic hierarchy database...');
+            const boundaryData = await loadBoundaryForHierarchy(rollupAggregationConfig.granularity);
+            await sleep(100);
 
-                updateRollupProgress(30, 'Loading geographic hierarchy database...');
-                const boundaryData = await loadBoundaryForHierarchy(rollupAggregationConfig.granularity);
-                await sleep(100);
+            // STEP 1: Always enrich - add geographic hierarchy columns to all rows
+            updateRollupProgress(40, 'Enriching rows with geographic hierarchy...');
+            const enrichedCSV = enrichOnlyCSV(rollupCsvData, boundaryData);
+            rollupGeneratedCSVs = enrichedCSV; // Start with enriched file
+            await sleep(100);
 
-                updateRollupProgress(60, 'Enriching rows with geographic hierarchy...');
-                rollupGeneratedCSVs = enrichOnlyCSV(rollupCsvData, boundaryData);
-                await sleep(100);
-
-                updateRollupProgress(100, 'Complete! Enriched CSV file generated.');
-                await sleep(500);
-
-                displayRollupDownloadLinks();
-            } else {
-                // AGGREGATE MODE: Original aggregation behavior
-                updateRollupProgress(10, 'Parsing CSV data...');
-                await sleep(100);
-
-                // Step 1: Aggregate by base level (ZIP or County)
-                updateRollupProgress(30, 'Aggregating by ' + rollupAggregationConfig.granularity + '...');
+            // STEP 2: Optionally create rollup files if user selected any levels
+            if (rollupAggregationConfig.outputLevels.length > 0 && rollupAggregationConfig.fields.length > 0) {
+                updateRollupProgress(60, 'Creating aggregated rollup files...');
                 const baseAggregated = aggregateRollupData(rollupCsvData);
                 await sleep(100);
 
-                // Step 2: Load boundary files to get hierarchy mapping
-                updateRollupProgress(50, 'Loading geographic boundaries...');
-                const boundaryData = await loadBoundaryForHierarchy(rollupAggregationConfig.granularity);
+                updateRollupProgress(80, 'Performing hierarchical roll-ups...');
+                const rollupFiles = performHierarchicalRollup(baseAggregated, boundaryData);
                 await sleep(100);
 
-                // Step 3: Perform hierarchical roll-ups
-                updateRollupProgress(70, 'Performing hierarchical roll-ups...');
-                rollupGeneratedCSVs = performHierarchicalRollup(baseAggregated, boundaryData);
-                await sleep(100);
-
-                // Step 4: Display download links
-                updateRollupProgress(100, 'Complete! CSV files generated successfully.');
-                await sleep(500);
-
-                displayRollupDownloadLinks();
+                // Merge enriched file with rollup files
+                rollupGeneratedCSVs = { ...enrichedCSV, ...rollupFiles };
             }
+
+            updateRollupProgress(100, 'Complete! CSV files generated successfully.');
+            await sleep(500);
+
+            displayRollupDownloadLinks();
         }
 
         function enrichOnlyCSV(csvData, lookupData) {
