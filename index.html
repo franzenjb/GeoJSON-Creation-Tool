@@ -3952,6 +3952,17 @@ Start by asking me question #1.</div>
             rollupResultSection.style.display = 'block';
             rollupResultGrid.innerHTML = '';
 
+            // ALWAYS show the enriched file first
+            if (rollupGeneratedCSVs.enriched) {
+                const csv = rollupGeneratedCSVs.enriched;
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const size = blob.size;
+
+                const card = createRollupResultCard('enriched', 'enriched_with_hierarchy.csv', size, csv);
+                rollupResultGrid.appendChild(card);
+            }
+
+            // Then show any optional rollup files
             rollupAggregationConfig.outputLevels.forEach(level => {
                 if (rollupGeneratedCSVs[level]) {
                     const csv = rollupGeneratedCSVs[level];
@@ -3966,11 +3977,12 @@ Start by asking me question #1.</div>
 
         function createRollupResultCard(level, filename, sizeBytes, csvContent) {
             const levelInfo = {
-                zip: { icon: '📦', name: 'ZIP Codes' },
-                county: { icon: '🏛️', name: 'Counties' },
-                chapter: { icon: '📚', name: 'Chapters' },
-                region: { icon: '🗺️', name: 'Regions' },
-                division: { icon: '🌎', name: 'Divisions' }
+                enriched: { icon: '✨', name: 'Enriched Data (All Original Columns + Hierarchy)' },
+                zip: { icon: '📦', name: 'ZIP Codes Aggregated' },
+                county: { icon: '🏛️', name: 'Counties Aggregated' },
+                chapter: { icon: '📚', name: 'Chapters Aggregated' },
+                region: { icon: '🗺️', name: 'Regions Aggregated' },
+                division: { icon: '🌎', name: 'Divisions Aggregated' }
             };
 
             const info = levelInfo[level] || { icon: '📄', name: level };
