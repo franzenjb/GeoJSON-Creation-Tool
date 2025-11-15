@@ -3546,6 +3546,14 @@ Start by asking me question #1.</div>
                     // Normalize the input state (convert full name to abbreviation if needed)
                     const normalizedInputState = normalizeStateName(stateName);
 
+                    // Debug: Log first row's values
+                    if (!hierarchyData && row === dataRows[0]) {
+                        console.log('DEBUG First row:', {
+                            countyName, stateName,
+                            normalizedInputCounty, normalizedInputState
+                        });
+                    }
+
                     // Lookup data has county in format "Dallas County, Alabama"
                     // Need to match county base name + state abbreviation
                     for (const zipCode in lookupData) {
@@ -3556,6 +3564,14 @@ Start by asking me question #1.</div>
                             if (parts.length === 2) {
                                 const lookupCounty = normalizeCountyName(parts[0].trim());
                                 const lookupState = normalizeStateName(parts[1].trim());
+
+                                // Debug: Log first lookup attempt
+                                if (!hierarchyData && row === dataRows[0] && zipCode === Object.keys(lookupData)[0]) {
+                                    console.log('DEBUG First lookup:', {
+                                        lookupCounty, lookupState,
+                                        matches: lookupCounty === normalizedInputCounty && lookupState === normalizedInputState
+                                    });
+                                }
 
                                 if (lookupCounty === normalizedInputCounty &&
                                     lookupState === normalizedInputState) {
