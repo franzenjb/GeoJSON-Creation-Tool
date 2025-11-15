@@ -24,7 +24,8 @@ Search and explore American Red Cross organizational hierarchy
 
 ### 2. **Data Enrichment** 📊
 Enrich your data with complete Red Cross geographic hierarchy
-- Upload CSV with ZIP or County codes
+- Upload CSV with **ZIP codes**, **County FIPS codes**, or **County + State names**
+- Flexible matching: accepts "Dallas" or "Dallas County", "TX" or "Texas"
 - Adds 8 geographic hierarchy columns: County, FIPS, ECODE, Chapter Name, RCODE, Region Name, DCODE, Division Name
 - Keeps ALL original columns and rows intact
 - Perfect for analysis, reporting, and creating choropleth maps
@@ -145,10 +146,15 @@ GeoJSON-Creation-Tool/
 ## 📊 CSV Requirements
 
 ### For Data Enrichment (Tab 2):
-Your CSV must have:
-- **ZIP column:** `Zip`, `ZIP`, `zip`, or `ZIP Code` OR **County FIPS column**
-- **Any data columns:** All original columns will be preserved
-- Tool adds: `County`, `FIPS`, `ECODE`, `Chapter`, `RCODE`, `Region`, `DCODE`, `Division`
+Your CSV must have **one of these**:
+- **ZIP column:** `Zip`, `ZIP`, `zip`, or `ZIP Code`
+- **County FIPS column:** 5-digit FIPS code
+- **County + State columns:** County name (with or without "County") + State (abbreviation or full name)
+  - Examples: "Dallas" + "TX", "Dallas County" + "Texas", "Orleans Parish" + "LA"
+
+**Any data columns:** All original columns will be preserved
+
+**Tool adds:** `County`, `FIPS`, `ECODE`, `Chapter`, `RCODE`, `Region`, `DCODE`, `Division`
 
 ### For Create GeoJSON (Tab 3):
 Your CSV must have:
