@@ -1,18 +1,19 @@
 # Red Cross GeoJSON & Data Tools
 
-A comprehensive suite of 6 web-based tools for American Red Cross data processing, geographic analysis, and visualization. All tools run entirely in the browser - no server required.
+A comprehensive suite of 9 web-based tools for American Red Cross data processing, geographic analysis, and visualization. All tools run entirely in the browser - no server required.
 
 **🌐 Live Demo:** https://franzenjb.github.io/GeoJSON-Creation-Tool/
 
 ## 🆕 Recent Updates
 
+- **Data Enrichment Tool**: Simplified from CSV Roll-Up - now ONLY adds 8 geographic hierarchy columns, preserving all original data
 - **Multi-Provider Geocoding**: All 3 providers (Mapbox, Geoapify, Bing Maps) are 100% FREE
-- **Enhanced CSV Roll-Up**: Larger, easier-to-read INPUT/OUTPUT examples with visual improvements
+- **Enhanced Data Enrichment**: Larger, easier-to-read INPUT/OUTPUT examples with visual improvements
 - **Pop-up Creator Samples**: Pre-filled field definition examples for quick testing
 - **Professional Documentation**: Clear, technical explanations throughout all tools
 - **100% US Coverage**: All 33,120 ZIP codes including territories (PR, VI, Guam, American Samoa)
 
-## 🎯 Six Powerful Tools in One
+## 🎯 Nine Powerful Tools in One
 
 ### 1. **Code Lookup** 🔍
 Search and explore American Red Cross organizational hierarchy
@@ -21,13 +22,13 @@ Search and explore American Red Cross organizational hierarchy
 - Complete Red Cross hierarchy mapping (ECODE, RCODE, DCODE)
 - Coverage: All 50 states + Puerto Rico, Virgin Islands, Guam, American Samoa
 
-### 2. **CSV Roll-Up** 📊
-Aggregate ZIP-level data to higher geographic levels
-- Upload ZIP-level CSV data
-- Automatically rolls up to County → Chapter → Region → Division
-- Adds FIPS codes and Red Cross hierarchy codes
-- Outputs hierarchical CSV with level-specific columns
-- Perfect for creating multi-level datasets
+### 2. **Data Enrichment** 📊
+Enrich your data with complete Red Cross geographic hierarchy
+- Upload CSV with ZIP or County codes
+- Adds 8 geographic hierarchy columns: County, FIPS, ECODE, Chapter Name, RCODE, Region Name, DCODE, Division Name
+- Keeps ALL original columns and rows intact
+- Perfect for analysis, reporting, and creating choropleth maps
+- 100% Red Cross hierarchy compliance (33,120 ZIPs, 3,162 counties, 226 chapters)
 
 ### 3. **Create GeoJSON** 🗺️
 Transform CSV data into professional GeoJSON files
@@ -60,6 +61,27 @@ Geocode addresses to GeoJSON or CSV with 3 FREE provider options
 - Upload CSV with address columns
 - Export to GeoJSON or CSV with coordinates
 - Batch geocoding support with progress tracking
+
+### 7. **Metadata BETA** 📋
+Extract and analyze metadata from ArcGIS Feature Services
+- Paste ArcGIS REST API URL
+- Automatically fetches layer metadata and field definitions
+- View field types, domains, and statistics
+- Export metadata to CSV or JSON
+
+### 8. **OAuth Tokens** 🔐
+Generate OAuth tokens for ArcGIS API authentication
+- Supports multiple authentication flows
+- Token generation for ArcGIS Online and Enterprise
+- Secure credential management
+- Copy tokens to clipboard for use in scripts and applications
+
+### 9. **Hi-Res Captures** 📸
+Capture high-resolution screenshots of ArcGIS web maps
+- Generate publication-quality map images
+- Supports custom dimensions and resolutions
+- Export to PNG or JPEG formats
+- Perfect for reports, presentations, and documentation
 
 ## 🚀 Quick Start
 
@@ -122,11 +144,11 @@ GeoJSON-Creation-Tool/
 
 ## 📊 CSV Requirements
 
-### For CSV Roll-Up (Tab 2):
+### For Data Enrichment (Tab 2):
 Your CSV must have:
-- **ZIP column:** `Zip`, `ZIP`, `zip`, or `ZIP Code`
-- **Data columns:** Numeric values to aggregate
-- Optional: `County`, `FIPS`, `ECODE`, `RCODE`, `DCODE` (will be added if missing)
+- **ZIP column:** `Zip`, `ZIP`, `zip`, or `ZIP Code` OR **County FIPS column**
+- **Any data columns:** All original columns will be preserved
+- Tool adds: `County`, `FIPS`, `ECODE`, `Chapter`, `RCODE`, `Region`, `DCODE`, `Division`
 
 ### For Create GeoJSON (Tab 3):
 Your CSV must have:
@@ -140,32 +162,31 @@ Your CSV must have:
 
 ## 🎨 Workflow Example
 
-### Creating Multi-Level Blood Drive Data
+### Creating Enriched Building Data for GeoJSON Mapping
 
-1. **Start with ZIP-level data** (Tab 2: CSV Roll-Up)
+1. **Start with your data** (Tab 2: Data Enrichment)
    ```csv
-   ZIP,Drives,Products_Collected
-   10001,5,450
-   10002,3,280
+   Building_ID,Address,City,ZIP,Status,Owner
+   B14625,113 S LAS POSAS RD,SAN MARCOS,92078,Active,Leased
+   B14627,400 MAIN ST,BROCKWAY,15824,Active,Licensed
    ...
    ```
 
-2. **Roll up to all levels**
-   - Upload CSV → Automatically aggregates to County, Chapter, Region, Division
-   - Downloads hierarchical CSV with columns like:
-     - `Drives (ZIP)`, `Drives (County)`, `Drives (Chapter)`, etc.
-     - Adds FIPS, ECODE, RCODE, DCODE
+2. **Enrich with geographic hierarchy**
+   - Upload CSV → Tool adds 8 geographic columns
+   - Downloads enriched CSV with ALL original columns plus:
+     - `County`, `FIPS`, `ECODE`, `Chapter`, `RCODE`, `Region`, `DCODE`, `Division`
+   - Every row keeps all original data
 
 3. **Create GeoJSON files** (Tab 3: Create GeoJSON)
-   - Upload the rolled-up CSV
-   - Select "Division" level
-   - Tool detects hierarchical format
-   - Creates Division GeoJSON with aggregated data
-   - Map preview shows 6 division boundaries with data
+   - Upload the enriched CSV
+   - Select your desired level (ZIP, County, Chapter, Region, or Division)
+   - Tool creates GeoJSON with geographic boundaries
+   - Map preview shows features with your data
 
 4. **Visualize in ArcGIS**
    - Import GeoJSON to ArcGIS Online
-   - Style by `RBC Products Collected (Division)`
+   - Style by any of your data columns
    - Use Pop-up Creator (Tab 5) for branded pop-ups
 
 ## 🛠️ Technologies
@@ -222,8 +243,8 @@ When creating Division GeoJSON:
 - **Try hierarchical:** If you have a rolled-up CSV, the tool will automatically use pre-aggregated values
 
 ### Slow performance with large files
-- **Use hierarchical CSVs:** Pre-aggregate data using Tab 2 (CSV Roll-Up)
-- **Start with higher levels:** Try County/Chapter instead of ZIP
+- **Enrich first:** Use Tab 2 (Data Enrichment) to add geographic hierarchy
+- **Start with higher levels:** Try County/Chapter instead of ZIP for GeoJSON creation
 - **Close other tabs:** Browser memory matters
 
 ### Missing territories
